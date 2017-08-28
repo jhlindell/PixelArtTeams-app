@@ -7,3 +7,12 @@ body {
 .navText {
   color: white !important;
 }
+
+.pixel {
+  width: 10px;
+  height: 10px;
+  float: left;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}

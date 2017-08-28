@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 
 class Grid extends Component {
+
   render(){
     return (
-      <div>grid goes here</div>
+      <div id="canvas">
+        {this.props.grid.map(pixel => <Pixel />)}
+      </div>
     )
   }
 }
