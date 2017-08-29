@@ -8,11 +8,57 @@ body {
   color: white !important;
 }
 
-.pixel {
-  width: 10px;
-  height: 10px;
+#canvas {
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+}
+
+.paint {
+  margin-top: 2px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
   float: left;
+  border-style: 2px;
   border-style: solid;
-  border-color: black;
+  margin-left: 1px;
+}
+
+.palette {
+  width: 550px;
+  height: 90px;
+  border-style: solid;
+  border-radius: 5px;
   border-width: 1px;
+  padding-left: 10px;
+  background-color: lightgray;
+}
+
+.colorBox {
+  width:90px;
+  height:90px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 1px;
+  float: right;
+  border-radius: 5px;
+}
+
+.currentColor {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 1px;
+  margin: 5px auto;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.currentText {
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
 }

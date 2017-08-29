@@ -1,14 +1,24 @@
 import React, {Component} from 'react';
+import Pixel from './Pixel';
+import {connect} from 'react-redux';
 
 class Grid extends Component {
 
-  render(){
+  render() {
     return (
-      <div id="canvas">
-        {this.props.grid.map(pixel => <Pixel />)}
+      <div>
+        <div id="canvas">
+          {this.props.grid.map((row, y) => {
+            return row.map((pixel, x) => <Pixel x={x} y={y} color={pixel} />)
+          })}
+        </div>
       </div>
     )
   }
 }
 
-export default Grid;
+function mapStateToProps(state) {
+  return {grid: state.gridReducer}
+}
+
+export default connect(mapStateToProps,null)(Grid);

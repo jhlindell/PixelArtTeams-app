@@ -1,6 +1,5 @@
 import React from "react";
-import { Collapse, Button, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav} from 'reactstrap';
 
 class NavBar extends React.Component {
 
