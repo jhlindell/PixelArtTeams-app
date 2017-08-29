@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 400px;
+  margin-left: 75px;
 }
 
 .paint {
@@ -33,6 +34,7 @@ body {
   border-radius: 5px;
   border-width: 1px;
   padding-left: 10px;
+  margin-top: 15px;
   background-color: lightgray;
 }
 

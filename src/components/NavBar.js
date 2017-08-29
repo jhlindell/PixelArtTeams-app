@@ -9,7 +9,7 @@ class NavBar extends React.Component {
         <Navbar color="inverse" light toggleable>
           <NavbarBrand href="/" className="navText">Team Pixel Art</NavbarBrand>
           <Nav className="ml-auto navText" navbar>
-            UserInfo
+            
           </Nav>
         </Navbar>
       </div>

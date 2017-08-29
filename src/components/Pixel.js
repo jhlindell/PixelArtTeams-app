@@ -12,13 +12,10 @@ const styles = {
   borderWidth: '1px',
 };
 
-
-
 class Pixel extends Component {
 
   render(){
     const { x, y, color, activeColor } = this.props;
-
     let newStyle = Object.assign({}, styles)
     newStyle.backgroundColor = color;
 
