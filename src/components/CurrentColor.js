@@ -14,7 +14,7 @@ const styles = {
 
 class CurrentColor extends Component {
   render(){
-    let newStyle = Object.assign({}, styles)
+    let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = this.props.activeColor;
     return (
       <div className="colorBox">

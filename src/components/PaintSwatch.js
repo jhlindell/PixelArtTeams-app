@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const styles = {
-  marginTop: '2px',
+  marginTop: '5px',
   width: '35px',
   height: '35px',
   borderRadius: '50%',
