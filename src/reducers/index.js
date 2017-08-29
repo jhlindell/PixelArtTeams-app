@@ -22,6 +22,11 @@ function gridReducer(state, action) {
       return pixel;
     }));
     return newGrid;
+
+    case 'UPDATE_GRID':
+    // console.log(action.payload);
+    return action.payload;
+
     default:
     return state;
   }

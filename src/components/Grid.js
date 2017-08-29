@@ -11,6 +11,13 @@ function pixelClick(x, y, color) {
   }
 }
 
+function updateGrid(grid){
+  return {
+    type: 'UPDATE_GRID',
+    payload: grid
+  }
+}
+
 class Grid extends Component {
   constructor(props) {
     super(props)
@@ -21,10 +28,13 @@ class Grid extends Component {
   componentDidMount() {
     this.socket = openSocket('http://localhost:7000');
     this.socket.on('connect', () => {
-      this.socket.emit('pixel', 'user connected');
+      this.socket.emit('grid', 'update');
     });
     this.socket.on('pixel', (pixel) => {
       this.props.pixelClick(pixel.x, pixel.y, pixel.color);
+    })
+    this.socket.on('gridUpdated', (grid)=> {
+      this.props.updateGrid(grid);
     })
   }
 
@@ -54,7 +64,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick }, dispatch)
+  return bindActionCreators({ pixelClick, updateGrid }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Grid);
