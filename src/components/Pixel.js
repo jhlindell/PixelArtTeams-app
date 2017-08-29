@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
 
 const styles = {
   width: '20px',
@@ -12,12 +12,7 @@ const styles = {
   borderWidth: '1px',
 };
 
-function pixelClick(x, y, color) {
-  return {
-    type: 'PIXEL_CLICK',
-    payload: { x, y, color },
-  }
-}
+
 
 class Pixel extends Component {
 
@@ -28,8 +23,7 @@ class Pixel extends Component {
     newStyle.backgroundColor = color;
 
     return (
-      <div style={newStyle} onClick={() => this.props.pixelClick(x, y, activeColor)}>
-
+      <div style={newStyle} onClick={() => this.props.sendPixel(x, y, activeColor)}>
       </div>
     )
   }
@@ -39,8 +33,4 @@ function mapStateToProps({ activeColor }) {
   return { activeColor };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Pixel);
+export default connect(mapStateToProps, null)(Pixel);
