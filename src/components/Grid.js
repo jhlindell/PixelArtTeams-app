@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 function pixelClick(x, y, color) {
   return {
     type: 'PIXEL_CLICK',
-    payload: { x, y, color },
+    payload: { x, y, color }
   }
 }
 
@@ -21,7 +21,6 @@ function updateGrid(grid){
 class Grid extends Component {
   constructor(props) {
     super(props)
-
     this.sendPixelToSocket = this.sendPixelToSocket.bind(this);
   }
 
