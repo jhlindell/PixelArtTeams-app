@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
-import {Card,CardText, CardBlock,
-  CardTitle, Col, Button} from 'reactstrap';
+import {Card, CardBlock,
+  CardTitle, Button} from 'reactstrap';
 import Project from './Project';
+import {connect} from 'react-redux';
 
 class ProjectBox extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      projects: [
-        {id:1, projectName: 'project 1'},
-        {id:2, projectName: 'project 2'},
-        {id:3, projectName: 'project 3'},
-      ]
-    }
+  componentDidMount(){
+    console.log(this.props.projects);
   }
 
   render(){
@@ -24,15 +18,19 @@ class ProjectBox extends Component {
           </CardTitle>
         </CardBlock>
         <CardBlock className="projectList">
-          {this.state.projects.map(project => <Project key={project.id} project={project} />)}
+          {this.props.projects.map(project => <Project key={project.id} project={project} />)}
         </CardBlock>
         <CardBlock>
-          <Button>New Project</Button>
+          <Button onClick={() => this.props.addNewProject()}>New Project</Button>
           <Button>Save Project</Button>
         </CardBlock>
       </Card>
-    )  
+    )
   }
 }
 
-export default ProjectBox;
+function mapStateToProps(state) {
+  return {projects: state.projectsReducer}
+}
+
+export default connect(mapStateToProps, null)(ProjectBox);

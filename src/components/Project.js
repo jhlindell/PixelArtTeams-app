@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Card,CardText, CardBlock,
-  CardTitle, Col, Button } from 'reactstrap';
+import { Card, CardTitle } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

@@ -52,10 +52,20 @@ function currentProject(state = 1, action) {
   }
 }
 
+function projectsReducer(state = [], action) {
+  switch (action.type) {
+    case 'FETCH_PROJECTS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
   currentProject,
+  projectsReducer,
 });
 
 export default rootReducer;
