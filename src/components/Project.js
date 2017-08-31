@@ -11,11 +11,17 @@ function selectProject(id){
   }
 }
 
+// if(this.props.project.id === this.props.currentProject){
+  //  apply projectCardHighlighted
+//}
+//
+
 class Project extends Component {
   render(){
     return (
-      <Card onClick={() => this.props.selectProject(this.props.project.id)}>
-        <CardTitle>
+      <Card className={"projectCard " + ((this.props.project.id === this.props.currentProject) ? "projectCardHighlighted" : "")}
+        onClick={() => this.props.selectProject(this.props.project.id)}>
+        <CardTitle className="projectCardText">
           {this.props.project.projectName}
         </CardTitle>
       </Card>
@@ -23,8 +29,12 @@ class Project extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return {currentProject: state.currentProject}
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectProject }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Project);
+export default connect(mapStateToProps, mapDispatchToProps)(Project);

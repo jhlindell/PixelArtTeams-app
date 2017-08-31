@@ -38,7 +38,6 @@ class App extends Component {
       this.socket.emit('grid', this.props.currentProject);
     });
     this.socket.on('pixel', (pixel) => {
-      console.log("received pixel update");
       this.props.pixelClick(pixel.x, pixel.y, pixel.color);
     });
     this.socket.on('gridUpdated', (grid)=> {

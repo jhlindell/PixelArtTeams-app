@@ -69,3 +69,21 @@ body {
   margin-top: 20px;
   margin-right: 20px;
 }
+
+.projectCard {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.projectCard:hover{
+  box-shadow: 0 0 15px #6b6862;
+}
+
+.projectCardText{
+  text-align: center;
+  margin-top:5px;
+}
+
+.projectCardHighlighted {
+  background-color: yellow;
+}
