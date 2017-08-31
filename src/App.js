@@ -34,9 +34,11 @@ class App extends Component {
   componentDidMount() {
     this.socket = openSocket('http://localhost:7000');
     this.socket.on('connect', () => {
-      this.socket.emit('grid', 'update');
+      this.socket.emit('joinRoom', this.props.currentProject);
+      this.socket.emit('grid', this.props.currentProject);
     });
     this.socket.on('pixel', (pixel) => {
+      console.log("received pixel update");
       this.props.pixelClick(pixel.x, pixel.y, pixel.color);
     });
     this.socket.on('gridUpdated', (grid)=> {
@@ -44,8 +46,14 @@ class App extends Component {
     });
   }
 
+  componentDidUpdate(prevProps){
+    this.socket.emit('leaveRoom', prevProps.currentProject);
+    this.socket.emit('joinRoom', this.props.currentProject);
+    this.socket.emit('grid', this.props.currentProject);
+  }
+
   sendPixelToSocket(x, y, color){
-    this.socket.emit('pixel', {x: x, y: y, color: color});
+    this.socket.emit('pixel', { x: x, y: y, color: color, project: this.props.currentProject});
   }
 
   componentWillUnmount() {
@@ -72,8 +80,12 @@ class App extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return {currentProject: state.currentProject}
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ pixelClick, updateGrid }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -38,13 +38,24 @@ function activeColor(state = '#000', action) {
     case 'UPDATE_COLOR':
       return action.payload.nextColor;
     default:
-      return state
+      return state;
+  }
+}
+
+function currentProject(state = 1, action) {
+  switch (action.type) {
+    case 'SELECT_PROJECT':
+      console.log("current project: ", action.payload.id);
+      return action.payload.id;
+    default:
+      return state;
   }
 }
 
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
+  currentProject,
 });
 
 export default rootReducer;
