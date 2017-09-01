@@ -32,11 +32,30 @@ function fetchProjects(projects){
   }
 }
 
+function mouseDownAction(){
+  return {
+    type: 'MOUSE_DOWN',
+    payload: true
+  }
+}
+
+function mouseUpAction(){
+  return {
+    type: 'MOUSE_UP',
+    payload: false
+  }
+}
+
 class App extends Component {
   constructor(props){
     super(props);
     this.sendPixelToSocket = this.sendPixelToSocket.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
+    this.saveProject = this.saveProject.bind(this);
+    this.mouseDown = this.mouseDown.bind(this);
+    this.mouseUp = this.mouseUp.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
+
   }
 
   componentDidMount() {
@@ -62,9 +81,11 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps){
-    this.socket.emit('leaveRoom', prevProps.currentProject);
-    this.socket.emit('joinRoom', this.props.currentProject);
-    this.socket.emit('grid', this.props.currentProject);
+    if(this.props.currentProject !== prevProps.currentProject){
+      this.socket.emit('leaveRoom', prevProps.currentProject);
+      this.socket.emit('joinRoom', this.props.currentProject);
+      this.socket.emit('grid', this.props.currentProject);
+    }
   }
 
   sendPixelToSocket(x, y, color){
@@ -75,8 +96,26 @@ class App extends Component {
     this.socket.emit('addNewProject');
   }
 
+  saveProject(){
+    this.socket.emit('saveProject', this.props.currentProject);
+  }
+
   componentWillUnmount() {
     this.socket.disconnect();
+  }
+
+  mouseDown(){
+    this.props.mouseDownAction();
+  }
+
+  mouseUp(){
+    this.props.mouseUpAction();
+  }
+
+  mouseOver(x, y, color){
+    if(this.props.mouseDown){
+      this.sendPixelToSocket(x,y,color);
+    }
   }
 
   render() {
@@ -86,12 +125,17 @@ class App extends Component {
           <div><Route path="/" render={() => <NavBar />} /></div>
           <Row>
             <Col md="8">
-              <Route path="/" render={() => <Grid   sendPixel={this.sendPixelToSocket} />} />
+              <Route path="/" render={() => <Grid
+                onMouseDown={this.mouseDown}
+                onMouseUp={this.mouseUp}
+                onMouseOver={this.mouseOver}
+                sendPixel={this.sendPixelToSocket} />} />
               <Route path="/" render={() => <Palette />} />
             </Col>
             <Col md="4">
               <Route path="/" render={() => <ProjectBox
-              addNewProject={this.addNewProject} />} />
+              addNewProject={this.addNewProject}
+              saveProject={this.saveProject} />} />
             </Col>
           </Row>
         </div>
@@ -101,11 +145,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  return {currentProject: state.currentProject}
+  return {currentProject: state.currentProject, mouseDown: state.mouseReducer}
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, fetchProjects }, dispatch)
+  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

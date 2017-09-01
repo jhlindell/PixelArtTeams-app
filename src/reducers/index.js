@@ -15,20 +15,19 @@ function gridReducer(state, action) {
 
   switch (action.type) {
     case 'PIXEL_CLICK':
-    const newGrid = state.map((row, y) => row.map((pixel, x) => {
-      if (x === action.payload.x && y === action.payload.y) {
-        return action.payload.color;
-      }
-      return pixel;
-    }));
-    return newGrid;
+      const newGrid = state.map((row, y) => row.map((pixel, x) => {
+        if (x === action.payload.x && y === action.payload.y) {
+          return action.payload.color;
+        }
+        return pixel;
+      }));
+      return newGrid;
 
     case 'UPDATE_GRID':
-    // console.log(action.payload);
-    return action.payload;
+      return action.payload;
 
     default:
-    return state;
+      return state;
   }
 
 }
@@ -45,7 +44,6 @@ function activeColor(state = '#000', action) {
 function currentProject(state = 1, action) {
   switch (action.type) {
     case 'SELECT_PROJECT':
-      console.log("current project: ", action.payload.id);
       return action.payload.id;
     default:
       return state;
@@ -61,11 +59,23 @@ function projectsReducer(state = [], action) {
   }
 }
 
+function mouseReducer(state = false, action) {
+  switch (action.type) {
+    case 'MOUSE_DOWN':
+      return action.payload;
+    case 'MOUSE_UP':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
   currentProject,
   projectsReducer,
+  mouseReducer,
 });
 
 export default rootReducer;

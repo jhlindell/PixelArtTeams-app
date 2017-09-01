@@ -5,9 +5,6 @@ import Project from './Project';
 import {connect} from 'react-redux';
 
 class ProjectBox extends Component {
-  componentDidMount(){
-    console.log(this.props.projects);
-  }
 
   render(){
     return (
@@ -21,8 +18,10 @@ class ProjectBox extends Component {
           {this.props.projects.map(project => <Project key={project.id} project={project} />)}
         </CardBlock>
         <CardBlock>
-          <Button onClick={() => this.props.addNewProject()}>New Project</Button>
-          <Button>Save Project</Button>
+          <Button onClick={() => this.props.addNewProject()}>
+            New Project</Button>
+          <Button onClick={() => this.props.saveProject()}>
+            Save Project</Button>
         </CardBlock>
       </Card>
     )
