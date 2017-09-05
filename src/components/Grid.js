@@ -3,10 +3,19 @@ import Pixel from './Pixel';
 import {connect} from 'react-redux';
 
 const Grid = (props) =>  {
+  let xCoord = props.grid[0].length;
+  let yCoord = props.grid.length;
+  let gridWidth = xCoord * 20;
+  let newStyle = {};
+  newStyle.paddingTop = '20px';
+  newStyle.display = 'flex';
+  newStyle.flexWrap = 'wrap';
+  newStyle.width = gridWidth + 'px';
+  newStyle.marginLeft = ((550 - gridWidth)/2);
 
   return (
     <div>
-      <div id="canvas"
+      <div style={newStyle}
         onMouseDown={() => props.onMouseDown()}
         onMouseUp={() => props.onMouseUp()}>
         {props.grid.map((row, y) => {

@@ -53,6 +53,7 @@ class ProjectBox extends Component {
             New Project</Button>
           <Button onClick={() => this.props.saveProject()}>
             Save Project</Button>
+          <Button onClick={() => this.finishProject()}>Finish</Button>
           {this.state.newProjectToggle && <Card>
             <Form onSubmit={this.onFormSubmit}>
               <Input type="text" name="project_name" onChange={(e) => {
