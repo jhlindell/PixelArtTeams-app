@@ -11,10 +11,10 @@ import './index.css';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
+registerServiceWorker();
+
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <App />
   </Provider>
   , document.getElementById('root'));
-  
-registerServiceWorker();

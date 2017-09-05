@@ -21,7 +21,7 @@ class Pixel extends Component {
 
     return (
       <div style={newStyle}
-        onClick={() => this.props.sendPixel(x, y, activeColor)}
+        onMouseDown={() => this.props.sendPixel(x, y, activeColor)}
         onMouseOver={() => this.props.onMouseOver(x, y, activeColor)}>
       </div>
     )

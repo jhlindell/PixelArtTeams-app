@@ -47,17 +47,6 @@ function mouseUpAction(){
 }
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.sendPixelToSocket = this.sendPixelToSocket.bind(this);
-    this.addNewProject = this.addNewProject.bind(this);
-    this.saveProject = this.saveProject.bind(this);
-    this.mouseDown = this.mouseDown.bind(this);
-    this.mouseUp = this.mouseUp.bind(this);
-    this.mouseOver = this.mouseOver.bind(this);
-
-  }
-
   componentDidMount() {
     this.socket = openSocket('http://localhost:7000');
     this.socket.on('connect', () => {
@@ -74,6 +63,7 @@ class App extends Component {
     });
 
     this.socket.on('sendProjectsToClient', (projects)=> {
+      // console.log("projects: ", projects);
       this.props.fetchProjects(projects);
     });
 
@@ -88,15 +78,19 @@ class App extends Component {
     }
   }
 
-  sendPixelToSocket(x, y, color){
-    this.socket.emit('pixel', { x: x, y: y, color: color, project: this.props.currentProject});
+  sendPixelToSocket = (x, y, color) => {
+    this.socket.emit('pixel', { x, y, color, project: this.props.currentProject});
   }
 
-  addNewProject(){
-    this.socket.emit('addNewProject');
+  addNewProject = (name, x, y) => {
+    this.socket.emit('addNewProject', {name, x, y});
   }
 
-  saveProject(){
+  // addNewProject = () => {
+  //   this.socket.emit('addNewProject');
+  // }
+
+  saveProject = () => {
     this.socket.emit('saveProject', this.props.currentProject);
   }
 
@@ -104,15 +98,15 @@ class App extends Component {
     this.socket.disconnect();
   }
 
-  mouseDown(){
+  mouseDown = () => {
     this.props.mouseDownAction();
   }
 
-  mouseUp(){
+  mouseUp = () => {
     this.props.mouseUpAction();
   }
 
-  mouseOver(x, y, color){
+  mouseOver = (x, y, color) => {
     if(this.props.mouseDown){
       this.sendPixelToSocket(x,y,color);
     }
@@ -134,8 +128,8 @@ class App extends Component {
             </Col>
             <Col md="4">
               <Route path="/" render={() => <ProjectBox
-              addNewProject={this.addNewProject}
-              saveProject={this.saveProject} />} />
+                addNewProject={this.addNewProject}
+                saveProject={this.saveProject} />} />
             </Col>
           </Row>
         </div>

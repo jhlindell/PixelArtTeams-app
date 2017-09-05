@@ -1,27 +1,25 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Pixel from './Pixel';
 import {connect} from 'react-redux';
 
-class Grid extends Component {
+const Grid = (props) =>  {
 
-  render() {
-    return (
-      <div>
-        <div id="canvas"
-          onMouseDown={() => this.props.onMouseDown()}
-          onMouseUp={() => this.props.onMouseUp()}>
-          {this.props.grid.map((row, y) => {
-            return row.map((pixel, x) => <Pixel
-              x={x} y={y}
-              color={pixel}
-              sendPixel={this.props.sendPixel}
-              onMouseOver={this.props.onMouseOver}
-            />)
-          })}
-        </div>
+  return (
+    <div>
+      <div id="canvas"
+        onMouseDown={() => props.onMouseDown()}
+        onMouseUp={() => props.onMouseUp()}>
+        {props.grid.map((row, y) => {
+          return row.map((pixel, x) => <Pixel
+            x={x} y={y}
+            color={pixel}
+            sendPixel={props.sendPixel}
+            onMouseOver={props.onMouseOver}
+          />)
+        })}
       </div>
-    )
-  }
+    </div>
+  );
 }
 
 function mapStateToProps(state) {

@@ -10,18 +10,13 @@ function selectProject(id){
   }
 }
 
-// if(this.props.project.id === this.props.currentProject){
-  //  apply projectCardHighlighted
-//}
-//
-
 class Project extends Component {
   render(){
     return (
       <Card className={"projectCard " + ((this.props.project.id === this.props.currentProject) ? "projectCardHighlighted" : "")}
         onClick={() => this.props.selectProject(this.props.project.id)}>
         <CardTitle className="projectCardText">
-          {this.props.project.projectName}
+          {this.props.project.project_name}
         </CardTitle>
       </Card>
     )
