@@ -70,12 +70,22 @@ function mouseReducer(state = false, action) {
   }
 }
 
+function galleryReducer(state = [], action){
+  switch(action.type) {
+    case 'GET_GALLERY':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
   currentProject,
   projectsReducer,
   mouseReducer,
+  galleryReducer,
 });
 
 export default rootReducer;

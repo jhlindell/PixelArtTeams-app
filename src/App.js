@@ -4,11 +4,13 @@ import NavBar from './components/NavBar';
 import Grid from './components/Grid';
 import Palette from './components/Palette';
 import ProjectBox from './components/ProjectBox';
+import Gallery from './components/Gallery';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {connect} from 'react-redux';
 import openSocket from 'socket.io-client';
 import { bindActionCreators } from 'redux';
+import {Container} from 'reactstrap';
 import './App.css';
 
 function pixelClick(x, y, color) {
@@ -53,8 +55,16 @@ function mouseUpAction(){
   }
 }
 
+function getGallery(art){
+  return {
+    type: 'GET_GALLERY',
+    payload: art
+  }
+}
+
 class App extends Component {
-  componentDidMount() {
+
+  componentWillMount() {
     this.socket = openSocket('http://localhost:7000');
     this.socket.on('connect', () => {
       this.socket.emit('joinRoom', this.props.currentProject);
@@ -70,8 +80,11 @@ class App extends Component {
     });
 
     this.socket.on('sendProjectsToClient', (projects)=> {
-      // console.log("projects: ", projects);
       this.props.fetchProjects(projects);
+    });
+
+    this.socket.on('sendingGallery', (gallery) => {
+      this.props.getGallery(gallery);
     });
 
     this.socket.on('changeCurrentProject', (id)=> {
@@ -79,6 +92,7 @@ class App extends Component {
     });
 
     this.socket.emit('initialize');
+    this.stockGallery();
   }
 
   componentDidUpdate(prevProps){
@@ -98,8 +112,7 @@ class App extends Component {
   }
 
   sendFinishedProject = () => {
-    console.log("finishing project");
-    this.socket.emit('finishProject', this.props.currentProject);
+    this.socket.emit('sendFinishedProject', this.props.currentProject);
   }
 
   saveProject = () => {
@@ -128,31 +141,38 @@ class App extends Component {
     }
   }
 
+  stockGallery = () => {
+    this.socket.emit('getArtForGallery');
+  }
+
   render() {
     return (
       <Router history={createHistory()}>
         <div>
           <div><Route path="/" render={() => <NavBar />} /></div>
-          <Row>
-            <Col md="8">
-              <Route path="/" render={() => <Grid
-                onMouseDown={this.mouseDown}
-                onMouseUp={this.mouseUp}
-                onMouseOver={this.mouseOver}
-                sendPixel={this.sendPixelToSocket} />} />
-              <Route path="/" render={() => <Palette />} />
-            </Col>
-            <Col md="4">
-              <Route path="/" render={() => <ProjectBox
-                addNewProject={this.addNewProject}
-                saveProject={this.saveProject}
-                deleteProject={this.deleteProject}
-                sendFinishedProject={this.sendFinishedProject}/>} />
-            </Col>
-          </Row>
-          <Row>
-            {/* <Route path="/gallery" render={() => <Gallery />} /> */}
-          </Row>
+          <Container>
+            <Row>
+              <Col md="8">
+                <Route path="/art" render={() => <Grid
+                  onMouseDown={this.mouseDown}
+                  onMouseUp={this.mouseUp}
+                  onMouseOver={this.mouseOver}
+                  sendPixel={this.sendPixelToSocket} />} />
+                <Route path="/art" render={() => <Palette />} />
+              </Col>
+              <Col md="4">
+                <Route path="/art" render={() => <ProjectBox
+                  addNewProject={this.addNewProject}
+                  saveProject={this.saveProject}
+                  deleteProject={this.deleteProject}
+                  sendFinishedProject={this.sendFinishedProject} />} />
+              </Col>
+            </Row>
+            <Row>
+              <Route path="/gallery" render={() => <Gallery
+                stockGallery={this.stockGallery} />} />
+            </Row>
+          </Container>
         </div>
       </Router>
     );
@@ -164,7 +184,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject }, dispatch)
+  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
