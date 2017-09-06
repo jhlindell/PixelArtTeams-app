@@ -37,6 +37,14 @@ class ProjectBox extends Component {
     this.setState({newProjectToggle: false});
   }
 
+  finishProject = () => {
+    this.props.sendFinishedProject();
+  }
+
+  deleteProject = () => {
+    this.props.deleteProject();
+  }
+
   render(){
     return (
       <Card className="projectBox">
@@ -53,7 +61,8 @@ class ProjectBox extends Component {
             New Project</Button>
           <Button onClick={() => this.props.saveProject()}>
             Save Project</Button>
-          <Button onClick={() => this.finishProject()}>Finish</Button>
+          <Button onClick={() => this.finishProject()}>Finish Project</Button>
+          <Button onClick={() => this.deleteProject()}>Delete Project</Button>
           {this.state.newProjectToggle && <Card>
             <Form onSubmit={this.onFormSubmit}>
               <Input type="text" name="project_name" onChange={(e) => {

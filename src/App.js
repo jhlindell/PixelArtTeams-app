@@ -25,6 +25,13 @@ function updateGrid(grid){
   }
 }
 
+function selectProject(id){
+  return {
+    type: 'SELECT_PROJECT',
+    payload: { id }
+  }
+}
+
 function fetchProjects(projects){
   return {
     type: 'FETCH_PROJECTS',
@@ -67,6 +74,10 @@ class App extends Component {
       this.props.fetchProjects(projects);
     });
 
+    this.socket.on('changeCurrentProject', (id)=> {
+      this.props.selectProject(id);
+    });
+
     this.socket.emit('initialize');
   }
 
@@ -86,12 +97,17 @@ class App extends Component {
     this.socket.emit('addNewProject', {name, x, y});
   }
 
-  // addNewProject = () => {
-  //   this.socket.emit('addNewProject');
-  // }
+  sendFinishedProject = () => {
+    console.log("finishing project");
+    this.socket.emit('finishProject', this.props.currentProject);
+  }
 
   saveProject = () => {
     this.socket.emit('saveProject', this.props.currentProject);
+  }
+
+  deleteProject = () => {
+    this.socket.emit('deleteProject', this.props.currentProject);
   }
 
   componentWillUnmount() {
@@ -129,8 +145,13 @@ class App extends Component {
             <Col md="4">
               <Route path="/" render={() => <ProjectBox
                 addNewProject={this.addNewProject}
-                saveProject={this.saveProject} />} />
+                saveProject={this.saveProject}
+                deleteProject={this.deleteProject}
+                sendFinishedProject={this.sendFinishedProject}/>} />
             </Col>
+          </Row>
+          <Row>
+            {/* <Route path="/gallery" render={() => <Gallery />} /> */}
           </Row>
         </div>
       </Router>
@@ -143,7 +164,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction }, dispatch)
+  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

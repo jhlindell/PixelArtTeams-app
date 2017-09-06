@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 const Grid = (props) =>  {
   let xCoord = props.grid[0].length;
-  let yCoord = props.grid.length;
   let gridWidth = xCoord * 20;
   let newStyle = {};
   newStyle.paddingTop = '20px';
