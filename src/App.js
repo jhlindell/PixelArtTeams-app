@@ -154,7 +154,7 @@ class App extends Component {
             <Row>
               <Route exact path="/" render={() => <LandingPage />} />
             </Row>
-            <Route path="/art" render={() => <NavBar />} />
+            {/* <Route path="/art" render={() => <NavBar />} /> */}
             <Row>
               <Col md="8">
                 <Route path="/art" render={() => <Grid
@@ -172,7 +172,7 @@ class App extends Component {
                   sendFinishedProject={this.sendFinishedProject} />} />
               </Col>
             </Row>
-            <Route path="/gallery" render={() => <NavBar />} />
+            {/* <Route path="/gallery" render={() => <NavBar />} /> */}
             <Row>
               <Route path="/gallery" render={() => <Gallery
                 stockGallery={this.stockGallery} />} />
