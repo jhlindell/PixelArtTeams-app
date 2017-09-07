@@ -65,7 +65,7 @@ function getGallery(art){
 class App extends Component {
 
   componentWillMount() {
-    this.socket = openSocket('https://pixelart-server.herokuapp.com/');
+    this.socket = openSocket('ws://pixelart-server.herokuapp.com/');
     this.socket.on('connect', () => {
       this.socket.emit('joinRoom', this.props.currentProject);
       this.socket.emit('grid', this.props.currentProject);
