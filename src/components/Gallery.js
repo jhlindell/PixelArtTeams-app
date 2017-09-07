@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ArtPiece from './ArtPiece';
 import {connect} from 'react-redux';
-
+import {CardDeck} from 'reactstrap';
 
 class Gallery extends Component {
   componentDidMount(){
@@ -10,9 +10,9 @@ class Gallery extends Component {
 
   render(){
     return (
-      <div>
-        {this.props.gallery.map((art) => <ArtPiece art={art} key={art.project_name}/>)}
-      </div>
+      <CardDeck>
+        {this.props.gallery.map((art) => <ArtPiece art={art} key={art.project_name} /> )}
+      </CardDeck>
     )
   }
 }

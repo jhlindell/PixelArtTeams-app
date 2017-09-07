@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardBlock, Form,
+import {Card, CardBlock, CardHeader, CardFooter, Col, Form, Label, FormGroup,
   CardTitle, Button, Input} from 'reactstrap';
 import Project from './Project';
 import {connect} from 'react-redux';
@@ -48,41 +48,65 @@ class ProjectBox extends Component {
   render(){
     return (
       <Card className="projectBox">
-        <CardBlock>
+        <CardHeader>
           <CardTitle className="projectBoxTitleText">
             Pixel Projects
           </CardTitle>
-        </CardBlock>
+        </CardHeader>
         <CardBlock className="projectList">
           {this.props.projects.map(project => <Project key={project.id} project={project} />)}
         </CardBlock>
-        <CardBlock>
-          <Button onClick={() => this.openNewProjectForm()}>
-            New Project</Button>
-          <Button onClick={() => this.props.saveProject()}>
-            Save Project</Button>
-          <Button onClick={() => this.finishProject()}>Finish Project</Button>
-          <Button onClick={() => this.deleteProject()}>Delete Project</Button>
+        <CardFooter className="newProjectInfoBox">
+          {!this.state.newProjectToggle  && <div>
+            <div className="projectButton">
+            <Button className="projectBoxButtonText" onClick={() => this.openNewProjectForm()}>
+              New Project</Button></div>
+            <div className="projectButton">
+            <Button className="projectBoxButtonText" onClick={() => this.props.saveProject()}>
+              Save Project</Button></div>
+            <div className="projectButton">
+            <Button className="projectBoxButtonText" onClick={() => this.finishProject()}>Finish Project</Button></div>
+            <div className="projectButton">
+            <Button className="projectBoxButtonText" onClick={() => this.deleteProject()}>Delete Project</Button></div>
+          </div>}
           {this.state.newProjectToggle && <Card>
             <Form onSubmit={this.onFormSubmit}>
-              <Input type="text" name="project_name" onChange={(e) => {
-                      this.handleInputChange(e)
-                    }} value={this.state.project_name} placeholder=""/>
-              <Input type="number" name="x" onChange={(e) => {
-                      this.handleInputChange(e)
-                    }} value={this.state.x} placeholder=""/>
-              <Input type="number" name="y" onChange={(e) => {
-                      this.handleInputChange(e)
-                    }} value={this.state.y} placeholder=""/>
-              <Button>
-                <span>Submit New Project</span>
-              </Button>
+              <FormGroup row>
+              <Label className="projectLabelText" for="project_name" sm={12}>Project Name</Label>
+                <Col sm={12}>
+                  <Input type="text" name="project_name" onChange={(e) => {
+                        this.handleInputChange(e)
+                      }} value={this.state.project_name} placeholder=""/>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="x" sm={8}>X Size</Label>
+                <Col m={4}>
+                  <Input type="number" name="x" onChange={(e) => {
+                        this.handleInputChange(e)
+                      }} value={this.state.x} placeholder=""/>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="x" sm={8}>Y Size</Label>
+                <Col m={4}>
+                  <Input type="number" name="y" onChange={(e) => {
+                        this.handleInputChange(e)
+                      }} value={this.state.y} placeholder=""/>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Button className="newProjectButton">
+                  <span>Submit New Project</span>
+                </Button>
+              </FormGroup>
             </Form>
-            <Button onClick={()=> this.cancelNew()}>
+            <Button className="newProjectButton"
+              onClick={()=> this.cancelNew()}>
               <span>Cancel New</span>
             </Button>
           </Card>}
-        </CardBlock>
+        </CardFooter>
       </Card>
     )
   }

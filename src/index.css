@@ -6,6 +6,8 @@ body {
 
 .navText {
   color: white !important;
+  font-family: 'Press Start 2P';
+  font-size: 32px;
 }
 
 #canvas {
@@ -60,14 +62,21 @@ body {
 }
 
 .currentText {
-  font-size: 14px;
+  font-size: 8px;
   text-align: center;
   margin: auto;
+  font-family: 'Press Start 2P';
 }
 
 .projectBox {
   margin-top: 20px;
   margin-right: 20px;
+}
+
+.projectBoxTitleText {
+  font-family: 'Press Start 2P';
+  text-align: center;
+  margin: auto;
 }
 
 .projectCard {
@@ -81,9 +90,39 @@ body {
 
 .projectCardText{
   text-align: center;
-  margin-top:5px;
+  padding-top:10px;
+  font-family: 'Press Start 2P';
 }
 
 .projectCardHighlighted {
   background-color: yellow;
+}
+
+.projectButton {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.projectBoxButtonText {
+  text-align: center;
+  font-family: 'Press Start 2P';
+}
+
+.artTitleText {
+  text-align: center;
+  font-family: 'Press Start 2P';
+}
+
+.newProjectButton {
+  margin: auto;
+  text-align: center;
+  font-family: 'Press Start 2P';
+}
+
+.newProjectInfoBox {
+  font-family: 'Press Start 2P';
+}
+
+.projectLabelText {
+  text-align: center;
 }

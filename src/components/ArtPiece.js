@@ -1,6 +1,6 @@
 import React from 'react';
 import ArtPixel from './ArtPixel';
-import {Card, CardBlock, CardTitle, CardHeader} from 'reactstrap';
+import {Card, CardBlock, CardTitle, CardHeader, Col} from 'reactstrap';
 
 const ArtPiece = (props) => {
 
@@ -11,24 +11,26 @@ const ArtPiece = (props) => {
   newStyle.display = 'flex';
   newStyle.flexWrap = 'wrap';
   newStyle.width = gridWidth + 'px';
-  newStyle.marginLeft = '10px';
-  newStyle.marginRight = '10px';
+  newStyle.margin = 'auto';
+
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          {props.art.project_name}
-        </CardTitle>
-      </CardHeader>
-      <CardBlock style={newStyle}>
-        {props.art.grid.map((row, y) => {
-          return row.map((pixel, x) => <ArtPixel
-            x={x} y={y}
-            color={pixel}/>)
-        })}
-      </CardBlock>
-    </Card>
+    <Col md="4">
+      <Card className="artCard">
+        <CardHeader>
+          <CardTitle className="artTitleText">
+            {props.art.project_name}
+          </CardTitle>
+        </CardHeader>
+        <CardBlock style={newStyle}>
+          {props.art.grid.map((row, y) => {
+            return row.map((pixel, x) => <ArtPixel
+              x={x} y={y}
+              color={pixel}/>)
+          })}
+        </CardBlock>
+      </Card>
+    </Col>
   )
 }
 

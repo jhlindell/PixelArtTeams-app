@@ -10,7 +10,6 @@ import createHistory from 'history/createBrowserHistory';
 import {connect} from 'react-redux';
 import openSocket from 'socket.io-client';
 import { bindActionCreators } from 'redux';
-import {Container} from 'reactstrap';
 import './App.css';
 
 function pixelClick(x, y, color) {
@@ -150,7 +149,7 @@ class App extends Component {
       <Router history={createHistory()}>
         <div>
           <div><Route path="/" render={() => <NavBar />} /></div>
-          <Container>
+          <div className="container-fluid">
             <Row>
               <Col md="8">
                 <Route path="/art" render={() => <Grid
@@ -172,7 +171,7 @@ class App extends Component {
               <Route path="/gallery" render={() => <Gallery
                 stockGallery={this.stockGallery} />} />
             </Row>
-          </Container>
+          </div>
         </div>
       </Router>
     );

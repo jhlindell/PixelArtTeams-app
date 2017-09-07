@@ -8,7 +8,7 @@ const styles = {
   float: 'left',
   boxSizing: 'borderBox',
   borderStyle: 'solid',
-  borderColor: 'black',
+  borderColor: '#d5d5d5',
   borderWidth: '1px',
 };
 
