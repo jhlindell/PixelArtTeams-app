@@ -13,6 +13,8 @@ import openSocket from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import './App.css';
 
+const WS = 'ws://pixelart-server.herokuapp.com/';
+
 function pixelClick(x, y, color) {
   return {
     type: 'PIXEL_CLICK',
@@ -65,7 +67,7 @@ function getGallery(art){
 class App extends Component {
 
   componentWillMount() {
-    this.socket = openSocket('ws://pixelart-server.herokuapp.com/');
+    this.socket = require('socket.io-client')(WS, {jsonp: false});
     this.socket.on('connect', () => {
       this.socket.emit('joinRoom', this.props.currentProject);
       this.socket.emit('grid', this.props.currentProject);
