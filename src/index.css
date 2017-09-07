@@ -7,7 +7,27 @@ body {
 .navText {
   color: white !important;
   font-family: 'Press Start 2P';
+}
+
+.navButtonText {
+  color: white !important;
+  font-family: 'Press Start 2P';
+}
+
+.navButtonText:hover {
+  text-decoration: none;
+  color: black !important;
+}
+
+.navMedia {
   font-size: 32px;
+}
+
+.navLinks {
+  margin-top: 10px;
+  float: right;
+  font-size: 24px;
+  background-color: rgb(31,32,33);
 }
 
 #canvas {
@@ -125,4 +145,34 @@ body {
 
 .projectLabelText {
   text-align: center;
+}
+
+.landingIntroText {
+  margin-top: 40px;
+  font-family: 'Press Start 2P';
+  font-size: 64px;
+  text-align: center;
+}
+
+.landingButton {
+  font-family: 'Press Start 2P';
+  margin-top: 400px;
+  text-align: center;
+  background-color: black;
+}
+
+.landingButtonText:hover {
+  color: red;
+}
+
+.landingButtonText {
+  color: red;
+}
+
+.landingButtonText:hover {
+  text-decoration: none;
+}
+
+.landingPage {
+  background-image: image();
 }

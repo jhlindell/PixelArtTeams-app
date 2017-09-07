@@ -5,6 +5,7 @@ import Grid from './components/Grid';
 import Palette from './components/Palette';
 import ProjectBox from './components/ProjectBox';
 import Gallery from './components/Gallery';
+import LandingPage from './components/LandingPage';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {connect} from 'react-redux';
@@ -148,8 +149,12 @@ class App extends Component {
     return (
       <Router history={createHistory()}>
         <div>
-          <div><Route path="/" render={() => <NavBar />} /></div>
+          <div></div>
           <div className="container-fluid">
+            <Row>
+              <Route exact path="/" render={() => <LandingPage />} />
+            </Row>
+            <Route path="/art" render={() => <NavBar />} />
             <Row>
               <Col md="8">
                 <Route path="/art" render={() => <Grid
@@ -167,6 +172,7 @@ class App extends Component {
                   sendFinishedProject={this.sendFinishedProject} />} />
               </Col>
             </Row>
+            <Route path="/gallery" render={() => <NavBar />} />
             <Row>
               <Route path="/gallery" render={() => <Gallery
                 stockGallery={this.stockGallery} />} />

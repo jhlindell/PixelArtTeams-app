@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, NavItem, Media} from 'reactstrap';
+import { Navbar, Media, Button} from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
 import { Link } from 'react-router-dom';
 
@@ -14,16 +14,14 @@ class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="inverse" light className="navText">
-          <Media left>
-            <Media style={imgStyle} object src={pixelpalette} alt="" />
-            Pixel Art Teams
-          </Media>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <Link to="/art">Paint </Link>
-              <Link to="/gallery"> Gallery</Link>
-            </NavItem>
-          </Nav>
+            <Media left className="navMedia">
+              <Media
+                style={imgStyle} object
+                src={pixelpalette} alt=""/>
+              Pixel Art Teams
+                <Button className="navLinks"><Link className="navButtonText" to="/gallery">Gallery</Link></Button>
+                <Button className="navLinks"><Link className="navButtonText" to="/art">Paint</Link></Button>
+            </Media>
         </Navbar>
       </div>
     );
