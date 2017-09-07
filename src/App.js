@@ -13,7 +13,7 @@ import openSocket from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import './App.css';
 
-const WS = 'ws://pixelart-server.herokuapp.com/';
+const WS = 'pixelart-server.herokuapp.com/';
 
 function pixelClick(x, y, color) {
   return {
