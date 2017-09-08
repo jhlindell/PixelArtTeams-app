@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar, Media, Button} from 'reactstrap';
+import { Navbar, Media, Button, Nav, NavItem,
+  NavbarToggler, Collapse, NavbarBrand} from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
 import { Link } from 'react-router-dom';
 
@@ -10,20 +11,40 @@ const imgStyle = {
 
 class NavBar extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   render(){
     return (
-      <div>
-        <Navbar color="inverse" light className="navText">
-            <Media left className="navMedia">
-              <Media
-                style={imgStyle} object
-                src={pixelpalette} alt=""/>
-              Pixel Art Teams
-                <Button className="navLinks"><Link className="navButtonText" to="/gallery">Gallery</Link></Button>
-                <Button className="navLinks"><Link className="navButtonText" to="/art">Paint</Link></Button>
-            </Media>
-        </Navbar>
-      </div>
+      <Navbar color="inverse" light toggleable>
+        <NavbarToggler right onClick={this.toggle} />
+        <Media left>
+          <Media
+            style={imgStyle} object src={pixelpalette} alt=""/>
+          </Media>
+        <NavbarBrand className="navText">Pixel Art Teams</NavbarBrand>
+        <Collapse isOpen={this.state.isOpen} navbar>
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <Button className="navLinks navbar-right"><Link className="navButtonText" to="/art">Paint</Link></Button>
+          </NavItem>
+          <NavItem>
+            <Button className="navLinks navbar-right"><Link className="navButtonText" to="/gallery">Gallery</Link></Button>
+          </NavItem>
+        </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }

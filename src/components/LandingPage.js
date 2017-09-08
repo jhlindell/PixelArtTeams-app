@@ -7,7 +7,7 @@ var sectionStyle = {
   backgroundImage: `url(${Background})`,
   backgroundSize: 'cover',
   width: '100%',
-  height: '700px'
+  height: '799px'
 };
 
 class LandingPage extends Component {

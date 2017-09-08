@@ -9,11 +9,11 @@ import LandingPage from './components/LandingPage';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {connect} from 'react-redux';
-import openSocket from 'socket.io-client';
 import { bindActionCreators } from 'redux';
 import './App.css';
 
-const WS = 'pixelart-server.herokuapp.com/';
+// const WS = 'pixelart-server.herokuapp.com/';
+const WS = 'localhost:7000';
 
 function pixelClick(x, y, color) {
   return {
@@ -151,13 +151,13 @@ class App extends Component {
     return (
       <Router history={createHistory()}>
         <div>
-          <div></div>
-          <div className="container-fluid">
-            <Row>
-              <Route exact path="/" render={() => <LandingPage />} />
-            </Row>
-            {/* <Route path="/art" render={() => <NavBar />} /> */}
-            <Row>
+          <Row>
+            <Route exact path="/" render={() => <LandingPage />} />
+          </Row>
+          <div>
+            <Route path="/art" render={() => <NavBar />} />
+
+            <Row className="container-fluid">
               <Col md="8">
                 <Route path="/art" render={() => <Grid
                   onMouseDown={this.mouseDown}
@@ -174,8 +174,10 @@ class App extends Component {
                   sendFinishedProject={this.sendFinishedProject} />} />
               </Col>
             </Row>
-            {/* <Route path="/gallery" render={() => <NavBar />} /> */}
-            <Row>
+          </div>
+          <div >
+            <Route path="/gallery" render={() => <NavBar />} />
+            <Row className="container">
               <Route path="/gallery" render={() => <Gallery
                 stockGallery={this.stockGallery} />} />
             </Row>

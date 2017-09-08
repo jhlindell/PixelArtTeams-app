@@ -11,8 +11,8 @@ class ProjectBox extends Component {
     this.state = {
       project_name: '',
       newProjectToggle: false,
-      x: 0,
-      y: 0
+      x: 20,
+      y: 20
     }
   }
 
@@ -69,7 +69,7 @@ class ProjectBox extends Component {
             <div className="projectButton">
             <Button className="projectBoxButtonText" onClick={() => this.deleteProject()}>Delete Project</Button></div>
           </div>}
-          {this.state.newProjectToggle && <Card>
+          {this.state.newProjectToggle && <Card className="newProject">
             <Form onSubmit={this.onFormSubmit}>
               <FormGroup row>
               <Label className="projectLabelText" for="project_name" sm={12}>Project Name</Label>
