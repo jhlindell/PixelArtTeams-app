@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './App.css';
 
-const WS = 'pixelart-server.herokuapp.com:80/';
+const WS = 'pixelart-server.herokuapp.com:80/socket.io/?EIO=4&transport=websocket';
 // const WS = 'localhost:7000';
 
 function pixelClick(x, y, color) {
