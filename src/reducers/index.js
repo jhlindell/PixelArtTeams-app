@@ -41,7 +41,7 @@ function activeColor(state = '#000', action) {
   }
 }
 
-function currentProject(state = 1, action) {
+function currentProject(state = 0, action) {
   switch (action.type) {
     case 'SELECT_PROJECT':
       return action.payload.id;

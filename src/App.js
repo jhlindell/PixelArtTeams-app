@@ -12,8 +12,8 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './App.css';
 
-const WS = 'pixelart-server.herokuapp.com:';
-// const WS = 'localhost:7000';
+// const WS = 'pixelart-server.herokuapp.com:';
+const WS = 'localhost:7000';
 
 function pixelClick(x, y, color) {
   return {
@@ -69,8 +69,10 @@ class App extends Component {
   componentWillMount() {
     this.socket = require('socket.io-client')(WS, {jsonp: false});
     this.socket.on('connect', () => {
-      this.socket.emit('joinRoom', this.props.currentProject);
-      this.socket.emit('grid', this.props.currentProject);
+      if(this.props.currentProject !== 0){
+        this.socket.emit('joinRoom', this.props.currentProject);
+        this.socket.emit('grid', this.props.currentProject);
+      }
     });
 
     this.socket.on('pixel', (pixel) => {
