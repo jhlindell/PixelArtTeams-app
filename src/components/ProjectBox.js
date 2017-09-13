@@ -81,7 +81,7 @@ class ProjectBox extends Component {
               </FormGroup>
               <FormGroup row>
                 <Label for="x" sm={8}>X Size</Label>
-                <Col m={4}>
+                <Col md={4}>
                   <Input type="number" name="x" onChange={(e) => {
                         this.handleInputChange(e)
                       }} value={this.state.x} placeholder=""/>
@@ -89,7 +89,7 @@ class ProjectBox extends Component {
               </FormGroup>
               <FormGroup row>
                 <Label for="x" sm={8}>Y Size</Label>
-                <Col m={4}>
+                <Col md={4}>
                   <Input type="number" name="y" onChange={(e) => {
                         this.handleInputChange(e)
                       }} value={this.state.y} placeholder=""/>

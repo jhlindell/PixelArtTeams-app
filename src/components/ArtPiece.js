@@ -15,7 +15,7 @@ const ArtPiece = (props) => {
 
 
   return (
-    <Col md="4">
+    <Col md={4}>
       <Card className="artCard">
         <CardHeader>
           <CardTitle className="artTitleText">

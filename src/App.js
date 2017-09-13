@@ -92,8 +92,6 @@ class App extends Component {
     });
 
     this.socket.on('changeCurrentProject', (id)=> {
-      console.log("currentProject: ", this.props.currentProject)
-      console.log("changing current project to: ", id);
       this.props.selectProject(id);
     });
 
