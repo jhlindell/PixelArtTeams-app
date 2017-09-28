@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardTitle } from 'reactstrap';
+import { Card, CardTitle, DropdownItem } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -13,20 +13,12 @@ function selectProject(id){
 class Project extends Component {
   render(){
     return (
-      <Card
-        className={"projectCard " + ((this.props.project.id === this.props.currentProject)
-        ?
-        "projectCardHighlighted"
-        :
-        "")}
+      <DropdownItem
+        className="projectBoxButtonText"
         onClick={() => this.props.selectProject(this.props.project.id)}
       >
-        <CardTitle
-          className="projectCardText"
-        >
-          {this.props.project.project_name}
-        </CardTitle>
-      </Card>
+        {this.props.project.project_name}
+      </DropdownItem>
     );
   }
 }

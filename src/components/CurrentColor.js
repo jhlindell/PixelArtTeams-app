@@ -10,18 +10,29 @@ const styles = {
   margin: '5px auto',
   boxSizing: 'border-box',
   backgroundColor: 'white'
-}
+};
 
 class CurrentColor extends Component {
   render() {
     let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = this.props.activeColor;
+
     return (
-      <div className="colorBox">
-        <div style={newStyle}></div>
-        <div className="currentText">Current Color</div>
+      <div
+        className="colorBox"
+        style={{width:'20%'}}
+      >
+        <div
+          style={newStyle}
+        >
+        </div>
+        <div
+          className="currentText"
+        >
+          Current Color
+        </div>
       </div>
-    )
+    );
   }
 }
 
