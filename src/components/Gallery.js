@@ -11,12 +11,12 @@ class Gallery extends Component {
   render(){
     return (
       <Row>
-      <CardDeck>
-        {this.props.gallery.map((art) => <ArtPiece
-          art={art}
-          key={art.project_name} />
-        )}
-      </CardDeck>
+        <CardDeck>
+          {this.props.gallery.map((art) => <ArtPiece
+            art={art}
+            key={art.project_name} />
+          )}
+        </CardDeck>
       </Row>
     );
   }

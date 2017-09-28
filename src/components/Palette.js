@@ -16,14 +16,14 @@ class Palette extends Component {
             offset: 3,
           }}
         >
-        <div
-          className="palette"
-        >
-          <CurrentColor />
-          <div style={{width:'80%'}}>
-            {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
+          <div
+            className="palette"
+          >
+            <CurrentColor />
+            <div style={{width:'80%'}}>
+              {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
+            </div>
           </div>
-        </div>
         </Col>
       </Row>
     );
