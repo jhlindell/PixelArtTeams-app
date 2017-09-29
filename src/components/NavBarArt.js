@@ -4,27 +4,11 @@ import {
   Media,
   Button,
   Nav,
-  NavItem,
   NavbarToggler,
   Collapse,
   NavbarBrand,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Col,
-  Form,
-  Label,
-  FormGroup,
-  Input,
 } from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
-import ProjectDropdown from './ProjectDropdown';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -43,50 +27,14 @@ class NavBar extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      newProjectToggle: false,
-      project_name: '',
-      x: 20,
-      y: 20,
     };
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
-
-  toggleNewProject() {
-    this.setState({
-      newProjectToggle: !this.state.newProjectToggle
-    });
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({[name]: value});
-  }
-
-  onFormSubmit = (event) => {
-    this.setState({newProjectToggle: false});
-    this.props.addNewProject(this.state.project_name, this.state.x, this.state.y);
-  }
-
-  finishProject = () => {
-    this.props.sendFinishedProject();
-  }
-
-  deleteProject = () => {
-    this.props.deleteProject();
-  }
-
-  saveProject = () => {
-    this.props.saveProject();
   }
 
   render(){
@@ -142,8 +90,8 @@ class NavBar extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {projects: state.projectsReducer};
+function mapStateToProps() {
+  return;
 }
 
 function mapDispatchToProps(dispatch) {

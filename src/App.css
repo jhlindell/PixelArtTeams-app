@@ -18,7 +18,7 @@
   font-size: large;
 }
 .App-body {
-  height: 100vh;
+  height: 100%;
 }
 
 @keyframes App-logo-spin {

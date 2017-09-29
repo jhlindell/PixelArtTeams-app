@@ -2,6 +2,8 @@ import React from 'react';
 import Pixel from './Pixel';
 import {connect} from 'react-redux';
 import {Row, Col} from 'reactstrap';
+import Project from './Project';
+import NewProject from './NewProject';
 
 const Grid = (props) =>  {
   let xCoord = props.grid[0].length;
@@ -21,29 +23,46 @@ const Grid = (props) =>  {
           size: 12,
         }}
       >
-        <div>
-        {typeof this.props.currentProject}
-        </div>
-        <div
-          style={newStyle}
-          onMouseDown={() => props.onMouseDown()}
-          onMouseUp={() => props.onMouseUp()}
-        >
-          {props.grid.map((row, y) => {
-            return row.map((pixel, x) => <Pixel
-              x={x} y={y}
-              color={pixel}
-              sendPixel={props.sendPixel}
-              onMouseOver={props.onMouseOver} />);
-          })}
+        {
+          props.currentProject === 0
+          ?
+          <div style={{padding: '5%',}}>
+            <h4 className="projectCardText">Select a project</h4>
+            {
+            props.projects.map(project => <Project
+              key={project.id}
+              project={project} />)
+            }
+            <br/>
+
+          <NewProject addNewProject={props.addNewProject} />
           </div>
+          :
+          <div
+            style={newStyle}
+            onMouseDown={() => props.onMouseDown()}
+            onMouseUp={() => props.onMouseUp()}
+          >
+            {props.grid.map((row, y) => {
+              return row.map((pixel, x) => <Pixel
+                x={x} y={y}
+                color={pixel}
+                sendPixel={props.sendPixel}
+                onMouseOver={props.onMouseOver} />);
+            })}
+          </div>
+        }
       </Col>
     </Row>
   );
 };
 
 function mapStateToProps(state) {
-  return {grid: state.gridReducer, currentProject: state.currentProject};
+  return {
+    grid: state.gridReducer,
+    projects: state.projectsReducer,
+    currentProject: state.currentProject,
+  };
 }
 
 export default connect(mapStateToProps, null)(Grid);

@@ -17,7 +17,7 @@ class Palette extends Component {
           style={{
             display: this.props.paletteReducer?'flex':'none',
             flexDirection: 'column',
-            position: 'fixed',
+            position: 'absolute',
             zIndex: 1,
             width: '50px',
             height: '80%',

@@ -79,7 +79,7 @@ function galleryReducer(state = [], action){
   }
 }
 
-function paletteReducer(state = true, action){
+function paletteReducer(state = false, action){
   switch(action.type) {
     case 'CHANGE_PALETTE_SHOW_STATE':
       return !state;

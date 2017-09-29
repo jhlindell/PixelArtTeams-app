@@ -32,7 +32,7 @@ class CurrentColor extends Component {
       <div
         className="colorBox"
         style={{
-          position: 'fixed',
+          position: 'absolute',
           zIndex: '1',
           background: 'lightgray',
           width: '50px',

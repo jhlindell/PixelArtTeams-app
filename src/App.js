@@ -163,15 +163,15 @@ class App extends Component {
 
           <Route
             path="/art"
-            render={() => <Menu
+            render={() => <NavBarArt />}/>
+          <Route
+          path="/art"
+          render={() => <Menu
             addNewProject={this.addNewProject}
             saveProject={this.saveProject}
             deleteProject={this.deleteProject}
             sendFinishedProject={this.sendFinishedProject}/>}
-          />
-          <Route
-            path="/art"
-            render={() => <NavBarArt />}/>
+            />
           <Route
             path="/art"
             render={() => <Palette />}
@@ -182,12 +182,13 @@ class App extends Component {
               onMouseDown={this.mouseDown}
               onMouseUp={this.mouseUp}
               onMouseOver={this.mouseOver}
-              sendPixel={this.sendPixelToSocket} />}
+              sendPixel={this.sendPixelToSocket}
+              addNewProject={this.addNewProject} />}
           />
 
           <Route
             path="/gallery"
-            render={() => <NavBar />}
+            render={() => <NavBarArt />}
           />
           <Route
             path="/gallery"
