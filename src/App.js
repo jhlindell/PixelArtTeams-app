@@ -193,6 +193,14 @@ class App extends Component {
           />
           <Route
             path="/gallery"
+            render={() => <Menu
+            addNewProject={this.addNewProject}
+            saveProject={this.saveProject}
+            deleteProject={this.deleteProject}
+            sendFinishedProject={this.sendFinishedProject}/>}
+          />
+          <Route
+            path="/gallery"
             render={() => <Gallery
               stockGallery={this.stockGallery} />}
           />

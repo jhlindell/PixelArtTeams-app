@@ -79,8 +79,8 @@ class NavBar extends React.Component {
               onClick={this.props.changeShowMenuState}
             >
               <span
-                className="glyphicon glyphicon-search"
-                aria-hidden="true">
+                className="glyphicon glyphicon-search menuButton"
+                aria-hidden="true">Menu
               </span>
             </Button>
           </Nav>

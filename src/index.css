@@ -217,3 +217,7 @@ body {
 .show > .dropdown-menu {
   display: block;
 }
+
+.menuButton {
+  font-family: 'Press Start 2P';
+}
