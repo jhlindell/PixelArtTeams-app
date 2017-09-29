@@ -1,67 +1,67 @@
 import React, { Component } from 'react';
-import {Row, Col} from 'reactstrap';
 import NavBar from './components/NavBar';
-import Grid from './components/Grid';
-import Palette from './components/Palette';
-import ProjectBox from './components/ProjectBox';
+import NavBarArt from './components/NavBarArt';
 import Gallery from './components/Gallery';
+import Grid from './components/Grid';
+import Menu from './components/Menu';
 import LandingPage from './components/LandingPage';
-import { Router, Route } from 'react-router-dom';
+import Palette from './components/Palette';
 import createHistory from 'history/createBrowserHistory';
-import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import { Router, Route } from 'react-router-dom';
 import './App.css';
 
-//const WS = 'pixelart-server.herokuapp.com:';
+// const WS = 'pixelart-server.herokuapp.com:';
 const WS = 'localhost:7000';
 
 function pixelClick(x, y, color) {
   return {
     type: 'PIXEL_CLICK',
     payload: { x, y, color }
-  }
+  };
 }
 
 function updateGrid(grid){
   return {
     type: 'UPDATE_GRID',
     payload: grid
-  }
+  };
 }
 
 function selectProject(id){
   return {
     type: 'SELECT_PROJECT',
     payload: { id }
-  }
+  };
 }
 
 function fetchProjects(projects){
   return {
     type: 'FETCH_PROJECTS',
     payload: projects
-  }
+  };
 }
 
 function mouseDownAction(){
   return {
     type: 'MOUSE_DOWN',
     payload: true
-  }
+  };
 }
 
 function mouseUpAction(){
   return {
     type: 'MOUSE_UP',
     payload: false
-  }
+  };
 }
 
 function getGallery(art){
   return {
     type: 'GET_GALLERY',
     payload: art
-  }
+  };
 }
 
 class App extends Component {
@@ -152,38 +152,50 @@ class App extends Component {
   render() {
     return (
       <Router history={createHistory()}>
-        <div>
-          <Row>
-            <Route exact path="/" render={() => <LandingPage />} />
-          </Row>
-          <div>
-            <Route path="/art" render={() => <NavBar />} />
+        <div
+          className="App-body"
+        >
+          <Route
+            exact
+            path="/"
+            render={() => <LandingPage />}
+          />
 
-            <Row className="container-fluid">
-              <Col md="8">
-                <Route path="/art" render={() => <Grid
-                  onMouseDown={this.mouseDown}
-                  onMouseUp={this.mouseUp}
-                  onMouseOver={this.mouseOver}
-                  sendPixel={this.sendPixelToSocket} />} />
-                <Route path="/art" render={() => <Palette />} />
-              </Col>
-              <Col md="4">
-                <Route path="/art" render={() => <ProjectBox
-                  addNewProject={this.addNewProject}
-                  saveProject={this.saveProject}
-                  deleteProject={this.deleteProject}
-                  sendFinishedProject={this.sendFinishedProject} />} />
-              </Col>
-            </Row>
-          </div>
-          <div >
-            <Route path="/gallery" render={() => <NavBar />} />
-            <Row className="container">
-              <Route path="/gallery" render={() => <Gallery
-                stockGallery={this.stockGallery} />} />
-            </Row>
-          </div>
+          <Route
+            path="/art"
+            render={() => <NavBarArt />}
+          />
+          <Route
+          path="/art"
+          render={() => <Menu
+            addNewProject={this.addNewProject}
+            saveProject={this.saveProject}
+            deleteProject={this.deleteProject}
+            sendFinishedProject={this.sendFinishedProject}/>}
+          />
+          <Route
+            path="/art"
+            render={() => <Palette />}
+          />
+          <Route
+            path="/art"
+            render={() => <Grid
+              onMouseDown={this.mouseDown}
+              onMouseUp={this.mouseUp}
+              onMouseOver={this.mouseOver}
+              sendPixel={this.sendPixelToSocket}
+              addNewProject={this.addNewProject} />}
+          />
+
+          <Route
+            path="/gallery"
+            render={() => <NavBarArt />}
+          />
+          <Route
+            path="/gallery"
+            render={() => <Gallery
+              stockGallery={this.stockGallery} />}
+          />
         </div>
       </Router>
     );
@@ -191,11 +203,11 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  return {currentProject: state.currentProject, mouseDown: state.mouseReducer}
+  return {currentProject: state.currentProject, mouseDown: state.mouseReducer};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch)
+  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

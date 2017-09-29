@@ -16,15 +16,17 @@ class Pixel extends Component {
 
   render(){
     const { x, y, color, activeColor } = this.props;
-    let newStyle = Object.assign({}, styles)
+    let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = color;
 
     return (
-      <div style={newStyle}
+      <div
+        style={newStyle}
         onMouseDown={() => this.props.sendPixel(x, y, activeColor)}
-        onMouseOver={() => this.props.onMouseOver(x, y, activeColor)}>
+        onMouseOver={() => this.props.onMouseOver(x, y, activeColor)}
+      >
       </div>
-    )
+    );
   }
 }
 
