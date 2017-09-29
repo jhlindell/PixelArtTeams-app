@@ -163,7 +163,8 @@ class App extends Component {
 
           <Route
             path="/art"
-            render={() => <NavBarArt />}/>
+            render={() => <NavBarArt />}
+          />
           <Route
           path="/art"
           render={() => <Menu
@@ -171,7 +172,7 @@ class App extends Component {
             saveProject={this.saveProject}
             deleteProject={this.deleteProject}
             sendFinishedProject={this.sendFinishedProject}/>}
-            />
+          />
           <Route
             path="/art"
             render={() => <Palette />}
