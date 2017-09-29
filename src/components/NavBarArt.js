@@ -20,17 +20,24 @@ import {
   Form,
   Label,
   FormGroup,
-  Input
+  Input,
 } from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
 import ProjectDropdown from './ProjectDropdown';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 const imgStyle = {
   width: "72px",
   marginRight: "20px",
 };
+
+function changeShowMenuState() {
+  return {
+    type: 'CHANGE_MENU_SHOW_STATE'
+  };
+}
 
 class NavBar extends React.Component {
 
@@ -88,10 +95,13 @@ class NavBar extends React.Component {
         color="inverse"
         light
         toggleable
+        style={{
+          height: '10vh'
+        }}
       >
         <NavbarToggler
           right
-          onClick={this.toggle}
+          onClick={this.props.changeShowMenuState}
         />
         <Media
           left
@@ -116,178 +126,17 @@ class NavBar extends React.Component {
             className="ml-auto"
             navbar
           >
-            <NavItem>
-              <Dropdown isOpen={this.state.isOpen} toggle={this.toggle}>
-                <DropdownToggle
-                  caret
-                  className="projectBoxButtonText"
-                >
-                  Menu
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <Link
-                      className="navButtonText"
-                      to="/art"
-                    >
-                      Canvas
-                    </Link>
-                  </DropdownItem>
-
-                  <DropdownItem>
-                    <Link
-                      className="navButtonText"
-                      to="/gallery"
-                    >
-                      Gallery
-                    </Link>
-                  </DropdownItem>
-
-                  <DropdownItem
-                    className="projectBoxButtonText"
-                    onClick={() => this.toggleNewProject()}
-                  >
-                    New Project
-                  </DropdownItem>
-
-                  <DropdownItem
-                    className="projectBoxButtonText"
-                    onClick={() => this.saveProject()}
-                  >
-                    Save Project
-                  </DropdownItem>
-
-                  <DropdownItem
-                  className="projectBoxButtonText"
-                  onClick={() => this.finishProject()}
-                  >
-                    Finish Project
-                  </DropdownItem>
-
-                  <DropdownItem
-                    className="projectBoxButtonText"
-                    onClick={() => this.deleteProject()}
-                  >
-                    Delete Project
-                  </DropdownItem>
-
-                  <DropdownItem
-                    header
-                    className="projectBoxButtonText"
-                  >
-                    Projects
-                  </DropdownItem>
-
-                  <DropdownItem divider />
-
-                  {this.props.projects.map(project => <ProjectDropdown key={project.id} project={project} />)}
-                </DropdownMenu>
-              </Dropdown>
-            </NavItem>
-          </Nav>
-        </Collapse>
-
-        <Modal
-          isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}
-        >
-          <ModalHeader
-            toggle={()=>this.toggleNewProject()}
-          >
-            New Project
-          </ModalHeader>
-
-          <ModalBody>
-            <Form
-              onSubmit={this.onFormSubmit}
-            >
-              <FormGroup
-                row>
-                <Label
-                  className="projectLabelText"
-                  for="project_name"
-                  sm={12}
-                >
-                  Project Name
-                </Label>
-                <Col
-                  sm={12}
-                >
-                  <Input
-                    type="text"
-                    name="project_name"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.project_name}
-                    placeholder=""
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup row>
-                <Label
-                  for="x"
-                  sm={8}
-                >
-                  X Size
-                </Label>
-                <Col
-                  md={4}
-                >
-                  <Input
-                    type="number"
-                    name="x"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.x}
-                    placeholder=""
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup
-                row
-              >
-                <Label
-                  for="x"
-                  sm={8}
-                >
-                  Y Size
-                </Label>
-                <Col
-                  md={4}
-                >
-                  <Input
-                    type="number"
-                    name="y"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.y}
-                    placeholder=""/>
-                </Col>
-              </FormGroup>
-            </Form>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={()=>this.onFormSubmit()}
-            >
-              Submit
-            </Button>
-            {' '}
             <Button
               color="secondary"
-              onClick={()=>this.toggleNewProject()}
+              onClick={this.props.changeShowMenuState}
             >
-              Cancel
+              <span
+                className="glyphicon glyphicon-search"
+                aria-hidden="true">
+              </span>
             </Button>
-          </ModalFooter>
-        </Modal>
+          </Nav>
+        </Collapse>
       </Navbar>
     );
   }
@@ -297,4 +146,8 @@ function mapStateToProps(state) {
   return {projects: state.projectsReducer};
 }
 
-export default connect(mapStateToProps, null)(NavBar);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({changeShowMenuState}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, null)(NavBar);

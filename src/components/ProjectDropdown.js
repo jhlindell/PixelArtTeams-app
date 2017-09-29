@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, DropdownItem } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -13,12 +12,16 @@ function selectProject(id){
 class Project extends Component {
   render(){
     return (
-      <DropdownItem
-        className="projectBoxButtonText"
+      <div
+        className={"projectCard " + ((this.props.project.id === this.props.currentProject)
+        ?
+        "projectCardHighlighted"
+        :
+        "")}
         onClick={() => this.props.selectProject(this.props.project.id)}
       >
         {this.props.project.project_name}
-      </DropdownItem>
+      </div>
     );
   }
 }

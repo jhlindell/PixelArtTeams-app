@@ -14,7 +14,6 @@ import {
   DropdownItem
 } from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
-import Project from './ProjectDropdown';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 

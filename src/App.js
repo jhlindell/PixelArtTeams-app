@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import NavBarArt from './components/NavBarArt';
 import Gallery from './components/Gallery';
 import Grid from './components/Grid';
+import Menu from './components/Menu';
 import LandingPage from './components/LandingPage';
 import Palette from './components/Palette';
 import createHistory from 'history/createBrowserHistory';
@@ -151,15 +152,26 @@ class App extends Component {
   render() {
     return (
       <Router history={createHistory()}>
-        <div className="App-body">
-          <Route exact path="/" render={() => <LandingPage />} />
+        <div
+          className="App-body"
+        >
+          <Route
+            exact
+            path="/"
+            render={() => <LandingPage />}
+          />
 
-          <Route path="/art" render={() => <NavBarArt
+          <Route
+            path="/art"
+            render={() => <Menu
             addNewProject={this.addNewProject}
             saveProject={this.saveProject}
             deleteProject={this.deleteProject}
-            sendFinishedProject={this.sendFinishedProject} />}
+            sendFinishedProject={this.sendFinishedProject}/>}
           />
+          <Route
+            path="/art"
+            render={() => <NavBarArt />}/>
           <Route
             path="/art"
             render={() => <Palette />}
@@ -171,7 +183,7 @@ class App extends Component {
               onMouseUp={this.mouseUp}
               onMouseOver={this.mouseOver}
               sendPixel={this.sendPixelToSocket} />}
-            />
+          />
 
           <Route
             path="/gallery"

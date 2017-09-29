@@ -7,7 +7,7 @@ const Grid = (props) =>  {
   let xCoord = props.grid[0].length;
   let gridWidth = xCoord * 20;
   let newStyle = {};
-  newStyle.paddingTop = '20px';
+  // newStyle.paddingTop = '20px';
   newStyle.display = 'flex';
   newStyle.flexWrap = 'wrap';
   newStyle.width = gridWidth + 'px';
@@ -15,13 +15,15 @@ const Grid = (props) =>  {
   // newStyle.marginLeft = ((550 - gridWidth)/2);
 
   return (
-    <Row>
+    <Row style={{height: '90vh'}}>
       <Col
         md={{
-          size: 10,
-          offset: 1,
+          size: 12,
         }}
       >
+        <div>
+        {typeof this.props.currentProject}
+        </div>
         <div
           style={newStyle}
           onMouseDown={() => props.onMouseDown()}
@@ -41,7 +43,7 @@ const Grid = (props) =>  {
 };
 
 function mapStateToProps(state) {
-  return {grid: state.gridReducer};
+  return {grid: state.gridReducer, currentProject: state.currentProject};
 }
 
 export default connect(mapStateToProps, null)(Grid);
