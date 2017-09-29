@@ -112,6 +112,7 @@ body {
   padding: 1px;
   font-family: 'Press Start 2P';
   border: none;
+  background: 'none';
 }
 
 .projectCard:hover{
@@ -145,6 +146,19 @@ body {
   font-family: 'Press Start 2P';
   background: none;
   border: none;
+}
+
+.projectButtonText {
+  width: 100%;
+  text-align: center;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+}
+
+.projectButtonText:hover{
+  background: #6b6862;
 }
 
 .projectBoxButtonText:hover{

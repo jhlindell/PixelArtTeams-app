@@ -22,7 +22,7 @@ class Project extends Component {
         onClick={() => this.props.selectProject(this.props.project.id)}
       >
         <CardTitle
-          className="projectCardText"
+          className="projectButtonText"
         >
           {this.props.project.project_name}
         </CardTitle>

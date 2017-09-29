@@ -9,7 +9,9 @@ import {
   Form,
   Label,
   FormGroup,
-  Input
+  Input,
+  Card,
+  CardTitle,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 
@@ -49,8 +51,10 @@ class NewProject extends React.Component {
   render(){
     return (
       <div>
+
+
         <button
-          className="projectBoxButtonText"
+          className="projectCard projectBoxButtonText"
           onClick={() => this.toggleNewProject()}
         >
           New Project

@@ -33,7 +33,6 @@ const Grid = (props) =>  {
               key={project.id}
               project={project} />)
             }
-            <br/>
 
           <NewProject addNewProject={props.addNewProject} />
           </div>
