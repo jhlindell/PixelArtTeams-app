@@ -26,7 +26,7 @@ const Grid = (props) =>  {
         {
           props.currentProject === 0
           ?
-          <div style={{padding: '5%',}}>
+          <div style={{padding: '5%'}}>
             <h4 className="projectCardText">Select a project</h4>
             {
             props.projects.map(project => <Project

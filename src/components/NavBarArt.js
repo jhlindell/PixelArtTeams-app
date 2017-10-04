@@ -23,7 +23,7 @@ function changeShowMenuState() {
   };
 }
 
-class NavBar extends React.Component {
+class NavBarArt extends React.Component {
 
   constructor(props) {
     super(props);
@@ -90,12 +90,8 @@ class NavBar extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return;
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({changeShowMenuState}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(NavBar);
+export default connect(null, mapDispatchToProps)(NavBarArt);

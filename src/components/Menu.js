@@ -6,21 +6,17 @@ import { connect } from 'react-redux';
 
 class Menu extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-  finishProject = () => {
-    this.props.sendFinishedProject();
-  }
-
-  deleteProject = () => {
-    this.props.deleteProject();
-  }
-
-  saveProject = () => {
-    this.props.saveProject();
-  }
+  // finishProject = () => {
+  //   this.props.sendFinishedProject();
+  // }
+  //
+  // deleteProject = () => {
+  //   this.props.deleteProject();
+  // }
+  //
+  // saveProject = () => {
+  //   this.props.saveProject();
+  // }
 
   render(){
     return (
@@ -57,7 +53,7 @@ class Menu extends React.Component {
 
         <button
           className="projectBoxButtonText"
-          onClick={() => this.saveProject()}
+          onClick={() => this.props.saveProject()}
         >
           Save Project
         </button>
@@ -66,14 +62,14 @@ class Menu extends React.Component {
 
         <button
         className="projectBoxButtonText"
-        onClick={() => this.finishProject()}
+        onClick={() => this.props.sendFinishedProject()}
         >
           Finish Project
         </button>
         <br/>
         <button
           className="projectBoxButtonText"
-          onClick={() => this.deleteProject()}
+          onClick={() => this.props.deleteProject()}
         >
           Delete Project
         </button>

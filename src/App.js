@@ -9,7 +9,10 @@ import Palette from './components/Palette';
 import createHistory from 'history/createBrowserHistory';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route }
+  from 'react-router-dom';
 import './App.css';
 
 // const WS = 'pixelart-server.herokuapp.com:';
@@ -151,7 +154,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={createHistory()}>
+      <Router>
         <div
           className="App-body"
         >
