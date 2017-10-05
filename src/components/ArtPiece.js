@@ -1,6 +1,12 @@
 import React from 'react';
 import ArtPixel from './ArtPixel';
-import {Card, CardBlock, CardTitle, CardHeader, Col} from 'reactstrap';
+import {
+  Card,
+  CardBlock,
+  CardTitle,
+  CardHeader,
+  Col,
+} from 'reactstrap';
 
 const ArtPiece = (props) => {
 
@@ -15,23 +21,32 @@ const ArtPiece = (props) => {
 
 
   return (
-    <Col md={4}>
-      <Card className="artCard">
+    <Col
+      md={4}
+    >
+      <Card
+        className="artCard"
+      >
         <CardHeader>
-          <CardTitle className="artTitleText">
+          <CardTitle
+            className="artTitleText"
+          >
             {props.art.project_name}
           </CardTitle>
         </CardHeader>
-        <CardBlock style={newStyle}>
+
+        <CardBlock
+          style={newStyle}
+        >
           {props.art.grid.map((row, y) => {
             return row.map((pixel, x) => <ArtPixel
               x={x} y={y}
-              color={pixel}/>)
+              color={pixel} />);
           })}
         </CardBlock>
       </Card>
     </Col>
-  )
-}
+  );
+};
 
 export default ArtPiece;

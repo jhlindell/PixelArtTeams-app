@@ -79,10 +79,19 @@ function galleryReducer(state = [], action){
   }
 }
 
-function paletteReducer(state = true, action){
+
+function paletteReducer(state = false, action){
   switch(action.type) {
     case 'CHANGE_PALETTE_SHOW_STATE':
-    console.log("current color state: ", state);
+      return !state;
+    default:
+      return state;
+  }
+}
+
+function menuReducer(state = false, action){
+  switch(action.type) {
+    case 'CHANGE_MENU_SHOW_STATE':
       return !state;
     default:
       return state;
@@ -96,7 +105,8 @@ const rootReducer = combineReducers({
   projectsReducer,
   mouseReducer,
   galleryReducer,
-  paletteReducer
+  paletteReducer,
+  menuReducer,
 });
 
 export default rootReducer;

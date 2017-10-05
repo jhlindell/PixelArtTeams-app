@@ -11,12 +11,15 @@ const styles = {
 };
 
 const ArtPixel = (props) => {
-    let newStyle = Object.assign({}, styles)
+    let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = props.color;
 
     return (
-      <div style={newStyle}></div>
-    )
-}
+      <div
+        style={newStyle}
+      >
+      </div>
+    );
+};
 
 export default ArtPixel;

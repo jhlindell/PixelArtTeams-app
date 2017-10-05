@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import PaintSwatch from './PaintSwatch';
 import CurrentColor from './CurrentColor';
 
@@ -7,14 +8,37 @@ var colorArray = ['#800000', '#FF0000', '#FFA500', '#FFFF00', '#808000', '#00800
 class Palette extends Component {
   render(){
     return (
-      <div className="palette">
+      <div
+        className="palette"
+      >
         <CurrentColor />
-        <div>
+        <div
+          id="color-wheel"
+          style={{
+            display: this.props.paletteReducer?'flex':'none',
+            flexDirection: 'column',
+            position: 'absolute',
+            zIndex: 1,
+            width: '50px',
+            height: '80%',
+            alignItems: 'center',
+            marginTop: '50px',
+            background: 'lightgray',
+            // borderBottom: 'solid 1px',
+            borderRight: 'solid 1px',
+          }}
+        >
           {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Palette;
+function mapStateToProps({ activeColor, paletteReducer }) {
+  return { activeColor, paletteReducer };
+}
+
+export default connect(mapStateToProps, null)(Palette);
+
+// export default Palette;
