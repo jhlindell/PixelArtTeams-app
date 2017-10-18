@@ -10,8 +10,6 @@ import {
   Label,
   FormGroup,
   Input,
-  Card,
-  CardTitle,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 

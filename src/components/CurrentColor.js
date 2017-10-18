@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { bindActionCreators } from 'redux';
-=======
-import {bindActionCreators} from 'redux';
->>>>>>> 42fa0341d4b89ed981a348ac3e32310b00af31a3
 
 const styles = {
   display: 'flex',
@@ -27,25 +23,12 @@ function changeShowState() {
   };
 }
 
-function changeShowState() {
-  return {
-    type: 'CHANGE_PALETTE_SHOW_STATE'
-  }
-}
-
 class CurrentColor extends Component {
   render() {
     let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = this.props.activeColor;
 
     return (
-<<<<<<< HEAD
-      <div className="colorBox"
-        onClick={() => this.props.changeShowState()}
-        >
-        <div style={newStyle}></div>
-        <div className="currentText">Current Color</div>
-=======
       <div
         className="colorBox"
         style={{
@@ -66,7 +49,6 @@ class CurrentColor extends Component {
             {this.props.activeColor.replace(/\#/,'')}
           </span>
         </div>
->>>>>>> 42fa0341d4b89ed981a348ac3e32310b00af31a3
       </div>
     );
   }
@@ -77,14 +59,7 @@ function mapStateToProps({ activeColor }) {
 }
 
 function mapDispatchToProps(dispatch) {
-<<<<<<< HEAD
-  return bindActionCreators({ changeShowState }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentColor);
-=======
   return bindActionCreators({changeShowState}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(CurrentColor);
->>>>>>> 42fa0341d4b89ed981a348ac3e32310b00af31a3

@@ -6,18 +6,6 @@ import { connect } from 'react-redux';
 
 class Menu extends React.Component {
 
-  // finishProject = () => {
-  //   this.props.sendFinishedProject();
-  // }
-  //
-  // deleteProject = () => {
-  //   this.props.deleteProject();
-  // }
-  //
-  // saveProject = () => {
-  //   this.props.saveProject();
-  // }
-
   render(){
     return (
       <div

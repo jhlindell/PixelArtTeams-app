@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
 import NavBarArt from './components/NavBarArt';
 import Gallery from './components/Gallery';
 import Grid from './components/Grid';
 import Menu from './components/Menu';
 import LandingPage from './components/LandingPage';
 import Palette from './components/Palette';
-import createHistory from 'history/createBrowserHistory';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {
