@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardTitle } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-function selectProject(id){
-  return {
-    type: 'SELECT_PROJECT',
-    payload: { id }
-  };
-}
+import { selectProject } from '../actions/index';
 
 class Project extends Component {
   render(){

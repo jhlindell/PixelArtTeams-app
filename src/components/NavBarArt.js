@@ -10,18 +10,13 @@ import {
 } from 'reactstrap';
 import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
+import { changeShowMenuState } from '../actions/index';
 
 const imgStyle = {
   width: "72px",
   marginRight: "20px",
 };
-
-function changeShowMenuState() {
-  return {
-    type: 'CHANGE_MENU_SHOW_STATE'
-  };
-}
 
 class NavBarArt extends React.Component {
 

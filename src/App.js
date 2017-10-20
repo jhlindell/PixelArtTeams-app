@@ -12,58 +12,11 @@ import {
   Route }
   from 'react-router-dom';
 import './App.css';
+import { pixelClick, updateGrid, selectProject, fetchProjects, mouseDownAction,
+  mouseUpAction, getGallery } from './actions/index';
 
 // const WS = 'pixelart-server.herokuapp.com:';
 const WS = 'localhost:7000';
-
-function pixelClick(x, y, color) {
-  return {
-    type: 'PIXEL_CLICK',
-    payload: { x, y, color }
-  };
-}
-
-function updateGrid(grid){
-  return {
-    type: 'UPDATE_GRID',
-    payload: grid
-  };
-}
-
-function selectProject(id){
-  return {
-    type: 'SELECT_PROJECT',
-    payload: { id }
-  };
-}
-
-function fetchProjects(projects){
-  return {
-    type: 'FETCH_PROJECTS',
-    payload: projects
-  };
-}
-
-function mouseDownAction(){
-  return {
-    type: 'MOUSE_DOWN',
-    payload: true
-  };
-}
-
-function mouseUpAction(){
-  return {
-    type: 'MOUSE_UP',
-    payload: false
-  };
-}
-
-function getGallery(art){
-  return {
-    type: 'GET_GALLERY',
-    payload: art
-  };
-}
 
 class App extends Component {
 
