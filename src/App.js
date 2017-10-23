@@ -5,6 +5,9 @@ import Grid from './components/Grid';
 import Menu from './components/Menu';
 import LandingPage from './components/LandingPage';
 import Palette from './components/Palette';
+import Signup from './components/auth/signup';
+import Signin from './components/auth/signin';
+import Signout from './components/auth/signout';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {
@@ -158,6 +161,12 @@ class App extends Component {
             render={() => <Gallery
               stockGallery={this.stockGallery} />}
           />
+          <Route
+            path="/signup"
+            component={Signup}
+          />
+          <Route path="/signin" component={Signin} />
+          <Route path="/signout" component={Signout} />
         </div>
       </Router>
     );

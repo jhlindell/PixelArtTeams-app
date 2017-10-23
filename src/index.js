@@ -12,6 +12,12 @@ import './index.css';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
+const token = localStorage.getItem('token');
+
+if(token){
+  store.dispatch({ type: 'AUTH_USER' });
+}
+
 registerServiceWorker();
 
 ReactDOM.render(

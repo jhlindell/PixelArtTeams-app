@@ -1,4 +1,5 @@
-
+import axios from 'axios';
+const LOCAL_URL = 'http://localhost:8000';
 
 export function changeShowState() {
   return {
@@ -66,4 +67,42 @@ export function getGallery(art){
     type: 'GET_GALLERY',
     payload: art
   };
+}
+
+export function signUpUser({username, email, password}){
+  return function(dispatch){
+    axios.post(`${LOCAL_URL}/signup`, {username, email, password})
+      .then(response => {
+        dispatch({type: 'AUTH_USER'});
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch((response) => {
+        dispatch(authError(response.data.error));
+      });
+  }
+}
+
+export function authError(error) {
+  return {
+    type: 'AUTH_ERROR',
+    payload: error
+  };
+}
+
+export function signInUser({username, password}){
+  return function(dispatch){
+    axios.post(`${LOCAL_URL}/signin`, {username, password})
+      .then(response => {
+        dispatch({type: 'AUTH_USER'});
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch((response) => {
+        dispatch(authError(response.data.error));
+      });
+  }
+}
+
+export function signoutUser(){
+  localStorage.removeItem('token');
+  return {type: 'UNAUTH_USER'};
 }

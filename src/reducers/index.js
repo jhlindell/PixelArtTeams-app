@@ -100,6 +100,7 @@ function menuReducer(state = false, action){
 }
 
 function authReducer(state = {}, action){
+  console.log(action.type);
   switch(action.type) {
     case 'AUTH_USER':
       return { ...state, error: '', authenticated: true };
@@ -107,8 +108,6 @@ function authReducer(state = {}, action){
       return { ...state, authenticated: false };
     case 'AUTH_ERROR':
       return { ...state, error: action.payload };
-    case 'FETCH_MESSAGE':
-      return { ...state, message: action.payload };
     default:
       return state;
   }

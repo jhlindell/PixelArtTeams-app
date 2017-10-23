@@ -220,3 +220,17 @@ body {
 .menuButton {
   font-family: 'Press Start 2P';
 }
+
+.newProjectSelector {
+  display:block;
+  margin: auto;
+  text-align: center;
+  font-family: 'Press Start 2P';
+  border: none;
+  background: 'none';
+  margin-top: 20px;
+}
+
+.newProjectSelector:hover {
+  background: #6b6862;
+}

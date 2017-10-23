@@ -8,6 +8,7 @@ import {
   Collapse,
   NavbarBrand,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,10 +27,30 @@ class NavBarArt extends React.Component {
       isOpen: false,
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  renderLinks() {
+    if (this.props.authenticated) {
+      // show a link to sign out
+      return <li className="nav-item">
+        <Link type="button" className="nav-link btn btn-secondary right" to="/signout">Sign Out</Link>
+      </li>
+    } else {
+      // show a link to sign in or sign up
+      return [
+        <li className="nav-item" key={1}>
+          <Link className="nav-link btn btn-secondary menuButton" to="/signin">Sign In</Link>
+        </li>,
+        <li className="nav-item" key={2}>
+          <Link className="nav-link btn btn-secondary menuButton" to="/signup">Sign Up</Link>
+        </li>
+      ];
+    }
   }
 
   render(){
@@ -42,37 +63,35 @@ class NavBarArt extends React.Component {
           height: '10vh'
         }}
       >
+
         <NavbarToggler
           right
-          onClick={this.props.changeShowMenuState}
+          onClick={ this.props.changeShowMenuState }
         />
         <Media
           left
         >
           <Media
-            style={imgStyle}
+            style={ imgStyle }
             object
-            src={pixelpalette}
+            src={ pixelpalette }
             alt=""
           />
         </Media>
-        <NavbarBrand
-          className="navText"
-        >
+        <NavbarBrand className="navText">
           Pixel Art Teams
         </NavbarBrand>
+
         <Collapse
-          isOpen={this.state.isOpen}
+          isOpen={ this.state.isOpen }
           navbar
         >
-          <Nav
-            className="ml-auto"
-            navbar
-          >
+
+          <Nav className="ml-auto" navbar>
+            {this.renderLinks()}
             <Button
               color="secondary"
-              onClick={this.props.changeShowMenuState}
-            >
+              onClick={ this.props.changeShowMenuState }>
               <span
                 className="glyphicon glyphicon-search menuButton"
                 aria-hidden="true">Menu
@@ -85,8 +104,12 @@ class NavBarArt extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+  return { authenticated: state.auth.authenticated };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({changeShowMenuState}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(NavBarArt);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBarArt);

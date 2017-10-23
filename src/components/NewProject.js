@@ -48,7 +48,7 @@ class NewProject extends Component {
     return (
       <div>
         <button
-          className="projectCard projectBoxButtonText"
+          className="newProjectSelector"
           onClick={() => this.toggleNewProject()}>
           New Project
         </button>
@@ -84,7 +84,7 @@ class NewProject extends Component {
               </FormGroup>
               <Button
                 color="primary"
-                action="submit"
+                type="submit"
                 disabled={submitting}>
                 Submit
               </Button>
