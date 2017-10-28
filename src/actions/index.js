@@ -93,7 +93,7 @@ export function signInUser({username, password}){
   return function(dispatch){
     axios.post(`${LOCAL_URL}/signin`, {username, password})
       .then(response => {
-        dispatch({type: 'AUTH_USER'});
+        dispatch({type: 'AUTH_USER', payload: response.data.token });
         localStorage.setItem('token', response.data.token);
       })
       .catch((response) => {

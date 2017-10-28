@@ -9,7 +9,7 @@ const Grid = (props) =>  {
   let xCoord = props.grid[0].length;
   let gridWidth = xCoord * 20;
   let newStyle = {};
-  // newStyle.paddingTop = '20px';
+  newStyle.paddingTop = '20px';
   newStyle.display = 'flex';
   newStyle.flexWrap = 'wrap';
   newStyle.width = gridWidth + 'px';
@@ -30,7 +30,7 @@ const Grid = (props) =>  {
             <h4 className="projectCardText">Select a project</h4>
             {
             props.projects.map(project => <Project
-              key={project.id}
+              key={project.project_id}
               project={project} />)
             }
 

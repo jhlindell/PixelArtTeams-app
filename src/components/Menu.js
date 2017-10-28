@@ -67,7 +67,7 @@ class Menu extends React.Component {
         >
           Projects
         </p>
-        {this.props.projects.map(project => <ProjectDropdown key={project.id} project={project} />)}
+        {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}
       </div>
     );
   }

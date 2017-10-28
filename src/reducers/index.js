@@ -100,10 +100,9 @@ function menuReducer(state = false, action){
 }
 
 function authReducer(state = {}, action){
-  console.log(action.type);
   switch(action.type) {
     case 'AUTH_USER':
-      return { ...state, error: '', authenticated: true };
+      return { ...state, error: '', authenticated: true, token: action.payload };
     case 'UNAUTH_USER':
       return { ...state, authenticated: false };
     case 'AUTH_ERROR':

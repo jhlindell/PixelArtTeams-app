@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import {
   Button,
   Modal,
@@ -25,10 +26,15 @@ class NewProject extends Component {
 
   constructor(props) {
     super(props);
+    this.renderButton = this.renderButton.bind(this);
     this.toggleNewProject = this.toggleNewProject.bind(this);
     this.state = {
       newProjectToggle: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.renderButton();
   }
 
   toggleNewProject() {
@@ -42,17 +48,24 @@ class NewProject extends Component {
     this.props.addNewProject(formProps.project_name, formProps.x, formProps.y);
   }
 
+  renderButton(){
+    return (
+      <button
+        className="newProjectSelector"
+        disabled={!this.props.authenticated}
+        onClick={() => this.toggleNewProject()}>
+        New Project
+      </button>
+    )
+  }
+
   render(){
     const { handleSubmit, pristine, reset, submitting} = this.props;
 
     return (
       <div>
-        <button
-          className="newProjectSelector"
-          onClick={() => this.toggleNewProject()}>
-          New Project
-        </button>
 
+        {this.renderButton()}
         <Modal
           isOpen={this.state.newProjectToggle}
           toggle={()=>this.toggleNewProject()}>
@@ -121,12 +134,15 @@ const validate = formProps => {
 }
 
 function mapStateToProps(state) {
-  return {projects: state.projectsReducer,
+  return { projects: state.projectsReducer,
     menuReducer: state.menuReducer,
-    errorMessage: state.auth.error };
+    errorMessage: state.auth.error,
+    authenticated: state.auth.authenticated };
 }
+
+NewProject = connect(mapStateToProps, null)(NewProject);
 
 export default reduxForm({
   form: 'newProject',
   validate
-}, mapStateToProps, null)(NewProject);
+})(NewProject);

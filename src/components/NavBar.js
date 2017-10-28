@@ -49,31 +49,6 @@ class NavBar extends React.Component {
     this.props.saveProject();
   }
 
-  // <NavItem>
-  //   <Button
-  //     className="navLinks navbar-right"
-  //   >
-  //     <Link
-  //       className="navButtonText"
-  //       to="/art"
-  //     >
-  //       Paint
-  //     </Link>
-  //   </Button>
-  // </NavItem>
-  // <NavItem>
-  //   <Button
-  //     className="navLinks navbar-right"
-  //   >
-  //     <Link
-  //       className="navButtonText"
-  //       to="/gallery"
-  //     >
-  //       Gallery
-  //     </Link>
-  //   </Button>
-  // </NavItem>
-
   render(){
     return (
       <Navbar

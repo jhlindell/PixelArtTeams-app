@@ -69,7 +69,8 @@ class App extends Component {
   }
 
   addNewProject = (name, x, y) => {
-    this.socket.emit('addNewProject', {name, x, y});
+    let token = this.props.token;
+    this.socket.emit('addNewProject', {name, x, y, token});
   }
 
   sendFinishedProject = () => {
@@ -174,7 +175,8 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  return {currentProject: state.currentProject, mouseDown: state.mouseReducer};
+  return {currentProject: state.currentProject, mouseDown: state.mouseReducer,
+    token: state.auth.token };
 }
 
 function mapDispatchToProps(dispatch) {
