@@ -69,7 +69,11 @@ class App extends Component {
   }
 
   addNewProject = (name, x, y) => {
-    let token = this.props.token;
+    let token;
+    if(!this.props.token){
+      token = localStorage.getItem('token');
+    } else
+    token = this.props.token;
     this.socket.emit('addNewProject', {name, x, y, token});
   }
 
