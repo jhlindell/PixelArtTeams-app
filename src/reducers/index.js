@@ -99,14 +99,26 @@ function menuReducer(state = false, action){
   }
 }
 
+const styleErrorCode = (code) => {
+  if (code.message.includes('401')){
+    return 'bad username or password';
+  }
+  else {
+    return 'unknown error';
+  }
+}
+
 function authReducer(state = {}, action){
   switch(action.type) {
     case 'AUTH_USER':
+      localStorage.setItem('token', action.payload);
       return { ...state, error: '', authenticated: true, token: action.payload };
     case 'UNAUTH_USER':
+      localStorage.removeItem('token');
       return { ...state, authenticated: false };
     case 'AUTH_ERROR':
-      return { ...state, error: action.payload };
+      const error = styleErrorCode(action.payload)
+      return { ...state, error };
     default:
       return state;
   }

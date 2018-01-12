@@ -3,8 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {
   Button,
   Form,
-  FormGroup,
-  Col
+  FormGroup
 } from 'reactstrap';
 import { signUpUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';

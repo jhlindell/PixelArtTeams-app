@@ -6,7 +6,6 @@ import { selectProject } from '../actions/index';
 
 class Project extends Component {
   render(){
-    console.log(this.props.project.project_id);
     return (
       <Card
         className={"projectCard " + (this.props.project.project_id)}

@@ -94,15 +94,13 @@ export function signInUser({username, password}){
     axios.post(`${LOCAL_URL}/signin`, {username, password})
       .then(response => {
         dispatch({type: 'AUTH_USER', payload: response.data.token });
-        localStorage.setItem('token', response.data.token);
       })
       .catch((response) => {
-        dispatch(authError(response.data.error));
+        dispatch(authError(response));
       });
   }
 }
 
 export function signoutUser(){
-  localStorage.removeItem('token');
   return {type: 'UNAUTH_USER'};
 }

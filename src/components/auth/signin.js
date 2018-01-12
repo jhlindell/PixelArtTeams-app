@@ -3,8 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {
   Button,
   Form,
-  FormGroup,
-  Col
+  FormGroup
 } from 'reactstrap';
 import { signInUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
@@ -22,9 +21,14 @@ const renderField = ({ input, label, type, meta: { touched, error }}) => (
 );
 
 class Signin extends Component {
+  componentWillReceiveProps(nextProps){
+    if(nextProps.authenticated){
+      this.props.history.push('/art');
+    }
+  }
+
   handleFormSubmit(formProps) {
-    this.props.signInUser(formProps);
-    this.props.history.push('/art');
+    this.props.signInUser(formProps)
   }
 
   renderAlert() {
@@ -75,7 +79,7 @@ class Signin extends Component {
 
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { authenticated: state.auth.authenticated, errorMessage: state.auth.error };
 }
 
 function mapDispatchToProps(dispatch){

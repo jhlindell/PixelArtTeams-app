@@ -60,7 +60,7 @@ class NewProject extends Component {
   }
 
   render(){
-    const { handleSubmit, pristine, reset, submitting} = this.props;
+    const { handleSubmit, submitting} = this.props;
 
     return (
       <div>
