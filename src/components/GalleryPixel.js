@@ -10,7 +10,7 @@ const styles = {
   borderWidth: '1px',
 };
 
-const ArtPixel = (props) => {
+const GalleryPixel = (props) => {
     let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = props.color;
 
@@ -22,4 +22,4 @@ const ArtPixel = (props) => {
     );
 };
 
-export default ArtPixel;
+export default GalleryPixel;

@@ -8,13 +8,9 @@ const styles = {
   alignItems: 'center',
   width: '50px',
   height: '50px',
-  // borderRadius: '50%',
-  // borderStyle: 'solid',
   borderBottom: '1px solid',
   borderRight: '1px solid',
   margin: 'auto',
-  // marginTop: '5px',
-  // boxSizing: 'border-box',
   backgroundColor: 'white',
 };
 

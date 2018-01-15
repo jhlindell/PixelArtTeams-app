@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtPixel from './ArtPixel';
+import GalleryPixel from './GalleryPixel';
 import {
   Card,
   CardBlock,
@@ -8,7 +8,7 @@ import {
   Col,
 } from 'reactstrap';
 
-const ArtPiece = (props) => {
+const GalleryPiece = (props) => {
 
   let xCoord = props.art.grid[0].length;
   let gridWidth = (xCoord * 10) + 40;
@@ -39,7 +39,7 @@ const ArtPiece = (props) => {
           style={newStyle}
         >
           {props.art.grid.map((row, y) => {
-            return row.map((pixel, x) => <ArtPixel
+            return row.map((pixel, x) => <GalleryPixel
               x={x} y={y}
               color={pixel} />);
           })}
@@ -49,4 +49,4 @@ const ArtPiece = (props) => {
   );
 };
 
-export default ArtPiece;
+export default GalleryPiece;

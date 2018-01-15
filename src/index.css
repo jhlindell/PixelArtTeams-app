@@ -29,32 +29,13 @@ body {
 }
 
 #canvas {
-  /*padding-top: 20px;*/
   display: flex;
   flex-wrap: wrap;
   width: 400px;
   margin-left: 75px;
 }
 
-.paint {
-  /*margin-top: 2px;*/
-  /*width: 35px;
-  height: 35px;*/
-  /*border-radius: 50%;*/
-  /*float: left;
-  border-style: 2px;
-  border-style: solid;*/
-  /*margin-left: 1px;*/
-}
-
 .palette {
-  /*width: 10vw;*/
-  /*height: 10.5vh;*/
-  /*border-style: solid;*/
-  /*border-radius: 5px;*/
-  /*border-width: 1px;*/
-  /*margin-left: 15px;*/
-  /*margin-top: 15px;*/
   background-color: lightgray;
 }
 
@@ -62,11 +43,8 @@ body {
   width:60px;
   height:60px;
   box-sizing: border-box;
-  /*border-right: solid;*/
-  /*border-bottom: solid;*/
   border-width: 1px;
   float: right;
-  /*border-radius: 5px;*/
 }
 
 .currentColor {
@@ -87,12 +65,7 @@ body {
   font-family: 'Press Start 2P';
 }
 
-.projectBox {
-  margin-top: 20px;
-  margin-right: 20px;
-}
-
-.projectBoxTitleText {
+.menuTitleTextText {
   font-family: 'Press Start 2P';
   text-align: center;
   padding: 1px;
@@ -106,9 +79,6 @@ body {
 }
 
 .projectCard {
-  /*margin-top: 2px;
-  margin-bottom: 2px;*/
-  /*text-align: left;*/
   padding: 1px;
   font-family: 'Press Start 2P';
   border: none;
@@ -139,7 +109,7 @@ body {
   text-align: center;
 }
 
-.projectBoxButtonText {
+.projectMenuTextText {
   width: 100%;
   text-align: left;
   padding: 1px;
@@ -161,7 +131,7 @@ body {
   background: #6b6862;
 }
 
-.projectBoxButtonText:hover{
+.projectMenuTextText:hover{
   background: #6b6862;
 }
 

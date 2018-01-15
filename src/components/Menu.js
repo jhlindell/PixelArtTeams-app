@@ -19,18 +19,18 @@ class Menu extends React.Component {
           display: this.props.menuReducer?'inline':'none',
         }}
       >
-        <div className="projectBoxButtonText">
+        <div className="projectMenuTextText">
           <Link
-            className="navButtonText projectBoxButtonText"
+            className="navButtonText projectMenuTextText"
             to="/art"
           >
             Canvas
           </Link>
         </div>
 
-        <div className="projectBoxButtonText">
+        <div className="projectMenuTextText">
           <Link
-            className="navButtonText projectBoxButtonText"
+            className="navButtonText projectMenuTextText"
             to="/gallery"
           >
             Gallery
@@ -40,7 +40,7 @@ class Menu extends React.Component {
         <NewProject addNewProject={this.props.addNewProject} />
 
         <button
-          className="projectBoxButtonText"
+          className="projectMenuTextText"
           onClick={() => this.props.saveProject()}
         >
           Save Project
@@ -49,21 +49,21 @@ class Menu extends React.Component {
         <br/>
 
         <button
-        className="projectBoxButtonText"
+        className="projectMenuTextText"
         onClick={() => this.props.sendFinishedProject()}
         >
           Finish Project
         </button>
         <br/>
         <button
-          className="projectBoxButtonText"
+          className="projectMenuTextText"
           onClick={() => this.props.deleteProject()}
         >
           Delete Project
         </button>
         <br/>
         <p
-          className="projectBoxTitleText"
+          className="menuTitleTextText"
         >
           Projects
         </p>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBarArt from './components/NavBarArt';
+import NavBar from './components/NavBar';
 import Gallery from './components/Gallery';
 import Grid from './components/Grid';
 import Menu from './components/Menu';
@@ -125,7 +125,7 @@ class App extends Component {
 
           <Route
             path="/art"
-            render={() => <NavBarArt />}
+            render={() => <NavBar />}
           />
           <Route
           path="/art"
@@ -151,7 +151,7 @@ class App extends Component {
 
           <Route
             path="/gallery"
-            render={() => <NavBarArt />}
+            render={() => <NavBar />}
           />
           <Route
             path="/gallery"
