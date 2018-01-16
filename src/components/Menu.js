@@ -56,15 +56,13 @@ class Menu extends React.Component {
         </button>
         <br/>
         <button
-          className="projectMenuTextText"
+          className="projectMenuTextText mb-3"
           onClick={() => this.props.deleteProject()}
         >
           Delete Project
         </button>
         <br/>
-        <p
-          className="menuTitleTextText"
-        >
+        <p className="menuTitleTextText">
           Projects
         </p>
         {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}

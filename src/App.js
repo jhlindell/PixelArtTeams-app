@@ -24,6 +24,8 @@ const WS = 'localhost:8000';
 class App extends Component {
 
   componentWillMount() {
+    // let token = localStorage.getItem('token');
+    console.log("App token: ", this.props.token);
     this.socket = require('socket.io-client')(WS, {jsonp: false});
     this.socket.on('connect', () => {
       if(this.props.currentProject !== 0){

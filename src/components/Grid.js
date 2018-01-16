@@ -1,66 +1,73 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Pixel from './Pixel';
 import {connect} from 'react-redux';
 import {Row, Col} from 'reactstrap';
 import Project from './Project';
 import NewProject from './NewProject';
 
-const Grid = (props) =>  {
-  let xCoord = props.grid[0].length;
-  let gridWidth = xCoord * 20;
-  let newStyle = {};
-  newStyle.paddingTop = '20px';
-  newStyle.display = 'flex';
-  newStyle.flexWrap = 'wrap';
-  newStyle.width = gridWidth + 'px';
-  newStyle.margin = 'auto';
-  // newStyle.marginLeft = ((550 - gridWidth)/2);
+class Grid extends Component {
+  render(){
+    console.log("grid auth: ", this.props.auth)
+    console.log("grid token: ", this.props.token)
+    let xCoord = this.props.grid[0].length;
+    let gridWidth = xCoord * 20;
+    let newStyle = {};
+    newStyle.paddingTop = '20px';
+    newStyle.display = 'flex';
+    newStyle.flexWrap = 'wrap';
+    newStyle.width = gridWidth + 'px';
+    newStyle.margin = 'auto';
+    // newStyle.marginLeft = ((550 - gridWidth)/2);
 
-  return (
-    <Row style={{height: '90vh'}}>
-      <Col
-        md={{
-          size: 12,
-        }}
-      >
-        {
-          props.currentProject === 0
-          ?
-          <div style={{padding: '5%'}}>
-            <h4 className="projectCardText">Select a project</h4>
-            {
-            props.projects.map(project => <Project
-              key={project.project_id}
-              project={project} />)
-            }
+    return (
+      <Row style={{height: '90vh'}}>
+        <Col
+          md={{
+            size: 12,
+          }}
+        >
+          {
+            this.props.currentProject === 0
+            ?
+            <div style={{padding: '5%'}}>
+              <h4 className="projectCardText">Select a project</h4>
+              {
+              this.props.projects.map(project => <Project
+                key={project.project_id}
+                project={project} />)
+              }
 
-          <NewProject addNewProject={props.addNewProject} />
-          </div>
-          :
-          <div
-            style={newStyle}
-            onMouseDown={() => props.onMouseDown()}
-            onMouseUp={() => props.onMouseUp()}
-          >
-            {props.grid.map((row, y) => {
-              return row.map((pixel, x) => <Pixel
-                x={x} y={y}
-                color={pixel}
-                sendPixel={props.sendPixel}
-                onMouseOver={props.onMouseOver} />);
-            })}
-          </div>
-        }
-      </Col>
-    </Row>
-  );
+            <NewProject addNewProject={this.props.addNewProject} />
+            </div>
+            :
+            <div
+              style={newStyle}
+              onMouseDown={() => this.props.onMouseDown()}
+              onMouseUp={() => this.props.onMouseUp()}
+            >
+              {this.props.grid.map((row, y) => {
+                return row.map((pixel, x) => <Pixel
+                  x={x} y={y}
+                  color={pixel}
+                  sendPixel={this.props.sendPixel}
+                  onMouseOver={this.props.onMouseOver} />);
+              })}
+            </div>
+          }
+        </Col>
+      </Row>
+    );
+  }
 };
+
 
 function mapStateToProps(state) {
   return {
     grid: state.gridReducer,
     projects: state.projectsReducer,
     currentProject: state.currentProject,
+    auth: state.auth.authenticated,
+    token: state.auth.token
   };
 }
 
