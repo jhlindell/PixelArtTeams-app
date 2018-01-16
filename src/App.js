@@ -55,7 +55,6 @@ class App extends Component {
     });
 
     this.socket.emit('initialize');
-    this.stockGallery();
   }
 
   componentDidUpdate(prevProps){
