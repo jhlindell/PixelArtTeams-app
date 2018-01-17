@@ -15,7 +15,7 @@ import {
   Route }
   from 'react-router-dom';
 import './App.css';
-import { pixelClick, updateGrid, selectProject, fetchProjects, mouseDownAction,
+import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction,
   mouseUpAction, getGallery } from './actions/index';
 
 // const WS = 'pixelart-server.herokuapp.com:';
@@ -24,8 +24,6 @@ const WS = 'localhost:8000';
 class App extends Component {
 
   componentWillMount() {
-    // let token = localStorage.getItem('token');
-    console.log("App token: ", this.props.token);
     this.socket = require('socket.io-client')(WS, {jsonp: false});
     this.socket.on('connect', () => {
       if(this.props.currentProject !== 0){
@@ -43,18 +41,22 @@ class App extends Component {
     });
 
     this.socket.on('sendProjectsToClient', (projects)=> {
-      this.props.fetchProjects(projects);
+      this.props.sendProjectsToStore(projects);
     });
 
     this.socket.on('sendingGallery', (gallery) => {
       this.props.getGallery(gallery);
     });
 
+    this.socket.on('requestRefresh', () => {
+      this.socket.emit('refreshProjects', this.props.token);
+    })
+
     this.socket.on('changeCurrentProject', (id)=> {
       this.props.selectProject(id);
     });
 
-    this.socket.emit('initialize');
+    this.socket.emit('initialize', this.props.token);
   }
 
   componentDidUpdate(prevProps){
@@ -79,15 +81,15 @@ class App extends Component {
   }
 
   sendFinishedProject = () => {
-    this.socket.emit('sendFinishedProject', this.props.currentProject);
+    this.socket.emit('sendFinishedProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   saveProject = () => {
-    this.socket.emit('saveProject', this.props.currentProject);
+    this.socket.emit('saveProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   deleteProject = () => {
-    this.socket.emit('deleteProject', this.props.currentProject);
+    this.socket.emit('deleteProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   componentWillUnmount() {
@@ -185,7 +187,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, fetchProjects, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch);
+  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

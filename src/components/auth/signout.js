@@ -6,6 +6,7 @@ import { signoutUser } from '../../actions/index';
 class Signout extends Component {
   componentWillMount() {
     this.props.signoutUser();
+    this.props.history.push('/')
   }
 
   render() {

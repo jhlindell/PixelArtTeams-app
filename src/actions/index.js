@@ -41,7 +41,7 @@ export function updateGrid(grid){
   };
 }
 
-export function fetchProjects(projects){
+export function sendProjectsToStore(projects){
   return {
     type: 'FETCH_PROJECTS',
     payload: projects

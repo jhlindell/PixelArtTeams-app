@@ -8,27 +8,30 @@ var colorArray = ['#800000', '#FF0000', '#FFA500', '#FFFF00', '#808000', '#00800
 class Palette extends Component {
   render(){
     return (
-      <div
-        className="palette"
-      >
-        <CurrentColor />
+      <div>
+        Palette
         <div
-          id="color-wheel"
-          style={{
-            display: this.props.paletteReducer?'flex':'none',
-            flexDirection: 'column',
-            position: 'absolute',
-            zIndex: 1,
-            width: '50px',
-            height: '80%',
-            alignItems: 'center',
-            marginTop: '50px',
-            background: 'lightgray',
-            // borderBottom: 'solid 1px',
-            borderRight: 'solid 1px',
-          }}
+          className="palette"
         >
-          {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
+          <CurrentColor />
+          <div
+            id="color-wheel"
+            style={{
+              display: this.props.paletteReducer?'flex':'none',
+              flexDirection: 'column',
+              position: 'absolute',
+              zIndex: 1,
+              width: '50px',
+              height: '80%',
+              alignItems: 'center',
+              marginTop: '50px',
+              background: 'lightgray',
+              // borderBottom: 'solid 1px',
+              borderRight: 'solid 1px',
+            }}
+          >
+            {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
+          </div>
         </div>
       </div>
     );

@@ -114,7 +114,6 @@ function authReducer(state = {}, action){
       localStorage.setItem('token', action.payload);
       return { ...state, error: '', authenticated: true, token: action.payload };
     case 'UNAUTH_USER':
-      console.log("unauth_user reducer fired")
       localStorage.removeItem('token');
       return { ...state, authenticated: false };
     case 'AUTH_ERROR':
