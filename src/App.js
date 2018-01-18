@@ -18,8 +18,8 @@ import './App.css';
 import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction,
   mouseUpAction, getGallery } from './actions/index';
 
-// const WS = 'pixelart-server.herokuapp.com:';
-const WS = 'localhost:8000';
+const WS = 'pixelart-server.herokuapp.com:';
+// const WS = 'localhost:8000';
 
 class App extends Component {
 
