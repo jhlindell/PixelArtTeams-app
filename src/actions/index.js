@@ -1,5 +1,6 @@
 import axios from 'axios';
 const LOCAL_URL = 'http://localhost:8000';
+const HEROKU_URL = 'https://pixelart-server.herokuapp.com/';
 
 export function changeShowState() {
   return {
@@ -71,7 +72,7 @@ export function getGallery(art){
 
 export function signUpUser({username, email, password}){
   return function(dispatch){
-    axios.post(`${LOCAL_URL}/signup`, {username, email, password})
+    axios.post(`${HEROKU_URL}/signup`, {username, email, password})
       .then(response => {
         dispatch({type: 'AUTH_USER', payload: response.data.token });
       })
@@ -90,7 +91,7 @@ export function authError(error) {
 
 export function signInUser({username, password}){
   return function(dispatch){
-    axios.post(`${LOCAL_URL}/signin`, {username, password})
+    axios.post(`${HEROKU_URL}/signin`, {username, password})
       .then(response => {
         dispatch({type: 'AUTH_USER', payload: response.data.token });
       })
