@@ -1,6 +1,7 @@
 import axios from 'axios';
 const LOCAL_URL = 'http://localhost:8000';
-const HEROKU_URL = 'https://pixelart-server.herokuapp.com/';
+const HEROKU_URL = 'https://pixelart-server.herokuapp.com';
+
 
 export function changeShowState() {
   return {
