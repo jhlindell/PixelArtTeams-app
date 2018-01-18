@@ -2,24 +2,14 @@ import React, { Component } from 'react';
 import { Card, CardTitle } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-function selectProject(id){
-  return {
-    type: 'SELECT_PROJECT',
-    payload: { id }
-  };
-}
+import { selectProject } from '../actions/index';
 
 class Project extends Component {
   render(){
     return (
       <Card
-        className={"projectCard " + ((this.props.project.id === this.props.currentProject)
-        ?
-        "projectCardHighlighted"
-        :
-        "")}
-        onClick={() => this.props.selectProject(this.props.project.id)}
+        className={"projectCard " + (this.props.project.project_id)}
+        onClick={() => this.props.selectProject(this.props.project.project_id)}
       >
         <CardTitle
           className="projectButtonText"

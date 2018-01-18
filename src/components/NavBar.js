@@ -4,18 +4,15 @@ import {
   Media,
   Button,
   Nav,
-  NavItem,
   NavbarToggler,
   Collapse,
   NavbarBrand,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from 'reactstrap';
-import pixelpalette from '../pixelpalette.png';
 import { Link } from 'react-router-dom';
+import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeShowMenuState } from '../actions/index';
 
 const imgStyle = {
   width: "72px",
@@ -26,54 +23,35 @@ class NavBar extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
 
-  finishProject = () => {
-    this.props.sendFinishedProject();
+  renderLinks() {
+    if (this.props.authenticated) {
+      // show a link to sign out
+      return <li className="nav-item">
+        <Link type="button" className="nav-link btn btn-secondary menuButton" to="/signout">Sign Out</Link>
+      </li>
+    } else {
+      // show a link to sign in or sign up
+      return [
+        <li className="nav-item" key={1}>
+          <Link className="nav-link btn btn-secondary menuButton" to="/signin">Sign In</Link>
+        </li>,
+        <li className="nav-item" key={2}>
+          <Link className="nav-link btn btn-secondary menuButton" to="/signup">Sign Up</Link>
+        </li>
+      ];
+    }
   }
-
-  deleteProject = () => {
-    this.props.deleteProject();
-  }
-
-  saveProject = () => {
-    this.props.saveProject();
-  }
-
-  // <NavItem>
-  //   <Button
-  //     className="navLinks navbar-right"
-  //   >
-  //     <Link
-  //       className="navButtonText"
-  //       to="/art"
-  //     >
-  //       Paint
-  //     </Link>
-  //   </Button>
-  // </NavItem>
-  // <NavItem>
-  //   <Button
-  //     className="navLinks navbar-right"
-  //   >
-  //     <Link
-  //       className="navButtonText"
-  //       to="/gallery"
-  //     >
-  //       Gallery
-  //     </Link>
-  //   </Button>
-  // </NavItem>
 
   render(){
     return (
@@ -81,60 +59,44 @@ class NavBar extends React.Component {
         color="inverse"
         light
         toggleable
+        style={{
+          height: '10vh'
+        }}
       >
+
         <NavbarToggler
           right
-          onClick={this.toggle}
+          onClick={ this.props.changeShowMenuState }
         />
         <Media
           left
         >
           <Media
-            style={imgStyle}
+            style={ imgStyle }
             object
-            src={pixelpalette}
+            src={ pixelpalette }
             alt=""
           />
         </Media>
-        <NavbarBrand
-          className="navText"
-        >
+        <NavbarBrand className="navText">
           Pixel Art Teams
         </NavbarBrand>
+
         <Collapse
-          isOpen={this.state.isOpen}
+          isOpen={ this.state.isOpen }
           navbar
         >
-          <Nav
-            className="ml-auto"
-            navbar
-          >
-            <NavItem>
-              <Dropdown isOpen={this.state.isOpen} toggle={this.toggle}>
-                <DropdownToggle caret>
-                  Menu
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <Link
-                      className="navButtonText"
-                      to="/art"
-                    >
-                      Paint
-                    </Link>
-                  </DropdownItem>
 
-                  <DropdownItem>
-                    <Link
-                      className="navButtonText"
-                      to="/gallery"
-                    >
-                      Gallery
-                    </Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </NavItem>
+          <Nav className="ml-auto" navbar>
+            {this.renderLinks()}
+            <Button
+              color="secondary"
+              onClick={ this.props.changeShowMenuState }>
+              <span
+                className="glyphicon glyphicon-search menuButton"
+                aria-hidden="true">Menu
+              </span>
+            </Button>
           </Nav>
         </Collapse>
       </Navbar>
@@ -142,8 +104,13 @@ class NavBar extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {projects: state.projectsReducer};
+function mapStateToProps(state){
+  return { authenticated: state.auth.authenticated,
+    token: state.auth.token };
 }
 
-export default connect(mapStateToProps, null)(NavBar);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({changeShowMenuState}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

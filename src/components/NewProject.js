@@ -1,33 +1,40 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from 'react-redux';
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Col,
   Form,
-  Label,
   FormGroup,
-  Input,
-  Card,
-  CardTitle,
 } from 'reactstrap';
-import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
-class NewProject extends React.Component {
+const renderField = ({ input, label, type, meta: { touched, error}}) => (
+<div>
+  <label>{label}</label>
+  <div>
+    <input {...input} placeholder={label} type={type} />
+    {touched &&
+      (error && <span>{error}</span>)}
+  </div>
+</div>
+);
+
+class NewProject extends Component {
 
   constructor(props) {
     super(props);
-
+    this.renderButton = this.renderButton.bind(this);
     this.toggleNewProject = this.toggleNewProject.bind(this);
     this.state = {
-      isOpen: false,
       newProjectToggle: false,
-      project_name: '',
-      x: 20,
-      y: 20,
     };
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.renderButton();
   }
 
   toggleNewProject() {
@@ -36,138 +43,106 @@ class NewProject extends React.Component {
     });
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({[name]: value});
+  handleFormSubmit(formProps) {
+    this.setState({newProjectToggle: false});
+    this.props.addNewProject(formProps.project_name, formProps.x, formProps.y);
   }
 
-  onFormSubmit = (event) => {
-    this.setState({newProjectToggle: false});
-    this.props.addNewProject(this.state.project_name, this.state.x, this.state.y);
+  renderButton(){
+    return (
+      <button
+        className="newProjectSelector"
+        disabled={!this.props.authenticated}
+        onClick={() => this.toggleNewProject()}>
+        New Project
+      </button>
+    )
   }
 
   render(){
+    const { handleSubmit, submitting} = this.props;
+
     return (
       <div>
 
-
-        <button
-          className="projectCard projectBoxButtonText"
-          onClick={() => this.toggleNewProject()}
-        >
-          New Project
-        </button>
-
+        {this.renderButton()}
         <Modal
           isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}
-        >
-          <ModalHeader
-            toggle={()=>this.toggleNewProject()}
-          >
+          toggle={()=>this.toggleNewProject()}>
+          <ModalHeader toggle={()=>this.toggleNewProject()}>
             New Project
           </ModalHeader>
 
           <ModalBody>
-            <Form
-              onSubmit={this.onFormSubmit}
-            >
-              <FormGroup
-                row>
-                <Label
-                  className="projectLabelText"
-                  for="project_name"
-                  sm={12}
-                >
-                  Project Name
-                </Label>
-                <Col
-                  sm={12}
-                >
-                  <Input
-                    type="text"
-                    name="project_name"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.project_name}
-                    placeholder=""
-                  />
-                </Col>
-              </FormGroup>
-
+            <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
               <FormGroup row>
-                <Label
-                  for="x"
-                  sm={8}
-                >
-                  X Size
-                </Label>
-                <Col
-                  md={4}
-                >
-                  <Input
-                    type="number"
-                    name="x"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.x}
-                    placeholder=""
-                  />
+                <Col sm={12}>
+                  <Field name="project_name"
+                    type="text"
+                    component={renderField}
+                    label="Project Name" />
                 </Col>
               </FormGroup>
-
-              <FormGroup
-                row
-              >
-                <Label
-                  for="x"
-                  sm={8}
-                >
-                  Y Size
-                </Label>
-                <Col
-                  md={4}
-                >
-                  <Input
-                    type="number"
-                    name="y"
-                    onChange={(e) => {
-                      this.handleInputChange(e);
-                    }}
-                    value={this.state.y}
-                    placeholder=""/>
+              <FormGroup row>
+                <Col md={4}>
+                  <Field name="x" component={renderField}
+                    type="text" label="X"/>
                 </Col>
               </FormGroup>
+              <FormGroup row>
+                <Col md={4}>
+                  <Field name="y" component={renderField}
+                    type="text" label="Y"/>
+                </Col>
+              </FormGroup>
+              <Button
+                color="primary"
+                type="submit"
+                disabled={submitting}>
+                Submit
+              </Button>
+              {' '}
+              <Button
+                color="secondary"
+                onClick={()=>this.toggleNewProject()}>
+                Cancel
+              </Button>
             </Form>
           </ModalBody>
-
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={()=>this.onFormSubmit()}
-            >
-              Submit
-            </Button>
-            {' '}
-            <Button
-              color="secondary"
-              onClick={()=>this.toggleNewProject()}
-            >
-              Cancel
-            </Button>
-          </ModalFooter>
         </Modal>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {projects: state.projectsReducer, menuReducer: state.menuReducer};
+const validate = formProps => {
+  const errors = {};
+
+  if(!formProps.project_name) {
+    errors.project_name = 'Please enter a project name';
+  }
+
+  if(formProps.x < 10 || formProps.x > 30){
+    errors.x = 'X needs to be between 10 and 30';
+  }
+
+  if(formProps.y < 10 || formProps.y > 30){
+    errors.y = 'Y needs to be between 10 and 30';
+  }
+
+  return errors;
 }
 
-export default connect(mapStateToProps, null)(NewProject);
+function mapStateToProps(state) {
+  return { projects: state.projectsReducer,
+    menuReducer: state.menuReducer,
+    errorMessage: state.auth.error,
+    authenticated: state.auth.authenticated };
+}
+
+NewProject = connect(mapStateToProps, null)(NewProject);
+
+export default reduxForm({
+  form: 'newProject',
+  validate
+})(NewProject);

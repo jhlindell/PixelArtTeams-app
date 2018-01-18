@@ -1,27 +1,18 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
+import { changeShowState } from '../actions/index';
 
 const styles = {
   display: 'flex',
   alignItems: 'center',
   width: '50px',
   height: '50px',
-  // borderRadius: '50%',
-  // borderStyle: 'solid',
   borderBottom: '1px solid',
   borderRight: '1px solid',
   margin: 'auto',
-  // marginTop: '5px',
-  // boxSizing: 'border-box',
   backgroundColor: 'white',
 };
-
-function changeShowState() {
-  return {
-    type: 'CHANGE_PALETTE_SHOW_STATE'
-  };
-}
 
 class CurrentColor extends Component {
   render() {
@@ -46,7 +37,7 @@ class CurrentColor extends Component {
           style={newStyle}
         >
           <span style={{fontSize: 'small',}}>
-            {this.props.activeColor.replace(/\#/,'')}
+            {this.props.activeColor.replace('#','')}
           </span>
         </div>
       </div>

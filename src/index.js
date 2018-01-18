@@ -5,17 +5,23 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
-import ReduxPromise from 'redux-promise';
-import {BrowserRouter} from 'react-router-dom';
+import reduxThunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+
+const token = localStorage.getItem('token');
+
+if(token){
+  store.dispatch({ type: 'AUTH_USER', payload: token });
+}
 
 registerServiceWorker();
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
 
       <App />
 

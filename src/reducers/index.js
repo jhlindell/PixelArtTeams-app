@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 function gridReducer(state, action) {
   if (state === undefined) {
@@ -79,6 +80,7 @@ function galleryReducer(state = [], action){
   }
 }
 
+
 function paletteReducer(state = false, action){
   switch(action.type) {
     case 'CHANGE_PALETTE_SHOW_STATE':
@@ -97,6 +99,31 @@ function menuReducer(state = false, action){
   }
 }
 
+const styleErrorCode = (code) => {
+  if (code.message.includes('401')){
+    return 'bad username or password';
+  }
+  else {
+    return 'unknown error';
+  }
+}
+
+function authReducer(state = {}, action){
+  switch(action.type) {
+    case 'AUTH_USER':
+      localStorage.setItem('token', action.payload);
+      return { ...state, error: '', authenticated: true, token: action.payload };
+    case 'UNAUTH_USER':
+      localStorage.removeItem('token');
+      return { ...state, authenticated: false };
+    case 'AUTH_ERROR':
+      const error = styleErrorCode(action.payload)
+      return { ...state, error };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -106,6 +133,8 @@ const rootReducer = combineReducers({
   galleryReducer,
   paletteReducer,
   menuReducer,
+  form: formReducer,
+  auth: authReducer
 });
 
 export default rootReducer;

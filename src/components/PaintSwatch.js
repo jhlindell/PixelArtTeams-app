@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { updateColor } from '../actions/index'
 
 const styles = {
   // marginTop: '5px',
@@ -14,13 +15,6 @@ const styles = {
   // borderStyle: 'solid',
   // marginLeft: '1px',
 };
-
-function updateColor(nextColor) {
-  return {
-    type: 'UPDATE_COLOR',
-    payload: {nextColor},
-  };
-}
 
 class PaintSwatch extends Component {
   render(){

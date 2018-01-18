@@ -6,18 +6,6 @@ import { connect } from 'react-redux';
 
 class Menu extends React.Component {
 
-  // finishProject = () => {
-  //   this.props.sendFinishedProject();
-  // }
-  //
-  // deleteProject = () => {
-  //   this.props.deleteProject();
-  // }
-  //
-  // saveProject = () => {
-  //   this.props.saveProject();
-  // }
-
   render(){
     return (
       <div
@@ -31,18 +19,18 @@ class Menu extends React.Component {
           display: this.props.menuReducer?'inline':'none',
         }}
       >
-        <div className="projectBoxButtonText">
+        <div className="projectMenuTextText">
           <Link
-            className="navButtonText projectBoxButtonText"
+            className="navButtonText projectMenuTextText"
             to="/art"
           >
             Canvas
           </Link>
         </div>
 
-        <div className="projectBoxButtonText">
+        <div className="projectMenuTextText">
           <Link
-            className="navButtonText projectBoxButtonText"
+            className="navButtonText projectMenuTextText"
             to="/gallery"
           >
             Gallery
@@ -52,7 +40,7 @@ class Menu extends React.Component {
         <NewProject addNewProject={this.props.addNewProject} />
 
         <button
-          className="projectBoxButtonText"
+          className="projectMenuTextText"
           onClick={() => this.props.saveProject()}
         >
           Save Project
@@ -61,25 +49,23 @@ class Menu extends React.Component {
         <br/>
 
         <button
-        className="projectBoxButtonText"
+        className="projectMenuTextText"
         onClick={() => this.props.sendFinishedProject()}
         >
           Finish Project
         </button>
         <br/>
         <button
-          className="projectBoxButtonText"
+          className="projectMenuTextText mb-3"
           onClick={() => this.props.deleteProject()}
         >
           Delete Project
         </button>
         <br/>
-        <p
-          className="projectBoxTitleText"
-        >
+        <p className="menuTitleTextText">
           Projects
         </p>
-        {this.props.projects.map(project => <ProjectDropdown key={project.id} project={project} />)}
+        {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}
       </div>
     );
   }
