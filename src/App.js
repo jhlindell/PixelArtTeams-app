@@ -15,11 +15,10 @@ import {
   Route }
   from 'react-router-dom';
 import './App.css';
-import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction,
-  mouseUpAction, getGallery } from './actions/index';
+import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction, mouseUpAction, getGallery, setUserName } from './actions/index';
 
-const WS = 'pixelart-server.herokuapp.com:';
-// const WS = 'localhost:8000';
+// const WS = 'pixelart-server.herokuapp.com:';
+const WS = 'localhost:8000';
 
 class App extends Component {
 
@@ -56,6 +55,18 @@ class App extends Component {
       this.props.selectProject(id);
     });
 
+    this.socket.on('resultOfAddingPermission', (result) => {
+      if(result){
+        alert('user permission added successfully');
+      } else {
+        alert('problem adding user permission');
+      }
+    });
+
+    this.socket.on('returnUserName', (username)=> {
+      this.props.setUserName(username);
+    });
+
     this.socket.emit('initialize', this.props.token);
   }
 
@@ -80,12 +91,25 @@ class App extends Component {
     this.socket.emit('addNewProject', {name, x, y, token});
   }
 
+  addNewUser = (username, email) => {
+    console.log("adding new user called with username: ", username, " and email: ", email);
+    this.socket.emit('addUserToProject', { username: username, email: email, projectid: this.props.currentProject});
+  }
+
   sendFinishedProject = () => {
     this.socket.emit('sendFinishedProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   saveProject = () => {
     this.socket.emit('saveProject', { projectid: this.props.currentProject, token: this.props.token});
+  }
+
+  getProjects = () => {
+    this.socket.emit('refreshProjects', this.props.token);
+  }
+
+  getUserName = () => {
+    this.socket.emit('getUserName', this.props.token);
   }
 
   deleteProject = () => {
@@ -128,12 +152,15 @@ class App extends Component {
 
           <Route
             path="/art"
-            render={() => <NavBar />}
+            render={() => <NavBar
+              getUserName={this.getUserName}
+            />}
           />
           <Route
           path="/art"
           render={() => <Menu
             addNewProject={this.addNewProject}
+            addNewUser={this.addNewUser}
             saveProject={this.saveProject}
             deleteProject={this.deleteProject}
             sendFinishedProject={this.sendFinishedProject}/>}
@@ -149,12 +176,16 @@ class App extends Component {
               onMouseUp={this.mouseUp}
               onMouseOver={this.mouseOver}
               sendPixel={this.sendPixelToSocket}
-              addNewProject={this.addNewProject} />}
+              addNewProject={this.addNewProject}
+              getProjects={this.getProjects}
+            />}
           />
 
           <Route
             path="/gallery"
-            render={() => <NavBar />}
+            render={() => <NavBar
+              getUserName={this.getUserName}
+            />}
           />
           <Route
             path="/gallery"
@@ -187,7 +218,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery }, dispatch);
+  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery, setUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -17,19 +17,19 @@ const renderField = ({ input, label, type, meta: { touched, error}}) => (
   <div>
     <input {...input} placeholder={label} type={type} />
     {touched &&
-      (error && <span>{error}</span>)}
+      (error && <span><br/>{error}</span>)}
   </div>
 </div>
 );
 
-class NewProject extends Component {
+class AddUser extends Component {
 
   constructor(props) {
     super(props);
     this.renderButton = this.renderButton.bind(this);
-    this.toggleNewProject = this.toggleNewProject.bind(this);
+    this.toggleNewUser = this.toggleNewUser.bind(this);
     this.state = {
-      newProjectToggle: false,
+      newUserToggle: false,
     };
   }
 
@@ -37,15 +37,15 @@ class NewProject extends Component {
     this.renderButton();
   }
 
-  toggleNewProject() {
+  toggleNewUser() {
     this.setState({
-      newProjectToggle: !this.state.newProjectToggle
+      newUserToggle: !this.state.newUserToggle
     });
   }
 
   handleFormSubmit(formProps) {
-    this.setState({newProjectToggle: false});
-    this.props.addNewProject(formProps.project_name, formProps.x, formProps.y);
+    this.setState({newUserToggle: false});
+    this.props.addNewUser(formProps.user_name, formProps.email);
   }
 
   renderButton(){
@@ -53,8 +53,8 @@ class NewProject extends Component {
       <button
         className="newProjectSelector"
         disabled={!this.props.authenticated}
-        onClick={() => this.toggleNewProject()}>
-        New Project
+        onClick={() => this.toggleNewUser()}>
+        Add New User
       </button>
     )
   }
@@ -67,32 +67,27 @@ class NewProject extends Component {
 
         {this.renderButton()}
         <Modal
-          isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}>
-          <ModalHeader toggle={()=>this.toggleNewProject()}>
+          isOpen={this.state.newUserToggle}
+          toggle={()=>this.toggleNewUser()}>
+          <ModalHeader toggle={()=>this.toggleNewUser()}>
             New Project
           </ModalHeader>
-
           <ModalBody>
             <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
               <FormGroup row>
                 <Col sm={12}>
-                  <Field name="project_name"
+                  <Field name="user_name"
                     type="text"
                     component={renderField}
-                    label="Project Name" />
+                    label="User Name" />
                 </Col>
               </FormGroup>
               <FormGroup row>
-                <Col md={4}>
-                  <Field name="x" component={renderField}
-                    type="text" label="X"/>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={4}>
-                  <Field name="y" component={renderField}
-                    type="text" label="Y"/>
+                <Col sm={12}>
+                  <Field name="email"
+                    type="text"
+                    component={renderField}
+                    label="User Email" />
                 </Col>
               </FormGroup>
               <Button
@@ -104,7 +99,7 @@ class NewProject extends Component {
               {' '}
               <Button
                 color="secondary"
-                onClick={()=>this.toggleNewProject()}>
+                onClick={()=>this.toggleNewUser()}>
                 Cancel
               </Button>
             </Form>
@@ -118,16 +113,8 @@ class NewProject extends Component {
 const validate = formProps => {
   const errors = {};
 
-  if(!formProps.project_name) {
-    errors.project_name = 'Please enter a project name';
-  }
-
-  if(formProps.x < 10 || formProps.x > 30){
-    errors.x = 'X needs to be between 10 and 30';
-  }
-
-  if(formProps.y < 10 || formProps.y > 30){
-    errors.y = 'Y needs to be between 10 and 30';
+  if(!formProps.user_name && !formProps.email) {
+    errors.user_name = 'Please enter either a username or user email';
   }
 
   return errors;
@@ -137,9 +124,9 @@ function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated };
 }
 
-NewProject = connect(mapStateToProps, null)(NewProject);
+AddUser = connect(mapStateToProps, null)(AddUser);
 
 export default reduxForm({
-  form: 'newProject',
+  form: 'AddUser',
   validate
-})(NewProject);
+})(AddUser);

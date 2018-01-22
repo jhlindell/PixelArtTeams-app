@@ -10,6 +10,12 @@ body {
   font-size: 32px;
 }
 
+.userNameText {
+  color: white !important;
+  font-family: 'Press Start 2P';
+  font-size: 20px;
+}
+
 .navButtonText {
   width: 100%;
   color: black !important;
@@ -197,10 +203,15 @@ body {
   text-align: center;
   font-family: 'Press Start 2P';
   border: none;
-  background: 'none';
+  background: 'blue' !important;
+  color: 'blue';
   margin-top: 20px;
 }
 
 .newProjectSelector:hover {
   background: #6b6862;
+}
+
+.menuList {
+  list-style: none;
 }

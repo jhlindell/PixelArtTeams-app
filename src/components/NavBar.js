@@ -20,12 +20,23 @@ const imgStyle = {
 };
 
 class NavBar extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
+      isOpen: false
     };
+  }
+
+  componentWillMount(){
+    if(this.props.authenticated){
+      this.props.getUserName();
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.authenticated){
+      this.props.getUserName();
+    }
   }
 
   toggle() {
@@ -88,6 +99,9 @@ class NavBar extends React.Component {
         >
 
           <Nav className="ml-auto" navbar>
+            {this.props.username && <span className="userNameText mr-2 mt-1">
+              Hi,{ this.props.username }
+            </span>}
             {this.renderLinks()}
             <Button
               color="secondary"
@@ -106,7 +120,7 @@ class NavBar extends React.Component {
 
 function mapStateToProps(state){
   return { authenticated: state.auth.authenticated,
-    token: state.auth.token };
+    token: state.auth.token, username: state.userName };
 }
 
 function mapDispatchToProps(dispatch) {

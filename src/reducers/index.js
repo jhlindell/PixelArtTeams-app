@@ -55,6 +55,8 @@ function projectsReducer(state = [], action) {
   switch (action.type) {
     case 'FETCH_PROJECTS':
       return action.payload;
+    case 'CLEAR_PROJECTS':
+      return [];
     default:
       return state;
   }
@@ -124,6 +126,28 @@ function authReducer(state = {}, action){
   }
 }
 
+function userName(state=null, action){
+  switch(action.type){
+    case "USERNAME":
+      return action.payload;
+    case "CLEAR_USERNAME":
+      return null;
+    default:
+      return state;
+  }
+}
+
+function collaborators(state=[], action){
+  switch(action.type){
+    case "SET_COLLABORATORS":
+      return action.payload;
+    case "CLEAR_COLLABORATORS":
+      return [];
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -134,7 +158,9 @@ const rootReducer = combineReducers({
   paletteReducer,
   menuReducer,
   form: formReducer,
-  auth: authReducer
+  auth: authReducer,
+  userName,
+  collaborators
 });
 
 export default rootReducer;

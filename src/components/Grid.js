@@ -6,9 +6,10 @@ import Project from './Project';
 import NewProject from './NewProject';
 
 class Grid extends Component {
+  componentWillMount(){
+    this.props.getProjects();
+  }
   render(){
-    console.log("grid auth: ", this.props.auth)
-    console.log("grid token: ", this.props.token)
     let xCoord = this.props.grid[0].length;
     let gridWidth = xCoord * 20;
     let newStyle = {};

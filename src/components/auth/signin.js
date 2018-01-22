@@ -28,7 +28,7 @@ class Signin extends Component {
   }
 
   handleFormSubmit(formProps) {
-    this.props.signInUser(formProps)
+    this.props.signInUser(formProps);
   }
 
   renderAlert() {

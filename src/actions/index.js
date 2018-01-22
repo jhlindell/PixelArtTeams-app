@@ -1,7 +1,7 @@
 import axios from 'axios';
 const LOCAL_URL = 'http://localhost:8000';
 const HEROKU_URL = 'https://pixelart-server.herokuapp.com';
-
+const URL = LOCAL_URL;
 
 export function changeShowState() {
   return {
@@ -27,6 +27,18 @@ export function selectProject(id){
     type: 'SELECT_PROJECT',
     payload: { id }
   };
+}
+
+export function getCollaborators(id){
+  return function(dispatch){
+    axios.get(`${URL}/api/users/collaborators/${id}`)
+      .then(response => {
+        dispatch({ type: 'SET_COLLABORATORS', payload: response.data });
+      })
+      .catch(response => {
+        console.log("error getting collaborators");
+      })
+  }
 }
 
 export function pixelClick(x, y, color) {
@@ -73,7 +85,7 @@ export function getGallery(art){
 
 export function signUpUser({username, email, password}){
   return function(dispatch){
-    axios.post(`${HEROKU_URL}/signup`, {username, email, password})
+    axios.post(`${URL}/signup`, {username, email, password})
       .then(response => {
         dispatch({type: 'AUTH_USER', payload: response.data.token });
       })
@@ -92,7 +104,7 @@ export function authError(error) {
 
 export function signInUser({username, password}){
   return function(dispatch){
-    axios.post(`${HEROKU_URL}/signin`, {username, password})
+    axios.post(`${URL}/signin`, {username, password})
       .then(response => {
         dispatch({type: 'AUTH_USER', payload: response.data.token });
       })
@@ -103,5 +115,17 @@ export function signInUser({username, password}){
 }
 
 export function signoutUser(){
-  return {type: 'UNAUTH_USER'};
+  return function(dispatch){
+    dispatch({type: 'UNAUTH_USER'});
+    dispatch({type: 'CLEAR_PROJECTS'});
+    dispatch({type: 'CLEAR_USERNAME'});
+    dispatch({type: 'CLEAR_COLLABORATORS'});
+  }
+}
+
+export function setUserName(username){
+  return {
+    type: 'USERNAME',
+    payload: username
+  };
 }
