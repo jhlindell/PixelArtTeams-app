@@ -120,10 +120,11 @@ export function signInUser({username, password}){
 
 export function signoutUser(){
   return function(dispatch){
-    dispatch({type: 'UNAUTH_USER'});
-    dispatch({type: 'CLEAR_PROJECTS'});
-    dispatch({type: 'CLEAR_USERNAME'});
-    dispatch({type: 'CLEAR_COLLABORATORS'});
+    // dispatch({type: 'CLEAR_PROJECTS'});
+    // dispatch({type: 'CLEAR_USERNAME'});
+    // dispatch({type: 'CLEAR_COLLABORATORS'});
+    // dispatch({type: 'UNAUTH_USER'});
+    dispatch({type: 'USER_LOGOUT'});
   }
 }
 

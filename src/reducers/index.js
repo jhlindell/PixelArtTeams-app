@@ -163,7 +163,7 @@ function userCheckReducer(state={}, action){
   }
 }
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   activeColor,
   gridReducer,
   currentProject,
@@ -178,5 +178,13 @@ const rootReducer = combineReducers({
   collaborators,
   userCheckReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
 
 export default rootReducer;
