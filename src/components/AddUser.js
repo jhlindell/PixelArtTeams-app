@@ -9,7 +9,9 @@ import {
   Form,
   FormGroup,
 } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { bindActionCreators } from 'redux';
+import { clearUserNameCheck } from '../actions/index';
 
 const renderField = ({ input, label, type, meta: { touched, error}}) => (
 <div>
@@ -37,6 +39,11 @@ class AddUser extends Component {
     this.renderButton();
   }
 
+  userCheckClicked(){
+    const formObj = formValueSelector('AddUser');
+    console.log(this.props);
+  }
+
   toggleNewUser() {
     this.setState({
       newUserToggle: !this.state.newUserToggle
@@ -46,6 +53,7 @@ class AddUser extends Component {
   handleFormSubmit(formProps) {
     this.setState({newUserToggle: false});
     this.props.addNewUser(formProps.user_name, formProps.email);
+    this.props.clearUserNameCheck();
   }
 
   renderButton(){
@@ -99,8 +107,16 @@ class AddUser extends Component {
               {' '}
               <Button
                 color="secondary"
-                onClick={()=>this.toggleNewUser()}>
+                onClick={()=> {
+                  this.toggleNewUser()
+                  this.props.clearUserNameCheck()
+                }}>
                 Cancel
+              </Button>
+              <Button
+                color="primary"
+                onClick={()=> this.userCheckClicked()}>
+                Check For User
               </Button>
             </Form>
           </ModalBody>
@@ -120,11 +136,15 @@ const validate = formProps => {
   return errors;
 }
 
-function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated };
+function mapStateToProps(state, props) {
+  return { authenticated: state.auth.authenticated, user: state.userCheckReducer, form: props.form };
 }
 
-AddUser = connect(mapStateToProps, null)(AddUser);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({clearUserNameCheck}, dispatch);
+}
+
+AddUser = connect(mapStateToProps, mapDispatchToProps)(AddUser);
 
 export default reduxForm({
   form: 'AddUser',

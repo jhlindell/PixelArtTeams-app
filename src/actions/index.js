@@ -87,10 +87,14 @@ export function signUpUser({username, email, password}){
   return function(dispatch){
     axios.post(`${URL}/signup`, {username, email, password})
       .then(response => {
-        dispatch({type: 'AUTH_USER', payload: response.data.token });
+        if(response.data.token){
+          dispatch({type: 'AUTH_USER', payload: response.data.token });
+        } else {
+          dispatch(authError(response.data.error));
+        }
       })
       .catch((response) => {
-        dispatch(authError(response.data.error));
+        dispatch(authError(response));
       });
   }
 }
@@ -128,4 +132,15 @@ export function setUserName(username){
     type: 'USERNAME',
     payload: username
   };
+}
+
+export function userNameCheck(result, message){
+  return {
+    type: 'USERNAME_CHECK',
+    payload: {result: result, message: message}
+  };
+}
+
+export function clearUserNameCheck(){
+  return {type: 'CLEAR_USERNAME_CHECK'};
 }

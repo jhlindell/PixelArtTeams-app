@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectDropdown from './ProjectDropdown';
 import NewProject from './NewProject';
-import AddUser from './AddUser';
+import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -40,7 +40,9 @@ class Menu extends React.Component {
         </div>
 
         <NewProject addNewProject={this.props.addNewProject} />
-        <AddUser addNewUser={this.props.addNewUser} />
+        <AddNewUser
+          addNewUser={this.props.addNewUser}
+          checkUserForAdd={this.props.checkUserForAdd} />
 
         <button
           className="projectMenuTextText"
@@ -73,7 +75,7 @@ class Menu extends React.Component {
         <p className="menuTitleTextText">
           Collaborators
         </p>
-        
+
         <Collaborators />
       </div>
     );

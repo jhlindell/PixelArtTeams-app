@@ -75,7 +75,6 @@ body {
   font-family: 'Press Start 2P';
   text-align: center;
   padding: 1px;
-  margin: auto;
 }
 
 .newProject {
@@ -198,14 +197,11 @@ body {
 }
 
 .newProjectSelector {
-  display:block;
-  margin: auto;
-  text-align: center;
   font-family: 'Press Start 2P';
   border: none;
-  background: 'blue' !important;
-  color: 'blue';
+  background: blue;
   margin-top: 20px;
+  padding-left: 0px;
 }
 
 .newProjectSelector:hover {
