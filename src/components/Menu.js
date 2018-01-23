@@ -1,12 +1,43 @@
 import React from "react";
 import ProjectDropdown from './ProjectDropdown';
 import NewProject from './NewProject';
-import AddUser from './AddUser';
+import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Menu extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOwner: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.currentProject){
+      this.isProjectOwner(nextProps.currentProject);
+    }
+  }
+
+  isProjectOwner(id){
+    let project;
+    let array = this.props.projects;
+    for(let i = 0; i < array.length; i++){
+      if(array[i].project_id === id){
+        project = array[i];
+        break;
+      }
+    }
+    if(project){
+      if(project.project_owner === this.props.username){
+        this.setState({isOwner: true});
+      } else {
+        this.setState({isOwner: false});
+      }
+    }
+  }
 
   render(){
     return (
@@ -40,40 +71,45 @@ class Menu extends React.Component {
         </div>
 
         <NewProject addNewProject={this.props.addNewProject} />
-        <AddUser addNewUser={this.props.addNewUser} />
 
-        <button
+        {this.state.isOwner && <div>
+          <AddNewUser
+            addNewUser={this.props.addNewUser}
+            checkUserForAdd={this.props.checkUserForAdd} />
+
+          <button
+            className="projectMenuTextText"
+            onClick={() => this.props.saveProject()}
+          >
+            Save Project
+          </button>
+
+          <br/>
+
+          <button
           className="projectMenuTextText"
-          onClick={() => this.props.saveProject()}
-        >
-          Save Project
-        </button>
-
+          onClick={() => this.props.sendFinishedProject()}
+          >
+            Finish Project
+          </button>
+          <br/>
+          <button
+            className="projectMenuTextText"
+            onClick={() => this.props.deleteProject()}
+          >
+            Delete Project
+          </button>
+        </div>}
         <br/>
-
-        <button
-        className="projectMenuTextText"
-        onClick={() => this.props.sendFinishedProject()}
-        >
-          Finish Project
-        </button>
-        <br/>
-        <button
-          className="projectMenuTextText mb-3"
-          onClick={() => this.props.deleteProject()}
-        >
-          Delete Project
-        </button>
-        <br/>
-        <p className="menuTitleTextText">
+        <div className="menuTitleTextText">
           Projects
-        </p>
+        </div>
         {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}
         <br/>
-        <p className="menuTitleTextText">
+        <div className="menuTitleTextText">
           Collaborators
-        </p>
-        
+        </div>
+
         <Collaborators />
       </div>
     );
@@ -81,7 +117,7 @@ class Menu extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {projects: state.projectsReducer, menuReducer: state.menuReducer};
+  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject };
 }
 
 export default connect(mapStateToProps, null)(Menu);

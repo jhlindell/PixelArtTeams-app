@@ -15,10 +15,10 @@ import {
   Route }
   from 'react-router-dom';
 import './App.css';
-import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction, mouseUpAction, getGallery, setUserName } from './actions/index';
+import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction, mouseUpAction, getGallery, setUserName, userNameCheck } from './actions/index';
 
-// const WS = 'pixelart-server.herokuapp.com:';
-const WS = 'localhost:8000';
+const WS = 'pixelart-server.herokuapp.com:';
+// const WS = 'localhost:8000';
 
 class App extends Component {
 
@@ -54,6 +54,16 @@ class App extends Component {
     this.socket.on('changeCurrentProject', (id)=> {
       this.props.selectProject(id);
     });
+
+    this.socket.on('resultOfUserCheck', (result) => {
+      if(result){
+        console.log("user exists");
+        this.props.userNameCheck(result, "User Exists");
+      } else {
+        console.log("user does not exist");
+        this.props.userNameCheck(result, "User Doesn't Exist");
+      }
+    })
 
     this.socket.on('resultOfAddingPermission', (result) => {
       if(result){
@@ -91,8 +101,11 @@ class App extends Component {
     this.socket.emit('addNewProject', {name, x, y, token});
   }
 
+  checkUserForAdd = (username, email) => {
+    this.socket.emit('checkUser', { username: username, email: email});
+  }
+
   addNewUser = (username, email) => {
-    console.log("adding new user called with username: ", username, " and email: ", email);
     this.socket.emit('addUserToProject', { username: username, email: email, projectid: this.props.currentProject});
   }
 
@@ -160,6 +173,7 @@ class App extends Component {
           path="/art"
           render={() => <Menu
             addNewProject={this.addNewProject}
+            checkUserForAdd={this.checkUserForAdd}
             addNewUser={this.addNewUser}
             saveProject={this.saveProject}
             deleteProject={this.deleteProject}
@@ -218,7 +232,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery, setUserName }, dispatch);
+  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery, setUserName, userNameCheck }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

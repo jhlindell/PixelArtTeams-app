@@ -102,11 +102,15 @@ function menuReducer(state = false, action){
 }
 
 const styleErrorCode = (code) => {
-  if (code.message.includes('401')){
-    return 'bad username or password';
-  }
-  else {
-    return 'unknown error';
+  if(code.message){
+    if (code.message.includes('401')){
+      return 'bad username or password';
+    }
+    else {
+      return code.message;
+    }
+  } else {
+    return code;
   }
 }
 
@@ -148,7 +152,18 @@ function collaborators(state=[], action){
   }
 }
 
-const rootReducer = combineReducers({
+function userCheckReducer(state={}, action){
+  switch(action.type){
+    case "USERNAME_CHECK":
+      return action.payload;
+    case "CLEAR_USERNAME_CHECK":
+      return {};
+    default:
+      return state;
+  }
+}
+
+const appReducer = combineReducers({
   activeColor,
   gridReducer,
   currentProject,
@@ -160,7 +175,16 @@ const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
   userName,
-  collaborators
+  collaborators,
+  userCheckReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
 
 export default rootReducer;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 const LOCAL_URL = 'http://localhost:8000';
 const HEROKU_URL = 'https://pixelart-server.herokuapp.com';
-const URL = LOCAL_URL;
+const URL = HEROKU_URL;
 
 export function changeShowState() {
   return {
@@ -87,10 +87,14 @@ export function signUpUser({username, email, password}){
   return function(dispatch){
     axios.post(`${URL}/signup`, {username, email, password})
       .then(response => {
-        dispatch({type: 'AUTH_USER', payload: response.data.token });
+        if(response.data.token){
+          dispatch({type: 'AUTH_USER', payload: response.data.token });
+        } else {
+          dispatch(authError(response.data.error));
+        }
       })
       .catch((response) => {
-        dispatch(authError(response.data.error));
+        dispatch(authError(response));
       });
   }
 }
@@ -116,10 +120,11 @@ export function signInUser({username, password}){
 
 export function signoutUser(){
   return function(dispatch){
-    dispatch({type: 'UNAUTH_USER'});
-    dispatch({type: 'CLEAR_PROJECTS'});
-    dispatch({type: 'CLEAR_USERNAME'});
-    dispatch({type: 'CLEAR_COLLABORATORS'});
+    // dispatch({type: 'CLEAR_PROJECTS'});
+    // dispatch({type: 'CLEAR_USERNAME'});
+    // dispatch({type: 'CLEAR_COLLABORATORS'});
+    // dispatch({type: 'UNAUTH_USER'});
+    dispatch({type: 'USER_LOGOUT'});
   }
 }
 
@@ -128,4 +133,15 @@ export function setUserName(username){
     type: 'USERNAME',
     payload: username
   };
+}
+
+export function userNameCheck(result, message){
+  return {
+    type: 'USERNAME_CHECK',
+    payload: {result: result, message: message}
+  };
+}
+
+export function clearUserNameCheck(){
+  return {type: 'CLEAR_USERNAME_CHECK'};
 }

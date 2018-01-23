@@ -64,7 +64,6 @@ class NewProject extends Component {
 
     return (
       <div>
-
         {this.renderButton()}
         <Modal
           isOpen={this.state.newProjectToggle}

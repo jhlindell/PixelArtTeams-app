@@ -23,7 +23,12 @@ const renderField = ({ input, label, type, meta: { touched, error }}) => (
 class Signup extends Component {
   handleFormSubmit(formProps) {
     this.props.signUpUser(formProps);
-    this.props.history.push('/art');
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.authenticated){
+      this.props.history.push('/art');
+    }
   }
 
   renderAlert() {
@@ -113,7 +118,7 @@ const validate = formProps => {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated };
 }
 
 function mapDispatchToProps(dispatch){

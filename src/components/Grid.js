@@ -3,7 +3,6 @@ import Pixel from './Pixel';
 import {connect} from 'react-redux';
 import {Row, Col} from 'reactstrap';
 import Project from './Project';
-import NewProject from './NewProject';
 
 class Grid extends Component {
   componentWillMount(){
@@ -38,8 +37,6 @@ class Grid extends Component {
                   key={project.project_id}
                   project={project} />)
                 }
-
-              <NewProject addNewProject={this.props.addNewProject} />
               </div>
               :
               <div

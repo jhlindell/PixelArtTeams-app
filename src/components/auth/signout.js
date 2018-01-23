@@ -6,7 +6,13 @@ import { signoutUser } from '../../actions/index';
 class Signout extends Component {
   componentWillMount() {
     this.props.signoutUser();
-    this.props.history.push('/')
+
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(!nextProps.authenticated){
+      this.props.history.push('/')
+    }
   }
 
   render() {
@@ -14,8 +20,12 @@ class Signout extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return { authenticated: state.auth.authenticated }
+}
+
 function mapDispatchToProps(dispatch){
   return bindActionCreators({ signoutUser }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Signout);
+export default connect(mapStateToProps, mapDispatchToProps)(Signout);
