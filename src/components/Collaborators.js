@@ -17,10 +17,10 @@ class Collaborators extends Component {
   render(){
     return (
       <div>
-        {this.props.collaborators.map(collaborator =>
-          <div
-            className="projectMenuTextText"
-            key={collaborator}>{collaborator}</div>)}
+        {this.props.collaborators.map(collaborator => {
+          if( collaborator !== this.props.username){
+            return <div className="projectMenuTextText"
+              key={collaborator}>{collaborator}</div>}})}
       </div>
     );
   }
@@ -28,7 +28,7 @@ class Collaborators extends Component {
 }
 
 function mapStateToProps(state){
-  return { currentProject: state.currentProject, collaborators: state.collaborators, projects: state.projectsReducer,}
+  return { currentProject: state.currentProject, collaborators: state.collaborators, projects: state.projectsReducer, username: state.userName }
 }
 
 function mapDispatchToProps(dispatch) {
