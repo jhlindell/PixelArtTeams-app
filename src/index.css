@@ -211,3 +211,8 @@ body {
 .menuList {
   list-style: none;
 }
+
+.aboutText {
+  font-family: 'Press Start 2P';
+  font-size: 12px;
+}

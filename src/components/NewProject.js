@@ -67,7 +67,8 @@ class NewProject extends Component {
         {this.renderButton()}
         <Modal
           isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}>
+          toggle={()=>this.toggleNewProject()}
+        >
           <ModalHeader toggle={()=>this.toggleNewProject()}>
             New Project
           </ModalHeader>
