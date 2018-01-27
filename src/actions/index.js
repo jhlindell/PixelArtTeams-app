@@ -1,7 +1,5 @@
 import axios from 'axios';
-const LOCAL_URL = 'http://localhost:8000';
-const HEROKU_URL = 'https://pixelart-server.herokuapp.com';
-const URL = HEROKU_URL;
+const URL = process.env.REACT_APP_API_URL;
 
 export function changeShowState() {
   return {
@@ -144,4 +142,8 @@ export function userNameCheck(result, message){
 
 export function clearUserNameCheck(){
   return {type: 'CLEAR_USERNAME_CHECK'};
+}
+
+export function connectSocket(){
+
 }

@@ -76,7 +76,6 @@ class NavBar extends React.Component {
       >
 
         <NavbarToggler
-          right
           onClick={ this.props.changeShowMenuState }
         />
         <Media

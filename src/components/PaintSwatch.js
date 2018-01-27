@@ -18,10 +18,10 @@ const styles = {
 
 class PaintSwatch extends Component {
   render(){
-    styles.backgroundColor = this.props.color;
+    const style = Object.assign({ backgroundColor: this.props.color }, styles);
     return (
       <div
-        style={styles}
+        style={style}
         className="paint"
         onClick={() => this.props.updateColor(this.props.color)}
       >

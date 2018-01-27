@@ -4,7 +4,7 @@ import NewProject from './NewProject';
 import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import About from './About';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Menu extends React.Component {

@@ -16,46 +16,44 @@ import {
   from 'react-router-dom';
 import './App.css';
 import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction, mouseUpAction, getGallery, setUserName, userNameCheck } from './actions/index';
-
-const WS = 'pixelart-server.herokuapp.com:';
-// const WS = 'localhost:8000';
+const socket = require('./socket');
 
 class App extends Component {
 
   componentWillMount() {
-    this.socket = require('socket.io-client')(WS, {jsonp: false});
-    this.socket.on('connect', () => {
+    socket.open();
+    socket.on('connect', () => {
       if(this.props.currentProject !== 0){
-        this.socket.emit('joinRoom', this.props.currentProject);
-        this.socket.emit('grid', this.props.currentProject);
+        socket.emit('joinRoom', this.props.currentProject);
+        socket.emit('grid', this.props.currentProject);
       }
     });
 
-    this.socket.on('pixel', (pixel) => {
+    socket.on('pixel', (pixel) => {
       this.props.pixelClick(pixel.x, pixel.y, pixel.color);
     });
 
-    this.socket.on('gridUpdated', (grid)=> {
+    socket.on('gridUpdated', (grid)=> {
       this.props.updateGrid(grid);
     });
 
-    this.socket.on('sendProjectsToClient', (projects)=> {
+    socket.on('sendProjectsToClient', (projects)=> {
       this.props.sendProjectsToStore(projects);
     });
 
-    this.socket.on('sendingGallery', (gallery) => {
+    socket.on('sendingGallery', (gallery) => {
       this.props.getGallery(gallery);
     });
 
-    this.socket.on('requestRefresh', () => {
-      this.socket.emit('refreshProjects', this.props.token);
+    socket.on('requestRefresh', () => {
+      socket.emit('refreshProjects', this.props.token);
     })
 
-    this.socket.on('changeCurrentProject', (id)=> {
+    socket.on('changeCurrentProject', (id)=> {
       this.props.selectProject(id);
     });
 
-    this.socket.on('resultOfUserCheck', (result) => {
+    socket.on('resultOfUserCheck', (result) => {
       if(result){
         console.log("user exists");
         this.props.userNameCheck(result, "User Exists");
@@ -65,7 +63,7 @@ class App extends Component {
       }
     })
 
-    this.socket.on('resultOfAddingPermission', (result) => {
+    socket.on('resultOfAddingPermission', (result) => {
       if(result){
         alert('user permission added successfully');
       } else {
@@ -73,23 +71,23 @@ class App extends Component {
       }
     });
 
-    this.socket.on('returnUserName', (username)=> {
+    socket.on('returnUserName', (username)=> {
       this.props.setUserName(username);
     });
 
-    this.socket.emit('initialize', this.props.token);
+    socket.emit('initialize', this.props.token);
   }
 
   componentDidUpdate(prevProps){
     if(this.props.currentProject !== prevProps.currentProject){
-      this.socket.emit('leaveRoom', prevProps.currentProject);
-      this.socket.emit('joinRoom', this.props.currentProject);
-      this.socket.emit('grid', this.props.currentProject);
+      socket.emit('leaveRoom', prevProps.currentProject);
+      socket.emit('joinRoom', this.props.currentProject);
+      socket.emit('grid', this.props.currentProject);
     }
   }
 
   sendPixelToSocket = (x, y, color) => {
-    this.socket.emit('pixel', { x, y, color, project: this.props.currentProject});
+    socket.emit('pixel', { x, y, color, project: this.props.currentProject});
   }
 
   addNewProject = (name, x, y) => {
@@ -98,39 +96,39 @@ class App extends Component {
       token = localStorage.getItem('token');
     } else
     token = this.props.token;
-    this.socket.emit('addNewProject', {name, x, y, token});
+    socket.emit('addNewProject', {name, x, y, token});
   }
 
   checkUserForAdd = (username, email) => {
-    this.socket.emit('checkUser', { username: username, email: email});
+    socket.emit('checkUser', { username: username, email: email});
   }
 
   addNewUser = (username, email) => {
-    this.socket.emit('addUserToProject', { username: username, email: email, projectid: this.props.currentProject});
+    socket.emit('addUserToProject', { username: username, email: email, projectid: this.props.currentProject});
   }
 
   sendFinishedProject = () => {
-    this.socket.emit('sendFinishedProject', { projectid: this.props.currentProject, token: this.props.token});
+    socket.emit('sendFinishedProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   saveProject = () => {
-    this.socket.emit('saveProject', { projectid: this.props.currentProject, token: this.props.token});
+    socket.emit('saveProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   getProjects = () => {
-    this.socket.emit('refreshProjects', this.props.token);
+    socket.emit('refreshProjects', this.props.token);
   }
 
   getUserName = () => {
-    this.socket.emit('getUserName', this.props.token);
+    socket.emit('getUserName', this.props.token);
   }
 
   deleteProject = () => {
-    this.socket.emit('deleteProject', { projectid: this.props.currentProject, token: this.props.token});
+    socket.emit('deleteProject', { projectid: this.props.currentProject, token: this.props.token});
   }
 
   componentWillUnmount() {
-    this.socket.disconnect();
+    socket.disconnect();
   }
 
   mouseDown = () => {
@@ -148,7 +146,7 @@ class App extends Component {
   }
 
   stockGallery = () => {
-    this.socket.emit('getArtForGallery');
+    socket.emit('getArtForGallery');
   }
 
   render() {
