@@ -3,6 +3,8 @@ import Pixel from './Pixel';
 import {connect} from 'react-redux';
 import {Row, Col} from 'reactstrap';
 import Project from './Project';
+import {bindActionCreators} from 'redux';
+import { mouseDownAction, mouseUpAction } from '../actions/index';
 
 class Grid extends Component {
   componentWillMount(){
@@ -41,15 +43,13 @@ class Grid extends Component {
               :
               <div
                 style={newStyle}
-                onMouseDown={() => this.props.onMouseDown()}
-                onMouseUp={() => this.props.onMouseUp()}
+                onMouseDown={() => this.props.mouseDownAction()}
+                onMouseUp={() => this.props.mouseUpAction()}
               >
                 {this.props.grid.map((row, y) => {
                   return row.map((pixel, x) => <Pixel
                     x={x} y={y}
-                    color={pixel}
-                    sendPixel={this.props.sendPixel}
-                    onMouseOver={this.props.onMouseOver} />);
+                    color={pixel} />);
                 })}
               </div>
             }
@@ -82,4 +82,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(Grid);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ mouseDownAction, mouseUpAction}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Grid);

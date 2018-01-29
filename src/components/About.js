@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody
-} from 'reactstrap';
+// import {
+//   Modal,
+//   ModalHeader,
+//   ModalBody
+// } from 'reactstrap';
 
 class About extends Component {
   constructor(props) {

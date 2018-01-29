@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
+import { sendPixel, mouseOverAction } from '../actions/socketActions';
 
 const styles = {
   width: '20px',
@@ -22,8 +23,8 @@ class Pixel extends Component {
     return (
       <div
         style={newStyle}
-        onMouseDown={() => this.props.sendPixel(x, y, activeColor)}
-        onMouseOver={() => this.props.onMouseOver(x, y, activeColor)}
+        onMouseDown={() => this.props.sendPixel(x, y)}
+        onMouseOver={() => this.props.mouseOverAction(x, y)}
       >
       </div>
     );
@@ -34,4 +35,8 @@ function mapStateToProps({ activeColor }) {
   return { activeColor };
 }
 
-export default connect(mapStateToProps, null)(Pixel);
+function mapDispatchToProps( dispatch ){
+  return bindActionCreators( { sendPixel, mouseOverAction }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pixel);

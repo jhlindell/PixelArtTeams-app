@@ -1,6 +1,6 @@
 import axios from 'axios';
+import store from '../store';
 const URL = process.env.REACT_APP_API_URL;
-var ReduxThunk = require('redux-thunk').default
 
 export function changeShowState() {
   return {
@@ -41,24 +41,15 @@ export function getCollaborators(id){
 }
 
 export function pixelClick(x, y, color) {
-  return {
-    type: 'PIXEL_CLICK',
-    payload: { x, y, color }
-  };
+  store.dispatch({type: 'PIXEL_CLICK', payload: { x, y, color }});
 }
 
 export function updateGrid(grid){
-  return {
-    type: 'UPDATE_GRID',
-    payload: grid
-  };
+  store.dispatch({ type: 'UPDATE_GRID', payload: grid });
 }
 
 export function sendProjectsToStore(projects){
-  return {
-    type: 'FETCH_PROJECTS',
-    payload: projects
-  };
+  store.dispatch({type: 'FETCH_PROJECTS', payload: projects});
 }
 
 export function mouseDownAction(){
@@ -76,10 +67,7 @@ export function mouseUpAction(){
 }
 
 export function getGallery(art){
-  return {
-    type: 'GET_GALLERY',
-    payload: art
-  };
+  store.dispatch({type: 'GET_GALLERY', payload: art});
 }
 
 export function signUpUser({username, email, password}){
@@ -128,17 +116,11 @@ export function signoutUser(){
 }
 
 export function setUserName(username){
-  console.log("setUserName", username)
-  return function (dispatch){
-    dispatch({type: 'USERNAME', payload: username})
-  };
+  store.dispatch({type: 'USERNAME', payload: username})
 }
 
 export function userNameCheck(result, message){
-  return {
-    type: 'USERNAME_CHECK',
-    payload: {result: result, message: message}
-  };
+  store.dispatch({type: 'USERNAME_CHECK', payload: {result: result, message: message}});
 }
 
 export function clearUserNameCheck(){
