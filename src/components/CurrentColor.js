@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeShowState } from '../actions/index';
+import { changePaletteShowState } from '../actions/index';
 
 const styles = {
   display: 'flex',
@@ -31,7 +31,7 @@ class CurrentColor extends Component {
           display: 'flex',
           alignItems: 'center',
         }}
-        onClick={()=>this.props.changeShowState()}
+        onClick={()=>this.props.changePaletteShowState()}
       >
         <div
           style={newStyle}
@@ -50,7 +50,7 @@ function mapStateToProps({ activeColor }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeShowState}, dispatch);
+  return bindActionCreators({changePaletteShowState}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(CurrentColor);

@@ -26,7 +26,6 @@ class Palette extends Component {
               alignItems: 'center',
               marginTop: '50px',
               background: 'lightgray',
-              // borderBottom: 'solid 1px',
               borderRight: 'solid 1px',
             }}
           >
@@ -43,5 +42,3 @@ function mapStateToProps({ activeColor, paletteReducer }) {
 }
 
 export default connect(mapStateToProps, null)(Palette);
-
-// export default Palette;

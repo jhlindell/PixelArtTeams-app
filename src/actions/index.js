@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../store';
 const URL = process.env.REACT_APP_API_URL;
 
-export function changeShowState() {
+export function changePaletteShowState() {
   return {
     type: 'CHANGE_PALETTE_SHOW_STATE'
   };
