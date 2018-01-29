@@ -1,5 +1,6 @@
 import axios from 'axios';
 const URL = process.env.REACT_APP_API_URL;
+var ReduxThunk = require('redux-thunk').default
 
 export function changeShowState() {
   return {
@@ -127,9 +128,9 @@ export function signoutUser(){
 }
 
 export function setUserName(username){
-  return {
-    type: 'USERNAME',
-    payload: username
+  console.log("setUserName", username)
+  return function (dispatch){
+    dispatch({type: 'USERNAME', payload: username})
   };
 }
 

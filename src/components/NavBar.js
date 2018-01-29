@@ -28,12 +28,14 @@ class NavBar extends React.Component {
   }
 
   componentWillMount(){
+    console.log("navbar: ", this.props.username);
     if(this.props.authenticated){
       this.props.getUserName();
     }
   }
 
   componentWillReceiveProps(nextProps){
+    console.log("navbar: ", this.props.username);
     if(nextProps.authenticated){
       this.props.getUserName();
     }

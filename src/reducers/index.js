@@ -133,6 +133,7 @@ function authReducer(state = {}, action){
 function userName(state=null, action){
   switch(action.type){
     case "USERNAME":
+      console.log("reducer", action)
       return action.payload;
     case "CLEAR_USERNAME":
       return null;

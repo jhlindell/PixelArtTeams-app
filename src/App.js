@@ -16,18 +16,20 @@ import {
   from 'react-router-dom';
 import './App.css';
 import { pixelClick, updateGrid, selectProject, sendProjectsToStore, mouseDownAction, mouseUpAction, getGallery, setUserName, userNameCheck } from './actions/index';
+import { hello } from './actions/socketActions';
 const socket = require('./socket');
 
 class App extends Component {
 
   componentWillMount() {
     socket.open();
-    socket.on('connect', () => {
-      if(this.props.currentProject !== 0){
-        socket.emit('joinRoom', this.props.currentProject);
-        socket.emit('grid', this.props.currentProject);
-      }
-    });
+    this.props.hello();
+    // socket.on('connect', () => {
+    //   if(this.props.currentProject !== 0){
+    //     socket.emit('joinRoom', this.props.currentProject);
+    //     socket.emit('grid', this.props.currentProject);
+    //   }
+    // });
 
     socket.on('pixel', (pixel) => {
       this.props.pixelClick(pixel.x, pixel.y, pixel.color);
@@ -70,11 +72,7 @@ class App extends Component {
         alert('problem adding user permission');
       }
     });
-
-    socket.on('returnUserName', (username)=> {
-      this.props.setUserName(username);
-    });
-
+    
     socket.emit('initialize', this.props.token);
   }
 
@@ -230,7 +228,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery, setUserName, userNameCheck }, dispatch);
+  return bindActionCreators({ pixelClick, updateGrid, sendProjectsToStore, mouseDownAction, mouseUpAction, selectProject, getGallery, setUserName, userNameCheck, hello }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
