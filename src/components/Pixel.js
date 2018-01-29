@@ -16,7 +16,7 @@ const styles = {
 class Pixel extends Component {
 
   render(){
-    const { x, y, color, activeColor } = this.props;
+    const { x, y, color} = this.props;
     let newStyle = Object.assign({}, styles);
     newStyle.backgroundColor = color;
 
@@ -31,12 +31,8 @@ class Pixel extends Component {
   }
 }
 
-function mapStateToProps({ activeColor }) {
-  return { activeColor };
-}
-
 function mapDispatchToProps( dispatch ){
   return bindActionCreators( { sendPixel, mouseOverAction }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pixel);
+export default connect(null, mapDispatchToProps)(Pixel);

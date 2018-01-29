@@ -12,6 +12,7 @@ import {
   FormGroup,
 } from 'reactstrap';
 import { bindActionCreators } from 'redux';
+import { checkUserForAdd } from '../actions/socketActions';
 import { clearUserNameCheck } from '../actions/index';
 
 class AddNewUser extends Component {
@@ -153,7 +154,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({clearUserNameCheck}, dispatch);
+  return bindActionCreators({ clearUserNameCheck, checkUserForAdd }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewUser);

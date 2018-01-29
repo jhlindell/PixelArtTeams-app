@@ -6,6 +6,8 @@ import Collaborators from './Collaborators';
 import About from './About';
 import { Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { checkUserForAdd, deleteProject, saveProject, addNewUser, sendFinishedProject, addNewProject } from '../actions/socketActions';
 
 class Menu extends React.Component {
 
@@ -123,4 +125,8 @@ function mapStateToProps(state) {
   return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject };
 }
 
-export default connect(mapStateToProps, null)(Menu);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ checkUserForAdd, deleteProject, saveProject, addNewUser, sendFinishedProject, addNewProject }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

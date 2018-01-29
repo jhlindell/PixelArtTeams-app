@@ -5,6 +5,7 @@ import {Row, Col} from 'reactstrap';
 import Project from './Project';
 import {bindActionCreators} from 'redux';
 import { mouseDownAction, mouseUpAction } from '../actions/index';
+import { getProjects } from '../actions/socketActions';
 
 class Grid extends Component {
   componentWillMount(){
@@ -83,7 +84,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ mouseDownAction, mouseUpAction}, dispatch);
+  return bindActionCreators({ mouseDownAction, mouseUpAction, getProjects}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Grid);

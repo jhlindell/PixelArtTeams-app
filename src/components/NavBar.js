@@ -13,6 +13,7 @@ import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeShowMenuState } from '../actions/index';
+import { getUserName } from '../actions/socketActions';
 
 const imgStyle = {
   width: "72px",
@@ -123,7 +124,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeShowMenuState}, dispatch);
+  return bindActionCreators({ changeShowMenuState, getUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
