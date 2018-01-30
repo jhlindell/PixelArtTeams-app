@@ -1,13 +1,4 @@
 import React from "react";
-import {
-  Navbar,
-  Media,
-  Button,
-  Nav,
-  NavbarToggler,
-  Collapse,
-  NavbarBrand,
-} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
@@ -67,55 +58,29 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      // <div className="row">
-        <Navbar
-          color="inverse"
-          light
-          toggleable
-          style={{
-            height: '10vh'
-          }}
-        >
-
-          <NavbarToggler
-            onClick={ this.props.changeShowMenuState }
-          />
-          <Media
-            left
-          >
-            <Media
-              style={ imgStyle }
-              object
-              src={ pixelpalette }
-              alt=""
-            />
-          </Media>
-          <NavbarBrand className="navText">
-            Pixel Art Teams
-          </NavbarBrand>
-
-          <Collapse
-            isOpen={ this.state.isOpen }
-            navbar
-          >
-
-            <Nav className="ml-auto" navbar>
-              {this.props.username && <span className="userNameText mr-2 mt-1">
-                Hi,{ this.props.username }
-              </span>}
-              {this.renderLinks()}
-              <Button
-                color="secondary"
+      <nav className="navbar navbar-toggleable navbar-light bg-inverse"
+        style={{ height: '10vh' }} >
+        <a className="navText navbar-brand">
+          <img style={ imgStyle } src={ pixelpalette }
+            className="d-inline" alt="palette"/>
+          Pixel Art Teams
+        </a>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="ml-auto navbar-nav">
+            <li className="mt-1">{this.props.username && <span className="userNameText mr-2">
+              Hi,{ this.props.username }
+            </span>}</li>
+            {this.renderLinks()}
+            <li>
+              <button className="btn btn-secondary" type="button"
                 onClick={ this.props.changeShowMenuState }>
-                <span
-                  className="glyphicon glyphicon-search menuButton"
-                  aria-hidden="true">Menu
-                </span>
-              </Button>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      // </div>
+                <span className="glyphicon glyphicon-search menuButton"
+                  aria-hidden="true">Menu </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }

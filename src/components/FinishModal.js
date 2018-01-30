@@ -38,14 +38,14 @@ class FinishModal extends Component {
           isOpen={ this.state.finishToggle }
           toggle={ () => this.toggleFinishModal() }
         >
-          <ModalHeader toggle={ ()=> this.toggleFinishModal() }>
-            Finish Modal
-          </ModalHeader>
-          <ModalBody>
+          <div className="modal-header">
+            <h4 className="modal-title"> Finish Project </h4>
+          </div>
+          <div className="modal-body">
             <div>
               <DrawCanvas />
             </div>
-          </ModalBody>
+          </div>
         </Modal>
       </div>
     )

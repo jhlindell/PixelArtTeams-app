@@ -89,7 +89,7 @@ class AddNewUser extends Component {
             this.props.clearUserNameCheck()
             this.clearForm(); }}>
           <div className="modal-header">
-            <h4 className="modal-title"> New Project </h4>
+            <h4 className="modal-title"> Add New User </h4>
           </div>
           <div className="modal-body">
             <form onSubmit={this.handleFormSubmit}>

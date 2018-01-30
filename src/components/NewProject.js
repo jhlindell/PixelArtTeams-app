@@ -1,23 +1,19 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  Col,
-  Form,
-  FormGroup,
 } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { addNewProject } from '../actions/socketActions';
 import { bindActionCreators } from 'redux';
 
-const renderField = ({ input, label, type, meta: { touched, error}}) => (
+const renderField = ({ input, label, type, placeholder, meta: { touched, error}}) => (
 <div>
   <label>{label}</label>
   <div>
-    <input {...input} placeholder={label} type={type} />
+    <input {...input} placeholder={placeholder} type={type} />
     {touched &&
       (error && <span>{error}</span>)}
   </div>
@@ -71,46 +67,35 @@ class NewProject extends Component {
           isOpen={this.state.newProjectToggle}
           toggle={()=>this.toggleNewProject()}
         >
-          <ModalHeader toggle={()=>this.toggleNewProject()}>
-            New Project
-          </ModalHeader>
+          <div className="modal-header">
+            <h4 className="modal-title"> New Project </h4>
+          </div>
 
-          <ModalBody>
-            <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-              <FormGroup row>
-                <Col sm={12}>
-                  <Field name="project_name"
-                    type="text"
-                    component={renderField}
-                    label="Project Name" />
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={4}>
-                  <Field name="x" component={renderField}
-                    type="text" label="X"/>
-                </Col>
-              </FormGroup>
-              <FormGroup row>
-                <Col md={4}>
-                  <Field name="y" component={renderField}
-                    type="text" label="Y"/>
-                </Col>
-              </FormGroup>
-              <Button
-                color="primary"
-                type="submit"
-                disabled={submitting}>
-                Submit
-              </Button>
-              {' '}
-              <Button
-                color="secondary"
-                onClick={()=>this.toggleNewProject()}>
-                Cancel
-              </Button>
-            </Form>
-          </ModalBody>
+          <div className="modal-body">
+            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+              <div className="form-group row">
+                <div className='col col-sm-12'>
+                  <Field name="project_name" type="text" component={renderField}
+                    label="Project Name" placeholder="Project Name"/>
+                </div>
+              </div>
+              <div className="form-group row">
+                <div className='col col-md-4'>
+                  <Field name="x" component={renderField} type="text" label="Canvas Width" placeholder="X"/>
+                </div>
+              </div>
+              <div className="form-group row">
+                <div className='col col-md-4'>
+                  <Field name="y" component={renderField} type="text" label="Canvas Height" placeholder="Y"/>
+                </div>
+              </div>
+              <button className="btn btn-primary" type="submit"
+                disabled={submitting}> Submit
+              </button>
+              <button className="btn btn-secondary ml-" type="button" onClick={()=>this.toggleNewProject()}> Cancel
+              </button>
+            </form>
+          </div>
         </Modal>
       </div>
     );
