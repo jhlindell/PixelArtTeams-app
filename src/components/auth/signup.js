@@ -22,7 +22,12 @@ const renderField = ({ input, label, type, meta: { touched, error }}) => (
 
 class Signup extends Component {
   handleFormSubmit(formProps) {
-    this.props.signUpUser(formProps);
+    let modProps = {};
+    modProps.username = formProps.username.toLowerCase();
+    modProps.email = formProps.email.toLowerCase();
+    modProps.password = formProps.password;
+    modProps.passwordConfirm = formProps.passwordConfirm;
+    this.props.signUpUser(modProps);
   }
 
   componentWillReceiveProps(nextProps){

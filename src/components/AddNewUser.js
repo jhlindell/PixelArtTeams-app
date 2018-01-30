@@ -45,13 +45,17 @@ class AddNewUser extends Component {
   }
 
   handleFormSubmit(event) {
-    this.props.addNewUser(this.state.user_name, this.state.email);
+    let userName = this.state.user_name.toLowerCase();
+    let email = this.state.email.toLowerCase();
+    this.props.addNewUser(userName, email);
     this.props.clearUserNameCheck();
     this.setState({newUserToggle: false});
   }
 
   userCheckClicked(){
-    this.props.checkUserForAdd(this.state.user_name, this.state.email);
+    let userName = this.state.user_name.toLowerCase();
+    let email = this.state.email.toLowerCase();
+    this.props.checkUserForAdd(userName, email);
   }
 
   renderButton(){
