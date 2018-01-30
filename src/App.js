@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App-body" >
+        <div className="App-body container-fluid" >
           <Route exact path="/" component={LandingPage} />
 
           <Route path="/art" component={NavBar} />

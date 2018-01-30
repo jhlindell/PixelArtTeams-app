@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Pixel from './Pixel';
 import {connect} from 'react-redux';
-import {Row, Col} from 'reactstrap';
 import Project from './Project';
 import {bindActionCreators} from 'redux';
 import { mouseDownAction, mouseUpAction } from '../actions/index';
@@ -23,18 +22,13 @@ class Grid extends Component {
 
     if(this.props.auth){
       return (
-        <Row style={{height: '90vh'}}>
-          <Col
-            md={{
-              size: 10,
-              offset: 1
-            }}
-          >
+        <div className="row">
+          <div className="col col-md-12">
             {
               this.props.currentProject === 0
               ?
-              <div style={{padding: '5%'}}>
-                <h4 className="projectCardText">Select a project</h4>
+              <div>
+                <h4 className="projectCardText mt-4">Select a project</h4>
                 {
                 this.props.projects.map(project => <Project
                   key={project.project_id}
@@ -54,19 +48,16 @@ class Grid extends Component {
                 })}
               </div>
             }
-          </Col>
-        </Row>
+          </div>
+        </div>
       );
     } else {
       return (
-        <Row>
-          <Col
-            md={{
-              size: 12,
-            }}>
+        <div className="row">
+          <div className="col col-md-12">
             <h4 className="projectCardText mt-4">Please Log In</h4>
-          </Col>
-        </Row>
+          </div>
+        </div>
       );
     }
   }

@@ -7,7 +7,7 @@ import About from './About';
 import { Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { checkUserForAdd, deleteProject, saveProject, addNewUser, sendFinishedProject, addNewProject } from '../actions/socketActions';
+import { deleteProject, saveProject, sendFinishedProject} from '../actions/socketActions';
 
 class Menu extends React.Component {
 
@@ -75,12 +75,10 @@ class Menu extends React.Component {
 
         <About />
 
-        <NewProject addNewProject={this.props.addNewProject} />
+        <NewProject />
 
         {this.state.isOwner && <div>
-          <AddNewUser
-            addNewUser={this.props.addNewUser}
-            checkUserForAdd={this.props.checkUserForAdd} />
+          <AddNewUser />
 
           <button
             className="projectMenuTextText"
@@ -126,7 +124,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ checkUserForAdd, deleteProject, saveProject, addNewUser, sendFinishedProject, addNewProject }, dispatch);
+  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

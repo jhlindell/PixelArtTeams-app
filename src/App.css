@@ -19,6 +19,8 @@
 }
 .App-body {
   height: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 @keyframes App-logo-spin {

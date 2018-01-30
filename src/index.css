@@ -167,7 +167,8 @@ body {
 
 .landingButton {
   font-family: 'Press Start 2P';
-  margin-top: 400px;
+  display: flex;
+  margin: 400px auto 0 auto;
   text-align: center;
   background-color: black;
 }

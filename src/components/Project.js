@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card, CardTitle } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectProject } from '../actions/index';
@@ -7,16 +6,12 @@ import { selectProject } from '../actions/index';
 class Project extends Component {
   render(){
     return (
-      <Card
-        className={"projectCard " + (this.props.project.project_id)}
-        onClick={() => this.props.selectProject(this.props.project.project_id)}
-      >
-        <CardTitle
-          className="projectButtonText"
-        >
+      <div className={"card projectCard " + (this.props.project.project_id)}
+        onClick={() => this.props.selectProject(this.props.project.project_id)} >
+        <h4 className="projectButtonText cardtitle" >
           {this.props.project.project_name}
-        </CardTitle>
-      </Card>
+        </h4>
+      </div>
     );
   }
 }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import GalleryPiece from './GalleryPiece';
 import {connect} from 'react-redux';
-import {CardDeck, Row} from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { stockGallery } from '../actions/socketActions';
 
@@ -12,14 +11,14 @@ class Gallery extends Component {
 
   render(){
     return (
-      <Row>
-        <CardDeck>
+      <div className="row">
+        <div className="card-deck">
           {this.props.gallery.map((art) => <GalleryPiece
             art={art}
             key={art.project_name} />
           )}
-        </CardDeck>
-      </Row>
+        </div>
+      </div>
     );
   }
 }

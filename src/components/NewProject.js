@@ -10,6 +10,8 @@ import {
   FormGroup,
 } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import { addNewProject } from '../actions/socketActions';
+import { bindActionCreators } from 'redux';
 
 const renderField = ({ input, label, type, meta: { touched, error}}) => (
 <div>
@@ -122,8 +124,8 @@ const validate = formProps => {
     errors.project_name = 'Please enter a project name';
   }
 
-  if(formProps.x < 10 || formProps.x > 30){
-    errors.x = 'X needs to be between 10 and 30';
+  if(formProps.x < 10 || formProps.x > 40){
+    errors.x = 'X needs to be between 10 and 40';
   }
 
   if(formProps.y < 10 || formProps.y > 30){
@@ -137,7 +139,11 @@ function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated };
 }
 
-NewProject = connect(mapStateToProps, null)(NewProject);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ addNewProject }, dispatch);
+}
+
+NewProject = connect(mapStateToProps, mapDispatchToProps)(NewProject);
 
 export default reduxForm({
   form: 'newProject',

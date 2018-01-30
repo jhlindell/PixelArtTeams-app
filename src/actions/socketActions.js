@@ -1,5 +1,6 @@
 import store from '../store';
-var socket = require('../socket');
+const socket = require('../socket');
+const otherActions = require('./index');
 
 export function socketConnect(){
   return (dispatch, getState) => {
@@ -24,6 +25,7 @@ export function sendPixel(x, y){
   return (dispatch, getState) => {
     const { activeColor, currentProject } = store.getState();
     socket.emit('pixel', {x, y, color: activeColor, project: currentProject})
+    otherActions.pixelClick(x, y, activeColor);
   }
 }
 

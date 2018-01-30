@@ -67,53 +67,55 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      <Navbar
-        color="inverse"
-        light
-        toggleable
-        style={{
-          height: '10vh'
-        }}
-      >
-
-        <NavbarToggler
-          onClick={ this.props.changeShowMenuState }
-        />
-        <Media
-          left
+      // <div className="row">
+        <Navbar
+          color="inverse"
+          light
+          toggleable
+          style={{
+            height: '10vh'
+          }}
         >
-          <Media
-            style={ imgStyle }
-            object
-            src={ pixelpalette }
-            alt=""
+
+          <NavbarToggler
+            onClick={ this.props.changeShowMenuState }
           />
-        </Media>
-        <NavbarBrand className="navText">
-          Pixel Art Teams
-        </NavbarBrand>
+          <Media
+            left
+          >
+            <Media
+              style={ imgStyle }
+              object
+              src={ pixelpalette }
+              alt=""
+            />
+          </Media>
+          <NavbarBrand className="navText">
+            Pixel Art Teams
+          </NavbarBrand>
 
-        <Collapse
-          isOpen={ this.state.isOpen }
-          navbar
-        >
+          <Collapse
+            isOpen={ this.state.isOpen }
+            navbar
+          >
 
-          <Nav className="ml-auto" navbar>
-            {this.props.username && <span className="userNameText mr-2 mt-1">
-              Hi,{ this.props.username }
-            </span>}
-            {this.renderLinks()}
-            <Button
-              color="secondary"
-              onClick={ this.props.changeShowMenuState }>
-              <span
-                className="glyphicon glyphicon-search menuButton"
-                aria-hidden="true">Menu
-              </span>
-            </Button>
-          </Nav>
-        </Collapse>
-      </Navbar>
+            <Nav className="ml-auto" navbar>
+              {this.props.username && <span className="userNameText mr-2 mt-1">
+                Hi,{ this.props.username }
+              </span>}
+              {this.renderLinks()}
+              <Button
+                color="secondary"
+                onClick={ this.props.changeShowMenuState }>
+                <span
+                  className="glyphicon glyphicon-search menuButton"
+                  aria-hidden="true">Menu
+                </span>
+              </Button>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      // </div>
     );
   }
 }

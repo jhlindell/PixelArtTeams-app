@@ -40,10 +40,18 @@ socket.on('resultOfUserCheck', (result) => {
 });
 
 socket.on('resultOfAddingPermission', (result) => {
-  if(result){
-    alert('user permission added successfully');
-  } else {
-    alert('problem adding user permission');
+  switch(result){
+    case 'success':
+      alert('user permission added successfully');
+      break;
+    case 'user already exists':
+      alert('user already exists');
+      break;
+    case 'error':
+      alert('problem adding user permission');
+      break;
+    default:
+      alert('problem adding user permission')
   }
 });
 
