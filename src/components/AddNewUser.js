@@ -108,7 +108,7 @@ class AddNewUser extends Component {
                   <label className="form-control-label mt-2"> {this.props.user.message} </label>
                  </div>
               </div>
-              <button color="primary" className="btn btn-primary" type="submit"
+              <button className="btn btn-primary" type="submit"
                 disabled={!this.state.user_exists}>
                 Submit
               </button>
