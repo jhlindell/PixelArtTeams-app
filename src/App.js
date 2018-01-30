@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App-body" >
-          <Route exact path="/" compenent={LandingPage} />
+          <Route exact path="/" component={LandingPage} />
 
           <Route path="/art" component={NavBar} />
           <Route path="/art" component={Menu} />
