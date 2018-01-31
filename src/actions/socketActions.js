@@ -1,13 +1,13 @@
 import socket from '../socket';
 import * as otherActions from './index';
 
-export function socketConnect(){
-  return (dispatch, getState) => {
-    const { currentProject } = getState();
-    socket.emit('joinRoom', currentProject);
-    socket.emit('grid', currentProject);
-  }
-}
+// export function socketConnect(){
+//   return (dispatch, getState) => {
+//     const { currentProject, auth } = getState();
+//     socket.emit('joinRoom', currentProject);
+//     socket.emit('grid', currentProject);
+//   }
+// }
 
 export function selectProject(id){
   return { type: 'SELECT_PROJECT', payload: { id } };
@@ -106,7 +106,9 @@ export function addNewProject(name, x, y){
 export function initialize(){
   return (dispatch, getState) => {
     const { auth } = getState();
-    socket.emit('initialize', auth.token);
+    if(auth.authenticated){
+      socket.emit('initialize', auth.token);
+    }
   }
 }
 

@@ -4,9 +4,9 @@ import * as otherActions from './actions/index.js';
 const WS = process.env.REACT_APP_WS;
 const socket = require('socket.io-client')(WS, {jsonp: false});
 
-socket.on('connect', () => {
-  store.dispatch(socketActions.socketConnect());
-});
+// socket.on('connect', () => {
+//   store.dispatch(socketActions.socketConnect());
+// });
 
 socket.on('returnUserName', (username)=> {
   store.dispatch(otherActions.setUserName(username));
