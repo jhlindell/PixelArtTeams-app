@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
 import Gallery from './components/Gallery';
-import Grid from './components/Grid';
-import Menu from './components/Menu';
+import MainCanvas from './components/MainCanvas';
 import LandingPage from './components/LandingPage';
-import Palette from './components/Palette';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
+import ProtectedRoute from './components/ProtectedRoute';
 import {connect} from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Route }
-  from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import {bindActionCreators} from 'redux';
 import { initialize, joinRoom, leaveRoom, grid } from './actions/socketActions';
@@ -41,20 +36,18 @@ class App extends Component {
     return (
       <Router>
         <div className="App-body container-fluid" >
-          <Route exact path="/" component={LandingPage} />
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signout" component={Signout} />
 
-          <Route path="/art" component={NavBar} />
-          <Route path="/art" component={Menu} />
-          <Route path="/art" component={Palette} />
-          <Route path="/art" component={Grid} />
+            <Route path="/gallery" component={Gallery} />
 
-          <Route path="/gallery" component={NavBar} />
-          <Route path="/gallery" component={Menu} />
-          <Route path="/gallery" component={Gallery} />
-
-          <Route path="/signup" component={Signup} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signout" component={Signout} />
+            <ProtectedRoute>
+              <Route path="/art" component={MainCanvas} />
+            </ProtectedRoute>
+          </Switch>
         </div>
       </Router>
     );

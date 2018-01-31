@@ -40,33 +40,37 @@ class Signin extends Component {
     const { handleSubmit, pristine, reset, submitting} = this.props;
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="form-group">
-            <Field name="username"
-              type="text"
-              component={renderField}
-              label="Username"
-            />
-          </div>
-          <div className="form-group">
-            <Field name="password"
-              type="password"
-              component={renderField}
-              label="Password"
-            />
-          </div>
-          {this.renderAlert()}
-          <button type="submit"
-            disabled={submitting}>
-            Submit
-          </button>
-          <button type="button"
-            disabled={pristine || submitting}
-            onClick={reset}>
-            Clear
-          </button>
-        </form>
+      <div className="row">
+        <div className="col-sm-12">
+          <form className="signinForm"
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <h3>Please Sign In</h3>
+            <div className="form-group mt-5">
+              <Field name="username"
+                type="text"
+                component={renderField}
+                label="Username"
+              />
+            </div>
+            <div className="form-group">
+              <Field name="password"
+                type="password"
+                component={renderField}
+                label="Password"
+              />
+            </div>
+            {this.renderAlert()}
+            <button type="submit"
+              disabled={submitting}>
+              Submit
+            </button>
+            <button type="button"
+              disabled={pristine || submitting}
+              onClick={reset}>
+              Clear
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

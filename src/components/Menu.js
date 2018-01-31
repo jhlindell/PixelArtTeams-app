@@ -4,7 +4,7 @@ import NewProject from './NewProject';
 import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import About from './About';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteProject, saveProject, sendFinishedProject, getUserName } from '../actions/socketActions';
