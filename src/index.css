@@ -41,10 +41,6 @@ body {
   margin-left: 75px;
 }
 
-.palette {
-  background-color: lightgray;
-}
-
 .colorBox {
   width:60px;
   height:60px;
@@ -133,13 +129,26 @@ body {
   text-decoration: underline;
 }
 
-.userMenuText {
+.userNameMenu {
   width: 100%;
-  text-align: left;
+  text-align: right;
   padding: 1px;
   font-family: 'Press Start 2P';
   background: none;
   border: none;
+}
+
+.menuMainChoice {
+  width: 100%;
+  text-align: right;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+}
+
+.menuMainChoice:hover{
+  background: #6b6862;
 }
 
 .projectButtonText {

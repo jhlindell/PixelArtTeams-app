@@ -66,10 +66,10 @@ class Menu extends React.Component {
         }}
       >
         {this.props.authenticated && <div>
-          <div className="projectMenuText">
+          <div className="userNameMenu">
             {this.props.username}
           </div>
-          <div className="projectMenuText mb-2">
+          <div className="menuMainChoice mb-2">
             <Link className="navButtonText projectMenuText"
               to="/signout" >
               Sign Out
@@ -77,13 +77,13 @@ class Menu extends React.Component {
           </div>
         </div>}
         {!this.props.authenticated && <div>
-          <div className="projectMenuText">
+          <div className="menuMainChoice">
             <Link className="navButtonText projectMenuText"
               to="/signin" >
               Sign In
             </Link>
           </div>
-          <div className="projectMenuText mb-2">
+          <div className="menuMainChoice mb-2">
             <Link className="navButtonText projectMenuText"
               to="/signup" >
               Sign Up
@@ -91,7 +91,7 @@ class Menu extends React.Component {
           </div>
         </div>}
         <Route path='/gallery' render={ ()=>(
-          <div className="projectMenuText">
+          <div className="menuMainChoice">
             <Link className="navButtonText projectMenuText"
               to="/art" >
               Canvas
@@ -101,7 +101,7 @@ class Menu extends React.Component {
         <Route path='/art' render={ ()=>(
           <div>
             {/* <About /> */}
-            <div className="projectMenuText">
+            <div className="menuMainChoice mb-3">
               <Link className="navButtonText projectMenuText"
                 to="/gallery" >
                 Gallery

@@ -8,7 +8,8 @@ var colorArray = ['#800000', '#FF0000', '#FFA500', '#FFFF00', '#808000', '#00800
 class Palette extends Component {
   render(){
     return (
-      <div className="palette" >
+      <div>
+        Current Color:
         <CurrentColor />
         <div id="color-wheel" style={{
             display: this.props.paletteReducer?'flex':'none',
