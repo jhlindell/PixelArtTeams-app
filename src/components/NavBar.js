@@ -67,10 +67,7 @@ class NavBar extends React.Component {
         </a>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="ml-auto navbar-nav">
-            <li className="mt-1">{this.props.username && <span className="userNameText mr-2">
-              Hi,{ this.props.username }
-            </span>}</li>
-            {this.renderLinks()}
+            {/* {this.renderLinks()} */}
             <li>
               <button className="btn btn-secondary" type="button"
                 onClick={ this.props.changeShowMenuState }>

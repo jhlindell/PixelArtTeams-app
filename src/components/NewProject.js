@@ -45,7 +45,7 @@ class NewProject extends Component {
   renderButton(){
     return (
       <button
-        className="newProjectSelector"
+        className="newProjectSelector mb-1"
         disabled={!this.props.authenticated}
         onClick={() => this.toggleNewProject()}>
         New Project

@@ -86,6 +86,7 @@ export function signInUser({username, password}){
 }
 
 export function signoutUser(){
+  localStorage.removeItem('token');
   return {type: 'USER_LOGOUT'};
 }
 

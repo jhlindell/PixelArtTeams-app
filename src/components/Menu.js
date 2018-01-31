@@ -7,7 +7,7 @@ import About from './About';
 import { Link, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteProject, saveProject, sendFinishedProject} from '../actions/socketActions';
+import { deleteProject, saveProject, sendFinishedProject, getUserName } from '../actions/socketActions';
 
 class Menu extends React.Component {
 
@@ -18,9 +18,18 @@ class Menu extends React.Component {
     };
   }
 
+  componentWillMount(){
+    if(this.props.authenticated){
+      this.props.getUserName();
+    }
+  }
+
   componentWillReceiveProps(nextProps){
     if(nextProps.currentProject){
       this.isProjectOwner(nextProps.currentProject);
+    }
+    if(nextProps.authenticated){
+      this.props.getUserName();
     }
   }
 
@@ -56,7 +65,31 @@ class Menu extends React.Component {
           display: this.props.menuReducer?'inline':'none',
         }}
       >
-        
+        {this.props.authenticated && <div>
+          <div className="projectMenuText">
+            {this.props.username}
+          </div>
+          <div className="projectMenuText mb-2">
+            <Link className="navButtonText projectMenuText"
+              to="/signout" >
+              Sign Out
+            </Link>
+          </div>
+        </div>}
+        {!this.props.authenticated && <div>
+          <div className="projectMenuText">
+            <Link className="navButtonText projectMenuText"
+              to="/signin" >
+              Sign In
+            </Link>
+          </div>
+          <div className="projectMenuText mb-2">
+            <Link className="navButtonText projectMenuText"
+              to="/signup" >
+              Sign Up
+            </Link>
+          </div>
+        </div>}
         <Route path='/gallery' render={ ()=>(
           <div className="projectMenuText">
             <Link className="navButtonText projectMenuText"
@@ -76,41 +109,33 @@ class Menu extends React.Component {
             </div>
             <NewProject />
             {this.state.isOwner && <div>
+              <div className="projectMenuHeading mt-3">
+                Project Controls
+              </div>
               <AddNewUser />
-
-              <button
-                className="projectMenuText"
+              <div className="projectMenuText mb-1"
                 onClick={() => this.props.saveProject()}
-              >
-                Save Project
-              </button>
-
-              <br/>
-
-              <button
-              className="projectMenuText"
+                > Save Project
+              </div>
+              <div className="projectMenuText mb-1"
               onClick={() => this.props.sendFinishedProject()}
-              >
-                Finish Project
-              </button>
-              <br/>
-              <button
-                className="projectMenuText"
-                onClick={() => this.props.deleteProject()}
-              >
+              > Finish Project
+              </div>
+              <div className="projectMenuText mb-1"
+                onClick={() => this.props.deleteProject()} >
                 Delete Project
-              </button>
+              </div>
             </div>}
-            <br/>
-            <div className="menuTitleText">
-              Projects
-            </div>
-            {this.props.projects.map(project => <ProjectsList key={project.project_id} project={project} />)}
-            <br/>
-            <div className="menuTitleText">
-              Collaborators
-            </div>
-            <Collaborators />
+            {this.props.authenticated && <div>
+              <div className="projectMenuHeading mb-1 mt-3">
+                Projects
+              </div>
+              {this.props.projects.map(project => <ProjectsList key={project.project_id} project={project} />)}
+              <div className="projectMenuHeading mt-3">
+                Collaborators
+              </div>
+              <Collaborators />
+            </div>}
           </div>
         )}/>
       </div>
@@ -119,11 +144,11 @@ class Menu extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, username: state.userName };
+  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated };
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject}, dispatch);
+  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject, getUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

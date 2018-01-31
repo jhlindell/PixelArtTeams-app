@@ -123,6 +123,25 @@ body {
   border: none;
 }
 
+.projectMenuHeading {
+  width: 100%;
+  text-align: left;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.userMenuText {
+  width: 100%;
+  text-align: left;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+}
+
 .projectButtonText {
   width: 100%;
   text-align: center;
@@ -201,7 +220,7 @@ body {
   font-family: 'Press Start 2P';
   border: none;
   background: lightgray;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   padding-left: 0px;
 }
 
