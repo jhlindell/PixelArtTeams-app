@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-  Button,
-  Form,
-  FormGroup
-} from 'reactstrap';
 import { signInUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -46,32 +41,32 @@ class Signin extends Component {
 
     return (
       <div>
-        <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <FormGroup>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <div className="form-group">
             <Field name="username"
               type="text"
               component={renderField}
               label="Username"
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <Field name="password"
               type="password"
               component={renderField}
               label="Password"
             />
-          </FormGroup>
+          </div>
           {this.renderAlert()}
-          <Button type="submit"
+          <button type="submit"
             disabled={submitting}>
             Submit
-          </Button>
-          <Button type="button"
+          </button>
+          <button type="button"
             disabled={pristine || submitting}
             onClick={reset}>
             Clear
-          </Button>
-        </Form>
+          </button>
+        </form>
       </div>
     );
   }

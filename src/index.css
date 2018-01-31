@@ -7,13 +7,13 @@ body {
 .navText {
   color: white !important;
   font-family: 'Press Start 2P';
-  font-size: 32px;
+  font-size: 20px;
 }
 
 .userNameText {
   color: white !important;
   font-family: 'Press Start 2P';
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .navButtonText {
@@ -39,10 +39,6 @@ body {
   flex-wrap: wrap;
   width: 400px;
   margin-left: 75px;
-}
-
-.palette {
-  background-color: lightgray;
 }
 
 .colorBox {
@@ -71,7 +67,7 @@ body {
   font-family: 'Press Start 2P';
 }
 
-.menuTitleTextText {
+.menuTitleText {
   font-family: 'Press Start 2P';
   text-align: center;
   padding: 1px;
@@ -114,13 +110,45 @@ body {
   text-align: center;
 }
 
-.projectMenuTextText {
+.projectMenuText {
   width: 100%;
   text-align: left;
   padding: 1px;
   font-family: 'Press Start 2P';
   background: none;
   border: none;
+}
+
+.projectMenuHeading {
+  width: 100%;
+  text-align: left;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.userNameMenu {
+  width: 100%;
+  text-align: right;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+}
+
+.menuMainChoice {
+  width: 100%;
+  text-align: right;
+  padding: 1px;
+  font-family: 'Press Start 2P';
+  background: none;
+  border: none;
+}
+
+.menuMainChoice:hover{
+  background: #6b6862;
 }
 
 .projectButtonText {
@@ -136,7 +164,7 @@ body {
   background: #6b6862;
 }
 
-.projectMenuTextText:hover{
+.projectMenuText:hover{
   background: #6b6862;
 }
 
@@ -167,7 +195,8 @@ body {
 
 .landingButton {
   font-family: 'Press Start 2P';
-  margin-top: 400px;
+  display: flex;
+  margin: 400px auto 0 auto;
   text-align: center;
   background-color: black;
 }
@@ -199,8 +228,8 @@ body {
 .newProjectSelector {
   font-family: 'Press Start 2P';
   border: none;
-  background: blue;
-  margin-top: 20px;
+  background: lightgray;
+  /* margin-top: 20px; */
   padding-left: 0px;
 }
 
@@ -215,4 +244,8 @@ body {
 .aboutText {
   font-family: 'Press Start 2P';
   font-size: 12px;
+}
+
+.galleryCardDeck {
+  width: 100%;
 }

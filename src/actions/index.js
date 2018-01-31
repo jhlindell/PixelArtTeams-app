@@ -1,32 +1,20 @@
 import axios from 'axios';
-const LOCAL_URL = 'http://localhost:8000';
-const HEROKU_URL = 'https://pixelart-server.herokuapp.com';
-const URL = HEROKU_URL;
+const URL = process.env.REACT_APP_API_URL;
 
-export function changeShowState() {
-  return {
-    type: 'CHANGE_PALETTE_SHOW_STATE'
-  };
+export function changePaletteShowState() {
+  return { type: 'CHANGE_PALETTE_SHOW_STATE' };
 }
 
 export function changeShowMenuState() {
-  return {
-    type: 'CHANGE_MENU_SHOW_STATE'
-  };
+  return { type: 'CHANGE_MENU_SHOW_STATE' };
 }
 
 export function updateColor(nextColor) {
-  return {
-    type: 'UPDATE_COLOR',
-    payload: {nextColor},
-  };
+  return { type: 'UPDATE_COLOR', payload: {nextColor}, };
 }
 
 export function selectProject(id){
-  return {
-    type: 'SELECT_PROJECT',
-    payload: { id }
-  };
+  return { type: 'SELECT_PROJECT', payload: { id } };
 }
 
 export function getCollaborators(id){
@@ -42,45 +30,27 @@ export function getCollaborators(id){
 }
 
 export function pixelClick(x, y, color) {
-  return {
-    type: 'PIXEL_CLICK',
-    payload: { x, y, color }
-  };
+  return {type: 'PIXEL_CLICK', payload: { x, y, color }};
 }
 
 export function updateGrid(grid){
-  return {
-    type: 'UPDATE_GRID',
-    payload: grid
-  };
+  return { type: 'UPDATE_GRID', payload: grid };
 }
 
 export function sendProjectsToStore(projects){
-  return {
-    type: 'FETCH_PROJECTS',
-    payload: projects
-  };
+  return {type: 'FETCH_PROJECTS', payload: projects};
 }
 
 export function mouseDownAction(){
-  return {
-    type: 'MOUSE_DOWN',
-    payload: true
-  };
+  return { type: 'MOUSE_DOWN', payload: true };
 }
 
 export function mouseUpAction(){
-  return {
-    type: 'MOUSE_UP',
-    payload: false
-  };
+  return { type: 'MOUSE_UP', payload: false };
 }
 
 export function getGallery(art){
-  return {
-    type: 'GET_GALLERY',
-    payload: art
-  };
+  return { type: 'GET_GALLERY', payload: art };
 }
 
 export function signUpUser({username, email, password}){
@@ -100,10 +70,7 @@ export function signUpUser({username, email, password}){
 }
 
 export function authError(error) {
-  return {
-    type: 'AUTH_ERROR',
-    payload: error
-  };
+  return { type: 'AUTH_ERROR', payload: error };
 }
 
 export function signInUser({username, password}){
@@ -119,27 +86,16 @@ export function signInUser({username, password}){
 }
 
 export function signoutUser(){
-  return function(dispatch){
-    // dispatch({type: 'CLEAR_PROJECTS'});
-    // dispatch({type: 'CLEAR_USERNAME'});
-    // dispatch({type: 'CLEAR_COLLABORATORS'});
-    // dispatch({type: 'UNAUTH_USER'});
-    dispatch({type: 'USER_LOGOUT'});
-  }
+  localStorage.removeItem('token');
+  return {type: 'USER_LOGOUT'};
 }
 
 export function setUserName(username){
-  return {
-    type: 'USERNAME',
-    payload: username
-  };
+  return {type: 'USERNAME', payload: username};
 }
 
 export function userNameCheck(result, message){
-  return {
-    type: 'USERNAME_CHECK',
-    payload: {result: result, message: message}
-  };
+  return {type: 'USERNAME_CHECK', payload: {result: result, message: message}};
 }
 
 export function clearUserNameCheck(){

@@ -1,12 +1,5 @@
 import React from 'react';
 import GalleryPixel from './GalleryPixel';
-import {
-  Card,
-  CardBlock,
-  CardTitle,
-  CardHeader,
-  Col,
-} from 'reactstrap';
 
 const GalleryPiece = (props) => {
 
@@ -21,31 +14,23 @@ const GalleryPiece = (props) => {
 
 
   return (
-    <Col
-      md={4}
-    >
-      <Card
-        className="artCard"
-      >
-        <CardHeader>
-          <CardTitle
-            className="artTitleText"
-          >
+    <div className="col col-md-4">
+      <div className="card artCard">
+        <div className="card-header">
+          <div className="artTitleText cardtitle" >
             {props.art.project_name}
-          </CardTitle>
-        </CardHeader>
+          </div>
+        </div>
 
-        <CardBlock
-          style={newStyle}
-        >
+        <div className="card-block" style={newStyle} >
           {props.art.grid.map((row, y) => {
             return row.map((pixel, x) => <GalleryPixel
               x={x} y={y}
               color={pixel} />);
           })}
-        </CardBlock>
-      </Card>
-    </Col>
+        </div>
+      </div>
+    </div>
   );
 };
 

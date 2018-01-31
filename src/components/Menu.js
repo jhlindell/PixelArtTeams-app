@@ -1,11 +1,13 @@
 import React from "react";
-import ProjectDropdown from './ProjectDropdown';
+import ProjectsList from './ProjectsList';
 import NewProject from './NewProject';
 import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import About from './About';
-import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteProject, saveProject, sendFinishedProject, getUserName } from '../actions/socketActions';
 
 class Menu extends React.Component {
 
@@ -16,9 +18,18 @@ class Menu extends React.Component {
     };
   }
 
+  componentWillMount(){
+    if(this.props.authenticated){
+      this.props.getUserName();
+    }
+  }
+
   componentWillReceiveProps(nextProps){
     if(nextProps.currentProject){
       this.isProjectOwner(nextProps.currentProject);
+    }
+    if(nextProps.authenticated){
+      this.props.getUserName();
     }
   }
 
@@ -46,81 +57,98 @@ class Menu extends React.Component {
         style={{
           height: 'fit-content',
           right: 0,
-          // bottom: 0,
           position: 'absolute',
           zIndex: 2,
-          background: 'blue',
+          background: 'lightgray',
+          paddingRight: '2px',
+          paddingLeft: '2px',
           display: this.props.menuReducer?'inline':'none',
         }}
       >
-        <div className="projectMenuTextText">
-          <Link
-            className="navButtonText projectMenuTextText"
-            to="/art"
-          >
-            Canvas
-          </Link>
-        </div>
-
-        <div className="projectMenuTextText">
-          <Link
-            className="navButtonText projectMenuTextText"
-            to="/gallery"
-          >
-            Gallery
-          </Link>
-        </div>
-
-        <About />
-
-        <NewProject addNewProject={this.props.addNewProject} />
-
-        {this.state.isOwner && <div>
-          <AddNewUser
-            addNewUser={this.props.addNewUser}
-            checkUserForAdd={this.props.checkUserForAdd} />
-
-          <button
-            className="projectMenuTextText"
-            onClick={() => this.props.saveProject()}
-          >
-            Save Project
-          </button>
-
-          <br/>
-
-          <button
-          className="projectMenuTextText"
-          onClick={() => this.props.sendFinishedProject()}
-          >
-            Finish Project
-          </button>
-          <br/>
-          <button
-            className="projectMenuTextText"
-            onClick={() => this.props.deleteProject()}
-          >
-            Delete Project
-          </button>
+        {this.props.authenticated && <div>
+          <div className="userNameMenu">
+            {this.props.username}
+          </div>
+          <div className="menuMainChoice mb-2">
+            <Link className="navButtonText projectMenuText"
+              to="/signout" >
+              Sign Out
+            </Link>
+          </div>
         </div>}
-        <br/>
-        <div className="menuTitleTextText">
-          Projects
-        </div>
-        {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}
-        <br/>
-        <div className="menuTitleTextText">
-          Collaborators
-        </div>
-
-        <Collaborators />
+        {!this.props.authenticated && <div>
+          <div className="menuMainChoice">
+            <Link className="navButtonText projectMenuText"
+              to="/signin" >
+              Sign In
+            </Link>
+          </div>
+          <div className="menuMainChoice mb-2">
+            <Link className="navButtonText projectMenuText"
+              to="/signup" >
+              Sign Up
+            </Link>
+          </div>
+        </div>}
+        <Route path='/gallery' render={ ()=>(
+          <div className="menuMainChoice">
+            <Link className="navButtonText projectMenuText"
+              to="/art" >
+              Canvas
+            </Link>
+          </div>
+        )}/>
+        <Route path='/art' render={ ()=>(
+          <div>
+            {/* <About /> */}
+            <div className="menuMainChoice mb-3">
+              <Link className="navButtonText projectMenuText"
+                to="/gallery" >
+                Gallery
+              </Link>
+            </div>
+            <NewProject />
+            {this.state.isOwner && <div>
+              <div className="projectMenuHeading mt-3">
+                Project Controls
+              </div>
+              <AddNewUser />
+              <div className="projectMenuText mb-1"
+                onClick={() => this.props.saveProject()}
+                > Save Project
+              </div>
+              <div className="projectMenuText mb-1"
+              onClick={() => this.props.sendFinishedProject()}
+              > Finish Project
+              </div>
+              <div className="projectMenuText mb-1"
+                onClick={() => this.props.deleteProject()} >
+                Delete Project
+              </div>
+            </div>}
+            {this.props.authenticated && <div>
+              <div className="projectMenuHeading mb-1 mt-3">
+                Projects
+              </div>
+              {this.props.projects.map(project => <ProjectsList key={project.project_id} project={project} />)}
+              <div className="projectMenuHeading mt-3">
+                Collaborators
+              </div>
+              <Collaborators />
+            </div>}
+          </div>
+        )}/>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject };
+  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated, collaborators: state.collaborators };
 }
 
-export default connect(mapStateToProps, null)(Menu);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject, getUserName }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

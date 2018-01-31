@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import GalleryPiece from './GalleryPiece';
 import {connect} from 'react-redux';
-import {CardDeck, Row} from 'reactstrap';
+import { bindActionCreators } from 'redux';
+import { stockGallery } from '../actions/socketActions';
 
 class Gallery extends Component {
   componentDidMount(){
@@ -10,14 +11,14 @@ class Gallery extends Component {
 
   render(){
     return (
-      <Row>
-        <CardDeck>
+      <div className="row">
+        <div className="card-deck galleryCardDeck">
           {this.props.gallery.map((art) => <GalleryPiece
             art={art}
             key={art.project_name} />
           )}
-        </CardDeck>
-      </Row>
+        </div>
+      </div>
     );
   }
 }
@@ -26,4 +27,8 @@ function mapStateToProps(state){
   return {gallery: state.galleryReducer};
 }
 
-export default connect(mapStateToProps, null)(Gallery);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ stockGallery }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

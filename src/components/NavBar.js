@@ -1,21 +1,13 @@
 import React from "react";
-import {
-  Navbar,
-  Media,
-  Button,
-  Nav,
-  NavbarToggler,
-  Collapse,
-  NavbarBrand,
-} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeShowMenuState } from '../actions/index';
+import { getUserName } from '../actions/socketActions';
 
 const imgStyle = {
-  width: "72px",
+  width: "50px",
   marginRight: "20px",
 };
 
@@ -66,54 +58,26 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      <Navbar
-        color="inverse"
-        light
-        toggleable
-        style={{
-          height: '10vh'
-        }}
-      >
-
-        <NavbarToggler
-          right
-          onClick={ this.props.changeShowMenuState }
-        />
-        <Media
-          left
-        >
-          <Media
-            style={ imgStyle }
-            object
-            src={ pixelpalette }
-            alt=""
-          />
-        </Media>
-        <NavbarBrand className="navText">
+      <nav className="navbar navbar-toggleable navbar-light bg-inverse"
+        style={{ height: '50px' }} >
+        <a className="navText navbar-brand">
+          <img style={ imgStyle } src={ pixelpalette }
+            className="d-inline" alt="palette"/>
           Pixel Art Teams
-        </NavbarBrand>
-
-        <Collapse
-          isOpen={ this.state.isOpen }
-          navbar
-        >
-
-          <Nav className="ml-auto" navbar>
-            {this.props.username && <span className="userNameText mr-2 mt-1">
-              Hi,{ this.props.username }
-            </span>}
-            {this.renderLinks()}
-            <Button
-              color="secondary"
-              onClick={ this.props.changeShowMenuState }>
-              <span
-                className="glyphicon glyphicon-search menuButton"
-                aria-hidden="true">Menu
-              </span>
-            </Button>
-          </Nav>
-        </Collapse>
-      </Navbar>
+        </a>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="ml-auto navbar-nav">
+            {/* {this.renderLinks()} */}
+            <li>
+              <button className="btn btn-secondary" type="button"
+                onClick={ this.props.changeShowMenuState }>
+                <span className="glyphicon glyphicon-search menuButton"
+                  aria-hidden="true">Menu </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
@@ -124,7 +88,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({changeShowMenuState}, dispatch);
+  return bindActionCreators({ changeShowMenuState, getUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

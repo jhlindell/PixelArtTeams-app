@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Input,
-  Col,
-  Form,
-  Label,
-  FormGroup,
-} from 'reactstrap';
+import { Modal } from 'reactstrap';
 import { bindActionCreators } from 'redux';
+import { checkUserForAdd, addNewUser } from '../actions/socketActions';
 import { clearUserNameCheck } from '../actions/index';
 
 class AddNewUser extends Component {
@@ -54,13 +45,18 @@ class AddNewUser extends Component {
   }
 
   handleFormSubmit(event) {
-    this.props.addNewUser(this.state.user_name, this.state.email);
+    event.preventDefault();
+    let userName = this.state.user_name.toLowerCase();
+    let email = this.state.email.toLowerCase();
+    this.props.addNewUser(userName, email);
     this.props.clearUserNameCheck();
     this.setState({newUserToggle: false});
   }
 
   userCheckClicked(){
-    this.props.checkUserForAdd(this.state.user_name, this.state.email);
+    let userName = this.state.user_name.toLowerCase();
+    let email = this.state.email.toLowerCase();
+    this.props.checkUserForAdd(userName, email);
   }
 
   renderButton(){
@@ -88,60 +84,48 @@ class AddNewUser extends Component {
     return (
       <div>
         {this.renderButton()}
-        <Modal
-          isOpen={this.state.newUserToggle}
+        <Modal isOpen={this.state.newUserToggle}
           toggle={()=> {
             this.toggleNewUser();
-            this.clearForm();
-          }}>
-          <ModalHeader toggle={()=> {
-            this.toggleNewUser();
-            this.clearForm();
-          }}>
-            New Project
-          </ModalHeader>
-          <ModalBody>
-            <Form onSubmit={this.handleFormSubmit}>
-              <FormGroup row className={(this.state.user_exists)?"has-success ":""}>
-                <Col sm={12}>
-                  <Input type="text" name="user_name"
+            this.props.clearUserNameCheck()
+            this.clearForm(); }}>
+          <div className="modal-header">
+            <h4 className="modal-title"> Add New User </h4>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={this.handleFormSubmit}>
+              <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
+                <div className="col col-sm-12">
+                  <input type="text" name="user_name"
                     onChange={(e) => {this.handleInputChange(e)}} value={this.state.user_name} placeholder="username"
-                    className={(this.state.user_exists)?"form-control-success ":""}/>
-                </Col>
-              </FormGroup>
-              <FormGroup row className={(this.state.user_exists)?"has-success ":""}>
-                <Col sm={12}>
-                  <Input type="text" name="email"
+                    className={(this.state.user_exists)?"form-control form-control-success ":"form-control"}/>
+                </div>
+              </div>
+              <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
+                <div className="col col-sm-12">
+                  <input type="text" name="email"
                     onChange={(e) => {this.handleInputChange(e)}} value={this.state.email} placeholder="email"
-                    className={(this.state.user_exists)?"form-control-success ":""}/>
-                  <Label className="mt-2">{this.props.user.message}</Label>
-                </Col>
-              </FormGroup>
-              <Button
-                color="primary"
-                type="submit"
+                    className={(this.state.user_exists)?"form-control form-control-success ":"form-control"}/>
+                  <label className="form-control-label mt-2"> {this.props.user.message} </label>
+                 </div>
+              </div>
+              <button className="btn btn-primary" type="submit"
                 disabled={!this.state.user_exists}>
                 Submit
-              </Button>
-              <Button
-                className="ml-2"
-                color="primary"
+              </button>
+              <button className="btn btn-primary ml-2" type="button"
                 onClick={()=> this.userCheckClicked()}>
                 Check For User
-              </Button>
-              <Button
-                className="ml-2"
-                color="secondary"
+              </button>
+              <button className="btn btn-secondary ml-2" type="button"
                 onClick={()=> {
                   this.toggleNewUser()
                   this.props.clearUserNameCheck()
-                  this.clearForm()
-                }}>
+                  this.clearForm() }}>
                 Cancel
-              </Button>
-
-            </Form>
-          </ModalBody>
+              </button>
+            </form>
+          </div>
         </Modal>
       </div>
     );
@@ -153,7 +137,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({clearUserNameCheck}, dispatch);
+  return bindActionCreators({ clearUserNameCheck, checkUserForAdd, addNewUser }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewUser);

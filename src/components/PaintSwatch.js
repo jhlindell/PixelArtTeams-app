@@ -4,24 +4,18 @@ import { bindActionCreators } from 'redux';
 import { updateColor } from '../actions/index'
 
 const styles = {
-  // marginTop: '5px',
   width: '50px',
-  // padding: '2%',
   height: '50px',
-  // borderRadius: '50%',
-  // float: 'left',
   borderBottom: 'solid 1px',
   borderRight: 'solid 1px',
-  // borderStyle: 'solid',
-  // marginLeft: '1px',
 };
 
 class PaintSwatch extends Component {
   render(){
-    styles.backgroundColor = this.props.color;
+    const style = Object.assign({ backgroundColor: this.props.color }, styles);
     return (
       <div
-        style={styles}
+        style={style}
         className="paint"
         onClick={() => this.props.updateColor(this.props.color)}
       >

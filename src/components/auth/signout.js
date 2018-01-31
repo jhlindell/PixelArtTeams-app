@@ -6,7 +6,6 @@ import { signoutUser } from '../../actions/index';
 class Signout extends Component {
   componentWillMount() {
     this.props.signoutUser();
-
   }
 
   componentWillReceiveProps(nextProps){

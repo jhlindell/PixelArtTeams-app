@@ -9,29 +9,15 @@ class Palette extends Component {
   render(){
     return (
       <div>
-        Palette
-        <div
-          className="palette"
-        >
-          <CurrentColor />
-          <div
-            id="color-wheel"
-            style={{
-              display: this.props.paletteReducer?'flex':'none',
-              flexDirection: 'column',
-              position: 'absolute',
-              zIndex: 1,
-              width: '50px',
-              height: '80%',
-              alignItems: 'center',
-              marginTop: '50px',
-              background: 'lightgray',
-              // borderBottom: 'solid 1px',
-              borderRight: 'solid 1px',
-            }}
-          >
-            {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
-          </div>
+        Current Color:
+        <CurrentColor />
+        <div id="color-wheel" style={{
+            display: this.props.paletteReducer?'flex':'none',
+            flexDirection: 'column', position: 'absolute',
+            zIndex: 2, width: '70px', height: '80%',
+            alignItems: 'center', marginTop: '70px',
+            background: 'white' }} >
+          {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
         </div>
       </div>
     );
@@ -43,5 +29,3 @@ function mapStateToProps({ activeColor, paletteReducer }) {
 }
 
 export default connect(mapStateToProps, null)(Palette);
-
-// export default Palette;

@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-  Button,
-  Form,
-  FormGroup
-} from 'reactstrap';
 import { signUpUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,7 +17,12 @@ const renderField = ({ input, label, type, meta: { touched, error }}) => (
 
 class Signup extends Component {
   handleFormSubmit(formProps) {
-    this.props.signUpUser(formProps);
+    let modProps = {};
+    modProps.username = formProps.username.toLowerCase();
+    modProps.email = formProps.email.toLowerCase();
+    modProps.password = formProps.password;
+    modProps.passwordConfirm = formProps.passwordConfirm;
+    this.props.signUpUser(modProps);
   }
 
   componentWillReceiveProps(nextProps){
@@ -46,46 +46,46 @@ class Signup extends Component {
 
     return (
       <div>
-        <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <FormGroup>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <div className="form-group">
             <Field name="username"
               type="text"
               component={renderField}
               label="Username"
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <Field name="email"
               type="email"
               component={renderField}
               label="Email"
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <Field name="password"
               type="password"
               component={renderField}
               label="Password"
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <Field name="passwordConfirm"
               type="password"
               component={renderField}
               label="Confirm Password"
             />
-          </FormGroup>
+          </div>
           {this.renderAlert()}
-          <Button type="submit"
+          <button type="submit" className="btn btn-primary"
             disabled={submitting}>
             Submit
-          </Button>
-          <Button type="button"
+          </button>
+          <button type="button" className="btn btn-secondary"
             disabled={pristine || submitting}
             onClick={reset}>
             Clear
-          </Button>
-        </Form>
+          </button>
+        </form>
       </div>
     );
   }

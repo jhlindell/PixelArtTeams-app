@@ -17,7 +17,6 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
-    "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "socket.io-client": "^2.0.3"
   },
