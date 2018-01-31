@@ -144,7 +144,7 @@ class Menu extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated };
+  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated, collaborators: state.collaborators };
 }
 
 function mapDispatchToProps(dispatch){

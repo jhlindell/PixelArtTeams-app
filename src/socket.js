@@ -43,6 +43,8 @@ socket.on('resultOfUserCheck', (result) => {
 socket.on('resultOfAddingPermission', (result) => {
   switch(result){
     case 'success':
+      const { currentProject} = store.getState();
+      store.dispatch(otherActions.getCollaborators(currentProject));
       alert('user permission added successfully');
       break;
     case 'user already exists':

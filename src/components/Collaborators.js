@@ -24,7 +24,6 @@ class Collaborators extends Component {
       </div>
     );
   }
-
 }
 
 function mapStateToProps(state){
