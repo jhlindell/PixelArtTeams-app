@@ -7,11 +7,9 @@ class ProjectsList extends Component {
   render(){
     return (
       <div
-        className={"projectCard " + ((this.props.project.project_id === this.props.currentProject)
-        ?
-        "projectCardHighlighted"
-        :
-        "")}
+        className={"projectCard " +
+        ((this.props.project.project_id === this.props.currentProject)
+        ? "projectCardHighlighted" : "")}
         onClick={() => this.props.selectProject(this.props.project.project_id)}
       >
         {this.props.project.project_name}

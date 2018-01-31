@@ -16,10 +16,15 @@ class LandingPage extends Component {
         <div className="landingIntroText" >
           Pixel Art Teams
         </div>
-        <div className="row">
+        <div className="row landingButtons">
           <button className="landingButton btn btn-secondary">
-            <Link className="landingButtonText" to="/art" >
-              Make Some Art
+            <Link className="landingButtonText" to="/gallery" >
+              Go to Gallery
+            </Link>
+          </button>
+          <button className="landingButton btn btn-secondary">
+            <Link className="landingButtonText" to="/signin" >
+              Sign In
             </Link>
           </button>
         </div>

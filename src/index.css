@@ -195,10 +195,13 @@ body {
 
 .landingButton {
   font-family: 'Press Start 2P';
-  display: flex;
+  background-color: black;
+}
+
+.landingButtons {
   margin: 400px auto 0 auto;
   text-align: center;
-  background-color: black;
+  display: block;
 }
 
 .landingButtonText:hover {
@@ -248,4 +251,16 @@ body {
 
 .galleryCardDeck {
   width: 100%;
+}
+
+.signinForm{
+  display: block;
+  margin: 200px auto 0 auto;
+  text-align: center;
+}
+
+.signupForm {
+  display: block;
+  margin: 100px auto 0 auto;
+  text-align: center;
 }
