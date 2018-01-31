@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-} from 'reactstrap';
+import { Modal } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { addNewProject } from '../actions/socketActions';
 import { bindActionCreators } from 'redux';

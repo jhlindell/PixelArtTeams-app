@@ -6,12 +6,14 @@ import { changePaletteShowState } from '../actions/index';
 const styles = {
   display: 'flex',
   alignItems: 'center',
-  width: '50px',
-  height: '50px',
+  width: '70px',
+  height: '70px',
   borderBottom: '1px solid',
   borderRight: '1px solid',
   margin: 'auto',
   backgroundColor: 'white',
+  borderRadius: '25%',
+  paddingBottom: '20px'
 };
 
 class CurrentColor extends Component {
@@ -25,9 +27,9 @@ class CurrentColor extends Component {
         style={{
           position: 'absolute',
           zIndex: '1',
-          background: 'lightgray',
-          width: '50px',
-          height: '50px',
+          background: 'white',
+          width: '70px',
+          height: '70px',
           display: 'flex',
           alignItems: 'center',
         }}

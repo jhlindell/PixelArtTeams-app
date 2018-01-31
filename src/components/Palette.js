@@ -10,21 +10,12 @@ class Palette extends Component {
     return (
       <div className="palette" >
         <CurrentColor />
-        <div
-          id="color-wheel"
-          style={{
+        <div id="color-wheel" style={{
             display: this.props.paletteReducer?'flex':'none',
-            flexDirection: 'column',
-            position: 'absolute',
-            zIndex: 2,
-            width: '50px',
-            height: '80%',
-            alignItems: 'center',
-            marginTop: '50px',
-            background: 'lightgray',
-            borderRight: 'solid 1px',
-          }}
-        >
+            flexDirection: 'column', position: 'absolute',
+            zIndex: 2, width: '70px', height: '80%',
+            alignItems: 'center', marginTop: '70px',
+            background: 'white' }} >
           {colorArray.map(color => <PaintSwatch key={color} color={color}/>)}
         </div>
       </div>

@@ -16,7 +16,7 @@ import {
 import './App.css';
 import {bindActionCreators} from 'redux';
 import { initialize, joinRoom, leaveRoom, grid } from './actions/socketActions';
-const socket = require('./socket');
+import socket from './socket';
 
 class App extends Component {
 

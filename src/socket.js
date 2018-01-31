@@ -1,41 +1,42 @@
-const socketActions = require('./actions/socketActions');
-const otherActions = require('./actions/index.js');
+import store from './store';
+import * as socketActions from './actions/socketActions';
+import * as otherActions from './actions/index.js';
 const WS = process.env.REACT_APP_WS;
-var socket = require('socket.io-client')(WS, {jsonp: false});
+const socket = require('socket.io-client')(WS, {jsonp: false});
 
 socket.on('connect', () => {
-  socketActions.socketConnect();
+  store.dispatch(socketActions.socketConnect());
 });
 
 socket.on('returnUserName', (username)=> {
-  otherActions.setUserName(username);
+  store.dispatch(otherActions.setUserName(username));
 });
 
 socket.on('sendProjectsToClient', (projects)=> {
-  otherActions.sendProjectsToStore(projects);
+  store.dispatch(otherActions.sendProjectsToStore(projects));
 });
 
 socket.on('gridUpdated', (grid)=> {
-  otherActions.updateGrid(grid);
+  store.dispatch(otherActions.updateGrid(grid));
 });
 
 socket.on('sendingGallery', (gallery) => {
-  otherActions.getGallery(gallery);
+  store.dispatch(otherActions.getGallery(gallery));
 });
 
 socket.on('changeCurrentProject', (id)=> {
-  socketActions.selectProject(id);
+  store.dispatch(socketActions.selectProject(id));
 });
 
 socket.on('requestRefresh', () => {
-  socketActions.refresh();
+  store.dispatch(socketActions.refresh());
 });
 
 socket.on('resultOfUserCheck', (result) => {
   if(result){
-    otherActions.userNameCheck(result, "User Exists");
+    store.dispatch(otherActions.userNameCheck(result, "User Exists"));
   } else {
-    otherActions.userNameCheck(result, "User Doesn't Exist");
+    store.dispatch(otherActions.userNameCheck(result, "User Doesn't Exist"));
   }
 });
 
@@ -56,7 +57,7 @@ socket.on('resultOfAddingPermission', (result) => {
 });
 
 socket.on('pixel', (pixel) => {
-  otherActions.pixelClick(pixel.x, pixel.y, pixel.color);
+  store.dispatch(otherActions.pixelClick(pixel.x, pixel.y, pixel.color));
 });
 
-module.exports = socket;
+export default socket;

@@ -12,7 +12,7 @@ class Gallery extends Component {
   render(){
     return (
       <div className="row">
-        <div className="card-deck">
+        <div className="card-deck galleryCardDeck">
           {this.props.gallery.map((art) => <GalleryPiece
             art={art}
             key={art.project_name} />

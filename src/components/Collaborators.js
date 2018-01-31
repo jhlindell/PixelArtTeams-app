@@ -19,7 +19,7 @@ class Collaborators extends Component {
       <div>
         {this.props.collaborators.map(collaborator => {
           if( collaborator !== this.props.username){
-            return <div className="projectMenuTextText"
+            return <div className="projectMenuText"
               key={collaborator}>{collaborator}</div>}})}
       </div>
     );

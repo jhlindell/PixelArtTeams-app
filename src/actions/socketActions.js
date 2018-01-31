@@ -1,6 +1,5 @@
-import store from '../store';
-const socket = require('../socket');
-const otherActions = require('./index');
+import socket from '../socket';
+import * as otherActions from './index';
 
 export function socketConnect(){
   return (dispatch, getState) => {
@@ -11,27 +10,27 @@ export function socketConnect(){
 }
 
 export function selectProject(id){
-  store.dispatch({ type: 'SELECT_PROJECT', payload: { id } });
+  return { type: 'SELECT_PROJECT', payload: { id } };
 }
 
 export function refresh(){
   return (dispatch, getState) => {
-    const { auth } = store.getState();
+    const { auth } = getState();
     socket.emit('refreshProjects', auth.token);
   }
 }
 
 export function sendPixel(x, y){
   return (dispatch, getState) => {
-    const { activeColor, currentProject } = store.getState();
+    const { activeColor, currentProject } = getState();
     socket.emit('pixel', {x, y, color: activeColor, project: currentProject})
-    otherActions.pixelClick(x, y, activeColor);
+    dispatch(otherActions.pixelClick(x, y, activeColor));
   }
 }
 
 export function mouseOverAction(x, y){
   return (dispatch, getState) => {
-    const { mouseReducer, activeColor, currentProject } = store.getState();
+    const { mouseReducer, activeColor, currentProject } = getState();
     if( mouseReducer ){
       socket.emit('pixel', {x, y, color: activeColor, project: currentProject})
     }

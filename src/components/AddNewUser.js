@@ -45,6 +45,7 @@ class AddNewUser extends Component {
   }
 
   handleFormSubmit(event) {
+    event.preventDefault();
     let userName = this.state.user_name.toLowerCase();
     let email = this.state.email.toLowerCase();
     this.props.addNewUser(userName, email);

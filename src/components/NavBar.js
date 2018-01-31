@@ -7,7 +7,7 @@ import { changeShowMenuState } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
 const imgStyle = {
-  width: "72px",
+  width: "50px",
   marginRight: "20px",
 };
 
@@ -59,7 +59,7 @@ class NavBar extends React.Component {
   render(){
     return (
       <nav className="navbar navbar-toggleable navbar-light bg-inverse"
-        style={{ height: '10vh' }} >
+        style={{ height: '50px' }} >
         <a className="navText navbar-brand">
           <img style={ imgStyle } src={ pixelpalette }
             className="d-inline" alt="palette"/>

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectProject } from '../actions/index';
 
-class ProjectDropDown extends Component {
+class ProjectsList extends Component {
   render(){
     return (
       <div
@@ -28,4 +28,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectProject }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDropDown);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);

@@ -1,10 +1,10 @@
 import React from "react";
-import ProjectDropdown from './ProjectDropdown';
+import ProjectsList from './ProjectsList';
 import NewProject from './NewProject';
 import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
 import About from './About';
-import { Link, Switch } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteProject, saveProject, sendFinishedProject} from '../actions/socketActions';
@@ -48,79 +48,78 @@ class Menu extends React.Component {
         style={{
           height: 'fit-content',
           right: 0,
-          // bottom: 0,
           position: 'absolute',
           zIndex: 2,
-          background: 'blue',
+          background: 'lightgray',
+          paddingRight: '2px',
+          paddingLeft: '2px',
           display: this.props.menuReducer?'inline':'none',
         }}
       >
-        <div className="projectMenuTextText">
-          <Link
-            className="navButtonText projectMenuTextText"
-            to="/art"
-          >
-            Canvas
-          </Link>
-        </div>
+        
+        <Route path='/gallery' render={ ()=>(
+          <div className="projectMenuText">
+            <Link className="navButtonText projectMenuText"
+              to="/art" >
+              Canvas
+            </Link>
+          </div>
+        )}/>
+        <Route path='/art' render={ ()=>(
+          <div>
+            {/* <About /> */}
+            <div className="projectMenuText">
+              <Link className="navButtonText projectMenuText"
+                to="/gallery" >
+                Gallery
+              </Link>
+            </div>
+            <NewProject />
+            {this.state.isOwner && <div>
+              <AddNewUser />
 
-        <div className="projectMenuTextText">
-          <Link
-            className="navButtonText projectMenuTextText"
-            to="/gallery"
-          >
-            Gallery
-          </Link>
-        </div>
+              <button
+                className="projectMenuText"
+                onClick={() => this.props.saveProject()}
+              >
+                Save Project
+              </button>
 
-        <About />
+              <br/>
 
-        <NewProject />
-
-        {this.state.isOwner && <div>
-          <AddNewUser />
-
-          <button
-            className="projectMenuTextText"
-            onClick={() => this.props.saveProject()}
-          >
-            Save Project
-          </button>
-
-          <br/>
-
-          <button
-          className="projectMenuTextText"
-          onClick={() => this.props.sendFinishedProject()}
-          >
-            Finish Project
-          </button>
-          <br/>
-          <button
-            className="projectMenuTextText"
-            onClick={() => this.props.deleteProject()}
-          >
-            Delete Project
-          </button>
-        </div>}
-        <br/>
-        <div className="menuTitleTextText">
-          Projects
-        </div>
-        {this.props.projects.map(project => <ProjectDropdown key={project.project_id} project={project} />)}
-        <br/>
-        <div className="menuTitleTextText">
-          Collaborators
-        </div>
-
-        <Collaborators />
+              <button
+              className="projectMenuText"
+              onClick={() => this.props.sendFinishedProject()}
+              >
+                Finish Project
+              </button>
+              <br/>
+              <button
+                className="projectMenuText"
+                onClick={() => this.props.deleteProject()}
+              >
+                Delete Project
+              </button>
+            </div>}
+            <br/>
+            <div className="menuTitleText">
+              Projects
+            </div>
+            {this.props.projects.map(project => <ProjectsList key={project.project_id} project={project} />)}
+            <br/>
+            <div className="menuTitleText">
+              Collaborators
+            </div>
+            <Collaborators />
+          </div>
+        )}/>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject };
+  return { projects: state.projectsReducer, menuReducer: state.menuReducer, username: state.userName, currentProject: state.currentProject, username: state.userName };
 }
 
 function mapDispatchToProps(dispatch){
