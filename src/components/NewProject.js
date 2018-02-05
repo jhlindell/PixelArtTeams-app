@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Modal } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { addNewProject } from '../actions/socketActions';
 import { bindActionCreators } from 'redux';
@@ -20,21 +19,9 @@ class NewProject extends Component {
 
   constructor(props) {
     super(props);
-    this.renderButton = this.renderButton.bind(this);
-    this.toggleNewProject = this.toggleNewProject.bind(this);
     this.state = {
       newProjectToggle: false,
     };
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.renderButton();
-  }
-
-  toggleNewProject() {
-    this.setState({
-      newProjectToggle: !this.state.newProjectToggle
-    });
   }
 
   handleFormSubmit(formProps) {
@@ -42,57 +29,43 @@ class NewProject extends Component {
     this.props.addNewProject(formProps.project_name, formProps.x, formProps.y);
   }
 
-  renderButton(){
-    return (
-      <button
-        className="newProjectSelector mb-1"
-        disabled={!this.props.authenticated}
-        onClick={() => this.toggleNewProject()}>
-        New Project
-      </button>
-    )
+  cancel(){
+    this.props.history.push('/art');
   }
 
   render(){
     const { handleSubmit, submitting } = this.props;
 
     return (
-      <div>
-        {this.renderButton()}
-        <Modal
-          isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}
-        >
-          <div className="modal-header">
-            <h4 className="modal-title"> New Project </h4>
-          </div>
-
-          <div className="modal-body">
-            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-              <div className="form-group row">
-                <div className='col col-sm-12'>
-                  <Field name="project_name" type="text" component={renderField}
-                    label="Project Name" placeholder="Project Name"/>
-                </div>
+      <div className="row">
+        <div className="col-sm-12">
+          <form className="addNewProjectForm"
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <h3 className="mb-5">New Project</h3>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <Field name="project_name" type="text" component={renderField}
+                  label="Project Name" placeholder="Project Name"/>
               </div>
-              <div className="form-group row">
-                <div className='col col-md-4'>
-                  <Field name="x" component={renderField} type="text" label="Canvas Width" placeholder="X"/>
-                </div>
+            </div>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <Field name="x" component={renderField} type="text" label="Canvas Width" placeholder="X"/>
               </div>
-              <div className="form-group row">
-                <div className='col col-md-4'>
-                  <Field name="y" component={renderField} type="text" label="Canvas Height" placeholder="Y"/>
-                </div>
+            </div>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <Field name="y" component={renderField} type="text" label="Canvas Height" placeholder="Y"/>
               </div>
-              <button className="btn btn-primary" type="submit"
-                disabled={submitting}> Submit
-              </button>
-              <button className="btn btn-secondary ml-" type="button" onClick={()=>this.toggleNewProject()}> Cancel
-              </button>
-            </form>
-          </div>
-        </Modal>
+            </div>
+            <button className="btn btn-primary" type="submit"
+              disabled={submitting}> Submit
+            </button>
+            <button className="btn btn-secondary ml-" type="button" onClick={()=>this.cancel()}>
+              Cancel
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

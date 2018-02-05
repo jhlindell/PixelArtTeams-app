@@ -7,6 +7,7 @@ import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
+import NewProject from './components/NewProject';
 import ProtectedRoute from './components/ProtectedRoute';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -48,6 +49,7 @@ class App extends Component {
             <Route path="/gallery" component={Gallery} />
 
             <ProtectedRoute>
+              <Route path="/newProject" component={NewProject} />
               <Route path="/art" component={MainCanvas} />
               <Route path="/newUser" component={AddNewUser} />
             </ProtectedRoute>

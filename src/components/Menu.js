@@ -1,6 +1,5 @@
 import React from "react";
 import ProjectsList from './ProjectsList';
-import NewProject from './NewProject';
 import Collaborators from './Collaborators';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -107,7 +106,12 @@ class Menu extends React.Component {
                 Gallery
               </Link>
             </div>
-            <NewProject />
+            <div className="menuMainChoice mb-3">
+              <Link className="navButtonText projectMenuText"
+                to="/newProject" >
+                New Project
+              </Link>
+            </div>
             {this.state.isOwner && <div>
               <div className="projectMenuHeading mt-3">
                 Project Controls
