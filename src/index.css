@@ -264,3 +264,9 @@ body {
   margin: 100px auto 0 auto;
   text-align: center;
 }
+
+.addNewUserForm {
+  display: block;
+  margin: 200px auto 0 auto;
+  text-align: center;
+}

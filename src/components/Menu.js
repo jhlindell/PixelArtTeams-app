@@ -1,9 +1,7 @@
 import React from "react";
 import ProjectsList from './ProjectsList';
 import NewProject from './NewProject';
-import AddNewUser from './AddNewUser';
 import Collaborators from './Collaborators';
-import About from './About';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -70,26 +68,28 @@ class Menu extends React.Component {
             {this.props.username}
           </div>
           <div className="menuMainChoice mb-2">
-            <Link className="navButtonText projectMenuText"
-              to="/signout" >
+            <Link className="navButtonText projectMenuText" to="/signout" >
               Sign Out
             </Link>
           </div>
         </div>}
         {!this.props.authenticated && <div>
           <div className="menuMainChoice">
-            <Link className="navButtonText projectMenuText"
-              to="/signin" >
+            <Link className="navButtonText projectMenuText" to="/signin" >
               Sign In
             </Link>
           </div>
           <div className="menuMainChoice mb-2">
-            <Link className="navButtonText projectMenuText"
-              to="/signup" >
+            <Link className="navButtonText projectMenuText" to="/signup" >
               Sign Up
             </Link>
           </div>
         </div>}
+        <div className="menuMainChoice mb-2">
+          <Link className="navButtonText projectMenuText" to="/about">
+            About
+          </Link>
+        </div>
         <Route path='/gallery' render={ ()=>(
           <div className="menuMainChoice">
             <Link className="navButtonText projectMenuText"
@@ -112,7 +112,12 @@ class Menu extends React.Component {
               <div className="projectMenuHeading mt-3">
                 Project Controls
               </div>
-              <AddNewUser />
+              <div className="projectMenuText mt-3">
+                <Link className="navButtonText projectMenuText"
+                  to="/newUser" >
+                  Add New User
+                </Link>
+              </div>
               <div className="projectMenuText mb-1"
                 onClick={() => this.props.saveProject()}
                 > Save Project

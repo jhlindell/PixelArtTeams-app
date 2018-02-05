@@ -5,6 +5,8 @@ import LandingPage from './components/LandingPage';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
+import About from './components/About';
+import AddNewUser from './components/AddNewUser';
 import ProtectedRoute from './components/ProtectedRoute';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -41,11 +43,13 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/signin" component={Signin} />
             <Route path="/signout" component={Signout} />
+            <Route path="/about" component={About} />
 
             <Route path="/gallery" component={Gallery} />
 
             <ProtectedRoute>
               <Route path="/art" component={MainCanvas} />
+              <Route path="/newUser" component={AddNewUser} />
             </ProtectedRoute>
           </Switch>
         </div>
