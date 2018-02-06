@@ -84,25 +84,25 @@ class Signup extends Component {
             <div className="form-group mt-5">
               <input name="username" type="text"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Username" value={this.state.username} />
+                value={this.state.username} placeholder="Username" />
                 {this.state.errors.username && <div>{this.state.errors.username}</div>}
             </div>
             <div className="form-group">
               <input name="email" type="email"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Email" value={this.state.email} />
+                value={this.state.email} placeholder="Email" />
                 {this.state.errors.email && <div>{this.state.errors.email}</div>}
             </div>
             <div className="form-group">
               <input name="password" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Password" value={this.state.password} />
+                value={this.state.password} placeholder="Password" />
                 {this.state.errors.password && <div>{this.state.errors.password}</div>}
             </div>
             <div className="form-group">
               <input name="passwordConfirm" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Confirm Password" value={this.state.passwordConfirm} />
+                value={this.state.passwordConfirm} placeholder="Confirm Password"/>
                 {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
             </div>
             {this.renderAlert()}

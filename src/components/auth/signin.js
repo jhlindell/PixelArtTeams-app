@@ -56,12 +56,12 @@ class Signin extends Component {
             <div className="form-group mt-5">
               <input name="username" type="text"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Username" value={this.state.username} />
+                placeholder="Username" value={this.state.username} />
             </div>
             <div className="form-group">
               <input name="password" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
-                label="Password" value={this.state.password} />
+                placeholder="Password" value={this.state.password} />
             </div>
             {this.renderAlert()}
             <button type="submit" className="btn btn-primary">
