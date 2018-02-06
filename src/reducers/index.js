@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 function gridReducer(state, action) {
   if (state === undefined) {
@@ -172,7 +171,6 @@ const appReducer = combineReducers({
   galleryReducer,
   paletteReducer,
   menuReducer,
-  form: formReducer,
   auth: authReducer,
   userName,
   collaborators,

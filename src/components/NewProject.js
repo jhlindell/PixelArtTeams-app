@@ -1,119 +1,124 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Modal } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
 import { addNewProject } from '../actions/socketActions';
 import { bindActionCreators } from 'redux';
 
-const renderField = ({ input, label, type, placeholder, meta: { touched, error}}) => (
-<div>
-  <label>{label}</label>
-  <div>
-    <input {...input} placeholder={placeholder} type={type} />
-    {touched &&
-      (error && <span>{error}</span>)}
-  </div>
-</div>
-);
-
 class NewProject extends Component {
-
   constructor(props) {
     super(props);
-    this.renderButton = this.renderButton.bind(this);
-    this.toggleNewProject = this.toggleNewProject.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      newProjectToggle: false,
+      project_name: '',
+      x: '',
+      y: '',
+      errors: {
+        name: '',
+        x: '',
+        y: ''
+      }
     };
   }
 
-  componentWillReceiveProps(nextProps){
-    this.renderButton();
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({[name]: value});
   }
 
-  toggleNewProject() {
-    this.setState({
-      newProjectToggle: !this.state.newProjectToggle
-    });
+  handleFormSubmit(event) {
+    event.preventDefault();
+    let valid = this.validate();
+    if(valid){
+      this.props.addNewProject(this.state.project_name, this.state.x, this.state.y);
+      this.props.history.push('/art');
+    } else {
+      console.log("errors: ", this.state.errors);
+    }
   }
 
-  handleFormSubmit(formProps) {
-    this.setState({newProjectToggle: false});
-    this.props.addNewProject(formProps.project_name, formProps.x, formProps.y);
-  }
-
-  renderButton(){
-    return (
-      <button
-        className="newProjectSelector mb-1"
-        disabled={!this.props.authenticated}
-        onClick={() => this.toggleNewProject()}>
-        New Project
-      </button>
-    )
+  cancel(){
+    this.props.history.push('/art');
   }
 
   render(){
-    const { handleSubmit, submitting } = this.props;
-
     return (
-      <div>
-        {this.renderButton()}
-        <Modal
-          isOpen={this.state.newProjectToggle}
-          toggle={()=>this.toggleNewProject()}
-        >
-          <div className="modal-header">
-            <h4 className="modal-title"> New Project </h4>
-          </div>
-
-          <div className="modal-body">
-            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-              <div className="form-group row">
-                <div className='col col-sm-12'>
-                  <Field name="project_name" type="text" component={renderField}
-                    label="Project Name" placeholder="Project Name"/>
-                </div>
+      <div className="row">
+        <div className="col-sm-12">
+          <form className="addNewProjectForm"
+            onSubmit={this.handleFormSubmit}>
+            <h3 className="mb-5">New Project</h3>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <input name="project_name" type="text"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  label="Project Name" placeholder="Project Name"
+                  value={this.state.project_name}/>
+                {this.state.errors.name && <div>{this.state.errors.name}</div>}
               </div>
-              <div className="form-group row">
-                <div className='col col-md-4'>
-                  <Field name="x" component={renderField} type="text" label="Canvas Width" placeholder="X"/>
-                </div>
+            </div>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <input name="x" type="text"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  label="Canvas Width" placeholder="X"
+                  value={this.state.x}/>
+                  {this.state.errors.x && <div>{this.state.errors.x}</div>}
               </div>
-              <div className="form-group row">
-                <div className='col col-md-4'>
-                  <Field name="y" component={renderField} type="text" label="Canvas Height" placeholder="Y"/>
-                </div>
+            </div>
+            <div className="form-group row">
+              <div className='col col-sm-12'>
+                <input name="y" type="text"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  label="Canvas Height" placeholder="Y"
+                  value={this.state.y}/>
+                  {this.state.errors.y && <div>{this.state.errors.y}</div>}
               </div>
-              <button className="btn btn-primary" type="submit"
-                disabled={submitting}> Submit
-              </button>
-              <button className="btn btn-secondary ml-" type="button" onClick={()=>this.toggleNewProject()}> Cancel
-              </button>
-            </form>
-          </div>
-        </Modal>
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Submit
+            </button>
+            <button className="btn btn-secondary ml-2" type="button" onClick={()=>this.cancel()}>
+              Cancel
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
-}
 
-const validate = formProps => {
-  const errors = {};
+  validate(){
+    this.clearErrors();
+    let errors = {};
+    let isValid = true;
 
-  if(!formProps.project_name) {
-    errors.project_name = 'Please enter a project name';
+    if(this.state.project_name === '') {
+      errors.name = 'Please enter a project name';
+      isValid = false;
+    }
+
+    if(this.state.x < 10 || this.state.x > 40){
+      errors.x = 'X needs to be between 10 and 40';
+      isValid = false;
+    }
+
+    if(this.state.y < 10 || this.state.y > 30){
+      errors.y = 'Y needs to be between 10 and 30';
+      isValid = false;
+    }
+
+    this.setState({errors: errors});
+    return isValid;
   }
 
-  if(formProps.x < 10 || formProps.x > 40){
-    errors.x = 'X needs to be between 10 and 40';
+  clearErrors(){
+    let errors = {};
+    errors.name = '';
+    errors.x = '';
+    errors.y = '';
+    this.setState({errors: errors });
   }
-
-  if(formProps.y < 10 || formProps.y > 30){
-    errors.y = 'Y needs to be between 10 and 30';
-  }
-
-  return errors;
 }
 
 function mapStateToProps(state) {
@@ -124,9 +129,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ addNewProject }, dispatch);
 }
 
-NewProject = connect(mapStateToProps, mapDispatchToProps)(NewProject);
-
-export default reduxForm({
-  form: 'newProject',
-  validate
-})(NewProject);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProject);

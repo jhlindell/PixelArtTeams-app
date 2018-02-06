@@ -9,7 +9,7 @@ class Palette extends Component {
   render(){
     return (
       <div>
-        Current Color:
+        <span className="paletteText">Current Color:</span>
         <CurrentColor />
         <div id="color-wheel" style={{
             display: this.props.paletteReducer?'flex':'none',

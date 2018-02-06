@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Background from '../pixelBackground.png';
 
 var sectionStyle = {
@@ -22,15 +23,32 @@ class LandingPage extends Component {
               Go to Gallery
             </Link>
           </button>
-          <button className="landingButton btn btn-secondary">
-            <Link className="landingButtonText" to="/signin" >
-              Sign In
-            </Link>
-          </button>
+          {!this.props.authenticated &&
+            <button className="landingButton btn btn-secondary">
+              <Link className="landingButtonText" to="/signin" >
+                Sign In
+              </Link>
+            </button>}
+          {!this.props.authenticated &&
+            <button className="landingButton btn btn-secondary">
+              <Link className="landingButtonText" to="/signup" >
+                Sign Up
+              </Link>
+            </button>}
+          {this.props.authenticated &&
+            <button className="landingButton btn btn-secondary">
+              <Link className="landingButtonText" to="/art" >
+                Make Some Art
+              </Link>
+            </button>}
         </div>
       </div>
     );
   }
 }
 
-export default LandingPage;
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps,null)(LandingPage);

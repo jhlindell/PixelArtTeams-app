@@ -36,7 +36,7 @@ class CurrentColor extends Component {
         onClick={()=>this.props.changePaletteShowState()}
       >
         <div style={newStyle} >
-          <span style={{fontSize: 'small',}}>
+          <span className="currentColorText" style={{fontSize: 'small',}}>
             {this.props.activeColor.replace('#','')}
           </span>
         </div>

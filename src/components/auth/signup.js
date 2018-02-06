@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { signUpUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-const renderField = ({ input, label, type, meta: { touched, error }}) => (
-<div>
-  <label>{label}</label>
-  <div>
-    <input {...input} placeholder={label} type={type} />
-    {touched &&
-      (error && <span>{error}</span>)}
-  </div>
-</div>
-);
-
 class Signup extends Component {
-  handleFormSubmit(formProps) {
-    let modProps = {};
-    modProps.username = formProps.username.toLowerCase();
-    modProps.email = formProps.email.toLowerCase();
-    modProps.password = formProps.password;
-    modProps.passwordConfirm = formProps.passwordConfirm;
-    this.props.signUpUser(modProps);
+  constructor(props){
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      errors: {
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirm: ''
+      }
+    };
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+  }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+    let valid = this.validate();
+    if(valid){
+      let modProps = {};
+      modProps.username = this.state.username.toLowerCase();
+      modProps.email = this.state.email.toLowerCase();
+      modProps.password = this.state.password;
+      modProps.passwordConfirm = this.state.passwordConfirm;
+      this.props.signUpUser(modProps);
+      this.props.history.push('/art');
+    }
   }
 
   componentWillReceiveProps(nextProps){
@@ -41,51 +59,58 @@ class Signup extends Component {
     }
   }
 
-  render(){
-    const { handleSubmit, pristine, reset, submitting} = this.props;
+  clear(){
+    this.setState({
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      errors: {
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirm: ''
+      }
+    });
+  }
 
+  render(){
     return (
       <div className="row">
         <div className="col-md-12">
           <form className="signupForm"
-            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            onSubmit={this.handleFormSubmit}>
             <h3>Sign Up</h3>
             <div className="form-group mt-5">
-              <Field name="username"
-                type="text"
-                component={renderField}
-                label="Username"
-              />
+              <input name="username" type="text"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Username" value={this.state.username} />
+                {this.state.errors.username && <div>{this.state.errors.username}</div>}
             </div>
             <div className="form-group">
-              <Field name="email"
-                type="email"
-                component={renderField}
-                label="Email"
-              />
+              <input name="email" type="email"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Email" value={this.state.email} />
+                {this.state.errors.email && <div>{this.state.errors.email}</div>}
             </div>
             <div className="form-group">
-              <Field name="password"
-                type="password"
-                component={renderField}
-                label="Password"
-              />
+              <input name="password" type="password"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Password" value={this.state.password} />
+                {this.state.errors.password && <div>{this.state.errors.password}</div>}
             </div>
             <div className="form-group">
-              <Field name="passwordConfirm"
-                type="password"
-                component={renderField}
-                label="Confirm Password"
-              />
+              <input name="passwordConfirm" type="password"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Confirm Password" value={this.state.passwordConfirm} />
+                {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
             </div>
             {this.renderAlert()}
-            <button type="submit" className="btn btn-primary"
-              disabled={submitting}>
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
             <button type="button" className="btn btn-secondary"
-              disabled={pristine || submitting}
-              onClick={reset}>
+              onClick={()=> this.clear()}>
               Clear
             </button>
           </form>
@@ -93,32 +118,49 @@ class Signup extends Component {
       </div>
     );
   }
-}
 
-const validate = formProps => {
-  const errors = {};
+  validate() {
+    this.clearErrors();
+    const errors = {};
+    let isValid = true;
 
-  if(!formProps.username){
-    errors.username = 'Please enter a username';
+    if(!this.state.username){
+      errors.username = 'Please enter a username';
+      isValid = false;
+    }
+
+    if(!this.state.email) {
+      errors.email = 'Please enter an email';
+      isValid = false;
+    }
+
+    if(!this.state.password) {
+      errors.password = 'Please enter a password';
+      isValid = false;
+    }
+
+    if(!this.state.passwordConfirm) {
+      errors.passwordConfirm = 'Please enter a password confirmation';
+      isValid = false;
+    }
+
+    if(this.state.password !== this.state.passwordConfirm) {
+      errors.password = 'Passwords must match';
+      isValid = false;
+    }
+
+    this.setState({errors: errors});
+    return isValid;
   }
 
-  if (!formProps.email) {
-    errors.email = 'Please enter an email';
+  clearErrors(){
+    let errors = {};
+    errors.name = '';
+    errors.x = '';
+    errors.y = '';
+    this.setState({errors: errors });
   }
 
-  if (!formProps.password) {
-    errors.password = 'Please enter a password';
-  }
-
-  if (!formProps.passwordConfirm) {
-    errors.passwordConfirm = 'Please enter a password confirmation';
-  }
-
-  if (formProps.password !== formProps.passwordConfirm) {
-    errors.password = 'Passwords must match';
-  }
-
-  return errors;
 }
 
 function mapStateToProps(state) {
@@ -129,9 +171,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ signUpUser }, dispatch);
 }
 
-Signup = connect(mapStateToProps, mapDispatchToProps)(Signup);
-
-export default reduxForm({
-  form: 'signup',
-  validate
-})(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
