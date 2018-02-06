@@ -60,7 +60,7 @@ class AddNewUser extends Component {
   render(){
     return (
       <div className="row">
-        <div className="offset-sm-3 col-sm-6">
+        <div className="offset-sm-4 col-sm-4">
           <form onSubmit={this.handleFormSubmit} className="addNewUserForm">
             <h4 className="mb-4">Please enter username or email of user to add</h4>
             <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>

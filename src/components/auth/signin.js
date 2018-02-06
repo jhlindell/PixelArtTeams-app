@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { signInUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-const renderField = ({ input, label, type, meta: { touched, error }}) => (
-<div>
-  <label>{label}</label>
-  <div>
-    <input {...input} placeholder={label} type={type} />
-    {touched &&
-      (error && <span>{error}</span>)}
-  </div>
-</div>
-);
-
 class Signin extends Component {
+  constructor(props){
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
+
   componentWillReceiveProps(nextProps){
     if(nextProps.authenticated){
       this.props.history.push('/art');
     }
   }
 
-  handleFormSubmit(formProps) {
-    this.props.signInUser(formProps);
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+  }
+
+  handleFormSubmit(event) {
+    event.preventDefault();
+    this.props.signInUser({username: this.state.username, password: this.state.password});
   }
 
   renderAlert() {
@@ -36,38 +42,34 @@ class Signin extends Component {
     }
   }
 
-  render(){
-    const { handleSubmit, pristine, reset, submitting} = this.props;
+  cancel(){
+    this.props.history.push('/gallery');
+  }
 
+  render(){
     return (
       <div className="row">
         <div className="col-sm-12">
           <form className="signinForm"
-            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            onSubmit={this.handleFormSubmit}>
             <h3>Please Sign In</h3>
             <div className="form-group mt-5">
-              <Field name="username"
-                type="text"
-                component={renderField}
-                label="Username"
-              />
+              <input name="username" type="text"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Username" value={this.state.username} />
             </div>
             <div className="form-group">
-              <Field name="password"
-                type="password"
-                component={renderField}
-                label="Password"
-              />
+              <input name="password" type="password"
+                onChange={(e) => {this.handleInputChange(e)}}
+                label="Password" value={this.state.password} />
             </div>
             {this.renderAlert()}
-            <button type="submit"
-              disabled={submitting}>
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
-            <button type="button"
-              disabled={pristine || submitting}
-              onClick={reset}>
-              Clear
+            <button type="button" className="btn btn-secondary ml-2"
+              onClick={()=> this.cancel()}>
+              Cancel
             </button>
           </form>
         </div>
@@ -85,8 +87,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({signInUser}, dispatch);
 }
 
-Signin = connect(mapStateToProps, mapDispatchToProps)(Signin);
-
-export default reduxForm({
-  form: 'signin'
-})(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

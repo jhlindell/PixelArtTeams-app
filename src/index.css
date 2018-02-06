@@ -276,3 +276,13 @@ body {
   margin: 150px auto 0 auto;
   text-align: center;
 }
+
+.paletteText {
+  font-family: 'Press Start 2P';
+  font-size: 12px;
+}
+
+.currentColorText{
+  font-family: 'Press Start 2P';
+  font-size: 10px !important;
+}
