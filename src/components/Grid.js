@@ -23,7 +23,7 @@ class Grid extends Component {
               onMouseUp={() => this.props.mouseUpAction()} >
               {this.props.grid.map((row, y) => {
                 return row.map((pixel, x) => <Pixel
-                  x={x} y={y}
+                  x={x} y={y} key={x.toString() + y.toString()}
                   color={pixel} />);
               })}
             </div>

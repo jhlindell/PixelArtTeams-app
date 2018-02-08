@@ -25,7 +25,7 @@ const GalleryPiece = (props) => {
         <div className="card-block" style={newStyle} >
           {props.art.grid.map((row, y) => {
             return row.map((pixel, x) => <GalleryPixel
-              x={x} y={y}
+              x={x} y={y} key={x.toString() + y.toString()}
               color={pixel} />);
           })}
         </div>

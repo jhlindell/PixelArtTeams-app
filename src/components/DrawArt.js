@@ -1,19 +1,18 @@
 import React from "react";
-
 import { Rect } from 'react-konva';
 
 const DrawArt = (props) => {
-  let grid = this.props.art.grid;
-  let xoffset = 400/this.props.art.x;
-  let yoffset = 400/this.props.art.y;
+  let grid = props.grid;
+  let offset = props.canvasY/props.grid.length;
 
   return (
     grid.map((row, y) => {
       return row.map((color, x) => <Rect
-        x={x*xoffset}
-        y={y*yoffset}
-        width={20}
-        height={20}
+        x={x*offset}
+        y={y*offset}
+        key={x.toString() + y.toString()}
+        width={props.pixelSize}
+        height={props.pixelSize}
         fill={color}
         />
       );
