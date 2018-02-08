@@ -12,7 +12,6 @@ const styles = {
   borderRight: '1px solid',
   margin: 'auto',
   backgroundColor: 'white',
-  borderRadius: '25%',
   paddingBottom: '20px'
 };
 

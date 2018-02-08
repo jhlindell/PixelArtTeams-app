@@ -127,8 +127,12 @@ class Menu extends React.Component {
                 > Save Project
               </div>
               <div className="projectMenuText mb-1"
-              onClick={() => this.props.sendFinishedProject()}
-              > Finish Project
+              // onClick={() => this.props.sendFinishedProject()}
+               >
+                <Link className="navButtonText projectMenuText"
+                  to="/finishart" >
+                  Finish Project
+                </Link>
               </div>
               <div className="projectMenuText mb-1"
                 onClick={() => this.props.deleteProject()} >

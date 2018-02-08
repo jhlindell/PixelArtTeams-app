@@ -1,14 +1,6 @@
 import socket from '../socket';
 import * as otherActions from './index';
 
-// export function socketConnect(){
-//   return (dispatch, getState) => {
-//     const { currentProject, auth } = getState();
-//     socket.emit('joinRoom', currentProject);
-//     socket.emit('grid', currentProject);
-//   }
-// }
-
 export function selectProject(id){
   return { type: 'SELECT_PROJECT', payload: { id } };
 }

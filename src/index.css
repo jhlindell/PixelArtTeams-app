@@ -250,6 +250,7 @@ body {
 }
 
 .galleryCardDeck {
+  padding: 10px;
   width: 100%;
 }
 
@@ -285,4 +286,36 @@ body {
 .currentColorText{
   font-family: 'Press Start 2P';
   font-size: 10px !important;
+}
+
+.finishCanvasContainer{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.finishCanvasElement{
+  margin: auto;
+}
+
+.finishControlsContainer{
+  display:flex;
+}
+
+.finishControlsElement{
+  margin:auto;
+  text-align: center;
+}
+
+.artCard{
+  background-color: gray;
+  margin-bottom: 10px;
+}
+
+.cardtitle{
+  font-size: 1.25rem;
 }

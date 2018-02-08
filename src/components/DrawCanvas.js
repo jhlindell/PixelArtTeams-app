@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Stage, Layer, Text } from 'react-konva';
+import { Stage, Layer} from 'react-konva';
 import DrawArt from './DrawArt';
 
 class DrawCanvas extends Component {
   render(){
+    let newStyle = {};
+    newStyle.height = this.props.canvasY + 'px';
+    newStyle.margin = 'auto';
+
     return (
-      <Stage width={400} height={400}>
+      <Stage width={this.props.canvasX} height={this.props.canvasY} style={newStyle}>
         <Layer>
-          <DrawArt art={this.props.projects[0]}/>
+          <DrawArt grid={this.props.grid}
+            pixelSize={this.props.pixelSize} canvasX={this.props.canvasX} canvasY={this.props.canvasY}/>
         </Layer>
       </Stage>
     )
   }
 }
 
-function mapStateToProps(state){
-  return { projects: state.projectsReducer }
-}
-
-export default connect(mapStateToProps,null)(DrawCanvas);
+export default DrawCanvas;
