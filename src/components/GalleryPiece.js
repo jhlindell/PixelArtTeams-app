@@ -1,37 +1,68 @@
-import React from 'react';
-import GalleryPixel from './GalleryPixel';
+import React, {Component} from 'react';
+import DrawCanvas from './DrawCanvas';
 
-const GalleryPiece = (props) => {
+class GalleryPiece extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      pixelSize: 0,
+      canvasX: 0,
+      canvasY: 0
+    }
+  }
 
-  let xCoord = props.art.grid[0].length;
-  let gridWidth = (xCoord * 10) + 40;
-  let newStyle = {};
-  newStyle.paddingTop = '20px';
-  newStyle.display = 'flex';
-  newStyle.flexWrap = 'wrap';
-  newStyle.width = gridWidth + 'px';
-  newStyle.margin = 'auto';
+  componentWillMount(){
+    this.calculateParams(this.props.art.grid);
+  }
 
+  calculateParams(grid){
+    let x = grid[0].length;
+    let y = grid.length;
+    let canvasX = 0;
+    let canvasY = 0;
+    if(x >= y){
+      let ratio = x/y;
+      canvasX = 240;
+      canvasY = 240 / ratio;
+    }
+    if(y > x){
+      let ratio = y/x;
+      canvasY = 240;
+      canvasX = 240 / ratio;
+    }
+    let pixelSizeX = (canvasX/x).toFixed(0);
+    let pixelSizeY = (canvasY/y).toFixed(0);
+    let pixelSize;
+    if(pixelSizeX > pixelSizeY){
+      pixelSize = pixelSizeY;
+    } else {
+      pixelSize = pixelSizeX;
+    }
+    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
+  }
 
-  return (
-    <div className="col col-md-4">
-      <div className="card artCard">
-        <div className="card-header">
-          <div className="artTitleText cardtitle" >
-            {props.art.project_name}
+  render(){
+    let newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.flexWrap = 'wrap';
+    newStyle.marginLeft = 'auto';
+    newStyle.marginRight = 'auto';
+    return (
+      <div className="col col-md-4">
+        <div className="card artCard">
+          <div className="card-header">
+            <div className="artTitleText cardtitle" >
+              {this.props.art.project_name}
+            </div>
+          </div>
+
+          <div className="card-block" style={newStyle} >
+            <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
           </div>
         </div>
-
-        <div className="card-block" style={newStyle} >
-          {props.art.grid.map((row, y) => {
-            return row.map((pixel, x) => <GalleryPixel
-              x={x} y={y} key={x.toString() + y.toString()}
-              color={pixel} />);
-          })}
-        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default GalleryPiece;

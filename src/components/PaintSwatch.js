@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { updateColor } from '../actions/index'
 
 const styles = {
-  width: '50px',
+  width: '70px',
   height: '50px',
   borderBottom: 'solid 1px',
   borderRight: 'solid 1px',
