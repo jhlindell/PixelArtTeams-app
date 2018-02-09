@@ -98,12 +98,12 @@ class NewProject extends Component {
       isValid = false;
     }
 
-    if(this.state.x < 10 || this.state.x > 40){
+    if(this.state.x < 10 || this.state.x > 50){
       errors.x = 'X needs to be between 10 and 40';
       isValid = false;
     }
 
-    if(this.state.y < 10 || this.state.y > 30){
+    if(this.state.y < 10 || this.state.y > 50){
       errors.y = 'Y needs to be between 10 and 30';
       isValid = false;
     }

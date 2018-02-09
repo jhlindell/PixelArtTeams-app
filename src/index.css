@@ -319,3 +319,13 @@ body {
 .cardtitle{
   font-size: 1.25rem;
 }
+
+.grid{
+  display: flex;
+  height: 80vh;
+  align-items: center;
+}
+
+.mainCanvas{
+  height: 100%;
+}

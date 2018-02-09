@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 import { sendPixel, mouseOverAction } from '../actions/socketActions';
 
 const styles = {
-  width: '20px',
-  height: '20px',
   float: 'left',
   boxSizing: 'borderBox',
   borderStyle: 'solid',
@@ -14,10 +12,11 @@ const styles = {
 };
 
 class Pixel extends Component {
-
   render(){
     const { x, y, color} = this.props;
     let newStyle = Object.assign({}, styles);
+    newStyle.height = this.props.pixelSize + 'px';
+    newStyle.width = this.props.pixelSize + 'px';
     newStyle.backgroundColor = color;
 
     return (

@@ -20,7 +20,10 @@ class Collaborators extends Component {
         {this.props.collaborators.map(collaborator => {
           if( collaborator !== this.props.username){
             return <div className="projectMenuText"
-              key={collaborator}>{collaborator}</div>}})}
+              key={collaborator}>{collaborator}</div>}
+
+          return null;
+        })}
       </div>
     );
   }
