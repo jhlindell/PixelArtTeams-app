@@ -3,6 +3,7 @@ import Menu from './Menu';
 import NavBar from './NavBar';
 import Grid from './Grid';
 import Palette from './Palette';
+import ProjectSelector from './ProjectSelector';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getProjects } from '../actions/socketActions';
@@ -27,7 +28,7 @@ class MainCanvas extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.currentProject !== this.props.currentProject){
+    if((nextProps.currentProject !== 0) && (nextProps.currentProject !== this.props.currentProject)){
       this.calculateCanvas(nextProps.currentProject);
     }
   }
@@ -73,7 +74,8 @@ class MainCanvas extends Component {
         <NavBar />
         <Menu />
         <Palette />
-        {this.props.currentProject !== 0 && <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y}/>}
+        {this.props.currentProject !== 0 && <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} />}
+        {this.props.currentProject === 0 && <ProjectSelector />}
       </div>
     )
   }

@@ -1,10 +1,10 @@
 import React from "react";
-import ProjectsList from './ProjectsList';
 import Collaborators from './Collaborators';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteProject, saveProject, sendFinishedProject, getUserName } from '../actions/socketActions';
+import { selectProject } from '../actions/index';
 
 class Menu extends React.Component {
 
@@ -112,11 +112,16 @@ class Menu extends React.Component {
                 New Project
               </Link>
             </div>
+            {this.props.authenticated && <div>
+              <div className="projectMenuText mt-3 mb-1" onClick={()=> this.props.selectProject(0)}>
+                Select a Project
+              </div>
+            </div>}
             {this.state.isOwner && <div>
               <div className="projectMenuHeading mt-3">
                 Project Controls
               </div>
-              <div className="projectMenuText mt-3">
+              <div className="projectMenuText mt-3 mb-1">
                 <Link className="navButtonText projectMenuText"
                   to="/newUser" >
                   Add New User
@@ -126,9 +131,7 @@ class Menu extends React.Component {
                 onClick={() => this.props.saveProject()}
                 > Save Project
               </div>
-              <div className="projectMenuText mb-1"
-              // onClick={() => this.props.sendFinishedProject()}
-               >
+              <div className="projectMenuText mb-1">
                 <Link className="navButtonText projectMenuText"
                   to="/finishart" >
                   Finish Project
@@ -140,10 +143,6 @@ class Menu extends React.Component {
               </div>
             </div>}
             {this.props.authenticated && <div>
-              <div className="projectMenuHeading mb-1 mt-3">
-                Projects
-              </div>
-              {this.props.projects.map(project => <ProjectsList key={project.project_id} project={project} />)}
               <div className="projectMenuHeading mt-3">
                 Collaborators
               </div>
@@ -161,7 +160,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject, getUserName }, dispatch);
+  return bindActionCreators({ deleteProject, saveProject, sendFinishedProject, getUserName, selectProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
