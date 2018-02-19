@@ -59,7 +59,7 @@ class ProjectSelectorCard extends Component {
     newStyle.marginRight = 'auto';
     return (
       <div className="col col-sm-3">
-        <div className="card" onClick={() => this.cardClicked(this.props.art.project_id)}>
+        <div className="card artCard" onClick={() => this.cardClicked(this.props.art.project_id)}>
           <div className="card-header">
             <div className="artTitleText cardtitle" >
               {this.props.art.project_name}

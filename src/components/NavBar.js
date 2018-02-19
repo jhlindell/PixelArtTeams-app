@@ -12,13 +12,6 @@ const imgStyle = {
 };
 
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
-  }
-
   componentWillMount(){
     if(this.props.authenticated){
       this.props.getUserName();
@@ -29,12 +22,6 @@ class NavBar extends React.Component {
     if(nextProps.authenticated){
       this.props.getUserName();
     }
-  }
-
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
   }
 
   renderLinks() {
@@ -67,7 +54,6 @@ class NavBar extends React.Component {
         </a>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="ml-auto navbar-nav">
-            {/* {this.renderLinks()} */}
             <li>
               <button className="btn btn-secondary" type="button"
                 onClick={ this.props.changeShowMenuState }>
