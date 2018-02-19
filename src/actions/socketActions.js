@@ -121,3 +121,9 @@ export function grid(id){
     socket.emit('grid', id);
   }
 }
+
+export function getSingleProject(id){
+  return (dispatch) => {
+    socket.emit('getSingleProject', id);
+  }
+}

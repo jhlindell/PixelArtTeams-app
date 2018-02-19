@@ -10,6 +10,7 @@ import AddNewUser from './components/AddNewUser';
 import NewProject from './components/NewProject';
 import FinishArt from './components/FinishArt';
 import ProtectedRoute from './components/ProtectedRoute';
+import ShowProject from './components/ShowProject';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -48,6 +49,7 @@ class App extends Component {
             <Route path="/about" component={About} />
 
             <Route path="/gallery" component={Gallery} />
+            <Route path="/project/:id" component={ShowProject} />
 
             <ProtectedRoute>
               <Route path="/newProject" component={NewProject} />

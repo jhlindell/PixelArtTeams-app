@@ -101,3 +101,7 @@ export function userNameCheck(result, message){
 export function clearUserNameCheck(){
   return {type: 'CLEAR_USERNAME_CHECK'};
 }
+
+export function galleryShow(project){
+  return {type: 'GALLERY_SHOW', payload: project}
+}
