@@ -146,7 +146,7 @@ class Menu extends React.Component {
               <div className="projectMenuHeading mt-3">
                 Collaborators
               </div>
-              <Collaborators />
+              <Collaborators classString={"projectMenuText"} project={this.props.currentProject}/>
             </div>}
           </div>
         )}/>

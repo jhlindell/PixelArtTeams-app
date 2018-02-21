@@ -162,6 +162,15 @@ function userCheckReducer(state={}, action){
   }
 }
 
+function galleryShowReducer(state=null, action){
+  switch(action.type){
+    case "GALLERY_SHOW":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -174,7 +183,8 @@ const appReducer = combineReducers({
   auth: authReducer,
   userName,
   collaborators,
-  userCheckReducer
+  userCheckReducer,
+  galleryShowReducer
 });
 
 const rootReducer = (state, action) => {

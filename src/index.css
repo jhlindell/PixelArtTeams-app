@@ -250,7 +250,7 @@ body {
 }
 
 .galleryCardDeck {
-  padding: 10px;
+  padding: 30px;
   width: 100%;
 }
 
@@ -335,4 +335,20 @@ body {
   font-size: 20px;
   text-align: center;
   margin:auto;
+}
+
+.showProjectInfo{
+  font-family: 'Press Start 2P';
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.showProjectHeading{
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.showProjectItem{
+  font-size: 16px;
 }

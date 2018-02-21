@@ -58,4 +58,8 @@ socket.on('pixel', (pixel) => {
   store.dispatch(otherActions.pixelClick(pixel.x, pixel.y, pixel.color));
 });
 
+socket.on('returnSingleProject', (project) => {
+  store.dispatch(otherActions.galleryShow(project));
+});
+
 export default socket;

@@ -49,7 +49,7 @@ class GalleryPiece extends Component{
     newStyle.marginRight = 'auto';
     return (
       <div className="col col-md-4">
-        <div className="card artCard">
+        <div className="card artCard" onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
           <div className="card-header">
             <div className="artTitleText cardtitle" >
               {this.props.art.project_name}

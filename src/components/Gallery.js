@@ -18,7 +18,7 @@ class Gallery extends Component {
         <Menu />
         <div className="row">
           <div className="card-deck galleryCardDeck">
-            {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} /> )}
+            {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
           </div>
         </div>
       </div>
