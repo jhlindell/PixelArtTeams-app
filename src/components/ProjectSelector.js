@@ -11,6 +11,20 @@ class ProjectSelector extends Component {
         <div className="offset-md-2 col-md-8 mt-4">
           <p className="pickAProject mb-3">Pick a project:</p>
           <div className="card-deck galleryCardDeck">
+            <div className="col col-sm-3">
+              <div className="card" onClick={()=> this.props.history.push('/newProject')}>
+                <div className="card-header">
+                  <div className="artTitleText cardtitle" >
+                    New
+                  </div>
+                </div>
+                <div className="card-body">
+                  <div className="artTitleText cardtitle mt-4 mb-4">
+                    Start New Project
+                  </div>
+                </div>
+              </div>
+            </div>
             {this.props.projects.map((art) => <ProjectSelectorCard art={art} key={art.project_name} /> )}
           </div>
         </div>

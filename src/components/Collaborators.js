@@ -5,7 +5,7 @@ import { getCollaborators } from '../actions/index';
 
 class Collaborators extends Component {
   componentWillMount(){
-    this.props.getCollaborators(this.props.currentProject);
+    this.props.getCollaborators(this.props.project);
   }
 
   componentWillReceiveProps(nextProps){
@@ -19,9 +19,8 @@ class Collaborators extends Component {
       <div>
         {this.props.collaborators.map(collaborator => {
           if( collaborator !== this.props.username){
-            return <div className="projectMenuText"
+            return <div className={this.props.classString}
               key={collaborator}>{collaborator}</div>}
-
           return null;
         })}
       </div>

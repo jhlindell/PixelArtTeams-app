@@ -75,7 +75,7 @@ class MainCanvas extends Component {
         <Menu />
         <Palette />
         {this.props.currentProject !== 0 && <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} />}
-        {this.props.currentProject === 0 && <ProjectSelector />}
+        {this.props.currentProject === 0 && <ProjectSelector history={this.props.history}/>}
       </div>
     )
   }

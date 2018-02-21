@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getSingleProject } from '../actions/socketActions';
 import DrawCanvas from './DrawCanvas';
+import Collaborators from './Collaborators';
 
 class ShowProject extends Component {
   constructor(props){
@@ -10,7 +11,7 @@ class ShowProject extends Component {
     this.state={
       pixelSize: 0,
       canvasX: 0,
-      canvasY: 0
+      canvasY: 0,
     }
   }
 
@@ -24,7 +25,6 @@ class ShowProject extends Component {
       this.props.history.push('/gallery');
     }
     if(nextProps.project){
-      console.log("project: ", nextProps.project);
       this.calculateCanvas(nextProps.project);
     }
   }
@@ -51,14 +51,29 @@ class ShowProject extends Component {
 
   render(){
     let newStyle = {};
-    newStyle.display = 'flex';
+    // newStyle.display = 'flex';
     newStyle.height = window.innerHeight + 'px';
-    newStyle.flexWrap = 'wrap';
+    // newStyle.flexWrap = 'wrap';
     newStyle.backgroundColor = 'lightgray';
+
+    let newStyle2 = {};
+    newStyle2.display = 'flex';
+    newStyle2.flexWrap = 'wrap';
 
     return (
       <div className="row" style={newStyle}>
-        {this.props.project && <DrawCanvas grid={ this.props.project.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/> }
+        <div className="col col-md-8" style={newStyle2}>
+          {this.props.project && <DrawCanvas grid={ this.props.project.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/> }
+        </div>
+        <div className="col col-md-4" style={newStyle2}>
+          <div className="showProjectInfo">
+            <p className="showProjectHeading">Project Info</p>
+            <p className="showProjectItem">Project Originator:</p>
+            {this.props.project && <p   className="showProjectItem">  {this.props.project.project_owner}</p>}
+            <p className="showProjectItem">Project Collaborators:</p>
+            <Collaborators classString={"showProjectItem"} project={this.props.match.params.id}/>
+          </div>
+        </div>
       </div>
     );
   }

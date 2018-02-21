@@ -336,3 +336,19 @@ body {
   text-align: center;
   margin:auto;
 }
+
+.showProjectInfo{
+  font-family: 'Press Start 2P';
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.showProjectHeading{
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.showProjectItem{
+  font-size: 16px;
+}
