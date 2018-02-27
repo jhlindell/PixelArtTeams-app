@@ -7,10 +7,12 @@ import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
+import NavBar2 from './components/NavBar2';
 import NewProject from './components/NewProject';
 import FinishArt from './components/FinishArt';
 import ProtectedRoute from './components/ProtectedRoute';
 import ShowProject from './components/ShowProject';
+import Footer from './components/Footer';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -38,26 +40,41 @@ class App extends Component {
   }
 
   render() {
+    const newStyle = {};
+    newStyle.flex = 0;
+    const newStyle2 = {};
+    newStyle2.display = 'flex';
+    newStyle2.flex = '1 1 100%';
+    newStyle2.alignItems = 'center';
+
     return (
       <Router>
-        <div className="App-body container-fluid" >
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/signout" component={Signout} />
-            <Route path="/about" component={About} />
+        <div className="App-body" >
+          <div style={newStyle}>
+            <NavBar2 />
+          </div>
+          <div style={newStyle2} id="mainBlock">
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/signin" component={Signin} />
+              <Route path="/signout" component={Signout} />
+              <Route path="/about" component={About} />
 
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/project/:id" component={ShowProject} />
+              <Route path="/gallery" component={Gallery} />
+              <Route path="/project/:id" component={ShowProject} />
 
-            <ProtectedRoute>
-              <Route path="/newProject" component={NewProject} />
-              <Route path="/art" component={MainCanvas} />
-              <Route path="/newUser" component={AddNewUser} />
-              <Route path="/finishart" component={FinishArt} />
-            </ProtectedRoute>
-          </Switch>
+              <ProtectedRoute>
+                <Route path="/newProject" component={NewProject} />
+                <Route path="/art" component={MainCanvas} />
+                <Route path="/newUser" component={AddNewUser} />
+                <Route path="/finishart" component={FinishArt} />
+              </ProtectedRoute>
+            </Switch>
+          </div>
+          <div style={newStyle}>
+            <Footer />
+          </div>
         </div>
       </Router>
     );

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import GalleryPiece from './GalleryPiece';
-import Menu from './Menu';
-import NavBar from './NavBar';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { stockGallery } from '../actions/socketActions';
@@ -14,9 +12,7 @@ class Gallery extends Component {
   render(){
     return (
       <div>
-        <NavBar />
-        <Menu />
-        <div className="row">
+        <div className="row galleryScroll noMargin">
           <div className="card-deck galleryCardDeck">
             {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
           </div>

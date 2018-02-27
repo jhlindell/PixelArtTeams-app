@@ -7,7 +7,7 @@ import ProjectSelectorCard from './ProjectSelectorCard';
 class ProjectSelector extends Component {
   render(){
     return (
-      <div className="row">
+      <div className="row noMargin">
         <div className="offset-md-2 col-md-8 mt-4">
           <p className="pickAProject mb-3">Pick a project:</p>
           <div className="card-deck galleryCardDeck">

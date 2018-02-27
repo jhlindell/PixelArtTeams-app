@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { updateColor } from '../actions/index'
 
 const styles = {
-  width: '70px',
-  height: '50px',
+  width: '40px',
+  height: '40px',
   borderBottom: 'solid 1px',
   borderRight: 'solid 1px',
 };
@@ -14,11 +14,8 @@ class PaintSwatch extends Component {
   render(){
     const style = Object.assign({ backgroundColor: this.props.color }, styles);
     return (
-      <div
-        style={style}
-        className="paint"
-        onClick={() => this.props.updateColor(this.props.color)}
-      >
+      <div style={style}
+        onClick={() => this.props.updateColor(this.props.color)} >
       </div>
     );
   }

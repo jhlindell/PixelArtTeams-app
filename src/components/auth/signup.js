@@ -99,7 +99,7 @@ class Signup extends Component {
                 value={this.state.password} placeholder="Password" />
                 {this.state.errors.password && <div>{this.state.errors.password}</div>}
             </div>
-            <div className="form-group">
+            <div className="form-group mb-4">
               <input name="passwordConfirm" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
                 value={this.state.passwordConfirm} placeholder="Confirm Password"/>
@@ -112,6 +112,10 @@ class Signup extends Component {
             <button type="button" className="btn btn-secondary"
               onClick={()=> this.clear()}>
               Clear
+            </button>
+            <button type="button" className="btn btn-secondary"
+              onClick={()=> this.props.history.push('/gallery')}>
+              Cancel
             </button>
           </form>
         </div>

@@ -6,8 +6,8 @@ import { changePaletteShowState } from '../actions/index';
 const styles = {
   display: 'flex',
   alignItems: 'center',
-  width: '70px',
-  height: '70px',
+  width: '40px',
+  height: '40px',
   borderBottom: '1px solid',
   borderRight: '1px solid',
   margin: 'auto',
@@ -21,16 +21,14 @@ class CurrentColor extends Component {
     newStyle.backgroundColor = this.props.activeColor;
 
     return (
-      <div
-        className="colorBox"
+      <span
         style={{
-          position: 'absolute',
+          width: '40px',
+          height: '40px',
           zIndex: '1',
           background: 'white',
-          width: '70px',
-          height: '70px',
-          display: 'flex',
-          alignItems: 'center',
+          float: 'left',
+          boxSizing: 'borderBox'
         }}
         onClick={()=>this.props.changePaletteShowState()}
       >
@@ -39,7 +37,7 @@ class CurrentColor extends Component {
             {this.props.activeColor.replace('#','')}
           </span>
         </div>
-      </div>
+      </span>
     );
   }
 }
