@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
+const newStyle = {
+  width: '70%',
+  display: 'flex',
+  flexDirection: 'column',
+  textAlign: 'center',
+  margin: 'auto'
+};
+
 class About extends Component {
-
   render(){
-    const newStyle = {};
-    newStyle.width = '70%';
-    newStyle.display = 'flex';
-    newStyle.flexDirection = 'column';
-    newStyle.textAlign = 'center';
-    newStyle.margin = 'auto';
-
     return (
       <div style={newStyle}>
         <p className="aboutText mt-4">

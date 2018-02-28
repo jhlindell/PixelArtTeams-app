@@ -22,7 +22,7 @@ class Grid extends Component {
     newStyle.flex = '1';
 
     return (
-      <div id="canvas">
+      <div id="grind">
         <div style={ newStyle } onMouseDown={() => this.props.mouseDownAction()} onMouseUp={() => this.props.mouseUpAction()} >
             {this.props.grid.map((row, y) => {
               return row.map((pixel, x) => <Pixel
