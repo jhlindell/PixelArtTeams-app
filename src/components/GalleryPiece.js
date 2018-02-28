@@ -42,21 +42,24 @@ class GalleryPiece extends Component{
   }
 
   render(){
-    let newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.flexWrap = 'wrap';
-    newStyle.marginLeft = 'auto';
-    newStyle.marginRight = 'auto';
+    let cardStyle = {};
+    cardStyle.backgroundColor = 'gray';
+    cardStyle.marginBottom = '10px';
+
+    let cardBlockStyle = {};
+    cardBlockStyle.display = 'flex';
+    cardBlockStyle.margin = 'auto';
+
     return (
       <div className="col col-md-4">
-        <div className="card artCard" onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
+        <div className="card" style={cardStyle} onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
           <div className="card-header">
-            <div className="artTitleText cardtitle" >
+            <div className="artTitleText" >
               {this.props.art.project_name}
             </div>
           </div>
 
-          <div className="card-block" style={newStyle} >
+          <div className="card-block" style={cardBlockStyle} >
             <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
           </div>
         </div>

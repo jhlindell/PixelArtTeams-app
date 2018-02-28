@@ -105,3 +105,7 @@ export function clearUserNameCheck(){
 export function galleryShow(project){
   return {type: 'GALLERY_SHOW', payload: project}
 }
+
+export function galleryTop3(top3){
+  return {type: 'GALLERY_TOP_3', payload: top3}
+}

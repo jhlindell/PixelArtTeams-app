@@ -47,20 +47,24 @@ class ProjectSelectorCard extends Component {
   }
 
   render(){
-    let newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.flexWrap = 'wrap';
-    newStyle.marginLeft = 'auto';
-    newStyle.marginRight = 'auto';
+    let artCard = {};
+    artCard.backgroundColor = 'gray';
+
+    let cardBlock = {};
+    cardBlock.display = 'flex';
+    cardBlock.flexWrap = 'wrap';
+    cardBlock.marginLeft = 'auto';
+    cardBlock.marginRight = 'auto';
+
     return (
       <div className="col col-sm-3">
-        <div className="card artCard" onClick={() => this.props.selectProject(this.props.art.project_id)}>
+        <div className="card mb-3" style={artCard} onClick={() => this.props.selectProject(this.props.art.project_id)}>
           <div className="card-header">
-            <div className="artTitleText cardtitle" >
+            <div className="artTitleText" >
               {this.props.art.project_name}
             </div>
           </div>
-          <div className="card-block" style={newStyle} >
+          <div className="card-block" style={cardBlock} >
             <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
           </div>
         </div>

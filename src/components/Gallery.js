@@ -11,16 +11,14 @@ class Gallery extends Component {
 
   render(){
     const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.justifyContent = 'center';
     newStyle.padding = '50px';
     newStyle.width = '100%';
 
     return (
-      <div>
-        <div className="row noMargin">
-          <div className="card-deck" style={newStyle}>
-            {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
-          </div>
-        </div>
+      <div className="card-deck" style={newStyle}>
+        {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
       </div>
     );
   }

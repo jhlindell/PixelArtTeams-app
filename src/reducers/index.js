@@ -171,6 +171,15 @@ function galleryShowReducer(state=null, action){
   }
 }
 
+function top3Reducer(state = null, action){
+  switch(action.type){
+    case "GALLERY_TOP_3":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -184,7 +193,8 @@ const appReducer = combineReducers({
   userName,
   collaborators,
   userCheckReducer,
-  galleryShowReducer
+  galleryShowReducer,
+  top3Reducer
 });
 
 const rootReducer = (state, action) => {

@@ -75,7 +75,7 @@ class AddNewUser extends Component {
         <div style={newStyle}>
           <div>
             <h3>Collaborators:</h3>
-            <Collaborators classString={'addNewUserCollaborators'}/>
+            <Collaborators project={this.props.currentProject} classString={'addNewUserCollaborators'}/>
           </div>
           <form onSubmit={this.handleFormSubmit} className="addNewUserForm">
             <h4 className="mb-4">Please enter username or email of user to add</h4>

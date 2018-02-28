@@ -5,14 +5,14 @@ import { getCollaborators } from '../actions/index';
 
 class Collaborators extends Component {
   componentWillMount(){
-    this.props.getCollaborators(this.props.currentProject);
+    this.props.getCollaborators(this.props.project);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.currentProject !== this.props.currentProject){
-      this.props.getCollaborators(nextProps.currentProject);
-    }
-  }
+  // componentWillReceiveProps(nextProps){
+  //   if(nextProps.currentProject !== this.props.currentProject){
+  //     this.props.getCollaborators(nextProps.currentProject);
+  //   }
+  // }
 
   render(){
     return (

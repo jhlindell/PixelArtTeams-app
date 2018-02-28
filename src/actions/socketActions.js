@@ -35,6 +35,12 @@ export function stockGallery(){
   }
 }
 
+export function getGalleryTop3(){
+  return (dispatch) => {
+    socket.emit('getGalleryTop3');
+  }
+}
+
 export function getProjects(){
   return (dispatch, getState) => {
     const { auth } = getState();

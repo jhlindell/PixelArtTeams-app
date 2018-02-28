@@ -16,18 +16,18 @@ class ProjectSelector extends Component {
     newStyle.margin = 'auto';
 
     return (
-      <div className="noMargin" style={newStyle}>
+      <div style={newStyle}>
         <p className="mb-3">Your Available Projects:</p>
         <div className="card-deck">
           <div className="col col-sm-3">
-            <div className="card" onClick={()=> this.props.history.push('/newProject')}>
+            <div className="card mb-3" onClick={()=> this.props.history.push('/newProject')}>
               <div className="card-header">
-                <div className="artTitleText cardtitle" >
+                <div className="artTitleText" >
                   New
                 </div>
               </div>
               <div className="card-body">
-                <div className="artTitleText cardtitle mt-4 mb-4">
+                <div className="artTitleText mt-4 mb-4">
                   Start New Project
                 </div>
               </div>

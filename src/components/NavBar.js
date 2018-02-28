@@ -47,7 +47,7 @@ class NavBar extends React.Component {
           <Link to="/gallery" className="navLink">Gallery</Link>
         </li>
         <li>
-          <span className="navText">Pixel Art Teams</span>
+          <Link to="/" className="navText">Pixel Art Teams</Link>
         </li>
         <li>
           <Link to="/store" className="navLink">Store</Link>
