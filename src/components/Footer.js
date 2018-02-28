@@ -17,6 +17,7 @@ class Footer extends React.Component {
       <footer style={newStyle}>
         <Link onClick={() => this.props.selectProject(0)}
           to="/art">Projects</Link>
+          <Link to="/newUser">Add New User</Link>
         <Link to="/about">Terms</Link>
         <Link to="/about">News</Link>
       </footer>

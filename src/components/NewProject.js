@@ -43,11 +43,14 @@ class NewProject extends Component {
   }
 
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.margin = 'auto';
+
     return (
-      <div className="row">
-        <div className="col-sm-12">
-          <form className="addNewProjectForm"
-            onSubmit={this.handleFormSubmit}>
+
+        <div style={newStyle}>
+          <form onSubmit={this.handleFormSubmit}>
             <h3 className="mb-5">New Project</h3>
             <div className="form-group row">
               <div className='col col-sm-12'>
@@ -84,7 +87,7 @@ class NewProject extends Component {
             </button>
           </form>
         </div>
-      </div>
+
     );
   }
 

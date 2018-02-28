@@ -5,6 +5,7 @@ import ProjectSelector from './ProjectSelector';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getProjects } from '../actions/socketActions';
+// import Background from '../backgrounds/watercolor-3173964_1920.jpg';
 
 class MainCanvas extends Component {
   constructor(props){
@@ -23,7 +24,12 @@ class MainCanvas extends Component {
     if(this.props.currentProject !== 0){
       this.calculateCanvas(this.props.currentProject);
     }
+
   }
+
+  componentDidMount(){
+    console.log('currentProject', this.props.currentProject);
+  };
 
   componentWillReceiveProps(nextProps){
     if((nextProps.currentProject !== 0) && (nextProps.currentProject !== this.props.currentProject)){
@@ -99,6 +105,7 @@ class MainCanvas extends Component {
     newStyle.display = 'flex';
     newStyle.justifyContent = 'center';
     newStyle.alignItems = 'center';
+    // newStyle.backgroundImage = `url(${Background})`;
     newStyle.height = '100%';
     newStyle.margin = 'auto';
 

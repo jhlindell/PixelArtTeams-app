@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Gallery from './components/Gallery';
 import MainCanvas from './components/MainCanvas';
-import LandingPage from './components/LandingPage';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
+import HomePage from './components/HomePage';
 import NavBar2 from './components/NavBar2';
 import NewProject from './components/NewProject';
 import FinishArt from './components/FinishArt';
@@ -40,22 +40,26 @@ class App extends Component {
   }
 
   render() {
-    const newStyle = {};
-    newStyle.flex = 0;
-    const newStyle2 = {};
-    newStyle2.display = 'flex';
-    newStyle2.flex = '1 1 100%';
-    newStyle2.alignItems = 'center';
+    const flexCol = {};
+    flexCol.display = 'flex';
+    flexCol.flexDirection = 'column';
+    flexCol.backgroundColor = 'lightgray';
+    const flex0 = {};
+    flex0.flex = 0;
+    const flex1 = {};
+    flex1.display = 'flex';
+    flex1.flex = '1 1 100%';
+    flex1.alignItems = 'center';
 
     return (
       <Router>
-        <div className="App-body" >
-          <div style={newStyle}>
+        <div className="App-body" style={flexCol}>
+          <div style={flex0}>
             <NavBar2 />
           </div>
-          <div style={newStyle2} id="mainBlock">
+          <div style={flex1} id="mainBlock">
             <Switch>
-              <Route exact path="/" component={LandingPage} />
+              <Route exact path="/" component={HomePage} />
               <Route path="/signup" component={Signup} />
               <Route path="/signin" component={Signin} />
               <Route path="/signout" component={Signout} />
@@ -72,7 +76,7 @@ class App extends Component {
               </ProtectedRoute>
             </Switch>
           </div>
-          <div style={newStyle}>
+          <div style={flex0}>
             <Footer />
           </div>
         </div>

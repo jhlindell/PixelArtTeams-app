@@ -49,11 +49,7 @@ class Signin extends Component {
   render(){
     const newStyle = {};
     newStyle.display = 'flex';
-    // newStyle.flex = 'none';
-    // newStyle.alignSelf = 'center';
-    newStyle.justifyContent = 'center';
-    newStyle.marginTop = '200px';
-    newStyle.height = "100%";
+    newStyle.margin = 'auto';
 
     return (
       <div style={newStyle}>
@@ -82,7 +78,6 @@ class Signin extends Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated, errorMessage: state.auth.error };

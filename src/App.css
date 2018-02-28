@@ -21,9 +21,6 @@
   min-height: 100vh;
   padding-left: 0px !important;
   padding-right: 0px !important;
-  display: flex;
-  flex-direction: column;
-  background-color: lightgray;
 }
 
 @keyframes App-logo-spin {

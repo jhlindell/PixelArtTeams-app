@@ -75,50 +75,52 @@ class Signup extends Component {
   }
 
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.margin = 'auto';
+    newStyle.textAlign = 'center';
+
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <form className="signupForm"
-            onSubmit={this.handleFormSubmit}>
-            <h3>Sign Up</h3>
-            <div className="form-group mt-5">
-              <input name="username" type="text"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.username} placeholder="Username" />
-                {this.state.errors.username && <div>{this.state.errors.username}</div>}
-            </div>
-            <div className="form-group">
-              <input name="email" type="email"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.email} placeholder="Email" />
-                {this.state.errors.email && <div>{this.state.errors.email}</div>}
-            </div>
-            <div className="form-group">
-              <input name="password" type="password"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.password} placeholder="Password" />
-                {this.state.errors.password && <div>{this.state.errors.password}</div>}
-            </div>
-            <div className="form-group mb-4">
-              <input name="passwordConfirm" type="password"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.passwordConfirm} placeholder="Confirm Password"/>
-                {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
-            </div>
-            {this.renderAlert()}
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-            <button type="button" className="btn btn-secondary"
-              onClick={()=> this.clear()}>
-              Clear
-            </button>
-            <button type="button" className="btn btn-secondary"
-              onClick={()=> this.props.history.push('/gallery')}>
-              Cancel
-            </button>
-          </form>
-        </div>
+      <div style={newStyle}>
+        <form onSubmit={this.handleFormSubmit}>
+          <h3>Sign Up</h3>
+          <div className="form-group mt-5">
+            <input name="username" type="text"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.username} placeholder="Username" />
+              {this.state.errors.username && <div>{this.state.errors.username}</div>}
+          </div>
+          <div className="form-group">
+            <input name="email" type="email"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.email} placeholder="Email" />
+              {this.state.errors.email && <div>{this.state.errors.email}</div>}
+          </div>
+          <div className="form-group">
+            <input name="password" type="password"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.password} placeholder="Password" />
+              {this.state.errors.password && <div>{this.state.errors.password}</div>}
+          </div>
+          <div className="form-group mb-4">
+            <input name="passwordConfirm" type="password"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.passwordConfirm} placeholder="Confirm Password"/>
+              {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
+          </div>
+          {this.renderAlert()}
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          {/* <button type="button" className="btn btn-secondary"
+            onClick={()=> this.clear()}>
+            Clear
+          </button> */}
+          <button type="button" className="btn btn-secondary"
+            onClick={()=> this.props.history.push('/gallery')}>
+            Cancel
+          </button>
+        </form>
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { checkUserForAdd, addNewUser } from '../actions/socketActions';
 import { clearUserNameCheck } from '../actions/index';
+import Collaborators from './Collaborators';
 
 class AddNewUser extends Component {
   constructor(props) {
@@ -14,6 +15,10 @@ class AddNewUser extends Component {
       email: '',
       user_exists: false
     };
+  }
+
+  componentDidMount(){
+    console.log('currentProject:', this.props.currentProject)
   }
 
   componentWillReceiveProps(nextProps){
@@ -58,9 +63,19 @@ class AddNewUser extends Component {
   }
 
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.flexDirection = 'column';
+    newStyle.margin = 'auto';
+    newStyle.textAlign = 'center';
+
     return (
-      <div className="row">
-        <div className="offset-sm-4 col-sm-4">
+
+        <div style={newStyle}>
+          <div>
+            <h3>Collaborators:</h3>
+            <Collaborators classString={'addNewUserCollaborators'}/>
+          </div>
           <form onSubmit={this.handleFormSubmit} className="addNewUserForm">
             <h4 className="mb-4">Please enter username or email of user to add</h4>
             <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
@@ -95,13 +110,13 @@ class AddNewUser extends Component {
             </button>
           </form>
         </div>
-      </div>
+
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated, user: state.userCheckReducer };
+  return { authenticated: state.auth.authenticated, user: state.userCheckReducer, currentProject: state.currentProject };
 }
 
 function mapDispatchToProps(dispatch) {

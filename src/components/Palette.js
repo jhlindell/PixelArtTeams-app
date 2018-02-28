@@ -14,7 +14,6 @@ class Palette extends Component {
 
     return (
       <div id='palletteDiv' style={newStyle} >
-        {/* <span className="paletteText">Current Color:</span> */}
         <CurrentColor />
         <span id="color-wheel" style={{
             display: 'flex',
