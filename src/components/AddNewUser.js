@@ -17,8 +17,10 @@ class AddNewUser extends Component {
     };
   }
 
-  componentDidMount(){
-    console.log('currentProject:', this.props.currentProject)
+  componentWillMount(){
+    if(this.props.currentProject === 0){
+      this.props.history.push('/art');
+    }
   }
 
   componentWillReceiveProps(nextProps){
@@ -45,7 +47,6 @@ class AddNewUser extends Component {
     let email = this.state.email.toLowerCase();
     this.props.addNewUser(userName, email);
     this.props.clearUserNameCheck();
-    this.props.history.push("/art");
   }
 
   userCheckClicked(){
@@ -106,7 +107,7 @@ class AddNewUser extends Component {
                 this.props.clearUserNameCheck()
                 this.clearForm()
                 this.cancel()}}>
-              Cancel
+              Done
             </button>
           </form>
         </div>

@@ -5,7 +5,7 @@ import { getCollaborators } from '../actions/index';
 
 class Collaborators extends Component {
   componentWillMount(){
-    this.props.getCollaborators(this.props.project);
+    this.props.getCollaborators(this.props.currentProject);
   }
 
   componentWillReceiveProps(nextProps){

@@ -27,10 +27,6 @@ class MainCanvas extends Component {
 
   }
 
-  componentDidMount(){
-    console.log('currentProject', this.props.currentProject);
-  };
-
   componentWillReceiveProps(nextProps){
     if((nextProps.currentProject !== 0) && (nextProps.currentProject !== this.props.currentProject)){
       this.calculateCanvas(nextProps.currentProject);

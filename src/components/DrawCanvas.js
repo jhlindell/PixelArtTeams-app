@@ -6,6 +6,7 @@ class DrawCanvas extends Component {
   render(){
     let newStyle = {};
     newStyle.height = this.props.canvasY + 'px';
+    newStyle.display = 'flex';
     newStyle.margin = 'auto';
 
     return (

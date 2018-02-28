@@ -7,11 +7,13 @@ import Signout from './components/auth/signout';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
 import HomePage from './components/HomePage';
-import NavBar2 from './components/NavBar2';
+import NavBar from './components/NavBar';
 import NewProject from './components/NewProject';
 import FinishArt from './components/FinishArt';
+import DeleteProject from './components/DeleteProject';
 import ProtectedRoute from './components/ProtectedRoute';
 import ShowProject from './components/ShowProject';
+import Store from './components/Store';
 import Footer from './components/Footer';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -55,7 +57,7 @@ class App extends Component {
       <Router>
         <div className="App-body" style={flexCol}>
           <div style={flex0}>
-            <NavBar2 />
+            <NavBar />
           </div>
           <div style={flex1} id="mainBlock">
             <Switch>
@@ -64,6 +66,7 @@ class App extends Component {
               <Route path="/signin" component={Signin} />
               <Route path="/signout" component={Signout} />
               <Route path="/about" component={About} />
+              <Route path="/store" component={Store} />
 
               <Route path="/gallery" component={Gallery} />
               <Route path="/project/:id" component={ShowProject} />
@@ -73,6 +76,7 @@ class App extends Component {
                 <Route path="/art" component={MainCanvas} />
                 <Route path="/newUser" component={AddNewUser} />
                 <Route path="/finishart" component={FinishArt} />
+                <Route path="/deleteProject" component={DeleteProject} />
               </ProtectedRoute>
             </Switch>
           </div>

@@ -9,7 +9,7 @@ class ProtectedRoute extends Component{
     newStyle.flex = '1 1 100%';
     if(this.isAuthed()){
       return (
-        <div style={newStyle}>
+        <div style={newStyle} id="protected">
           {this.props.children}
         </div>
       );
