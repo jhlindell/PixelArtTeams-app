@@ -56,10 +56,18 @@ class FinishArt extends Component {
     newStyle.margin = 'auto';
     newStyle.justifyContent = 'space-between';
 
+    let newStyle2 = {};
+    newStyle2.display = 'flex';
+    newStyle2.flexDirection = 'column';
+    newStyle2.alignItems = 'center';
+    newStyle2.margin = 'auto';
+    newStyle2.textAlign = 'center';
+    newStyle2.paddingLeft = '100px';
+
     return (
       <div style={newStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
-        <div className="finishControlsElement">
+        <div style={newStyle2}>
           <div>Finish Project? </div>
           <div className="mb-2">You will not be able to work on it again.</div>
           <div>

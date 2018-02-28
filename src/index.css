@@ -9,57 +9,6 @@ body {
   font-size: 20px;
 }
 
-.navButtonText {
-  width: 100%;
-  color: black !important;
-}
-
-.navButtonText:hover {
-  text-decoration: none;
-  color: black !important;
-}
-
-.projectMenuText {
-  width: 100%;
-  text-align: left;
-  padding: 1px;
-  background: none;
-  border: none;
-}
-
-.projectMenuHeading {
-  width: 100%;
-  text-align: left;
-  padding: 1px;
-  background: none;
-  border: none;
-  text-decoration: underline;
-}
-
-.userNameMenu {
-  width: 100%;
-  text-align: right;
-  padding: 1px;
-  background: none;
-  border: none;
-}
-
-.menuMainChoice {
-  width: 100%;
-  text-align: right;
-  padding: 1px;
-  background: none;
-  border: none;
-}
-
-.menuMainChoice:hover{
-  background: #6b6862;
-}
-
-.projectMenuText:hover{
-  background: #6b6862;
-}
-
 .artTitleText {
   text-align: center;
   font-size: 1.25rem;
@@ -71,21 +20,6 @@ body {
 
 .aboutText {
   font-size: 12px;
-}
-
-.addNewUserForm {
-  display: block;
-  margin: 200px auto 0 auto;
-  text-align: center;
-}
-
-.finishControlsElement{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  text-align: center;
-  padding-left: 100px;
 }
 
 .showProjectInfo{
@@ -103,27 +37,9 @@ body {
   font-size: 16px;
 }
 
-.navBarStyle {
-  display: flex;
-  height: 50px;
-  width: 100%;
-  background-color: black;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .navLink {
   color: white !important;
   font-size: 16px;
-}
-
-.noMargin {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
 }
 
 footer a {

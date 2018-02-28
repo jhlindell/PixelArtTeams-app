@@ -5,6 +5,19 @@ import { bindActionCreators } from 'redux';
 import { changeShowMenuState } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
+const navBarStyle = {
+  display: 'flex',
+  height: '50px',
+  width: '100%',
+  backgroundColor: 'black',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  listStyle: 'none',
+  padding: 0,
+  margin: 0
+};
+
 class NavBar extends React.Component {
   componentWillMount(){
     if(this.props.authenticated){
@@ -39,7 +52,7 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      <ul className="navBarStyle">
+      <ul style={navBarStyle}>
         <li>
           <Link to="/art" className="navLink">Make Art</Link>
         </li>
