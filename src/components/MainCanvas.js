@@ -5,7 +5,7 @@ import ProjectSelector from './ProjectSelector';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getProjects } from '../actions/socketActions';
-// import Background from '../backgrounds/watercolor-3173964_1920.jpg';
+// import Background from '../watercolor-3173964_1920.jpg';
 
 class MainCanvas extends Component {
   constructor(props){
