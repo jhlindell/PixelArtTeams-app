@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import DrawCanvas from './DrawCanvas';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { sendFinishedProject } from '../actions/socketActions';
+import { deleteProject } from '../actions/socketActions';
 
-class FinishArt extends Component {
+class DeleteProject extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -41,8 +41,8 @@ class FinishArt extends Component {
     this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
   }
 
-  finishProject(){
-    this.props.sendFinishedProject();
+  deleteProject(){
+    this.props.deleteProject();
     this.props.history.push('/art');
   }
 
@@ -68,10 +68,10 @@ class FinishArt extends Component {
       <div style={newStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
         <div style={newStyle2}>
-          <div>Finish Project? </div>
-          <div className="mb-2">You will not be able to work on it again.</div>
+          <div>Delete Project? </div>
+          <div className="mb-2">You will not be able to undo this.</div>
           <div>
-            <button type="button" className="btn btn-primary" onClick={()=>this.finishProject()}> Finish </button>
+            <button type="button" className="btn btn-primary" onClick={()=>this.deleteProject()}> Delete </button>
             <button type="button" className="btn btn-secondary" onClick={()=>this.cancel()}> Cancel </button>
           </div>
         </div>
@@ -81,11 +81,11 @@ class FinishArt extends Component {
 }
 
 function mapStateToProps(state){
-  return { grid: state.gridReducer, currentProject: state.currentProject }
+  return { grid: state.gridReducer, currentProject: state.currentProject};
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ sendFinishedProject }, dispatch);
+  return bindActionCreators({ deleteProject }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FinishArt);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteProject);

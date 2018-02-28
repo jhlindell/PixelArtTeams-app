@@ -1,14 +1,21 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import pixelpalette from '../pixelpalette.png';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeShowMenuState } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
-const imgStyle = {
-  width: "50px",
-  marginRight: "20px",
+const navBarStyle = {
+  display: 'flex',
+  height: '50px',
+  width: '100%',
+  backgroundColor: 'black',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  listStyle: 'none',
+  padding: 0,
+  margin: 0
 };
 
 class NavBar extends React.Component {
@@ -27,17 +34,17 @@ class NavBar extends React.Component {
   renderLinks() {
     if (this.props.authenticated) {
       // show a link to sign out
-      return <li className="nav-item">
-        <Link type="button" className="nav-link btn btn-secondary menuButton" to="/signout">Sign Out</Link>
+      return <li>
+        <Link className="navLink" to="/signout">Sign Out</Link>
       </li>
     } else {
       // show a link to sign in or sign up
       return [
-        <li className="nav-item" key={1}>
-          <Link className="nav-link btn btn-secondary menuButton" to="/signin">Sign In</Link>
+        <li>
+          <Link className="navLink" to="/signin">Sign In</Link>
         </li>,
-        <li className="nav-item" key={2}>
-          <Link className="nav-link btn btn-secondary menuButton" to="/signup">Sign Up</Link>
+        <li>
+          <Link className="navLink" to="/signup">Sign Up</Link>
         </li>
       ];
     }
@@ -45,25 +52,21 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      <nav className="navbar navbar-toggleable navbar-light bg-inverse"
-        style={{ height: '50px' }} >
-        <a className="navText navbar-brand">
-          <img style={ imgStyle } src={ pixelpalette }
-            className="d-inline" alt="palette"/>
-          Pixel Art Teams
-        </a>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="ml-auto navbar-nav">
-            <li>
-              <button className="btn btn-secondary" type="button"
-                onClick={ this.props.changeShowMenuState }>
-                <span className="glyphicon glyphicon-search menuButton"
-                  aria-hidden="true">Menu </span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ul style={navBarStyle}>
+        <li>
+          <Link to="/art" className="navLink">Make Art</Link>
+        </li>
+        <li>
+          <Link to="/gallery" className="navLink">Gallery</Link>
+        </li>
+        <li>
+          <Link to="/" className="navText">Pixel Art Teams</Link>
+        </li>
+        <li>
+          <Link to="/store" className="navLink">Store</Link>
+        </li>
+        {this.renderLinks()}
+      </ul>
     );
   }
 }

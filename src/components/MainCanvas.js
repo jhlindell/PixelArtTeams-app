@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Menu from './Menu';
-import NavBar from './NavBar';
 import Grid from './Grid';
 import Palette from './Palette';
 import ProjectSelector from './ProjectSelector';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { getProjects } from '../actions/socketActions';
+// import Background from '../watercolor-3173964_1920.jpg';
 
 class MainCanvas extends Component {
   constructor(props){
@@ -25,6 +24,7 @@ class MainCanvas extends Component {
     if(this.props.currentProject !== 0){
       this.calculateCanvas(this.props.currentProject);
     }
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -68,14 +68,46 @@ class MainCanvas extends Component {
     this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY, x: x, y: y});
   }
 
+  renderComp(){
+    if(this.props.currentProject === 0){
+      return <ProjectSelector history={this.props.history}/>
+    }
+    else {
+      const canvasYSize = 560;
+      const canvasXSize = 800;
+      const canvasStyle = {};
+      let vertMargins = 0;
+      let gridHeight = this.state.y * this.state.pixelSize;
+      vertMargins = (520 - gridHeight)/2;
+
+      canvasStyle.backgroundColor = 'white';
+      canvasStyle.height = canvasYSize + 'px';
+      canvasStyle.width = canvasXSize + 'px';
+      canvasStyle.display = 'flex';
+      canvasStyle.flexDirection = 'column';
+
+      return (
+        <div style={canvasStyle} id="mainCanvas2">
+          <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins}/>
+          <Palette canvasHeight={canvasYSize} canvasWidth={canvasXSize}
+            topMargin={vertMargins}/>
+        </div>
+      );
+    }
+  };
+
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.justifyContent = 'center';
+    newStyle.alignItems = 'center';
+    // newStyle.backgroundImage = `url(${Background})`;
+    newStyle.height = '100%';
+    newStyle.margin = 'auto';
+
     return (
-      <div>
-        <NavBar />
-        <Menu />
-        <Palette />
-        {this.props.currentProject !== 0 && <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} />}
-        {this.props.currentProject === 0 && <ProjectSelector history={this.props.history}/>}
+      <div style={newStyle} id="MainCanvas1">
+        {this.renderComp()}
       </div>
     )
   }

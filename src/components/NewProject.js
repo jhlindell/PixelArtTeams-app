@@ -43,11 +43,14 @@ class NewProject extends Component {
   }
 
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.margin = 'auto';
+
     return (
-      <div className="row">
-        <div className="col-sm-12">
-          <form className="addNewProjectForm"
-            onSubmit={this.handleFormSubmit}>
+
+        <div style={newStyle}>
+          <form onSubmit={this.handleFormSubmit}>
             <h3 className="mb-5">New Project</h3>
             <div className="form-group row">
               <div className='col col-sm-12'>
@@ -84,7 +87,7 @@ class NewProject extends Component {
             </button>
           </form>
         </div>
-      </div>
+
     );
   }
 
@@ -98,13 +101,13 @@ class NewProject extends Component {
       isValid = false;
     }
 
-    if(this.state.x < 10 || this.state.x > 50){
+    if(this.state.x < 10 || this.state.x > 40){
       errors.x = 'X needs to be between 10 and 40';
       isValid = false;
     }
 
-    if(this.state.y < 10 || this.state.y > 50){
-      errors.y = 'Y needs to be between 10 and 30';
+    if(this.state.y < 10 || this.state.y > 40){
+      errors.y = 'Y needs to be between 10 and 40';
       isValid = false;
     }
 

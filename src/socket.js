@@ -62,4 +62,8 @@ socket.on('returnSingleProject', (project) => {
   store.dispatch(otherActions.galleryShow(project));
 });
 
+socket.on('galleryTop3', (top3) => {
+  store.dispatch(otherActions.galleryTop3(top3));
+})
+
 export default socket;

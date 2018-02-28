@@ -35,6 +35,12 @@ export function stockGallery(){
   }
 }
 
+export function getGalleryTop3(){
+  return (dispatch) => {
+    socket.emit('getGalleryTop3');
+  }
+}
+
 export function getProjects(){
   return (dispatch, getState) => {
     const { auth } = getState();
@@ -65,7 +71,9 @@ export function deleteProject(){
 export function saveProject(){
   return (dispatch, getState) => {
     const { currentProject, auth} = getState();
-    socket.emit('saveProject', { projectid: currentProject, token: auth.token});
+    if(currentProject){
+      socket.emit('saveProject', { projectid: currentProject, token: auth.token});
+    }
   }
 }
 

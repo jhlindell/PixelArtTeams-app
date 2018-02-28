@@ -8,11 +8,11 @@ class Collaborators extends Component {
     this.props.getCollaborators(this.props.project);
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.currentProject !== this.props.currentProject){
-      this.props.getCollaborators(nextProps.currentProject);
-    }
-  }
+  // componentWillReceiveProps(nextProps){
+  //   if(nextProps.currentProject !== this.props.currentProject){
+  //     this.props.getCollaborators(nextProps.currentProject);
+  //   }
+  // }
 
   render(){
     return (
@@ -29,7 +29,7 @@ class Collaborators extends Component {
 }
 
 function mapStateToProps(state){
-  return { currentProject: state.currentProject, collaborators: state.collaborators, projects: state.projectsReducer, username: state.userName }
+  return { currentProject: state.currentProject, collaborators: state.collaborators, username: state.userName }
 }
 
 function mapDispatchToProps(dispatch) {

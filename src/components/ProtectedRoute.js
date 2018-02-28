@@ -4,9 +4,12 @@ import { Redirect } from 'react-router-dom';
 
 class ProtectedRoute extends Component{
   render() {
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.flex = '1 1 100%';
     if(this.isAuthed()){
       return (
-        <div>
+        <div style={newStyle} id="protected">
           {this.props.children}
         </div>
       );

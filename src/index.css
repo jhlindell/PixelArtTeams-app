@@ -4,341 +4,20 @@ body {
   font-family: sans-serif;
 }
 
-.navText {
-  color: white !important;
-  font-family: 'Press Start 2P';
-  font-size: 20px;
-}
-
-.userNameText {
-  color: white !important;
-  font-family: 'Press Start 2P';
-  font-size: 16px;
-}
-
-.navButtonText {
-  width: 100%;
-  color: black !important;
-  font-family: 'Press Start 2P';
-}
-
-.navButtonText:hover {
-  text-decoration: none;
-  color: black !important;
-}
-
-.navLinks {
-  margin-top: 10px;
-  float: right;
-  font-size: 24px;
-  background-color: rgb(31,32,33);
-}
-
-#canvas {
-  display: flex;
-  flex-wrap: wrap;
-  width: 400px;
-  margin-left: 75px;
-}
-
-.colorBox {
-  width:60px;
-  height:60px;
-  box-sizing: border-box;
-  border-width: 1px;
-  float: right;
-}
-
-.currentColor {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 1px;
-  margin: 5px auto;
-  box-sizing: border-box;
-  background-color: white;
-}
-
-.currentText {
-  font-size: 8px;
-  text-align: center;
-  margin: auto;
-  font-family: 'Press Start 2P';
-}
-
-.menuTitleText {
-  font-family: 'Press Start 2P';
-  text-align: center;
-  padding: 1px;
-}
-
-.newProject {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-
-.projectCard {
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  border: none;
-  background: 'none';
-}
-
-.projectCard:hover{
-  background: #6b6862;
-  /*box-shadow: 0 0 15px #6b6862;*/
-}
-
-.projectCardText{
-  text-align: center;
-  padding-top:10px;
-  font-family: 'Press Start 2P';
-}
-
-.projectCardHighlighted {
-  background: #6b6862;
-  text-align: left;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  border: none;
-}
-
-.projectButton {
-  margin-top: 5px;
-  text-align: center;
-}
-
-.projectMenuText {
-  width: 100%;
-  text-align: left;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  background: none;
-  border: none;
-}
-
-.projectMenuHeading {
-  width: 100%;
-  text-align: left;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  background: none;
-  border: none;
-  text-decoration: underline;
-}
-
-.userNameMenu {
-  width: 100%;
-  text-align: right;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  background: none;
-  border: none;
-}
-
-.menuMainChoice {
-  width: 100%;
-  text-align: right;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  background: none;
-  border: none;
-}
-
-.menuMainChoice:hover{
-  background: #6b6862;
-}
-
-.projectButtonText {
-  width: 100%;
-  text-align: center;
-  padding: 1px;
-  font-family: 'Press Start 2P';
-  background: none;
-  border: none;
-}
-
-.projectButtonText:hover{
-  background: #6b6862;
-}
-
-.projectMenuText:hover{
-  background: #6b6862;
-}
-
 .artTitleText {
   text-align: center;
-  font-family: 'Press Start 2P';
-}
-
-.newProjectButton {
-  margin: auto;
-  text-align: center;
-  font-family: 'Press Start 2P';
-}
-
-.newProjectInfoBox {
-  font-family: 'Press Start 2P';
-}
-
-.projectLabelText {
-  text-align: center;
-}
-
-.landingIntroText {
-  font-family: 'Press Start 2P';
-  font-size: 64px;
-  text-align: center;
-}
-
-.landingButton {
-  font-family: 'Press Start 2P';
-  background-color: black;
-}
-
-.landingButtons {
-  margin: 400px auto 0 auto;
-  text-align: center;
-  display: block;
-}
-
-.landingButtonText:hover {
-  color: red;
-}
-
-.landingButtonText {
-  color: red;
-}
-
-.landingButtonText:hover {
-  text-decoration: none;
-}
-
-.landingPage {
-  background-image: image();
+  font-size: 1.25rem;
 }
 
 .show > .dropdown-menu {
   display: block;
 }
 
-.menuButton {
-  font-family: 'Press Start 2P';
-}
-
-.newProjectSelector {
-  font-family: 'Press Start 2P';
-  border: none;
-  background: lightgray;
-  /* margin-top: 20px; */
-  padding-left: 0px;
-}
-
-.newProjectSelector:hover {
-  background: #6b6862;
-}
-
-.menuList {
-  list-style: none;
-}
-
 .aboutText {
-  font-family: 'Press Start 2P';
   font-size: 12px;
-}
-
-.galleryCardDeck {
-  padding: 30px;
-  width: 100%;
-}
-
-.signinForm{
-  display: block;
-  margin: 200px auto 0 auto;
-  text-align: center;
-}
-
-.signupForm {
-  display: block;
-  margin: 100px auto 0 auto;
-  text-align: center;
-}
-
-.addNewUserForm {
-  display: block;
-  margin: 200px auto 0 auto;
-  text-align: center;
-}
-
-.addNewProjectForm {
-  display: block;
-  margin: 150px auto 0 auto;
-  text-align: center;
-}
-
-.paletteText {
-  font-family: 'Press Start 2P';
-  font-size: 12px;
-}
-
-.currentColorText{
-  font-family: 'Press Start 2P';
-  font-size: 10px !important;
-}
-
-.finishCanvasContainer{
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.finishCanvasElement{
-  margin: auto;
-}
-
-.finishControlsContainer{
-  display:flex;
-}
-
-.finishControlsElement{
-  margin:auto;
-  text-align: center;
-}
-
-.artCard{
-  background-color: gray;
-  margin-bottom: 10px;
-}
-
-.cardtitle{
-  font-size: 1.25rem;
-}
-
-.grid{
-  display: flex;
-  height: 80vh;
-  align-items: center;
-}
-
-.mainCanvas{
-  height: 100%;
-}
-
-.pickAProject{
-  font-family: 'Press Start 2P';
-  font-size: 20px;
-  text-align: center;
-  margin:auto;
 }
 
 .showProjectInfo{
-  font-family: 'Press Start 2P';
   text-align: center;
   margin-top: auto;
   margin-bottom: auto;
@@ -351,4 +30,22 @@ body {
 
 .showProjectItem{
   font-size: 16px;
+}
+
+.navLink {
+  color: white !important;
+  font-size: 16px;
+}
+
+.navText {
+  color: white !important;
+  font-size: 20px;
+}
+
+footer a {
+  color: white !important;
+}
+
+.addNewUserCollaborators{
+  font-size: 20px;
 }

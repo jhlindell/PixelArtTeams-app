@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Gallery from './components/Gallery';
 import MainCanvas from './components/MainCanvas';
-import LandingPage from './components/LandingPage';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
+import HomePage from './components/HomePage';
+import NavBar from './components/NavBar';
 import NewProject from './components/NewProject';
 import FinishArt from './components/FinishArt';
+import DeleteProject from './components/DeleteProject';
 import ProtectedRoute from './components/ProtectedRoute';
 import ShowProject from './components/ShowProject';
+import Store from './components/Store';
+import Footer from './components/Footer';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -38,26 +42,47 @@ class App extends Component {
   }
 
   render() {
+    const flexCol = {};
+    flexCol.display = 'flex';
+    flexCol.flexDirection = 'column';
+    flexCol.backgroundColor = 'lightgray';
+    const flex0 = {};
+    flex0.flex = 0;
+    const flex1 = {};
+    flex1.display = 'flex';
+    flex1.flex = '1 1 100%';
+    flex1.alignItems = 'center';
+
     return (
       <Router>
-        <div className="App-body container-fluid" >
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/signin" component={Signin} />
-            <Route path="/signout" component={Signout} />
-            <Route path="/about" component={About} />
+        <div className="App-body" style={flexCol}>
+          <div style={flex0}>
+            <NavBar />
+          </div>
+          <div style={flex1} id="mainBlock">
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/signin" component={Signin} />
+              <Route path="/signout" component={Signout} />
+              <Route path="/about" component={About} />
+              <Route path="/store" component={Store} />
 
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/project/:id" component={ShowProject} />
+              <Route path="/gallery" component={Gallery} />
+              <Route path="/project/:id" component={ShowProject} />
 
-            <ProtectedRoute>
-              <Route path="/newProject" component={NewProject} />
-              <Route path="/art" component={MainCanvas} />
-              <Route path="/newUser" component={AddNewUser} />
-              <Route path="/finishart" component={FinishArt} />
-            </ProtectedRoute>
-          </Switch>
+              <ProtectedRoute>
+                <Route path="/newProject" component={NewProject} />
+                <Route path="/art" component={MainCanvas} />
+                <Route path="/newUser" component={AddNewUser} />
+                <Route path="/finishart" component={FinishArt} />
+                <Route path="/deleteProject" component={DeleteProject} />
+              </ProtectedRoute>
+            </Switch>
+          </div>
+          <div style={flex0}>
+            <Footer />
+          </div>
         </div>
       </Router>
     );

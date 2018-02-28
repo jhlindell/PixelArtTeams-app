@@ -47,37 +47,37 @@ class Signin extends Component {
   }
 
   render(){
+    const newStyle = {};
+    newStyle.display = 'flex';
+    newStyle.margin = 'auto';
+
     return (
-      <div className="row">
-        <div className="col-sm-12">
-          <form className="signinForm"
-            onSubmit={this.handleFormSubmit}>
-            <h3>Please Sign In</h3>
-            <div className="form-group mt-5">
-              <input name="username" type="text"
-                onChange={(e) => {this.handleInputChange(e)}}
-                placeholder="Username" value={this.state.username} />
-            </div>
-            <div className="form-group">
-              <input name="password" type="password"
-                onChange={(e) => {this.handleInputChange(e)}}
-                placeholder="Password" value={this.state.password} />
-            </div>
-            {this.renderAlert()}
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-            <button type="button" className="btn btn-secondary ml-2"
-              onClick={()=> this.cancel()}>
-              Cancel
-            </button>
-          </form>
-        </div>
+      <div style={newStyle}>
+        <form onSubmit={this.handleFormSubmit}>
+          <h3>Please Sign In</h3>
+          <div className="form-group mt-5">
+            <input name="username" type="text"
+              onChange={(e) => {this.handleInputChange(e)}}
+              placeholder="Username" value={this.state.username} />
+          </div>
+          <div className="form-group">
+            <input name="password" type="password"
+              onChange={(e) => {this.handleInputChange(e)}}
+              placeholder="Password" value={this.state.password} />
+          </div>
+          {this.renderAlert()}
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <button type="button" className="btn btn-secondary ml-2"
+            onClick={()=> this.cancel()}>
+            Cancel
+          </button>
+        </form>
       </div>
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated, errorMessage: state.auth.error };

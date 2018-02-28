@@ -51,21 +51,25 @@ class ShowProject extends Component {
 
   render(){
     let newStyle = {};
-    // newStyle.display = 'flex';
-    newStyle.height = window.innerHeight + 'px';
-    // newStyle.flexWrap = 'wrap';
+    newStyle.display = 'flex';
+    newStyle.margin = 'auto';
+    newStyle.justifyContent = 'space-between';
     newStyle.backgroundColor = 'lightgray';
 
     let newStyle2 = {};
     newStyle2.display = 'flex';
-    newStyle2.flexWrap = 'wrap';
+    newStyle2.flexDirection = 'column';
+    newStyle2.alignItems = 'center';
+    newStyle2.margin = 'auto';
+    newStyle2.textAlign = 'center';
+    newStyle2.paddingLeft = '100px';
 
     return (
-      <div className="row" style={newStyle}>
-        <div className="col col-md-8" style={newStyle2}>
+      <div style={newStyle}>
+        <div>
           {this.props.project && <DrawCanvas grid={ this.props.project.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/> }
         </div>
-        <div className="col col-md-4" style={newStyle2}>
+        <div style={newStyle2}>
           <div className="showProjectInfo">
             <p className="showProjectHeading">Project Info</p>
             <p className="showProjectItem">Project Originator:</p>

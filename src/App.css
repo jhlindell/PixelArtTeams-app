@@ -18,7 +18,7 @@
   font-size: large;
 }
 .App-body {
-  height: 100%;
+  min-height: 100vh;
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
