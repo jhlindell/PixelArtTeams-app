@@ -84,6 +84,13 @@ export function addNewUser(username, email){
   }
 }
 
+export function removeUser(username){
+  return (dispatch, getState) => {
+    const { currentProject } = getState();
+    socket.emit('removeUserFromProject', { username: username, projectid: currentProject});
+  }
+}
+
 export function sendFinishedProject(){
   return (dispatch, getState) => {
     const { currentProject, auth} = getState();

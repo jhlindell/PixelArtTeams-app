@@ -7,7 +7,7 @@ import Background from '../watercolor-3173964_1920.jpg';
 
 var sectionStyle = {
   backgroundImage: `url(${Background})`,
-  backgroundSize: 'stretch',
+  backgroundSize: 'auto',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -18,12 +18,6 @@ var sectionStyle = {
 class HomePage extends Component {
   componentWillMount(){
     this.props.getGalleryTop3();
-  }
-
-  componentWillReceiveProps(nextProps){
-    if(nextProps.top3){
-      console.log("top 3: ", nextProps.top3);
-    }
   }
 
   render(){

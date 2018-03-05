@@ -109,3 +109,7 @@ export function galleryShow(project){
 export function galleryTop3(top3){
   return {type: 'GALLERY_TOP_3', payload: top3}
 }
+
+export function setCollaborator(username){
+  return {type: 'SET_COLLABORATOR', payload: username}
+}

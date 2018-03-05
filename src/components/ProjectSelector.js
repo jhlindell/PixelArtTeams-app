@@ -8,6 +8,7 @@ class ProjectSelector extends Component {
 
 
   render(){
+    console.log('current projects: ', this.props.projects);
     const newStyle = {};
     newStyle.padding = '50px';
     newStyle.justifyContent = 'center';
