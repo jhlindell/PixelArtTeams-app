@@ -113,3 +113,11 @@ export function galleryTop3(top3){
 export function setCollaborator(username){
   return {type: 'SET_COLLABORATOR', payload: username}
 }
+
+export function setUserRatingForProject(project_id, rating){
+  return {type: 'SET_USER_RATING', payload: { project_id, rating }}
+}
+
+export function setAvgProjectRating(project_id, rating){
+  return {type: 'SET_AVG_PROJECT_RATING', payload: { project_id, rating }}
+}

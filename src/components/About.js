@@ -13,35 +13,49 @@ class About extends Component {
     return (
       <div style={newStyle}>
         <p className="aboutText mt-4">
-          Pixel Art Teams is a collaborative pixel art maker. It allows users to work together to create art in a simple and fun way.
+          Getting started is easy!
         </p>
         <p className="aboutText">
-          To begin, one must signup to create an account. Usernames are unique, as are email addresses.
+          1. Click on the “Make Art” link.
         </p>
         <p className="aboutText">
-          To start a new project, select New project from the project selector. A project name must be entered. The x and y fields are the canvas size. Be warned that large canvases can cause significant slowdown in performance. 20x20 is the default canvas size.
+          2. If you are a new user, you’ll need to register and create an account. Usernames and email addresses are unique. If you are a returning user, you’ll need to login.
         </p>
         <p className="aboutText">
-          When the grid is displayed, you are ready to draw. On the left is the color palette. The currently selected color is shown in the box. Clicking on this box opens the palette.
+          3. Select the Canvas properties for your new project. Include a Project name. Enter the x and y dimensions of your canvas. If you want to invite other users to join in the fun, you may do so. When ready, click on the “Done” link.
         </p>
         <p className="aboutText">
-          If you are the originator of a project, several menu options will be available to you.
+          4. Click on any pixel to paint it with the selected color. Click on any color in the color palette to change your selected color. Note: You can click and drag to color several pixels in one stroke.
         </p>
         <p className="aboutText">
-          Add new user allows you to give permission to a friend to collaborate on your project with you. You must know either their name or email address to add them.
+          5. When you are happy with your work, click on the “Finish” link. This happens automatically when the timer runs out. If you are a member of a group project, only the project moderator can choose to finish the project before the timer runs out.
         </p>
         <p className="aboutText">
-          Finish project removes the project from your active projects list and sends it to the gallery. This action can't be undone. Use this when you know that your art is complete.
+          That’s it. Have fun, and make beautiful art!
         </p>
         <p className="aboutText">
-          Lastly, delete removes the project permanently.
+          When you’re not making art, you can explore the Gallery or visit our Store. Enjoy!
         </p>
-        <p className="aboutText">
-          Have fun, and make some beautiful art!
-        </p>
+        
       </div>
     )
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default About;

@@ -180,6 +180,24 @@ function top3Reducer(state = null, action){
   }
 }
 
+function userRatingReducer(state = null, action){
+  switch(action.type){
+    case "SET_USER_RATING":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function avgProjectRating(state = null, action){
+  switch(action.type){
+    case "SET_AVG_PROJECT_RATING":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -194,7 +212,9 @@ const appReducer = combineReducers({
   collaborators,
   userCheckReducer,
   galleryShowReducer,
-  top3Reducer
+  top3Reducer,
+  userRatingReducer,
+  avgProjectRating
 });
 
 const rootReducer = (state, action) => {

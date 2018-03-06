@@ -64,6 +64,14 @@ socket.on('returnSingleProject', (project) => {
 
 socket.on('galleryTop3', (top3) => {
   store.dispatch(otherActions.galleryTop3(top3));
+});
+
+socket.on('returnUserRatingForProject', (obj) => {
+  store.dispatch(otherActions.setUserRatingForProject(obj.project_id, obj.rating));
+});
+
+socket.on('returnAvgRating', (obj) => {
+  store.dispatch(otherActions.setAvgProjectRating(obj.project_id, obj.rating));
 })
 
 export default socket;

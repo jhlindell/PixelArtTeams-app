@@ -8,12 +8,6 @@ class Collaborators extends Component {
     this.props.getCollaborators(this.props.project);
   }
 
-  // componentWillReceiveProps(nextProps){
-  //   if(nextProps.currentProject !== this.props.currentProject){
-  //     this.props.getCollaborators(nextProps.currentProject);
-  //   }
-  // }
-
   render(){
     return (
       <div>

@@ -12,7 +12,7 @@ class Gallery extends Component {
   render(){
     const newStyle = {};
     newStyle.display = 'flex';
-    newStyle.justifyContent = 'center';
+    newStyle.justifyContent = 'space-around';
     newStyle.padding = '50px';
     newStyle.width = '100%';
 

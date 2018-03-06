@@ -34,7 +34,7 @@ class NavBar extends React.Component {
   renderLinks() {
     if (this.props.authenticated) {
       // show a link to sign out
-      return <li key={'signup'}>
+      return <li key={'signout'}>
         <Link className="navLink"  to="/signout">Sign Out</Link>
       </li>
     } else {
@@ -54,7 +54,7 @@ class NavBar extends React.Component {
     return (
       <ul style={navBarStyle}>
         <li key={'art'} >
-          <Link to="/art" className="navLink">Make Art</Link>
+          <Link to="/newProject" className="navLink">Make Art</Link>
         </li>
         <li key={'gallery'}>
           <Link to="/gallery" className="navLink">Gallery</Link>

@@ -142,3 +142,21 @@ export function getSingleProject(id){
     socket.emit('getSingleProject', id);
   }
 }
+
+export function fetchUserRatingForProject(projectid, token){
+  return (dispatch) => {
+    socket.emit('getUserRatingForProject', {project_id: projectid, token: token });
+  }
+}
+
+export function updateUserRatingForProject(projectid, token, rating){
+  return (dispatch) => {
+    socket.emit('changeUserRatingForProject', { project_id: projectid, token, rating });
+  }
+}
+
+export function fetchAvgProjectRating(projectid){
+  return (dispatch) => {
+    socket.emit('getAvgRatingForProject', projectid);
+  }
+}
