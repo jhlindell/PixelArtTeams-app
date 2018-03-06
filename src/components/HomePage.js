@@ -23,9 +23,10 @@ class HomePage extends Component {
   render(){
     const top3Deck = {};
     top3Deck.display = 'flex';
-    top3Deck.justifyContent = 'center';
+    top3Deck.justifyContent = 'space-around';
     top3Deck.width = '100%';
     top3Deck.margin = 'auto';
+    top3Deck.flexWrap = 'wrap';
 
     const top3Card = {};
     top3Card.width = '80%';
@@ -50,7 +51,7 @@ class HomePage extends Component {
             Top 3 Projects
           </div>
           <div className="card-block">
-            {this.props.top3 &&<div className="card-deck" style={top3Deck}>
+            {this.props.top3 &&<div style={top3Deck}>
               {this.props.top3.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
             </div>}
           </div>

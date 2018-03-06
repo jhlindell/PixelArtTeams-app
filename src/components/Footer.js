@@ -63,8 +63,8 @@ class Footer extends React.Component {
         {this.state.isOwner && <Link to="/newUser">Add New User</Link>}
         {this.state.isOwner && <Link to="/finishArt">Finish Project</Link>}
         {this.state.isOwner && <Link to="/deleteProject">Delete Project</Link>}
-        <Link to="/about">Terms</Link>
-        <Link to="/about">News</Link>
+        <Link to="/about">About</Link>
+        {/* <Link to="/about">News</Link> */}
       </footer>
     );
   }

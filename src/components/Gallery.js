@@ -15,9 +15,10 @@ class Gallery extends Component {
     newStyle.justifyContent = 'space-around';
     newStyle.padding = '50px';
     newStyle.width = '100%';
+    newStyle.flexWrap = 'wrap';
 
     return (
-      <div className="card-deck" style={newStyle}>
+      <div style={newStyle}>
         {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
       </div>
     );

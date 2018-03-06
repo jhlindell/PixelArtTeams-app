@@ -124,14 +124,14 @@ class ShowProject extends Component {
             <div>
               Avg. Rating: {this.averageRating()}
             </div>
-            <div>
+            {this.props.auth.authenticated &&<div>
               Your rating: {this.userRating()}
-            </div>
-            <div>
+            </div>}
+            {this.props.auth.authenticated &&<div>
               <input type="number" name="user_rating" style={{width: '50px'}}
                 onChange={(e) => {this.handleInputChange(e)}} value={this.state.user_rating} placeholder="rating" />
               <button type="button" className="btn btn-primary" onClick={()=>{this.setUserRating()}} >Rate</button>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

@@ -25,8 +25,6 @@ class ProjectSelector extends Component {
     cardDeck.display = 'flex';
     cardDeck.justifyContent = 'space-around';
 
-
-
     return (
       <div style={newStyle}>
         <p className="mb-3">Your Available Projects:</p>

@@ -50,18 +50,21 @@ class GalleryPiece extends Component{
     cardBlockStyle.display = 'flex';
     cardBlockStyle.margin = 'auto';
 
-    return (
-      <div className="col col-md-4">
-        <div className="card" style={cardStyle} onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
-          <div className="card-header">
-            <div className="artTitleText" >
-              {this.props.art.project_name}
-            </div>
-          </div>
+    let footerStyle = {};
+    footerStyle.textAlign = 'center';
 
-          <div className="card-block" style={cardBlockStyle} >
-            <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
+    return (
+      <div className="card" style={cardStyle} onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
+        <div className="card-header">
+          <div className="artTitleText" >
+            {this.props.art.project_name}
           </div>
+        </div>
+        <div className="card-block" style={cardBlockStyle} >
+          <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
+        </div>
+        <div className="card-footer" style={footerStyle}>
+          Avg. Rating: {this.props.art.rating}
         </div>
       </div>
     );

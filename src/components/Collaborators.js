@@ -12,9 +12,8 @@ class Collaborators extends Component {
     return (
       <div>
         {this.props.collaborators.map(collaborator => {
-          if( collaborator !== this.props.username){
-            return <div className={this.props.classString}
-              key={collaborator}>{collaborator}</div>}
+          if(collaborator !== this.props.username){
+            return <div key={collaborator}>{collaborator}</div>}
           return null;
         })}
       </div>
