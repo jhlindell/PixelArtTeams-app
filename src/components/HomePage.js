@@ -3,11 +3,8 @@ import GalleryPiece from './GalleryPiece';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getGalleryTop3 } from '../actions/socketActions';
-import Background from '../watercolor-3173964_1920.jpg';
 
 var sectionStyle = {
-  backgroundImage: `url(${Background})`,
-  backgroundSize: 'auto',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
