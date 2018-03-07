@@ -49,3 +49,15 @@ footer a {
 .addNewUserCollaborators{
   font-size: 20px;
 }
+
+.selectedUser {
+  justify-content: center;
+}
+
+.selectedUser:hover {
+  background: lightgray;
+}
+
+.selectedUserHighlighted {
+  background: lightgray;
+}

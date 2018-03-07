@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { checkUserForAdd, addNewUser, removeUser} from '../actions/socketActions';
-import { clearUserNameCheck, setCollaborator } from '../actions/index';
-import Collaborators from './Collaborators';
+import {
+  checkUserForAdd,
+  addNewUser,
+  removeUser}
+  from '../actions/socketActions';
+import {
+  clearUserNameCheck,
+  getCollaborators,
+  setCollaborator }
+  from '../actions/index';
 
 class AddNewUser extends Component {
   constructor(props) {
@@ -11,12 +18,13 @@ class AddNewUser extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.removeUser = this.removeUser.bind(this);
-    this.setCollaborator = this.setCollaborator.bind(this);
+    this.selectUser = this.selectUser.bind(this);
 
     this.state = {
       user_name: '',
       email: '',
-      user_exists: false
+      user_exists: false,
+      selectedUser: ''
     };
   }
 
@@ -24,6 +32,7 @@ class AddNewUser extends Component {
     if(this.props.currentProject === 0){
       this.props.history.push('/art');
     }
+    this.props.getCollaborators(this.props.currentProject)
   }
 
   componentWillReceiveProps(nextProps){
@@ -67,11 +76,13 @@ class AddNewUser extends Component {
   }
 
   removeUser(){
-    this.props.removeUser();
+    this.props.removeUser(this.state.selectedUser);
+    this.props.getCollaborators(this.props.currentProject);
+    this.setState({selectedUser: ''});
   }
 
-  setCollaborator(username){
-    this.props.setCollaborator(username);
+  selectUser(username){
+    this.setState({selectedUser: username});
   }
 
   render(){
@@ -82,7 +93,7 @@ class AddNewUser extends Component {
     newStyle.textAlign = 'center';
 
     const colStyle = {};
-    colStyle.width = '40%';
+    colStyle.width = '60%';
     colStyle.margin = 'auto';
 
     const formStyle = {};
@@ -95,13 +106,17 @@ class AddNewUser extends Component {
           <div className="card-header artTitleText" >
             Collaborators:
           </div>
-          <div className="card-block">
-            <Collaborators project={this.props.currentProject} classString={'addNewUserCollaborators'}/>
-          </div>
+          <ul className="list-group list-group-flush">
+            {this.props.collaborators.map(collaborator => {
+              if(collaborator !== this.props.username){
+              return <li className={"list-group-item selectedUser " + ((collaborator === this.state.selectedUser) ? "selectedUserHighlighted" : "") }
+                key={collaborator} onClick={()=> this.selectUser(collaborator)}>{collaborator}</li>}
+              return null;
+            })}
+          </ul>
           <div className="card-footer">
             <div className="btn-group">
-              {/* <button className="btn btn-secondary">User</button> */}
-              <button onClick={() => this.removeUser()} className="btn btn-primary">Remove</button>
+              <button disabled={!this.state.selectedUser} onClick={() => this.removeUser()} className="btn btn-primary">Remove</button>
             </div>
           </div>
         </div>
@@ -147,11 +162,11 @@ class AddNewUser extends Component {
 }
 
 function mapStateToProps(state) {
-  return { authenticated: state.auth.authenticated, user: state.userCheckReducer, currentProject: state.currentProject };
+  return { authenticated: state.auth.authenticated, user: state.userCheckReducer, currentProject: state.currentProject, collaborators: state.collaborators, username: state.userName };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ clearUserNameCheck, checkUserForAdd, addNewUser, removeUser, setCollaborator }, dispatch);
+  return bindActionCreators({ clearUserNameCheck, checkUserForAdd, addNewUser, removeUser, getCollaborators, setCollaborator }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewUser);

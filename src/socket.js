@@ -41,7 +41,6 @@ socket.on('resultOfAddingPermission', (result) => {
     case 'success':
       const { currentProject} = store.getState();
       store.dispatch(otherActions.getCollaborators(currentProject));
-      alert('user permission added successfully');
       break;
     case 'user already exists':
       alert('user already exists');
@@ -53,6 +52,11 @@ socket.on('resultOfAddingPermission', (result) => {
       alert('problem adding user permission')
   }
 });
+
+socket.on('userPermissionRemoved', ()=> {
+  const {currentProject} = store.getState();
+  store.dispatch(otherActions.getCollaborators(currentProject));
+})
 
 socket.on('pixel', (pixel) => {
   store.dispatch(otherActions.pixelClick(pixel.x, pixel.y, pixel.color));
