@@ -8,28 +8,33 @@ import { getSingleProject,
   from '../actions/socketActions';
 import { getCollaborators } from '../actions/index';
 import DrawCanvas from './DrawCanvas';
+import ReactStars from 'react-stars';
+
+
 
 class ShowProject extends Component {
   constructor(props){
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       pixelSize: 0,
       canvasX: 0,
       canvasY: 0,
-      user_rating: 0,
+      user_rating: null,
     }
   }
 
-  componentWillMount(){
+  async componentWillMount(){
     let id = this.props.match.params.id;
     this.props.getSingleProject(id);
     this.props.getCollaborators(id);
-    this.props.fetchUserRatingForProject(id, this.props.auth.token);
     this.props.fetchAvgProjectRating(id);
+    this.props.fetchUserRatingForProject(id, this.props.auth.token);
   }
 
   componentWillReceiveProps(nextProps){
+    if(nextProps.userRating){
+      this.setState({user_rating: nextProps.userRating.rating});
+    }
     if(nextProps.project && nextProps.project.is_finished === false){
       this.props.history.push('/gallery');
     }
@@ -37,15 +42,9 @@ class ShowProject extends Component {
       this.calculateCanvas(nextProps.project);
     }
     if(this.props.userRating && nextProps.userRating.rating !== this.props.userRating.rating){
+
       this.props.fetchAvgProjectRating(this.props.match.params.id);
     }
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({[name]: value});
   }
 
   calculateCanvas(project){
@@ -84,8 +83,12 @@ class ShowProject extends Component {
     }
   }
 
+  ratingChanged = (newRating) => {
+    this.setState({ user_rating: newRating }, ()=> this.props.updateUserRatingForProject(this.props.match.params.id, this.props.auth.token, this.state.user_rating));
+  }
+
   setUserRating(){
-    this.props.updateUserRatingForProject(this.props.match.params.id, this.props.auth.token, this.state.user_rating);
+    ;
   }
 
   render(){
@@ -93,20 +96,24 @@ class ShowProject extends Component {
     containerStyle.display = 'flex';
     containerStyle.margin = 'auto';
     containerStyle.justifyContent = 'space-between';
-    containerStyle.backgroundColor = 'lightgray';
 
     let cardStyle = {};
     cardStyle.display = 'flex';
     cardStyle.margin = 'auto';
     cardStyle.textAlign = 'center';
     cardStyle.width = '200px';
+    cardStyle.marginLeft = '100px';
+
+    let starStyle = {};
+    starStyle.display = 'flex';
+    starStyle.justifyContent = 'center';
 
     return (
       <div style={containerStyle}>
         <div>
           {this.props.project && <DrawCanvas grid={ this.props.project.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/> }
         </div>
-        <div className="card ml-5" style={cardStyle}>
+        <div className="card" style={cardStyle}>
           <div className="card-header">
             <h4 className="showProjectHeading">Project Info</h4>
           </div>
@@ -117,20 +124,20 @@ class ShowProject extends Component {
           </div>
           <ul className="list-group list-group-flush">
             {this.props.collaborators.map(collaborator => {
-              return <li className="list-group-item" key={collaborator}>{collaborator}</li>
+              return <li className="list-group-item selectedUser" key={collaborator}>{collaborator}</li>
             })}
           </ul>
           <div className="card-body">
             <div>
               Avg. Rating: {this.averageRating()}
             </div>
-            {this.props.auth.authenticated &&<div>
-              Your rating: {this.userRating()}
-            </div>}
-            {this.props.auth.authenticated &&<div>
-              <input type="number" name="user_rating" style={{width: '50px'}}
-                onChange={(e) => {this.handleInputChange(e)}} value={this.state.user_rating} placeholder="rating" />
-              <button type="button" className="btn btn-primary" onClick={()=>{this.setUserRating()}} >Rate</button>
+            {this.props.auth.authenticated &&<div style={starStyle}>
+              {this.state.user_rating && <ReactStars
+                count={3}
+                onChange={this.ratingChanged}
+                size={20}
+                value={this.state.user_rating}
+                half={false} />}
             </div>}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DrawCanvas from './DrawCanvas';
+import ReactStars from 'react-stars';
 
 class GalleryPiece extends Component{
   constructor(props){
@@ -52,6 +53,9 @@ class GalleryPiece extends Component{
 
     let footerStyle = {};
     footerStyle.textAlign = 'center';
+    footerStyle.display = 'flex';
+    footerStyle.justifyContent = 'center';
+    footerStyle.alignItems = 'center';
 
     return (
       <div className="card" style={cardStyle} onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
@@ -64,7 +68,12 @@ class GalleryPiece extends Component{
           <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
         </div>
         <div className="card-footer" style={footerStyle}>
-          Avg. Rating: {this.props.art.rating}
+          Avg. Rating: <div className='ml-2'>
+              <ReactStars
+              count={3}
+              size={20}
+              value={this.props.art.rating} />
+            </div>
         </div>
       </div>
     );

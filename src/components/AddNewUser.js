@@ -122,7 +122,7 @@ class AddNewUser extends Component {
         </div>
 
         <form className="card" onSubmit={this.handleFormSubmit} style={formStyle}>
-          <h4 className="mt-4 mb-4">Please enter username or email of user to add</h4>
+          <h4 className="mt-3 mb-3">Please enter username or email of user to add</h4>
           <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
             <div className="col col-sm-12">
               <input type="text" name="user_name"
@@ -130,7 +130,7 @@ class AddNewUser extends Component {
                 className={(this.state.user_exists)?"form-control form-control-success ":"form-control"}/>
             </div>
           </div>
-          <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
+          <div className={(this.state.user_exists)?"mb-0 form-group has-success row":"mb-0 form-group row"}>
             <div className="col col-sm-12">
               <input type="text" name="email"
                 onChange={(e) => {this.handleInputChange(e)}} value={this.state.email} placeholder="email"
@@ -138,7 +138,7 @@ class AddNewUser extends Component {
               <label className="form-control-label mt-2"> {this.props.user.message} </label>
              </div>
           </div>
-          <div className="btn-group" style={{padding: '0', margin: 'auto'}}>
+          <div className="btn-group mb-2" style={{padding: '0', margin: 'auto'}}>
             <button className="btn btn-primary" type="submit"
               disabled={!this.state.user_exists}>
               Submit
