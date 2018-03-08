@@ -9,7 +9,7 @@ import { getSingleProject,
 import { getCollaborators } from '../actions/index';
 import DrawCanvas from './DrawCanvas';
 import ReactStars from 'react-stars';
-
+import moment from 'moment';
 
 
 class ShowProject extends Component {
@@ -87,8 +87,20 @@ class ShowProject extends Component {
     this.setState({ user_rating: newRating }, ()=> this.props.updateUserRatingForProject(this.props.match.params.id, this.props.auth.token, this.state.user_rating));
   }
 
-  setUserRating(){
-    ;
+  startTime(){
+    if(this.props.project.started_at){
+      return moment(this.props.project.started_at).local().format('LLL');
+    } else {
+      return 'N/A'
+    }
+  }
+
+  endTime(){
+    if(this.props.project.finished_at){
+      return moment(this.props.project.finished_at).local().format('LLL');
+    } else {
+      return 'N/A'
+    }
   }
 
   render(){
@@ -101,7 +113,7 @@ class ShowProject extends Component {
     cardStyle.display = 'flex';
     cardStyle.margin = 'auto';
     cardStyle.textAlign = 'center';
-    cardStyle.width = '200px';
+    cardStyle.width = '300px';
     cardStyle.marginLeft = '100px';
 
     let starStyle = {};
@@ -117,17 +129,19 @@ class ShowProject extends Component {
           <div className="card-header">
             <h4 className="showProjectHeading">Project Info</h4>
           </div>
-          <div className="card-body">
-            <div className="showProjectItem mb-2">Project Originator:</div>
-            {this.props.project && <div className="showProjectItem mb-2">  {this.props.project.project_owner}</div>}
-            <p className="showProjectItem">Project Collaborators:</p>
+          <div className="card-block">
+            <div className="showProjectItem mb-2">Project Originator:{this.props.project && <span className="showProjectItem">  {this.props.project.project_owner}</span>}</div>
+
+            <div className="showProjectItem">Start Time: {this.props.project && <div className="showProjectItem">  {this.startTime()}</div>}</div>
+            <div className="showProjectItem">End Time: {this.props.project && <div className="showProjectItem">  {this.endTime()}</div>}</div>
           </div>
+          <p className="showProjectItem">Project Collaborators:</p>
           <ul className="list-group list-group-flush">
             {this.props.collaborators.map(collaborator => {
               return <li className="list-group-item selectedUser" key={collaborator}>{collaborator}</li>
             })}
           </ul>
-          <div className="card-body">
+          <div className="card-block">
             <div>
               Avg. Rating: {this.averageRating()}
             </div>

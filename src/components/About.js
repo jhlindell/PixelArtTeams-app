@@ -5,13 +5,13 @@ const newStyle = {
   display: 'flex',
   flexDirection: 'column',
   textAlign: 'center',
-  margin: 'auto'
+  margin: 'auto',
 };
 
 class About extends Component {
   render(){
     return (
-      <div style={newStyle}>
+      <div className="card" style={newStyle}>
         <p className="aboutText mt-4">
           Getting started is easy!
         </p>
@@ -36,7 +36,7 @@ class About extends Component {
         <p className="aboutText">
           When you’re not making art, you can explore the Gallery or visit our Store. Enjoy!
         </p>
-        
+
       </div>
     )
   }

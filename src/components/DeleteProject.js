@@ -62,12 +62,13 @@ class DeleteProject extends Component {
     newStyle2.alignItems = 'center';
     newStyle2.margin = 'auto';
     newStyle2.textAlign = 'center';
-    newStyle2.paddingLeft = '100px';
+    newStyle2.marginLeft = '100px';
+    newStyle2.width = '200px';
 
     return (
       <div style={newStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
-        <div style={newStyle2}>
+        <div className = "card" style={newStyle2}>
           <div>Delete Project? </div>
           <div className="mb-2">You will not be able to undo this.</div>
           <div>
