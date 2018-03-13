@@ -58,7 +58,7 @@ class AddNewUser extends Component {
     let userName = this.state.user_name.toLowerCase();
     let email = this.state.email.toLowerCase();
     this.props.addNewUser(userName, email);
-    this.props.clearUserNameCheck();
+    this.clearForm();
   }
 
   userCheckClicked(){
@@ -69,6 +69,7 @@ class AddNewUser extends Component {
 
   clearForm(){
     this.setState({user_name: '', email: '', user_exists: false});
+    this.props.clearUserNameCheck();
   }
 
   cancel(){
@@ -130,7 +131,7 @@ class AddNewUser extends Component {
                 className={(this.state.user_exists)?"form-control form-control-success ":"form-control"}/>
             </div>
           </div>
-          <div className={(this.state.user_exists)?"mb-0 form-group has-success row":"mb-0 form-group row"}>
+          <div className={(this.state.user_exists)?"form-group has-success row":"form-group row"}>
             <div className="col col-sm-12">
               <input type="text" name="email"
                 onChange={(e) => {this.handleInputChange(e)}} value={this.state.email} placeholder="email"
@@ -140,6 +141,7 @@ class AddNewUser extends Component {
           </div>
           <div className="btn-group mb-2" style={{padding: '0', margin: 'auto'}}>
             <button className="btn btn-primary" type="submit"
+              // onClick={()=> this.clearForm()}
               disabled={!this.state.user_exists}>
               Submit
             </button>

@@ -94,8 +94,12 @@ export function setUserName(username){
   return {type: 'USERNAME', payload: username};
 }
 
-export function userNameCheck(result, message){
-  return {type: 'USERNAME_CHECK', payload: {result: result, message: message}};
+export function userNameCheck(result, message, username){
+  if(username){
+    return {type: 'USERNAME_CHECK', payload: {result, message, username }};
+  } else {
+    return {type: 'USERNAME_CHECK', payload: {result, message }};
+  }
 }
 
 export function clearUserNameCheck(){

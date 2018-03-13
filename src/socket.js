@@ -30,7 +30,7 @@ socket.on('requestRefresh', () => {
 
 socket.on('resultOfUserCheck', (result) => {
   if(result){
-    store.dispatch(otherActions.userNameCheck(result, "User Exists"));
+    store.dispatch(otherActions.userNameCheck(result.bool, "User Exists", result.username));
   } else {
     store.dispatch(otherActions.userNameCheck(result, "User Doesn't Exist"));
   }

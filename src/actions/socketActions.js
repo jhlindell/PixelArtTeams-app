@@ -98,7 +98,7 @@ export function sendFinishedProject(){
   }
 }
 
-export function addNewProject(name, x, y, timer){
+export function addNewProject(name, x, y, timer, collaborators){
   return (dispatch, getState) => {
     const { auth } = getState();
     let token;
@@ -106,7 +106,7 @@ export function addNewProject(name, x, y, timer){
       token = localStorage.getItem('token');
     } else
     token = auth.token;
-    socket.emit('addNewProject', {name, x, y, token, timer});
+    socket.emit('addNewProject', {name, x, y, token, timer, collaborators});
   }
 }
 
