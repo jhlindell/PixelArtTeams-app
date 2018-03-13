@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DrawCanvas from './DrawCanvas';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { selectProject } from '../actions/index';
 import { deleteProject } from '../actions/socketActions';
 
 class DeleteProject extends Component {
@@ -34,15 +35,15 @@ class DeleteProject extends Component {
     } else {
       pixelSize = pixelSizeX;
     }
-    let offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
-    let canvasX = ((windowX - (offsetX*2))).toFixed(0);
-    let canvasY = windowY;
+    let canvasX = pixelSize * x;
+    let canvasY = pixelSize * y;
 
     this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
   }
 
   deleteProject(){
     this.props.deleteProject();
+    this.props.selectProject(0);
     this.props.history.push('/art');
   }
 
@@ -86,7 +87,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteProject }, dispatch);
+  return bindActionCreators({ deleteProject, selectProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteProject);
