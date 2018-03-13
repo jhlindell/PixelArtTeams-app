@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DrawCanvas from './DrawCanvas';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { selectProject } from '../actions/index';
 import { deleteProject } from '../actions/socketActions';
 
 class DeleteProject extends Component {
@@ -34,9 +35,8 @@ class DeleteProject extends Component {
     } else {
       pixelSize = pixelSizeX;
     }
-    let offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
-    let canvasX = ((windowX - (offsetX*2))).toFixed(0);
-    let canvasY = windowY;
+    let canvasX = pixelSize * x;
+    let canvasY = pixelSize * y;
 
     this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
   }
@@ -62,12 +62,13 @@ class DeleteProject extends Component {
     newStyle2.alignItems = 'center';
     newStyle2.margin = 'auto';
     newStyle2.textAlign = 'center';
-    newStyle2.paddingLeft = '100px';
+    newStyle2.marginLeft = '100px';
+    newStyle2.width = '200px';
 
     return (
       <div style={newStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
-        <div style={newStyle2}>
+        <div className = "card" style={newStyle2}>
           <div>Delete Project? </div>
           <div className="mb-2">You will not be able to undo this.</div>
           <div>
@@ -85,7 +86,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteProject }, dispatch);
+  return bindActionCreators({ deleteProject, selectProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteProject);

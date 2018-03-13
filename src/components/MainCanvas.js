@@ -3,8 +3,9 @@ import Grid from './Grid';
 import Palette from './Palette';
 import ProjectSelector from './ProjectSelector';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { getProjects } from '../actions/socketActions';
+import { bindActionCreators } from 'redux';
+import { getProjects, saveProject, sendFinishedProject } from '../actions/socketActions';
+import moment from 'moment';
 // import Background from '../watercolor-3173964_1920.jpg';
 
 class MainCanvas extends Component {
@@ -15,7 +16,8 @@ class MainCanvas extends Component {
       canvasX: 0,
       canvasY: 0,
       x: 0,
-      y: 0
+      y: 0,
+      finishTime: ''
     }
   }
 
@@ -24,12 +26,27 @@ class MainCanvas extends Component {
     if(this.props.currentProject !== 0){
       this.calculateCanvas(this.props.currentProject);
     }
-
   }
 
   componentWillReceiveProps(nextProps){
+    if(nextProps.currentProject === 0 && this.props.currentProject !== nextProps.currentProject){
+      this.props.saveProject();
+      this.props.getProjects();
+    }
     if((nextProps.currentProject !== 0) && (nextProps.currentProject !== this.props.currentProject)){
       this.calculateCanvas(nextProps.currentProject);
+    }
+
+    if(nextProps.projects !== this.props.projects){
+      for(let i = 0; i < nextProps.projects.length; i++){
+        if(nextProps.projects[i].finished_at){
+          let now = new Date();
+          let nowString = moment.utc(now).format();
+          if(moment(nowString).isSameOrAfter(nextProps.projects[i].finished_at)){
+            this.props.sendFinishedProject(nextProps.projects[i].project_id);
+          }
+        }
+      }
     }
   }
 
@@ -46,6 +63,7 @@ class MainCanvas extends Component {
 
   calculateCanvas(id){
     let index = this.getProjectIndex(id);
+    let finishTime = this.props.projects[index].finished_at;
     let x = this.props.projects[index].grid[0].length;
     let y = this.props.projects[index].grid.length;
     let windowX = (window.innerWidth * 0.7).toFixed(0);
@@ -64,8 +82,7 @@ class MainCanvas extends Component {
     let offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
     let canvasX = ((windowX -( offsetX * 2 ))).toFixed(0);
     let canvasY = windowY;
-
-    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY, x: x, y: y});
+    this.setState({ pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY, x: x, y: y, finishTime: finishTime });
   }
 
   renderComp(){
@@ -88,7 +105,7 @@ class MainCanvas extends Component {
 
       return (
         <div style={canvasStyle} id="mainCanvas2">
-          <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins}/>
+          <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins} finishTime={this.state.finishTime} />
           <Palette canvasHeight={canvasYSize} canvasWidth={canvasXSize}
             topMargin={vertMargins}/>
         </div>
@@ -124,7 +141,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getProjects}, dispatch);
+  return bindActionCreators({ getProjects, saveProject, sendFinishedProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainCanvas);

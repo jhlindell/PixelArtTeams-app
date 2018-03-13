@@ -14,13 +14,7 @@ body {
 }
 
 .aboutText {
-  font-size: 12px;
-}
-
-.showProjectInfo{
-  text-align: center;
-  margin-top: auto;
-  margin-bottom: auto;
+  font-size: 14px;
 }
 
 .showProjectHeading{
@@ -48,4 +42,16 @@ footer a {
 
 .addNewUserCollaborators{
   font-size: 20px;
+}
+
+.selectedUser {
+  justify-content: center;
+}
+
+.selectedUser:hover {
+  background: lightgray;
+}
+
+.selectedUserHighlighted {
+  background: lightgray;
 }

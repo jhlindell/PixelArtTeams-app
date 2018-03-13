@@ -8,19 +8,12 @@ class Collaborators extends Component {
     this.props.getCollaborators(this.props.project);
   }
 
-  // componentWillReceiveProps(nextProps){
-  //   if(nextProps.currentProject !== this.props.currentProject){
-  //     this.props.getCollaborators(nextProps.currentProject);
-  //   }
-  // }
-
   render(){
     return (
       <div>
         {this.props.collaborators.map(collaborator => {
-          if( collaborator !== this.props.username){
-            return <div className={this.props.classString}
-              key={collaborator}>{collaborator}</div>}
+          if(collaborator !== this.props.username){
+            return <div key={collaborator}>{collaborator}</div>}
           return null;
         })}
       </div>

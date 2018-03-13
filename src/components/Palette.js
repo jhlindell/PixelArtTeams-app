@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PaintSwatch from './PaintSwatch';
 import CurrentColor from './CurrentColor';
@@ -26,8 +26,8 @@ class Palette extends Component {
   }
 }
 
-function mapStateToProps({ activeColor, paletteReducer }) {
-  return { activeColor, paletteReducer };
+function mapStateToProps({ activeColor }) {
+  return { activeColor };
 }
 
 export default connect(mapStateToProps, null)(Palette);

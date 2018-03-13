@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectProject } from '../actions/index';
 import ProjectSelectorCard from './ProjectSelectorCard';
+import Easel from '../easel.png'
 
 class ProjectSelector extends Component {
-
 
   render(){
     const newStyle = {};
@@ -15,24 +15,30 @@ class ProjectSelector extends Component {
     newStyle.textAlign = 'center';
     newStyle.margin = 'auto';
 
+    const picStyle = {};
+    picStyle.height = '160px';
+    picStyle.margin = 'auto';
+    picStyle.padding = '20px';
+
+    const cardDeck = {};
+    cardDeck.display = 'flex';
+    cardDeck.justifyContent = 'space-around';
+    cardDeck.flexWrap = 'wrap';
+
     return (
       <div style={newStyle}>
         <p className="mb-3">Your Available Projects:</p>
-        <div className="card-deck">
-          <div className="col col-sm-3">
-            <div className="card mb-3" onClick={()=> this.props.history.push('/newProject')}>
+        <div style={cardDeck}>
+            <div className="card mb-3 mr-2" onClick={()=> this.props.history.push('/newProject')}>
               <div className="card-header">
-                <div className="artTitleText" >
-                  New
-                </div>
+                <h4>
+                  New Project
+                </h4>
               </div>
               <div className="card-body">
-                <div className="artTitleText mt-4 mb-4">
-                  Start New Project
-                </div>
+                <img src={Easel} style={picStyle} alt="easel"/>
               </div>
             </div>
-          </div>
           {this.props.projects.map((art) => <ProjectSelectorCard art={art} key={art.project_name} /> )}
         </div>
       </div>

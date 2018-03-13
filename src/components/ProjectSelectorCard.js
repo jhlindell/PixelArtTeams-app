@@ -57,18 +57,18 @@ class ProjectSelectorCard extends Component {
     cardBlock.marginRight = 'auto';
 
     return (
-      <div className="col col-sm-3">
-        <div className="card mb-3" style={artCard} onClick={() => this.props.selectProject(this.props.art.project_id)}>
+      // <div className="col col-sm-3">
+        <div className="card mb-3 mr-2 ml-2" style={artCard} onClick={() => this.props.selectProject(this.props.art.project_id)}>
           <div className="card-header">
-            <div className="artTitleText" >
+            <h4>
               {this.props.art.project_name}
-            </div>
+            </h4>
           </div>
           <div className="card-block" style={cardBlock} >
             <DrawCanvas grid={this.props.art.grid} canvasX={this.state.canvasX} canvasY={this.state.canvasY} pixelSize={this.state.pixelSize} />
           </div>
         </div>
-      </div>
+      // </div>
     );
   }
 }

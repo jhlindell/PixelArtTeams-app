@@ -1,10 +1,6 @@
 import axios from 'axios';
 const URL = process.env.REACT_APP_API_URL;
 
-export function changePaletteShowState() {
-  return { type: 'CHANGE_PALETTE_SHOW_STATE' };
-}
-
 export function changeShowMenuState() {
   return { type: 'CHANGE_MENU_SHOW_STATE' };
 }
@@ -94,8 +90,12 @@ export function setUserName(username){
   return {type: 'USERNAME', payload: username};
 }
 
-export function userNameCheck(result, message){
-  return {type: 'USERNAME_CHECK', payload: {result: result, message: message}};
+export function userNameCheck(result, message, username){
+  if(username){
+    return {type: 'USERNAME_CHECK', payload: {result, message, username }};
+  } else {
+    return {type: 'USERNAME_CHECK', payload: {result, message }};
+  }
 }
 
 export function clearUserNameCheck(){
@@ -108,4 +108,16 @@ export function galleryShow(project){
 
 export function galleryTop3(top3){
   return {type: 'GALLERY_TOP_3', payload: top3}
+}
+
+export function setCollaborator(username){
+  return {type: 'SET_COLLABORATOR', payload: username}
+}
+
+export function setUserRatingForProject(project_id, rating){
+  return {type: 'SET_USER_RATING', payload: { project_id, rating }}
+}
+
+export function setAvgProjectRating(project_id, rating){
+  return {type: 'SET_AVG_PROJECT_RATING', payload: { project_id, rating }}
 }

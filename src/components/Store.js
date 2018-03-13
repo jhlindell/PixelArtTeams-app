@@ -5,6 +5,7 @@ class Store extends Component {
     const newStyle = {};
     newStyle.display = 'flex';
     newStyle.margin = 'auto';
+    newStyle.color = 'white';
 
     return (
       <div style={newStyle}>

@@ -84,14 +84,26 @@ export function addNewUser(username, email){
   }
 }
 
-export function sendFinishedProject(){
+export function removeUser(username){
   return (dispatch, getState) => {
-    const { currentProject, auth} = getState();
-    socket.emit('sendFinishedProject', { projectid: currentProject, token: auth.token});
+    const { currentProject } = getState();
+    socket.emit('removeUserFromProject', { username: username, projectid: currentProject});
   }
 }
 
-export function addNewProject(name, x, y){
+export function sendFinishedProject(id?){
+  return (dispatch, getState) => {
+    if(id){
+      const {auth} = getState();
+      socket.emit('sendFinishedProject', { projectid: id, token: auth.token });
+    } else {
+      const { currentProject, auth} = getState();
+      socket.emit('sendFinishedProject', { projectid: currentProject, token: auth.token});
+    }    
+  }
+}
+
+export function addNewProject(name, x, y, timer, collaborators){
   return (dispatch, getState) => {
     const { auth } = getState();
     let token;
@@ -99,7 +111,7 @@ export function addNewProject(name, x, y){
       token = localStorage.getItem('token');
     } else
     token = auth.token;
-    socket.emit('addNewProject', {name, x, y, token});
+    socket.emit('addNewProject', {name, x, y, token, timer, collaborators});
   }
 }
 
@@ -133,5 +145,23 @@ export function grid(id){
 export function getSingleProject(id){
   return (dispatch) => {
     socket.emit('getSingleProject', id);
+  }
+}
+
+export function fetchUserRatingForProject(projectid, token){
+  return (dispatch) => {
+    socket.emit('getUserRatingForProject', {project_id: projectid, token: token });
+  }
+}
+
+export function updateUserRatingForProject(projectid, token, rating){
+  return (dispatch) => {
+    socket.emit('changeUserRatingForProject', { project_id: projectid, token, rating });
+  }
+}
+
+export function fetchAvgProjectRating(projectid){
+  return (dispatch) => {
+    socket.emit('getAvgRatingForProject', projectid);
   }
 }

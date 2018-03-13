@@ -21,6 +21,7 @@ import './App.css';
 import {bindActionCreators} from 'redux';
 import { initialize, joinRoom, leaveRoom, grid } from './actions/socketActions';
 import socket from './socket';
+import Background from './watercolor-3173964_1920.jpg';
 
 class App extends Component {
 
@@ -45,7 +46,9 @@ class App extends Component {
     const flexCol = {};
     flexCol.display = 'flex';
     flexCol.flexDirection = 'column';
-    flexCol.backgroundColor = 'lightgray';
+    flexCol.backgroundImage = `url(${Background})`;
+    flexCol.backgroundSize = 'auto';
+
     const flex0 = {};
     flex0.flex = 0;
     const flex1 = {};

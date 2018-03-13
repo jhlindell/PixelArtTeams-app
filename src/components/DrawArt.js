@@ -3,7 +3,7 @@ import { Rect } from 'react-konva';
 
 const DrawArt = (props) => {
   let grid = props.grid;
-  let offset = props.canvasY/props.grid.length;
+  let offset = Math.floor(props.canvasY/props.grid.length);
 
   return (
     grid.map((row, y) => {

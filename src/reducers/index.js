@@ -81,25 +81,6 @@ function galleryReducer(state = [], action){
   }
 }
 
-
-function paletteReducer(state = false, action){
-  switch(action.type) {
-    case 'CHANGE_PALETTE_SHOW_STATE':
-      return !state;
-    default:
-      return state;
-  }
-}
-
-function menuReducer(state = false, action){
-  switch(action.type) {
-    case 'CHANGE_MENU_SHOW_STATE':
-      return !state;
-    default:
-      return state;
-  }
-}
-
 const styleErrorCode = (code) => {
   if(code.message){
     if (code.message.includes('401')){
@@ -180,6 +161,24 @@ function top3Reducer(state = null, action){
   }
 }
 
+function userRatingReducer(state = null, action){
+  switch(action.type){
+    case "SET_USER_RATING":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function avgProjectRating(state = null, action){
+  switch(action.type){
+    case "SET_AVG_PROJECT_RATING":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -187,14 +186,14 @@ const appReducer = combineReducers({
   projectsReducer,
   mouseReducer,
   galleryReducer,
-  paletteReducer,
-  menuReducer,
   auth: authReducer,
   userName,
   collaborators,
   userCheckReducer,
   galleryShowReducer,
-  top3Reducer
+  top3Reducer,
+  userRatingReducer,
+  avgProjectRating
 });
 
 const rootReducer = (state, action) => {

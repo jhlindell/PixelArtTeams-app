@@ -3,27 +3,39 @@ import Pixel from './Pixel';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { mouseDownAction, mouseUpAction } from '../actions/index';
-import { saveProject } from '../actions/socketActions';
+import { saveProject, sendFinishedProject } from '../actions/socketActions';
+import Countdown from 'react-countdown-now';
 
 class Grid extends Component {
   componentWillUnmount(){
     this.props.saveProject();
   }
+
+  countdownComplete(){
+    this.props.sendFinishedProject();
+  }
+
   render(){
     let xCoord = this.props.x;
     let gridWidth = xCoord * this.props.pixelSize;
     let leftMargin = (800 - gridWidth)/2;
-    let newStyle = {};
-    newStyle.marginTop = this.props.vertMargins + 'px';
-    newStyle.marginBottom = this.props.vertMargins + 'px';
-    newStyle.marginLeft = leftMargin + 'px';
-    newStyle.flexWrap = 'wrap';
-    newStyle.width = gridWidth + 'px';
-    newStyle.flex = '1';
+    let gridStyle = {};
+    gridStyle.marginTop = this.props.vertMargins + 'px';
+    gridStyle.marginBottom = this.props.vertMargins + 'px';
+    gridStyle.marginLeft = leftMargin + 'px';
+    gridStyle.flexWrap = 'wrap';
+    gridStyle.width = gridWidth + 'px';
+    gridStyle.flex = '1';
+
+    let countdownStyle = {};
+    countdownStyle.textAlign = 'center';
+    countdownStyle.marginTop = '5px';
+    countdownStyle.fontSize = '18px';
 
     return (
-      <div id="grind">
-        <div style={ newStyle } onMouseDown={() => this.props.mouseDownAction()} onMouseUp={() => this.props.mouseUpAction()} >
+      <div id="grid">
+        <div style={countdownStyle}>Time Left on Project: {this.props.finishTime && <Countdown date={this.props.finishTime} onComplete={() => this.countdownComplete()} />}</div>
+        <div style={ gridStyle } onMouseDown={() => this.props.mouseDownAction()} onMouseUp={() => this.props.mouseUpAction()} >
             {this.props.grid.map((row, y) => {
               return row.map((pixel, x) => <Pixel
                 x={x} y={y} key={x.toString() + y.toString()}
@@ -40,7 +52,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ mouseDownAction, mouseUpAction, saveProject }, dispatch);
+  return bindActionCreators({ mouseDownAction, mouseUpAction, saveProject, sendFinishedProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Grid);

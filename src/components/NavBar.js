@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeShowMenuState } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
 const navBarStyle = {
@@ -34,17 +33,17 @@ class NavBar extends React.Component {
   renderLinks() {
     if (this.props.authenticated) {
       // show a link to sign out
-      return <li>
-        <Link className="navLink" to="/signout">Sign Out</Link>
+      return <li key={'signout'}>
+        <Link className="navLink"  to="/signout">Sign Out</Link>
       </li>
     } else {
       // show a link to sign in or sign up
       return [
-        <li>
-          <Link className="navLink" to="/signin">Sign In</Link>
+        <li key={'signin'}>
+          <Link className="navLink"  to="/signin">Sign In</Link>
         </li>,
-        <li>
-          <Link className="navLink" to="/signup">Sign Up</Link>
+        <li key={'signup'}>
+          <Link className="navLink" key={'signup'} to="/signup">Sign Up</Link>
         </li>
       ];
     }
@@ -53,16 +52,16 @@ class NavBar extends React.Component {
   render(){
     return (
       <ul style={navBarStyle}>
-        <li>
-          <Link to="/art" className="navLink">Make Art</Link>
+        <li key={'art'} >
+          <Link to="/newProject" className="navLink">Make Art</Link>
         </li>
-        <li>
+        <li key={'gallery'}>
           <Link to="/gallery" className="navLink">Gallery</Link>
         </li>
-        <li>
+        <li key={'home'}>
           <Link to="/" className="navText">Pixel Art Teams</Link>
         </li>
-        <li>
+        <li key={'store'}>
           <Link to="/store" className="navLink">Store</Link>
         </li>
         {this.renderLinks()}
@@ -77,7 +76,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeShowMenuState, getUserName }, dispatch);
+  return bindActionCreators({ getUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
