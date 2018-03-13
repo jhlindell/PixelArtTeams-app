@@ -81,25 +81,6 @@ function galleryReducer(state = [], action){
   }
 }
 
-
-function paletteReducer(state = false, action){
-  switch(action.type) {
-    case 'CHANGE_PALETTE_SHOW_STATE':
-      return !state;
-    default:
-      return state;
-  }
-}
-
-function menuReducer(state = false, action){
-  switch(action.type) {
-    case 'CHANGE_MENU_SHOW_STATE':
-      return !state;
-    default:
-      return state;
-  }
-}
-
 const styleErrorCode = (code) => {
   if(code.message){
     if (code.message.includes('401')){
@@ -205,8 +186,6 @@ const appReducer = combineReducers({
   projectsReducer,
   mouseReducer,
   galleryReducer,
-  paletteReducer,
-  menuReducer,
   auth: authReducer,
   userName,
   collaborators,

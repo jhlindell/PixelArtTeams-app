@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeShowMenuState } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
 const navBarStyle = {
@@ -77,7 +76,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeShowMenuState, getUserName }, dispatch);
+  return bindActionCreators({ getUserName }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

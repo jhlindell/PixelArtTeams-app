@@ -5,9 +5,7 @@ import { updateColor } from '../actions/index'
 
 const styles = {
   width: '40px',
-  height: '40px',
-  borderBottom: 'solid 1px',
-  borderRight: 'solid 1px',
+  height: '40px'
 };
 
 class PaintSwatch extends Component {
