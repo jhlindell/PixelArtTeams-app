@@ -9,6 +9,7 @@
     "konva": "^1.7.6",
     "moment": "^2.21.0",
     "react": "^16.2.0",
+    "react-countdown-now": "^1.3.0",
     "react-dom": "^16.2.0",
     "react-konva": "^1.6.6",
     "react-redux": "^5.0.6",

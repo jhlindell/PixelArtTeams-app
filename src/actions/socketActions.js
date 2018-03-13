@@ -91,10 +91,15 @@ export function removeUser(username){
   }
 }
 
-export function sendFinishedProject(){
+export function sendFinishedProject(id?){
   return (dispatch, getState) => {
-    const { currentProject, auth} = getState();
-    socket.emit('sendFinishedProject', { projectid: currentProject, token: auth.token});
+    if(id){
+      const {auth} = getState();
+      socket.emit('sendFinishedProject', { projectid: id, token: auth.token });
+    } else {
+      const { currentProject, auth} = getState();
+      socket.emit('sendFinishedProject', { projectid: currentProject, token: auth.token});
+    }    
   }
 }
 

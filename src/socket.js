@@ -9,6 +9,7 @@ socket.on('returnUserName', (username)=> {
 });
 
 socket.on('sendProjectsToClient', (projects)=> {
+  // console.log("socket actions SPTC projects: ", projects);
   store.dispatch(otherActions.sendProjectsToStore(projects));
 });
 

@@ -43,7 +43,6 @@ class DeleteProject extends Component {
 
   deleteProject(){
     this.props.deleteProject();
-    this.props.selectProject(0);
     this.props.history.push('/art');
   }
 

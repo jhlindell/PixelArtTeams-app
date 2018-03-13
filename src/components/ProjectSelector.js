@@ -7,7 +7,6 @@ import Easel from '../easel.png'
 
 class ProjectSelector extends Component {
 
-
   render(){
     const newStyle = {};
     newStyle.padding = '50px';
@@ -24,6 +23,7 @@ class ProjectSelector extends Component {
     const cardDeck = {};
     cardDeck.display = 'flex';
     cardDeck.justifyContent = 'space-around';
+    cardDeck.flexWrap = 'wrap';
 
     return (
       <div style={newStyle}>
