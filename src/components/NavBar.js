@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { selectProject } from '../actions/index';
 import { getUserName } from '../actions/socketActions';
 
 const navBarStyle = {
@@ -56,7 +57,8 @@ class NavBar extends React.Component {
           <Link to="/newProject" className="navLink">Make Art</Link>
         </li>
         <li key={'gallery'}>
-          <Link to="/gallery" className="navLink">Gallery</Link>
+          <Link to="/gallery" className="navLink"
+          onClick={() => this.props.selectProject(0)}>Gallery</Link>
         </li>
         <li key={'home'}>
           <Link to="/" className="navText">Pixel Art Teams</Link>
@@ -76,7 +78,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getUserName }, dispatch);
+  return bindActionCreators({ getUserName, selectProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
