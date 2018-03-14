@@ -27,7 +27,7 @@ class ProjectSelector extends Component {
 
     return (
       <div style={newStyle}>
-        <p className="mb-3">Your Available Projects:</p>
+        <p className="mb-3" style={{color: 'white'}}>Your Available Projects:</p>
         <div style={cardDeck}>
             <div className="card mb-3 mr-2" onClick={()=> this.props.history.push('/newProject')}>
               <div className="card-header">
