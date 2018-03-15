@@ -73,7 +73,7 @@ class GalleryPiece extends Component{
               count={3}
               size={20}
               value={this.props.art.rating} />
-            </div>
+            </div> 
         </div>
       </div>
     );

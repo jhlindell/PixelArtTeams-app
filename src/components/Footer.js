@@ -13,11 +13,11 @@ class Footer extends React.Component {
     };
   }
 
-  componentWillMount(){
-    if(this.props.authenticated){
-      this.props.getUserName();
-    }
-  }
+  // componentWillMount(){
+  //   if(this.props.authenticated){
+  //     this.props.getUserName();
+  //   }
+  // }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.currentProject === 0){
@@ -26,9 +26,9 @@ class Footer extends React.Component {
     if(nextProps.currentProject){
       this.isProjectOwner(nextProps.currentProject);
     }
-    if(nextProps.authenticated){
-      this.props.getUserName();
-    }
+    // if(nextProps.authenticated && nextProps.authenticated !== this.props.authenticated){
+    //   this.props.getUserName();
+    // }
   }
 
   isProjectOwner(id){
@@ -41,7 +41,7 @@ class Footer extends React.Component {
       }
     }
     if(project){
-      if(project.project_owner === this.props.username){
+      if(project.project_owner === this.props.username.username){
         this.setState({isOwner: true});
       } else {
         this.setState({isOwner: false});

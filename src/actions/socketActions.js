@@ -61,10 +61,15 @@ export function checkUserForAdd(username, email){
   }
 }
 
-export function deleteProject(){
+export function deleteProject(id?){
   return (dispatch, getState) => {
-    const { currentProject, auth} = getState();
-    socket.emit('deleteProject', { projectid: currentProject, token: auth.token});
+    if(id){
+      const { auth } = getState();
+      socket.emit('deleteProject', { projectid: id, token: auth.token});
+    } else {
+      const { currentProject, auth} = getState();
+      socket.emit('deleteProject', { projectid: currentProject, token: auth.token});
+    }
   }
 }
 
@@ -99,7 +104,7 @@ export function sendFinishedProject(id?){
     } else {
       const { currentProject, auth} = getState();
       socket.emit('sendFinishedProject', { projectid: currentProject, token: auth.token});
-    }    
+    }
   }
 }
 

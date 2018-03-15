@@ -26,7 +26,7 @@ class NavBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.authenticated){
+    if(nextProps.authenticated && nextProps.authenticated !== this.props.authenticated){
       this.props.getUserName();
     }
   }
@@ -51,6 +51,7 @@ class NavBar extends React.Component {
   }
 
   render(){
+    console.log('userinfo: ', this.props.username );
     return (
       <ul style={navBarStyle}>
         <li key={'art'} >
