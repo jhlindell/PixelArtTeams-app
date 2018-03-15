@@ -86,8 +86,8 @@ export function signoutUser(){
   return {type: 'USER_LOGOUT'};
 }
 
-export function setUserName(username){
-  return {type: 'USERNAME', payload: username};
+export function setUserName(userinfo){
+  return {type: 'USERNAME', payload: userinfo};
 }
 
 export function userNameCheck(result, message, username){

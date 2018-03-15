@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { getSingleProject,
   fetchUserRatingForProject,
   updateUserRatingForProject,
-  fetchAvgProjectRating }
+  fetchAvgProjectRating,
+  deleteProject }
   from '../actions/socketActions';
 import { getCollaborators } from '../actions/index';
 import DrawCanvas from './DrawCanvas';
@@ -103,6 +104,11 @@ class ShowProject extends Component {
     }
   }
 
+  deleteProject(){
+    this.props.deleteProject(this.props.project.project_id);
+    this.props.history.push('/gallery');
+  }
+
   render(){
     let containerStyle = {};
     containerStyle.display = 'flex';
@@ -153,6 +159,9 @@ class ShowProject extends Component {
                 value={this.state.user_rating}
                 half={false} />}
             </div>}
+            <div>
+              {this.props.username && this.props.username.isMod && <button onClick={()=> this.deleteProject()}>Delete</button>}
+            </div>
           </div>
         </div>
       </div>
@@ -161,11 +170,11 @@ class ShowProject extends Component {
 }
 
 function mapStateToProps(state){
-  return { project: state.galleryShowReducer, collaborators: state.collaborators, auth: state.auth, userRating: state.userRatingReducer, projectAvg: state.avgProjectRating }
+  return { project: state.galleryShowReducer, collaborators: state.collaborators, auth: state.auth, userRating: state.userRatingReducer, projectAvg: state.avgProjectRating, username: state.userName }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getSingleProject, getCollaborators, fetchUserRatingForProject, updateUserRatingForProject, fetchAvgProjectRating }, dispatch);
+  return bindActionCreators({ getSingleProject, getCollaborators, fetchUserRatingForProject, updateUserRatingForProject, fetchAvgProjectRating, deleteProject }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowProject);
