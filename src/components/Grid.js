@@ -43,7 +43,7 @@ class Grid extends Component {
 
     return (
       <div id="grid">
-        <div style={countdownStyle}>Time Left on Project: {this.props.finishTime && <Countdown date={this.props.finishTime} onComplete={() => this.countdownComplete()} />}</div>
+        <div style={countdownStyle}>Time Left on Project: {this.props.finishTime && <Countdown date={this.props.finishTime} onComplete={() => this.countdownComplete()} />}{!this.props.finishTime && <span> Unlimited</span>}</div>
         <div style={ gridStyle } onMouseDown={() => this.props.mouseDownAction()} onMouseUp={() => this.props.mouseUpAction()} >
             {this.props.grid.map((row, y) => {
               return row.map((pixel, x) => <Pixel
