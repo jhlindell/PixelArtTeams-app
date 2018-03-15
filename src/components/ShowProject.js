@@ -160,7 +160,7 @@ class ShowProject extends Component {
                 half={false} />}
             </div>}
             <div>
-              {this.props.username && this.props.username.isMod && <button onClick={()=> this.deleteProject()}>Delete</button>}
+              {this.props.username && this.props.username.isMod && <button className="btn-primary mt-2" onClick={()=> this.deleteProject()}>Delete</button>}
             </div>
           </div>
         </div>
