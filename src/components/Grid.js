@@ -5,10 +5,19 @@ import {bindActionCreators} from 'redux';
 import { mouseDownAction, mouseUpAction } from '../actions/index';
 import { saveProject, sendFinishedProject } from '../actions/socketActions';
 import Countdown from 'react-countdown-now';
+import moment from 'moment';
 
 class Grid extends Component {
   componentWillUnmount(){
     this.props.saveProject();
+  }
+
+  componentWillMount(){
+    let now = new Date();
+    let nowString = moment.utc(now).format();
+    if(moment(nowString).isSameOrAfter(this.props.finishTime)){
+      this.props.sendFinishedProject(this.props.currentProject);
+    }
   }
 
   countdownComplete(){
