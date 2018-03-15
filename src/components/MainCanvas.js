@@ -67,7 +67,7 @@ class MainCanvas extends Component {
     let x = this.props.projects[index].grid[0].length;
     let y = this.props.projects[index].grid.length;
     let windowX = 800;
-    let windowY = 560;
+    let windowY = 500;
     let pixelSizeX = (windowX/x).toFixed(0);
     let pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize = 0;
@@ -95,7 +95,7 @@ class MainCanvas extends Component {
       const canvasStyle = {};
       let vertMargins = 0;
       let gridHeight = this.state.y * this.state.pixelSize;
-      vertMargins = (560 - gridHeight)/2;
+      vertMargins = (520 - gridHeight)/2;
 
       canvasStyle.backgroundColor = 'white';
       canvasStyle.height = canvasYSize + 'px';
