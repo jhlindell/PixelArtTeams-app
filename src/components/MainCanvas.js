@@ -66,8 +66,8 @@ class MainCanvas extends Component {
     let finishTime = this.props.projects[index].finished_at;
     let x = this.props.projects[index].grid[0].length;
     let y = this.props.projects[index].grid.length;
-    let windowX = (window.innerWidth * 0.7).toFixed(0);
-    let windowY = (window.innerHeight * 0.7).toFixed(0);
+    let windowX = 800;
+    let windowY = 560;
     let pixelSizeX = (windowX/x).toFixed(0);
     let pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize = 0;
@@ -106,7 +106,7 @@ class MainCanvas extends Component {
       return (
         <div style={canvasStyle} id="mainCanvas2">
           <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins} finishTime={this.state.finishTime} />
-          <Palette canvasHeight={canvasYSize} canvasWidth={canvasXSize}
+          <Palette canvasWidth={canvasXSize}
             topMargin={vertMargins}/>
         </div>
       );
