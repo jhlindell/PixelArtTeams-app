@@ -95,7 +95,7 @@ class MainCanvas extends Component {
       const canvasStyle = {};
       let vertMargins = 0;
       let gridHeight = this.state.y * this.state.pixelSize;
-      vertMargins = (520 - gridHeight)/2;
+      vertMargins = (480 - gridHeight)/2;
 
       canvasStyle.backgroundColor = 'white';
       canvasStyle.height = canvasYSize + 'px';
