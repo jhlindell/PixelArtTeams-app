@@ -79,4 +79,8 @@ socket.on('returnAvgRating', (obj) => {
   store.dispatch(otherActions.setAvgProjectRating(obj.project_id, obj.rating));
 })
 
+socket.on('projectClosedOut', (projectid) => {
+  store.dispatch(otherActions.selectProject(0));
+})
+
 export default socket;
