@@ -51,7 +51,6 @@ class NavBar extends React.Component {
   }
 
   render(){
-    console.log('userinfo: ', this.props.username );
     return (
       <ul style={navBarStyle}>
         <li key={'art'} >
