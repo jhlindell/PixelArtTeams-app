@@ -41,7 +41,7 @@ class Footer extends React.Component {
       }
     }
     if(project){
-      if(project.project_owner === this.props.username.username){
+      if(project.project_owner === this.props.user.username){
         this.setState({isOwner: true});
       } else {
         this.setState({isOwner: false});
@@ -71,7 +71,7 @@ class Footer extends React.Component {
 }
 
 function mapStateToProps(state){
-  return { username: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated, projects: state.projectsReducer };
+  return { user: state.userName, currentProject: state.currentProject, authenticated: state.auth.authenticated, projects: state.projectsReducer };
 }
 
 function mapDispatchToProps(dispatch){

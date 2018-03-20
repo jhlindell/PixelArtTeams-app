@@ -45,8 +45,8 @@ export function mouseUpAction(){
   return { type: 'MOUSE_UP', payload: false };
 }
 
-export function getGallery(art){
-  return { type: 'GET_GALLERY', payload: art };
+export function getGallery(gallery){
+  return { type: 'GET_GALLERY', payload: gallery };
 }
 
 export function signUpUser({username, email, password}){
@@ -103,21 +103,29 @@ export function clearUserNameCheck(){
 }
 
 export function galleryShow(project){
-  return {type: 'GALLERY_SHOW', payload: project}
+  return {type: 'GALLERY_SHOW', payload: project};
 }
 
 export function galleryTop3(top3){
-  return {type: 'GALLERY_TOP_3', payload: top3}
+  return {type: 'GALLERY_TOP_3', payload: top3};
 }
 
 export function setCollaborator(username){
-  return {type: 'SET_COLLABORATOR', payload: username}
+  return {type: 'SET_COLLABORATOR', payload: username};
 }
 
 export function setUserRatingForProject(project_id, rating){
-  return {type: 'SET_USER_RATING', payload: { project_id, rating }}
+  return {type: 'SET_USER_RATING', payload: { project_id, rating }};
 }
 
 export function setAvgProjectRating(project_id, rating){
-  return {type: 'SET_AVG_PROJECT_RATING', payload: { project_id, rating }}
+  return {type: 'SET_AVG_PROJECT_RATING', payload: { project_id, rating }};
+}
+
+export function setFlagCheck(bool){
+  return {type: 'SET_FLAG_CHECK', payload: bool };
+}
+
+export function clearFlagCheck(){
+  return {type: 'CLEAR_FLAG_CHECK'};
 }

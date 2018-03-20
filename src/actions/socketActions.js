@@ -29,9 +29,10 @@ export function mouseOverAction(x, y){
   }
 }
 
-export function stockGallery(){
-  return (dispatch) => {
-    socket.emit('getArtForGallery');
+export function stockGallery(sortStyle){
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    socket.emit('getArtForGallery', { sortStyle, token: auth.token });
   }
 }
 
@@ -168,5 +169,24 @@ export function updateUserRatingForProject(projectid, token, rating){
 export function fetchAvgProjectRating(projectid){
   return (dispatch) => {
     socket.emit('getAvgRatingForProject', projectid);
+  }
+}
+
+export function promoteProjectToPublic(projectid){
+  return (dispatch) => {
+    socket.emit('makeProjectPublic', projectid);
+  }
+}
+
+export function flagProject(projectId){
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    socket.emit('flaggingProject', { projectId, token: auth.token });
+  }
+}
+
+export function flagCheck(id, token){
+  return (dispatch) => {
+    socket.emit('didUserFlag', { project_id: id, token });
   }
 }

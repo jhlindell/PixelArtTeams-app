@@ -9,7 +9,6 @@ socket.on('returnUserName', (userinfo)=> {
 });
 
 socket.on('sendProjectsToClient', (projects)=> {
-  // console.log("socket actions SPTC projects: ", projects);
   store.dispatch(otherActions.sendProjectsToStore(projects));
 });
 
@@ -77,10 +76,17 @@ socket.on('returnUserRatingForProject', (obj) => {
 
 socket.on('returnAvgRating', (obj) => {
   store.dispatch(otherActions.setAvgProjectRating(obj.project_id, obj.rating));
-})
+});
 
-socket.on('projectClosedOut', () => {
-  store.dispatch(otherActions.selectProject(0));
-})
+socket.on('projectClosedOut', (id) => {
+  const {currentProject} = store.getState();
+  if(id === currentProject){
+    store.dispatch(otherActions.selectProject(0));
+  }
+});
+
+socket.on('flagCheckResult', (bool) => {
+  store.dispatch(otherActions.setFlagCheck(bool));
+});
 
 export default socket;

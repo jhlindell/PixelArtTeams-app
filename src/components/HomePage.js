@@ -65,7 +65,7 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state){
-  return { user: state.userName, auth: state.authReducer, top3: state.top3Reducer }
+  return { auth: state.authReducer, top3: state.top3Reducer }
 }
 
 function mapDispatchToProps(dispatch){

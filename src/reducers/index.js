@@ -179,6 +179,17 @@ function avgProjectRating(state = null, action){
   }
 }
 
+function flagCheckReducer(state = false, action){
+  switch(action.type){
+    case 'SET_FLAG_CHECK':
+      return action.payload;
+    case 'CLEAR_FLAG_CHECK':
+      return false;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -193,7 +204,8 @@ const appReducer = combineReducers({
   galleryShowReducer,
   top3Reducer,
   userRatingReducer,
-  avgProjectRating
+  avgProjectRating,
+  flagCheckReducer
 });
 
 const rootReducer = (state, action) => {
