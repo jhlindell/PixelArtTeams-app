@@ -35,6 +35,7 @@ class NavBar extends React.Component {
     if (this.props.authenticated) {
       // show a link to sign out
       return <li key={'signout'}>
+        <span className="navLink mr-3">{this.props.user && this.props.user.username}</span>
         <Link className="navLink"  to="/signout">Sign Out</Link>
       </li>
     } else {
@@ -74,7 +75,7 @@ class NavBar extends React.Component {
 
 function mapStateToProps(state){
   return { authenticated: state.auth.authenticated,
-    token: state.auth.token, username: state.userName };
+    token: state.auth.token, user: state.userName };
 }
 
 function mapDispatchToProps(dispatch) {
