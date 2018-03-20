@@ -85,4 +85,8 @@ socket.on('projectClosedOut', (id) => {
   }
 });
 
+socket.on('flagCheckResult', (bool) => {
+  store.dispatch(otherActions.setFlagCheck(bool));
+});
+
 export default socket;

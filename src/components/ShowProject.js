@@ -6,9 +6,11 @@ import { getSingleProject,
   updateUserRatingForProject,
   fetchAvgProjectRating,
   deleteProject,
-  promoteProjectToPublic }
+  promoteProjectToPublic,
+  flagProject,
+  flagCheck }
   from '../actions/socketActions';
-import { getCollaborators } from '../actions/index';
+import { getCollaborators, clearFlagCheck } from '../actions/index';
 import DrawCanvas from './DrawCanvas';
 import ReactStars from 'react-stars';
 import moment from 'moment';
@@ -25,12 +27,17 @@ class ShowProject extends Component {
     }
   }
 
-  async componentWillMount(){
+  componentWillMount(){
     let id = this.props.match.params.id;
     this.props.getSingleProject(id);
     this.props.getCollaborators(id);
     this.props.fetchAvgProjectRating(id);
     this.props.fetchUserRatingForProject(id, this.props.auth.token);
+    this.props.flagCheck(id, this.props.auth.token);
+  }
+
+  componentWillUnmount(){
+    this.props.clearFlagCheck();
   }
 
   componentWillReceiveProps(nextProps){
@@ -113,7 +120,13 @@ class ShowProject extends Component {
   promoteToPublic(){
     this.props.promoteProjectToPublic(this.props.project.project_id);
     this.props.getSingleProject(this.props.project.project_id);
-    this.props.history.push(`/project/${this.props.project.project_id}`)
+    this.props.history.push(`/project/${this.props.project.project_id}`);
+  }
+
+  flagInappropriate(){
+    this.props.flagProject(this.props.project.project_id);
+    this.props.history.push(`/project/${this.props.project.project_id}`);
+    this.props.flagCheck(this.props.project.project_id, this.props.auth.token);
   }
 
   render(){
@@ -172,6 +185,9 @@ class ShowProject extends Component {
             <div>
               {this.props.user && this.props.project && !this.props.project.is_public && <button className="btn-primary mt-2" onClick={()=> this.promoteToPublic()}>Make Public</button>}
             </div>
+            <div>
+              {!this.props.projectFlag &&<button className="btn-danger mt-2" onClick={()=> this.flagInappropriate()}>Flag Inappropriate</button>}
+            </div>
           </div>
         </div>
       </div>
@@ -180,11 +196,11 @@ class ShowProject extends Component {
 }
 
 function mapStateToProps(state){
-  return { project: state.galleryShowReducer, collaborators: state.collaborators, auth: state.auth, userRating: state.userRatingReducer, projectAvg: state.avgProjectRating, user: state.userName }
+  return { project: state.galleryShowReducer, collaborators: state.collaborators, auth: state.auth, userRating: state.userRatingReducer, projectAvg: state.avgProjectRating, user: state.userName, projectFlag: state.flagCheckReducer }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getSingleProject, getCollaborators, fetchUserRatingForProject, updateUserRatingForProject, fetchAvgProjectRating, deleteProject, promoteProjectToPublic }, dispatch);
+  return bindActionCreators({ getSingleProject, getCollaborators, fetchUserRatingForProject, updateUserRatingForProject, fetchAvgProjectRating, deleteProject, promoteProjectToPublic, flagProject, flagCheck, clearFlagCheck }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowProject);

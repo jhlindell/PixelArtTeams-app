@@ -177,3 +177,16 @@ export function promoteProjectToPublic(projectid){
     socket.emit('makeProjectPublic', projectid);
   }
 }
+
+export function flagProject(projectId){
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    socket.emit('flaggingProject', { projectId, token: auth.token });
+  }
+}
+
+export function flagCheck(id, token){
+  return (dispatch) => {
+    socket.emit('didUserFlag', { project_id: id, token });
+  }
+}

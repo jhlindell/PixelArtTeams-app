@@ -121,3 +121,11 @@ export function setUserRatingForProject(project_id, rating){
 export function setAvgProjectRating(project_id, rating){
   return {type: 'SET_AVG_PROJECT_RATING', payload: { project_id, rating }};
 }
+
+export function setFlagCheck(bool){
+  return {type: 'SET_FLAG_CHECK', payload: bool };
+}
+
+export function clearFlagCheck(){
+  return {type: 'CLEAR_FLAG_CHECK'};
+}

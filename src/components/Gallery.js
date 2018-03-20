@@ -19,7 +19,7 @@ class Gallery extends Component {
 
   handleChange = (selectedOption) => {
     this.setState({selectedOption});
-    if(selectedOption && selectedOption.value !== 'flagged'){
+    if(selectedOption && selectedOption.value){
       this.props.stockGallery(selectedOption.value);
     }
   }
@@ -69,7 +69,6 @@ class Gallery extends Component {
   }
 
   render(){
-    console.log("gallery: ", this.props.gallery);
     const galleryCards = {};
     galleryCards.display = 'flex';
     galleryCards.justifyContent = 'space-around';
@@ -79,21 +78,25 @@ class Gallery extends Component {
 
     const selectorStyle = {};
     selectorStyle.width = '200px';
-    selectorStyle.textAlign = 'center';
+    //selectorStyle.textAlign = 'center';
     selectorStyle.marginTop = '10px';
+    selectorStyle.marginLeft = 'auto';
+    selectorStyle.marginRight = 'auto';
     selectorStyle.display = 'flex';
+    selectorStyle.justifyContent = 'center';
 
     const container = {};
     container.display = 'flex';
     container.justifyContent = 'center';
     container.alignItems = 'center';
     container.flexDirection = 'column';
+    container.width = '100%';
 
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
 
     return (
-      <div style={container}>
+      <div style={{width: '100%'}}>
         <div className="card" style={selectorStyle}>
           <span>Sort Style:</span>
           <Select
@@ -104,11 +107,12 @@ class Gallery extends Component {
             options={this.state.options}
           />
         </div>
-        <div style={galleryCards}>
-          {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
+        <div style={container}>
+          <div style={galleryCards}>
+            {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
+          </div>
         </div>
       </div>
-
     );
   }
 }

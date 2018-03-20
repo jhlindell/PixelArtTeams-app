@@ -54,7 +54,7 @@ class App extends Component {
     const flex1 = {};
     flex1.display = 'flex';
     flex1.flex = '1 1 100%';
-    flex1.alignItems = 'center';
+    //flex1.alignItems = 'center';
 
     return (
       <Router>
