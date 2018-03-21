@@ -69,7 +69,6 @@ class Gallery extends Component {
   }
 
   render(){
-    console.log('Gallery: ', this.props.gallery);
     const galleryCards = {};
     galleryCards.display = 'flex';
     galleryCards.justifyContent = 'space-around';
