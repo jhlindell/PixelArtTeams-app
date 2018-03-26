@@ -190,6 +190,17 @@ function flagCheckReducer(state = false, action){
   }
 }
 
+function verificationMessageReducer(state = null, action){
+  switch(action.type){
+    case 'SET_VERIFICATION_MESSAGE':
+      return action.payload;
+    case "CLEAR_VERIFICATION_MESSAGE":
+      return null;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -205,7 +216,8 @@ const appReducer = combineReducers({
   top3Reducer,
   userRatingReducer,
   avgProjectRating,
-  flagCheckReducer
+  flagCheckReducer,
+  verificationMessageReducer
 });
 
 const rootReducer = (state, action) => {

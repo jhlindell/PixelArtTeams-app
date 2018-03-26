@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as socketActions from './socketActions';
 const URL = process.env.REACT_APP_API_URL;
 
 export function changeShowMenuState() {
@@ -54,7 +55,7 @@ export function signUpUser({username, email, password}){
     axios.post(`${URL}/signup`, {username, email, password})
       .then(response => {
         if(response.data.token){
-          dispatch({type: 'AUTH_USER', payload: response.data.token });
+          dispatch(socketActions.sendVerificationEmail(username, email, response.data.token));
         } else {
           dispatch(authError(response.data.error));
         }
@@ -69,11 +70,15 @@ export function authError(error) {
   return { type: 'AUTH_ERROR', payload: error };
 }
 
-export function signInUser({username, password}){
+export function signInUser({ username, password }){
   return function(dispatch){
-    axios.post(`${URL}/signin`, {username, password})
+    axios.post(`${URL}/signin`, { username, password })
       .then(response => {
-        dispatch({type: 'AUTH_USER', payload: response.data.token });
+        if(response.data.verified){
+          dispatch({type: 'AUTH_USER', payload: response.data.token });
+        } else {
+          dispatch(authError('Click link in verifiction email to proceed.'));
+        }
       })
       .catch((response) => {
         dispatch(authError(response));
@@ -87,7 +92,7 @@ export function signoutUser(){
 }
 
 export function setUserName(userinfo){
-  return {type: 'USERNAME', payload: userinfo};
+  return {type: 'USERNAME', payload: userinfo };
 }
 
 export function userNameCheck(result, message, username){
@@ -103,15 +108,15 @@ export function clearUserNameCheck(){
 }
 
 export function galleryShow(project){
-  return {type: 'GALLERY_SHOW', payload: project};
+  return {type: 'GALLERY_SHOW', payload: project };
 }
 
 export function galleryTop3(top3){
-  return {type: 'GALLERY_TOP_3', payload: top3};
+  return {type: 'GALLERY_TOP_3', payload: top3 };
 }
 
 export function setCollaborator(username){
-  return {type: 'SET_COLLABORATOR', payload: username};
+  return {type: 'SET_COLLABORATOR', payload: username };
 }
 
 export function setUserRatingForProject(project_id, rating){
@@ -128,4 +133,12 @@ export function setFlagCheck(bool){
 
 export function clearFlagCheck(){
   return {type: 'CLEAR_FLAG_CHECK'};
+}
+
+export function setVerificationMessage(message){
+  return {type: 'SET_VERIFICATION_MESSAGE', payload: message};
+}
+
+export function clearVerificationMessage(){
+  return {type: 'CLEAR_VERIFICATION_MESSAGE'};
 }

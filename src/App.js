@@ -4,6 +4,9 @@ import MainCanvas from './components/MainCanvas';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
+import VerifyEmail from './components/auth/verifyEmail';
+import SignInTrouble from './components/auth/signInTrouble';
+import PasswordReset from './components/auth/passwordReset';
 import About from './components/About';
 import AddNewUser from './components/AddNewUser';
 import HomePage from './components/HomePage';
@@ -68,6 +71,9 @@ class App extends Component {
               <Route path="/signup" component={Signup} />
               <Route path="/signin" component={Signin} />
               <Route path="/signout" component={Signout} />
+              <Route path="/verifyEmail/:hash" component={VerifyEmail} />
+              <Route path="/signInTrouble" component={SignInTrouble} />
+              <Route path="/passwordReset/:hash" component={PasswordReset} />
               <Route path="/about" component={About} />
               <Route path="/store" component={Store} />
 

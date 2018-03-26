@@ -89,4 +89,8 @@ socket.on('flagCheckResult', (bool) => {
   store.dispatch(otherActions.setFlagCheck(bool));
 });
 
+socket.on('hashCheckResult', message => {
+  store.dispatch(otherActions.setVerificationMessage(message))
+})
+
 export default socket;

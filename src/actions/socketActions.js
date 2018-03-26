@@ -190,3 +190,39 @@ export function flagCheck(id, token){
     socket.emit('didUserFlag', { project_id: id, token });
   }
 }
+
+export function sendVerificationEmail(username, email, token){
+  return (dispatch) => {
+    socket.emit('sendVerificationEmail', { username, email, token })
+  }
+}
+
+export function checkUserHash(hash){
+  return (dispatch) => {
+    socket.emit('checkForHash', hash);
+  }
+}
+
+export function forgotUsername(email){
+  return (dispatch) => {
+    socket.emit('forgotUsername', email);
+  }
+}
+
+export function resendVerificationEmail(email){
+  return (dispatch) => {
+    socket.emit('resendVerificationEmail', email);
+  }
+}
+
+export function passwordResetEmail(email){
+  return (dispatch) => {
+    socket.emit('passwordResetEmail', email);
+  }
+}
+
+export function sendPasswordReset(password, hash){
+  return (dispatch) => {
+    socket.emit('sendPasswordReset', { password, hash });
+  }
+}

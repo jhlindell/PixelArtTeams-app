@@ -28,7 +28,7 @@ class ShowProject extends Component {
   }
 
   componentWillMount(){
-    let id = this.props.match.params.id;
+    const id = this.props.match.params.id;
     this.props.getSingleProject(id);
     this.props.getCollaborators(id);
     this.props.fetchAvgProjectRating(id);

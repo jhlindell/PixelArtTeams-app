@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { signUpUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { clearVerificationMessage } from '../../actions/index';
+import { checkUserHash, sendPasswordReset } from '../../actions/socketActions';
 
-class Signup extends Component {
+class PasswordReset extends Component {
   constructor(props){
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      emailSent: false,
-      username: '',
-      email: '',
       password: '',
       passwordConfirm: '',
       errors: {
-        username: '',
-        email: '',
         password: '',
         passwordConfirm: ''
       }
@@ -34,45 +31,18 @@ class Signup extends Component {
     event.preventDefault();
     let valid = this.validate();
     if(valid){
-      let modProps = {};
-      modProps.username = this.state.username.toLowerCase();
-      modProps.email = this.state.email.toLowerCase();
-      modProps.password = this.state.password;
-      modProps.passwordConfirm = this.state.passwordConfirm;
-      this.props.signUpUser(modProps);
-      this.setState({ emailSent: true })
+      this.props.sendPasswordReset(this.state.password, this.props.match.params.hash);
+      console.log("resetting password with: ", this.state.password, this.props.match.params.hash);
+      this.props.history.push('/signin');
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.authenticated){
-      this.props.history.push('/art');
-    }
+  componentWillMount(){
+    this.props.checkUserHash(this.props.match.params.hash);
   }
 
-  renderAlert() {
-    if (this.props.errorMessage) {
-      return (
-        <div className="alert alert-danger">
-          <strong>Oops!</strong> {this.props.errorMessage}
-        </div>
-      );
-    }
-  }
-
-  clear(){
-    this.setState({
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-      errors: {
-        username: '',
-        email: '',
-        password: '',
-        passwordConfirm: ''
-      }
-    });
+  componentWillUnmount(){
+    this.props.clearVerificationMessage();
   }
 
   render(){
@@ -88,22 +58,13 @@ class Signup extends Component {
 
     return (
       <div style={newStyle}>
-        {!this.state.emailSent && <div style={newStyle}>
+        {(!this.props.verificationMessage) && <div className="card">
+          <h3>Checking Password Reset Hash</h3>
+        </div>}
+        {(this.props.verificationMessage && this.props.verificationMessage === 'User Verified') && <div >
           <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
-            <h3>Sign Up</h3>
-            <div className="form-group mt-5">
-              <input name="username" type="text"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.username} placeholder="Username" />
-                {this.state.errors.username && <div>{this.state.errors.username}</div>}
-            </div>
-            <div className="form-group">
-              <input name="email" type="email"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.email} placeholder="Email" />
-                {this.state.errors.email && <div>{this.state.errors.email}</div>}
-            </div>
-            <div className="form-group">
+            <h3>Password Reset:</h3>
+            <div className="form-group mt-3">
               <input name="password" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
                 value={this.state.password} placeholder="Password" />
@@ -115,37 +76,25 @@ class Signup extends Component {
                 value={this.state.passwordConfirm} placeholder="Confirm Password"/>
                 {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
             </div>
-            {this.renderAlert()}
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+            <button className="btn-primary" type="submit">Reset Password</button>
             <button type="button" className="btn btn-secondary"
               onClick={()=> this.props.history.push('/gallery')}>
               Cancel
             </button>
           </form>
         </div>}
-        {this.state.emailSent && <div style={newStyle}>
-          <h3 className="card" style={cardStyle}>Email Sent</h3>
+        {(this.props.verificationMessage && this.props.verificationMessage === 'User Verification Failed') && <div className="card">
+          <h3>There was a problem with the Password Link. Please click below and try again.</h3>
+          <p><Link to='/signInTrouble'>Sign In Issues</Link></p>
         </div>}
       </div>
-    );
+    )
   }
 
   validate() {
     this.clearErrors();
     const errors = {};
     let isValid = true;
-
-    if(!this.state.username){
-      errors.username = 'Please enter a username';
-      isValid = false;
-    }
-
-    if(!this.state.email) {
-      errors.email = 'Please enter an email';
-      isValid = false;
-    }
 
     if(!this.state.password) {
       errors.password = 'Please enter a password';
@@ -168,19 +117,18 @@ class Signup extends Component {
 
   clearErrors(){
     let errors = {};
-    errors.name = '';
-    errors.x = '';
-    errors.y = '';
+    errors.password = '';
+    errors.passwordConfirm = '';
     this.setState({errors: errors });
   }
 }
 
-function mapStateToProps(state) {
-  return { errorMessage: state.auth.error, authenticated: state.auth.authenticated };
-}
 
+function mapStateToProps(state){
+  return { verificationMessage: state.verificationMessageReducer };
+}
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ signUpUser }, dispatch);
+  return bindActionCreators({ checkUserHash, clearVerificationMessage, sendPasswordReset }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordReset);
