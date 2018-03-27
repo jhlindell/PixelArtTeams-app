@@ -40,16 +40,17 @@ socket.on('resultOfAddingPermission', (result) => {
   switch(result){
     case 'success':
       const { currentProject} = store.getState();
+      otherActions.addMessageToContainer('Successfully Added User');
       store.dispatch(otherActions.getCollaborators(currentProject));
       break;
     case 'user already exists':
-      alert('user already exists');
+      otherActions.addMessageToContainer('user already exists');
       break;
     case 'error':
-      alert('problem adding user permission');
+      otherActions.addMessageToContainer('problem adding user permission');
       break;
     default:
-      alert('problem adding user permission')
+      otherActions.addMessageToContainer('problem adding user permission')
   }
 });
 
@@ -81,6 +82,7 @@ socket.on('returnAvgRating', (obj) => {
 socket.on('projectClosedOut', (id) => {
   const {currentProject} = store.getState();
   if(id === currentProject){
+    store.dispatch(otherActions.addMessageToContainer('That Project Was Closed Out'))
     store.dispatch(otherActions.selectProject(0));
   }
 });
@@ -90,7 +92,11 @@ socket.on('flagCheckResult', (bool) => {
 });
 
 socket.on('hashCheckResult', message => {
-  store.dispatch(otherActions.setVerificationMessage(message))
+  store.dispatch(otherActions.setVerificationMessage(message));
+})
+
+socket.on('addMessageToContainer', message => {
+  store.dispatch(otherActions.addMessageToContainer(message));
 })
 
 export default socket;

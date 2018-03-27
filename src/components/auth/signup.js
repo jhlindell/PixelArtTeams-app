@@ -9,7 +9,6 @@ class Signup extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
-      emailSent: false,
       username: '',
       email: '',
       password: '',
@@ -40,7 +39,7 @@ class Signup extends Component {
       modProps.password = this.state.password;
       modProps.passwordConfirm = this.state.passwordConfirm;
       this.props.signUpUser(modProps);
-      this.setState({ emailSent: true })
+      this.props.history.push('/signin');
     }
   }
 
@@ -88,46 +87,41 @@ class Signup extends Component {
 
     return (
       <div style={newStyle}>
-        {!this.state.emailSent && <div style={newStyle}>
-          <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
-            <h3>Sign Up</h3>
-            <div className="form-group mt-5">
-              <input name="username" type="text"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.username} placeholder="Username" />
-                {this.state.errors.username && <div>{this.state.errors.username}</div>}
-            </div>
-            <div className="form-group">
-              <input name="email" type="email"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.email} placeholder="Email" />
-                {this.state.errors.email && <div>{this.state.errors.email}</div>}
-            </div>
-            <div className="form-group">
-              <input name="password" type="password"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.password} placeholder="Password" />
-                {this.state.errors.password && <div>{this.state.errors.password}</div>}
-            </div>
-            <div className="form-group mb-4">
-              <input name="passwordConfirm" type="password"
-                onChange={(e) => {this.handleInputChange(e)}}
-                value={this.state.passwordConfirm} placeholder="Confirm Password"/>
-                {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
-            </div>
-            {this.renderAlert()}
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-            <button type="button" className="btn btn-secondary"
-              onClick={()=> this.props.history.push('/gallery')}>
-              Cancel
-            </button>
-          </form>
-        </div>}
-        {this.state.emailSent && <div style={newStyle}>
-          <h3 className="card" style={cardStyle}>Email Sent</h3>
-        </div>}
+        <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
+          <h3>Sign Up</h3>
+          <div className="form-group mt-5">
+            <input name="username" type="text"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.username} placeholder="Username" />
+              {this.state.errors.username && <div>{this.state.errors.username}</div>}
+          </div>
+          <div className="form-group">
+            <input name="email" type="email"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.email} placeholder="Email" />
+              {this.state.errors.email && <div>{this.state.errors.email}</div>}
+          </div>
+          <div className="form-group">
+            <input name="password" type="password"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.password} placeholder="Password" />
+              {this.state.errors.password && <div>{this.state.errors.password}</div>}
+          </div>
+          <div className="form-group mb-4">
+            <input name="passwordConfirm" type="password"
+              onChange={(e) => {this.handleInputChange(e)}}
+              value={this.state.passwordConfirm} placeholder="Confirm Password"/>
+              {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
+          </div>
+          {this.renderAlert()}
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <button type="button" className="btn btn-secondary"
+            onClick={()=> this.props.history.push('/gallery')}>
+            Cancel
+          </button>
+        </form>
       </div>
     );
   }

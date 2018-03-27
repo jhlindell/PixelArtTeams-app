@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gallery from './components/Gallery';
+import MessageContainer from './components/MessageContainer';
 import MainCanvas from './components/MainCanvas';
 import Signup from './components/auth/signup';
 import Signin from './components/auth/signin';
@@ -64,6 +65,9 @@ class App extends Component {
         <div className="App-body" style={flexCol}>
           <div style={flex0}>
             <NavBar />
+          </div>
+          <div style={flex0}>
+            <MessageContainer />
           </div>
           <div style={flex1} id="mainBlock">
             <Switch>

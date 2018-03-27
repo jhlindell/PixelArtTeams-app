@@ -20,7 +20,6 @@ class VerifyEmail extends Component {
     newStyle.margin = 'auto';
     newStyle.textAlign = 'center';
 
-
     return (
       <div style={newStyle}>
         {(!this.props.verificationMessage) && <div className="card">
@@ -32,7 +31,7 @@ class VerifyEmail extends Component {
         </div>}
         {(this.props.verificationMessage && this.props.verificationMessage === 'User Verification Failed') && <div className="card">
           <h3>There was a problem with verification please click below to try again</h3>
-          <p><Link to='/signup'>Sign In</Link></p>
+          <p><Link to='/signin'>Sign In</Link></p>
         </div>}
       </div>
     )

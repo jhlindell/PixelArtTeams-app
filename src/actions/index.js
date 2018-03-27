@@ -142,3 +142,14 @@ export function setVerificationMessage(message){
 export function clearVerificationMessage(){
   return {type: 'CLEAR_VERIFICATION_MESSAGE'};
 }
+
+export function addMessageToContainer(message){
+  let timeStamp = new Date().toString();
+  let id = message + timeStamp;
+  let messageObject = { message, id: id}
+  return {type: 'ADD_MESSAGE', payload: messageObject};
+}
+
+export function clearMessage(id){
+  return {type: 'CLEAR_MESSAGE', payload: id};
+}
