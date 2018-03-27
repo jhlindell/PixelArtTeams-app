@@ -1,4 +1,4 @@
-#L7 Software presents: Pixel Art Teams!
+# L7 Software presents: Pixel Art Teams!
 
 ## What is this application?
 Pixel Art Teams is a full stack application that allows users to create art together.
