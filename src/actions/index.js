@@ -153,3 +153,7 @@ export function addMessageToContainer(message){
 export function clearMessage(id){
   return {type: 'CLEAR_MESSAGE', payload: id};
 }
+
+export function clearAuthError(){
+  return {type: 'CLEAR_AUTH_ERROR' };
+}

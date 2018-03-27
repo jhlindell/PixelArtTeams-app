@@ -103,7 +103,10 @@ function authReducer(state = {}, action){
       localStorage.removeItem('token');
       return { ...state, authenticated: false };
     case 'AUTH_ERROR':
-      const error = styleErrorCode(action.payload)
+      let error = styleErrorCode(action.payload)
+      return { ...state, error };
+    case 'CLEAR_AUTH_ERROR':
+      error = '';
       return { ...state, error };
     default:
       return state;

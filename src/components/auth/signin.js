@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signInUser } from '../../actions/index';
+import { signInUser, clearAuthError } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,10 @@ class Signin extends Component {
       username: '',
       password: ''
     };
+  }
+
+  componentWillMount(){
+    this.props.clearAuthError();
   }
 
   componentWillReceiveProps(nextProps){
@@ -53,34 +57,44 @@ class Signin extends Component {
     container.margin = 'auto';
 
     const cardStyle = {};
-    cardStyle.padding = '20px';
     cardStyle.display = 'flex';
     cardStyle.textAlign = 'center';
 
+    const bodyStyle = {};
+    bodyStyle.display = 'flex';
+    bodyStyle.flexDirection = 'column';
+    bodyStyle.justifyContent = 'center';
+
     return (
       <div style={container}>
-        <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
-          <h3>Please Sign In</h3>
-          <div className="form-group mt-5">
-            <input name="username" type="text"
-              onChange={(e) => {this.handleInputChange(e)}}
-              placeholder="Username" value={this.state.username} />
+        <div className="card" style={cardStyle}>
+          <div className="card-header">
+            <h3>Please Sign In</h3>
           </div>
-          <div className="form-group">
-            <input name="password" type="password"
-              onChange={(e) => {this.handleInputChange(e)}}
-              placeholder="Password" value={this.state.password} />
+          <div className="card-block" >
+            <form onSubmit={this.handleFormSubmit} style={bodyStyle}>
+              <div className="form-group mt-2">
+                <input name="username" type="text"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  placeholder="Username" value={this.state.username} />
+              </div>
+              <div className="form-group">
+                <input name="password" type="password"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  placeholder="Password" value={this.state.password} />
+              </div>
+              {this.renderAlert()}
+              <Link className="mb-2" to="/signInTrouble">Trouble Signing In?</Link>
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+              <button type="button" className="btn btn-secondary"
+                onClick={()=> this.cancel()}>
+                Cancel
+              </button>
+            </form>
           </div>
-          {this.renderAlert()}
-          <Link to="/signInTrouble">Trouble Signing In?</Link>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-          <button type="button" className="btn btn-secondary"
-            onClick={()=> this.cancel()}>
-            Cancel
-          </button>
-        </form>
+        </div>
       </div>
     );
   }
@@ -91,7 +105,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({signInUser}, dispatch);
+  return bindActionCreators({ signInUser, clearAuthError }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);
