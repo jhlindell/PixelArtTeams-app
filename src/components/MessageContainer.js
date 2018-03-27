@@ -16,6 +16,7 @@ const containerStyle = {
 };
 const cardStyle = {
   padding: '5px',
+  margin: '2px',
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'row',
