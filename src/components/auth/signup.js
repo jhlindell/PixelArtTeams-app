@@ -82,7 +82,6 @@ class Signup extends Component {
     const newStyle = {};
     newStyle.display = 'flex';
     newStyle.margin = 'auto';
-    newStyle.textAlign = 'center';
 
     const cardStyle = {};
     cardStyle.width = '250px';
