@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectProject } from '../actions/index';
+import { getProjects } from '../actions/socketActions';
 import ProjectSelectorCard from './ProjectSelectorCard';
 import Easel from '../easel.png'
 
 class ProjectSelector extends Component {
+  componentWillMount(){
+    this.props.getProjects();
+  }
 
   render(){
     const newStyle = {};
@@ -51,7 +55,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectProject }, dispatch);
+  return bindActionCreators({ selectProject, getProjects }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectSelector);

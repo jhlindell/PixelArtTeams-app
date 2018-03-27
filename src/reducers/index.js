@@ -190,6 +190,38 @@ function flagCheckReducer(state = false, action){
   }
 }
 
+function verificationMessageReducer(state = null, action){
+  switch(action.type){
+    case 'SET_VERIFICATION_MESSAGE':
+      return action.payload;
+    case "CLEAR_VERIFICATION_MESSAGE":
+      return null;
+    default:
+      return state;
+  }
+}
+
+function messageReducer(state = [], action){
+  switch(action.type){
+    case 'ADD_MESSAGE':
+      const message = action.payload;
+      return [ ...state, message ];
+
+    case 'CLEAR_MESSAGE':
+      let stateArray = state;
+      let filteredArray = stateArray.filter(message => {
+        if(message.id && message.id !== action.payload){
+          return message;
+        }
+        return null;
+      });
+      return filteredArray;
+
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -205,7 +237,9 @@ const appReducer = combineReducers({
   top3Reducer,
   userRatingReducer,
   avgProjectRating,
-  flagCheckReducer
+  flagCheckReducer,
+  verificationMessageReducer,
+  messageReducer
 });
 
 const rootReducer = (state, action) => {

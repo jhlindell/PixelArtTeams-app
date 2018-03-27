@@ -45,7 +45,7 @@ class NavBar extends React.Component {
           <Link className="navLink"  to="/signin">Sign In</Link>
         </li>,
         <li key={'signup'}>
-          <Link className="navLink" key={'signup'} to="/signup">Sign Up</Link>
+          <Link className="navLink" to="/signup">Sign Up</Link>
         </li>
       ];
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { signInUser } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Signin extends Component {
   constructor(props){
@@ -47,13 +48,18 @@ class Signin extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
+    const container = {};
+    container.display = 'flex';
+    container.margin = 'auto';
+
+    const cardStyle = {};
+    cardStyle.padding = '20px';
+    cardStyle.display = 'flex';
+    cardStyle.textAlign = 'center';
 
     return (
-      <div style={newStyle}>
-        <form onSubmit={this.handleFormSubmit}>
+      <div style={container}>
+        <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
           <h3>Please Sign In</h3>
           <div className="form-group mt-5">
             <input name="username" type="text"
@@ -66,10 +72,11 @@ class Signin extends Component {
               placeholder="Password" value={this.state.password} />
           </div>
           {this.renderAlert()}
+          <Link to="/signInTrouble">Trouble Signing In?</Link>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          <button type="button" className="btn btn-secondary ml-2"
+          <button type="button" className="btn btn-secondary"
             onClick={()=> this.cancel()}>
             Cancel
           </button>

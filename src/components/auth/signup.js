@@ -39,7 +39,7 @@ class Signup extends Component {
       modProps.password = this.state.password;
       modProps.passwordConfirm = this.state.passwordConfirm;
       this.props.signUpUser(modProps);
-      this.props.history.push('/art');
+      this.props.history.push('/signin');
     }
   }
 
@@ -80,9 +80,14 @@ class Signup extends Component {
     newStyle.margin = 'auto';
     newStyle.textAlign = 'center';
 
+    const cardStyle = {};
+    cardStyle.padding = '20px';
+    cardStyle.display = 'flex';
+    cardStyle.textAlign = 'center';
+
     return (
       <div style={newStyle}>
-        <form onSubmit={this.handleFormSubmit}>
+        <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
           <h3>Sign Up</h3>
           <div className="form-group mt-5">
             <input name="username" type="text"
@@ -112,10 +117,6 @@ class Signup extends Component {
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          {/* <button type="button" className="btn btn-secondary"
-            onClick={()=> this.clear()}>
-            Clear
-          </button> */}
           <button type="button" className="btn btn-secondary"
             onClick={()=> this.props.history.push('/gallery')}>
             Cancel
@@ -166,7 +167,6 @@ class Signup extends Component {
     errors.y = '';
     this.setState({errors: errors });
   }
-
 }
 
 function mapStateToProps(state) {
