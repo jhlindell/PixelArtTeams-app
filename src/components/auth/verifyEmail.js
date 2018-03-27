@@ -15,19 +15,27 @@ class VerifyEmail extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
-    newStyle.textAlign = 'center';
+    const containerStyle = {};
+    containerStyle.display = 'flex';
+    containerStyle.margin = 'auto';
+    containerStyle.textAlign = 'center';
+
+    const linkStyle = {};
+    linkStyle.fontSize = '22px';
+    // linkStyle.padding = '10px';
 
     return (
-      <div style={newStyle}>
+      <div style={containerStyle}>
         {(!this.props.verificationMessage) && <div className="card">
           <h3>Checking Verification</h3>
         </div>}
         {(this.props.verificationMessage && this.props.verificationMessage === 'User Verified') && <div className="card">
-          <h3>Congrats! You've been verified. Click below to sign in</h3>
-          <a><Link to='/signin'>Sign In</Link></a>
+          <div className="card-header">
+            <h3>Congrats! You've been verified.</h3>
+          </div>
+          <div className="card-block">
+            <Link style={linkStyle} to='/signin'>Sign In</Link>
+          </div>
         </div>}
         {(this.props.verificationMessage && this.props.verificationMessage === 'User Verification Failed') && <div className="card">
           <h3>There was a problem with verification please click below to try again</h3>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signUpUser } from '../../actions/index';
+import { signUpUser, clearAuthError } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -43,6 +43,10 @@ class Signup extends Component {
     }
   }
 
+  componentWillMount(){
+    this.props.clearAuthError();
+  }
+
   componentWillReceiveProps(nextProps){
     if(nextProps.authenticated){
       this.props.history.push('/art');
@@ -81,47 +85,58 @@ class Signup extends Component {
     newStyle.textAlign = 'center';
 
     const cardStyle = {};
-    cardStyle.padding = '20px';
+    cardStyle.width = '250px';
     cardStyle.display = 'flex';
     cardStyle.textAlign = 'center';
 
+    const bodyStyle = {};
+    bodyStyle.display = 'flex';
+    bodyStyle.flexDirection = 'column';
+    bodyStyle.justifyContent = 'center';
+
     return (
       <div style={newStyle}>
-        <form className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
-          <h3>Sign Up</h3>
-          <div className="form-group mt-5">
-            <input name="username" type="text"
-              onChange={(e) => {this.handleInputChange(e)}}
-              value={this.state.username} placeholder="Username" />
-              {this.state.errors.username && <div>{this.state.errors.username}</div>}
+        <div className="card" style={cardStyle} >
+          <div className="card-header">
+            <h3>Sign Up</h3>
           </div>
-          <div className="form-group">
-            <input name="email" type="email"
-              onChange={(e) => {this.handleInputChange(e)}}
-              value={this.state.email} placeholder="Email" />
-              {this.state.errors.email && <div>{this.state.errors.email}</div>}
+          <div className='card-block'>
+            <form onSubmit={this.handleFormSubmit} style={bodyStyle}>
+              <div className="form-group mt-2">
+                <input name="username" type="text"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  value={this.state.username} placeholder="Username" />
+                  {this.state.errors.username && <div>{this.state.errors.username}</div>}
+              </div>
+              <div className="form-group">
+                <input name="email" type="email"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  value={this.state.email} placeholder="Email" />
+                  {this.state.errors.email && <div>{this.state.errors.email}</div>}
+              </div>
+              <div className="form-group">
+                <input name="password" type="password"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  value={this.state.password} placeholder="Password" />
+                  {this.state.errors.password && <div>{this.state.errors.password}</div>}
+              </div>
+              <div className="form-group mb-4">
+                <input name="passwordConfirm" type="password"
+                  onChange={(e) => {this.handleInputChange(e)}}
+                  value={this.state.passwordConfirm} placeholder="Confirm Password"/>
+                  {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
+              </div>
+              {this.renderAlert()}
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+              <button type="button" className="btn btn-secondary"
+                onClick={()=> this.props.history.push('/gallery')}>
+                Cancel
+              </button>
+            </form>
           </div>
-          <div className="form-group">
-            <input name="password" type="password"
-              onChange={(e) => {this.handleInputChange(e)}}
-              value={this.state.password} placeholder="Password" />
-              {this.state.errors.password && <div>{this.state.errors.password}</div>}
-          </div>
-          <div className="form-group mb-4">
-            <input name="passwordConfirm" type="password"
-              onChange={(e) => {this.handleInputChange(e)}}
-              value={this.state.passwordConfirm} placeholder="Confirm Password"/>
-              {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
-          </div>
-          {this.renderAlert()}
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-          <button type="button" className="btn btn-secondary"
-            onClick={()=> this.props.history.push('/gallery')}>
-            Cancel
-          </button>
-        </form>
+        </div>
       </div>
     );
   }
@@ -174,7 +189,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ signUpUser }, dispatch);
+  return bindActionCreators({ signUpUser, clearAuthError }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
