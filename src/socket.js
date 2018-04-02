@@ -93,10 +93,14 @@ socket.on('flagCheckResult', (bool) => {
 
 socket.on('hashCheckResult', message => {
   store.dispatch(otherActions.setVerificationMessage(message));
-})
+});
 
 socket.on('addMessageToContainer', message => {
   store.dispatch(otherActions.addMessageToContainer(message));
-})
+});
+
+socket.on('chatMessage', (obj) => {
+  store.dispatch(otherActions.addChatMessage(obj.username, obj.message));
+});
 
 export default socket;

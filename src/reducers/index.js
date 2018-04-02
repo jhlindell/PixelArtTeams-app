@@ -225,6 +225,20 @@ function messageReducer(state = [], action){
   }
 }
 
+function chatReducer(state = [], action){
+  switch(action.type){
+    case 'ADD_CHAT_MESSAGE':
+      const message = action.payload;
+      return [...state, message];
+
+    case 'CLEAR_CHAT_MESSAGES':
+      return [];
+
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -242,7 +256,8 @@ const appReducer = combineReducers({
   avgProjectRating,
   flagCheckReducer,
   verificationMessageReducer,
-  messageReducer
+  messageReducer,
+  chatReducer
 });
 
 const rootReducer = (state, action) => {

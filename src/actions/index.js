@@ -77,7 +77,7 @@ export function signInUser({ username, password }){
         if(response.data.verified){
           dispatch({type: 'AUTH_USER', payload: response.data.token });
         } else {
-          dispatch(authError('Click link in verifiction email to proceed.'));
+          dispatch(authError('Click link in verification email to proceed.'));
         }
       })
       .catch((response) => {
@@ -156,4 +156,12 @@ export function clearMessage(id){
 
 export function clearAuthError(){
   return {type: 'CLEAR_AUTH_ERROR' };
+}
+
+export function addChatMessage(username, message){
+  return {type: 'ADD_CHAT_MESSAGE', payload: {username, message}};
+}
+
+export function clearChat(){
+  return {type: 'CLEAR_CHAT_MESSAGES' };
 }

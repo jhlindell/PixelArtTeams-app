@@ -226,3 +226,10 @@ export function sendPasswordReset(password, hash){
     socket.emit('sendPasswordReset', { password, hash });
   }
 }
+
+export function submitChatMessage(username, message){
+  return (dispatch, getState) => {
+    const { currentProject } = getState();
+    socket.emit('submitChatMessage', { username, message, currentProject });
+  }
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from './Grid';
 import Palette from './Palette';
 import ProjectSelector from './ProjectSelector';
+import ChatContainer from './ChatContainer';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getProjects, saveProject, sendFinishedProject } from '../actions/socketActions';
@@ -103,27 +104,35 @@ class MainCanvas extends Component {
       canvasStyle.display = 'flex';
       canvasStyle.flexDirection = 'column';
 
+      const ArtAndChat = {};
+      ArtAndChat.display = 'flex';
+      ArtAndChat.justifyContent = 'space-around';
+      ArtAndChat.alignItems = 'center';
+      ArtAndChat.flexWrap = 'wrap';
+
       return (
-        <div style={canvasStyle} id="mainCanvas2">
-          <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins} finishTime={this.state.finishTime} />
-          <Palette canvasWidth={canvasXSize}
-            topMargin={vertMargins}/>
+        <div style={ArtAndChat}>
+          <div style={canvasStyle} id="mainCanvas2">
+            <Grid grid={this.props.grid} pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY} x={this.state.x} y={this.state.y} vertMargins={vertMargins} finishTime={this.state.finishTime} />
+            <Palette canvasWidth={canvasXSize}
+              topMargin={vertMargins}/>
+          </div>
+          <ChatContainer />
         </div>
       );
     }
   };
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.justifyContent = 'center';
-    newStyle.alignItems = 'center';
-    // newStyle.backgroundImage = `url(${Background})`;
-    newStyle.height = '100%';
-    newStyle.margin = 'auto';
+    const containerStyle = {};
+    containerStyle.display = 'flex';
+    containerStyle.justifyContent = 'center';
+    containerStyle.alignItems = 'center';
+    containerStyle.height = '100%';
+    containerStyle.margin = 'auto';
 
     return (
-      <div style={newStyle} id="MainCanvas1">
+      <div style={containerStyle} id="MainCanvas1">
         {this.renderComp()}
       </div>
     )
