@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { checkUserForAdd, addNewProject } from '../actions/socketActions';
-import { clearUserNameCheck } from '../actions/index';
+import { clearUserNameCheck, addMessageToContainer } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class NewProject extends Component {
@@ -35,8 +35,7 @@ class NewProject extends Component {
         this.props.clearUserNameCheck();
       }
       if(nextProps.user.result === false){
-        // this.setState({ user_exists: false })
-        console.log("user doesn't exist: ", nextProps.user);
+        this.props.addMessageToContainer("user doesn't exist");
       }
     }
   }
@@ -54,8 +53,6 @@ class NewProject extends Component {
     if(valid){
       this.props.addNewProject(this.state.project_name, this.state.x, this.state.y, this.state.timer, this.state.collaborators);
       this.props.history.push('/art');
-    } else {
-      console.log("errors: ", this.state.errors);
     }
   }
 
@@ -286,7 +283,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ addNewProject, clearUserNameCheck, checkUserForAdd }, dispatch);
+  return bindActionCreators({ addNewProject, clearUserNameCheck, checkUserForAdd, addMessageToContainer }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewProject);
