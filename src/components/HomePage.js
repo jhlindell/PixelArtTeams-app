@@ -55,9 +55,10 @@ class HomePage extends Component {
         </div>
         <div className="card" style={aboutCard}>
           <h2 className="mt-2" style={aboutText}>About Pixel Art Teams</h2>
-          <p>A bunch of stuff about pixel art teams.</p>
+          <p>Pixel Art Teams is a collaborative art maker that allows you and your friends to work together to make art.</p>
           <h2 style={aboutText}>How It Works</h2>
-          <p>Some instructions.</p>
+          <p>Click through and scroll down to the readme for a walkthrough of the app.</p>
+          <a href="https://github.com/jhlindell/PixelArtTeams-app">Walkthrough</a>
         </div>
       </div>
     )
