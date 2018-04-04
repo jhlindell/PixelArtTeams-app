@@ -233,3 +233,9 @@ export function submitChatMessage(username, message){
     socket.emit('submitChatMessage', { username, message, currentProject });
   }
 }
+
+export function sendSupportEmail(name, email, message){
+  return (dispatch) => {
+    socket.emit('sendSupportEmail', { name, email, message });
+  }
+}
