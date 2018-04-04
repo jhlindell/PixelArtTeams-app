@@ -9,6 +9,8 @@ class Signup extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
+      showTerms: false,
+      termsAccepted: false,
       username: '',
       email: '',
       password: '',
@@ -53,6 +55,14 @@ class Signup extends Component {
     }
   }
 
+  agreeToTerms(){
+    this.setState({showTerms: false, termsAccepted: true});
+  }
+
+  showToS(){
+    this.setState({showTerms: true});
+  }
+
   renderAlert() {
     if (this.props.errorMessage) {
       return (
@@ -88,6 +98,11 @@ class Signup extends Component {
     cardStyle.display = 'flex';
     cardStyle.textAlign = 'center';
 
+    const ToSStyle = {};
+    ToSStyle.width = '750px';
+    ToSStyle.display = 'flex';
+    ToSStyle.textAlign = 'center';
+
     const bodyStyle = {};
     bodyStyle.display = 'flex';
     bodyStyle.flexDirection = 'column';
@@ -95,7 +110,44 @@ class Signup extends Component {
 
     return (
       <div style={newStyle}>
-        <div className="card" style={cardStyle} >
+        {this.state.showTerms && <div className="card" style={ToSStyle} >
+          <div className="card-header">
+            <h3>Terms of Service</h3>
+          </div>
+          <div className='card-block'>
+            <p>
+              These terms may be updated at any time. When these terms are modified, you must agree to the updated terms to continue creating artwork on this website.
+            </p>
+            <p>
+              You agree to license any artwork you create on this website under the Creative Commons Attribution 4.0 International license. <a href='https://creativecommons.org/licenses/by/4.0/'>(CC BY 4.0).</a> Attribution is denoted with your username in the Pixel Art Teams gallery. In the gallery, each completed canvas lists the usernames of all participants.
+            </p>
+            <p>
+              You agree to avoid creating pornographic artwork on this website. Any user may flag a completed canvas for review. Our moderators may hide any artwork that we consider to be inappropriate.
+            </p>
+            <p>
+              You agree to avoid creating artwork that infringes on copyrighted material. For example, you may not spell out the words “Star Wars” or draw a picture of “Batman” on your canvas. Any user may flag a completed canvas for review. Our moderators may hide any artwork that appears to infringe an existing copyright.
+            </p>
+            <p>
+              You agree that others may see your username and any other information you provide on your public profile page.
+            </p>
+            <p>
+              You agree to avoid any form of bullying or harassment in your chat messages. Any user may submit a complaint about your chatting behavior. Our moderators may ban users as deemed appropriate.
+            </p>
+            <p>
+              You agree that anyone can view artwork that you or your team leader promotes to the public gallery.
+            </p>
+            <p>
+              You agree that users can rate any artwork in the public gallery.
+            </p>
+            <p>
+              Be creative and be cool to others.
+            </p>
+          </div>
+          <div className='card-footer'>
+            <button type='button' className="btn btn-primary" onClick={()=>this.agreeToTerms()}>I agree to these terms.</button>
+          </div>
+        </div>}
+        {!this.state.showTerms && <div className="card" style={cardStyle} >
           <div className="card-header">
             <h3>Sign Up</h3>
           </div>
@@ -126,16 +178,17 @@ class Signup extends Component {
                   {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
               </div>
               {this.renderAlert()}
-              <button type="submit" className="btn btn-primary">
+              {!this.state.showTerms && !this.state.termsAccepted && <button type="button" className="btn btn-primary" onClick={()=>this.showToS()}>View Terms</button>}
+              {this.state.termsAccepted && <button type="submit" className="btn btn-primary">
                 Submit
-              </button>
+              </button>}
               <button type="button" className="btn btn-secondary"
                 onClick={()=> this.props.history.push('/gallery')}>
                 Cancel
               </button>
             </form>
           </div>
-        </div>
+        </div>}
       </div>
     );
   }

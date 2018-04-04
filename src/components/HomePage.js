@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GalleryPiece from './GalleryPiece';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getGalleryTop3 } from '../actions/socketActions';
@@ -55,10 +56,20 @@ class HomePage extends Component {
         </div>
         <div className="card" style={aboutCard}>
           <h2 className="mt-2" style={aboutText}>About Pixel Art Teams</h2>
-          <p>Pixel Art Teams is a collaborative art maker that allows you and your friends to work together to make art.</p>
-          <h2 style={aboutText}>How It Works</h2>
-          <p>Click through and scroll down to the readme for a walkthrough of the app.</p>
-          <a href="https://github.com/jhlindell/PixelArtTeams-app">Walkthrough</a>
+          <p className="mt-2">Making artwork is fun. Working together with others to make artwork can be even more fun. Welcome to Pixel Art Teams.
+
+          This website lets up to ten people work together to create artwork, one pixel at a time. The website supports a fun team-building process that is easy to learn and endlessly rewarding.
+
+          Getting started is simple. You create a canvas, invite your friends, and work together to make art. Learn more <Link to="/about">here</Link>, or select <Link to='/newProject'>Make Art</Link> to begin.
+
+          When your work is complete, you can add it to our <Link to='/gallery'>Gallery. </Link>Enjoy!</p>
+          <h2 style={aboutText}>About Us</h2>
+          <p>Ionogen Media is a small entertainment company owned by Michael and Karilyn Starks. Jon Lindell is the lead engineer who has created the bulk of the content on this website.
+
+          “Contact us” with any feedback you want to provide.
+
+          Enjoy making art together with others.
+          </p>
         </div>
       </div>
     )
