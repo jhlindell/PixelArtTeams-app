@@ -19,6 +19,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ShowProject from './components/ShowProject';
 import Store from './components/Store';
 import Footer from './components/Footer';
+import CustomerSupport from './components/CustomerSupport';
 import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
@@ -80,6 +81,7 @@ class App extends Component {
               <Route path="/passwordReset/:hash" component={PasswordReset} />
               <Route path="/about" component={About} />
               <Route path="/store" component={Store} />
+              <Route path="/customerSupport" component={CustomerSupport} />
 
               <Route path="/gallery" component={Gallery} />
               <Route path="/project/:id" component={ShowProject} />

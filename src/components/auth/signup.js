@@ -229,9 +229,10 @@ class Signup extends Component {
 
   clearErrors(){
     let errors = {};
-    errors.name = '';
-    errors.x = '';
-    errors.y = '';
+    errors.username = '';
+    errors.email = '';
+    errors.password = '';
+    errors.passwordConfirm = '';
     this.setState({errors: errors });
   }
 }
