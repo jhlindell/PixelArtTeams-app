@@ -1,41 +1,54 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { stripeMessage } from '../actions/index';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 
-// const STRIPE_PUBLISHABLE = process.env.STRIPE_PUBLISHABLE;
-const STRIPE_PUBLISHABLE = 'pk_test_Z2bJUZEdLekU7Y0ZN40HI3uB';
+const STRIPE_PUBLISHABLE = process.env.REACT_APP_STRIPE_PUBLISHABLE;
 const PAYMENT_SERVER_URL = process.env.REACT_APP_API_URL;
 const CURRENCY = 'USD';
 
-const fromUSDToCent = amount => amount * 100;
+class Checkout extends Component{
+  fromUSDToCent = amount => amount * 100;
 
-const successPayment = data => {
-  alert('Payment Successful');
-};
+  successPayment = data => {
+    this.props.stripeMessage('Success');
+  };
 
-const errorPayment = data => {
-  alert('Payment Error');
-};
+  errorPayment = data => {
+    this.props.stripeMessage('Error');
+  };
 
-const onToken = (amount, description) => token =>
-  axios.post(`${PAYMENT_SERVER_URL}/api/payment`,
-    {
-      description,
-      source: token.id,
-      currency: CURRENCY,
-      amount: fromUSDToCent(amount)
-    })
-    .then(successPayment)
-    .catch(errorPayment);
+  onToken = (amount, description) => token =>
+    axios.post(`${PAYMENT_SERVER_URL}/api/payment`,
+      {
+        description,
+        source: token.id,
+        currency: CURRENCY,
+        amount: this.fromUSDToCent(amount)
+      })
+      .then(this.successPayment)
+      .catch(this.errorPayment);
 
-const Checkout = ({ name, description, amount }) =>
-  <StripeCheckout
-    name={name}
-    description={description}
-    amount={fromUSDToCent(amount)}
-    token={onToken(amount, description)}
-    currency={CURRENCY}
-    stripeKey={STRIPE_PUBLISHABLE}
-  />
+  render(){
+    const { name, description, amount } = this.props;
 
-export default Checkout;
+    return (
+      <StripeCheckout
+        name={name}
+        description={description}
+        amount={this.fromUSDToCent(amount)}
+        token={this.onToken(amount, description)}
+        currency={CURRENCY}
+        stripeKey={STRIPE_PUBLISHABLE}
+      />
+    )
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ stripeMessage }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Checkout);

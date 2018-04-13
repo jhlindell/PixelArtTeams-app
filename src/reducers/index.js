@@ -239,6 +239,19 @@ function chatReducer(state = [], action){
   }
 }
 
+function stripeMessageReducer(state=null, action){
+  switch(action.type){
+    case 'SET_STRIPE_MESSAGE':
+      return action.payload;
+
+    case 'CLEAR_STRIPE_MESSAGE':
+      return null;
+
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   activeColor,
   gridReducer,
@@ -257,7 +270,8 @@ const appReducer = combineReducers({
   flagCheckReducer,
   verificationMessageReducer,
   messageReducer,
-  chatReducer
+  chatReducer,
+  stripeMessageReducer
 });
 
 const rootReducer = (state, action) => {

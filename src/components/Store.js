@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Checkout from './Checkout';
 import CurrencyFormat from 'react-currency-format';
 
@@ -16,11 +17,12 @@ class Store extends Component {
     this.setState({ showCheckout: !this.state.showCheckout });
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({[name]: value});
+  stripeMessage(){
+    if(this.props.stripeMessage && this.props.stripeMessage === 'Success'){
+      return <h3>Your Donation Was Successful. Thank You!</h3>;
+    } else {
+      return <h3>There was a problem with your donation</h3>;
+    }
   }
 
   render(){
@@ -39,11 +41,11 @@ class Store extends Component {
 
     return (
       <div className="card" style={cardStyle}>
-        {!this.state.showCheckout && <div>
+        {!this.props.stripeMessage && !this.state.showCheckout && <div>
           <h3>Store development is in a future feature release. If you feel that your life has been immesurably enriched by this app and you want to give us money to show your eternal gratitude, click the button below.</h3>
           <button className="btn btn-primary mt-3" onClick={()=> this.changeShowState()}>I Want to Give You Money</button>
         </div>}
-        {this.state.showCheckout && <div>
+        {!this.props.stripeMessage && this.state.showCheckout && <div>
           <h3>Donations are greatly appreciated. To proceed, please enter the donation amount and click the button below to process with Stripe.</h3>
           <div style={columnStyle} className="mt-4">
             <CurrencyFormat className="mb-2" style={{textAlign: 'right'}} value={this.state.formattedAmount} thousandSeparator={true} prefix={'$'} fixedDecimalScale={true} decimalScale={0} onValueChange={(values) => {
@@ -57,9 +59,16 @@ class Store extends Component {
             />
           </div>
         </div>}
+        {this.props.stripeMessage && <div>
+          {this.stripeMessage()}
+        </div>}
       </div>
     )
   }
 }
 
-export default Store;
+function mapStateToProps(state){
+  return { stripeMessage: state.stripeMessageReducer };
+}
+
+export default connect(mapStateToProps, null)(Store);

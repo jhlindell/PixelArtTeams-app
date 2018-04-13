@@ -165,3 +165,11 @@ export function addChatMessage(username, message){
 export function clearChat(){
   return {type: 'CLEAR_CHAT_MESSAGES' };
 }
+
+export function stripeMessage(message){
+  return {type: 'SET_STRIPE_MESSAGE', payload: message };
+}
+
+export function clearStripeMessage(){
+  return {type: 'CLEAR_STRIPE_MESSAGE'};
+}
