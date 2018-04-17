@@ -42,11 +42,11 @@ class Store extends Component {
     return (
       <div className="card" style={cardStyle}>
         {!this.props.stripeMessage && !this.state.showCheckout && <div>
-          <h3>Store development is in a future feature release. If you feel that your life has been immesurably enriched by this app and you want to give us money to show your eternal gratitude, click the button below.</h3>
+          <h4>Store development is in a future feature release. If you feel that your life has been immesurably enriched by this app and you want to give us money to show your eternal gratitude, click the button below.</h4>
           <button className="btn btn-primary mt-3" onClick={()=> this.changeShowState()}>I Want to Give You Money</button>
         </div>}
         {!this.props.stripeMessage && this.state.showCheckout && <div>
-          <h3>Donations are greatly appreciated. To proceed, please enter the donation amount and click the button below to process with Stripe.</h3>
+          <h4>Donations are greatly appreciated. To proceed, please enter the donation amount and click the button below to process with Stripe.</h4>
           <div style={columnStyle} className="mt-4">
             <CurrencyFormat className="mb-2" style={{textAlign: 'right'}} value={this.state.formattedAmount} thousandSeparator={true} prefix={'$'} fixedDecimalScale={true} decimalScale={0} onValueChange={(values) => {
                 const {formattedValue, value} = values;

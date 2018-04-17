@@ -6,14 +6,15 @@ const newStyle = {
   flexDirection: 'column',
   textAlign: 'center',
   margin: 'auto',
+  padding: '10px'
 };
 
 class About extends Component {
   render(){
     return (
       <div className="card" style={newStyle}>
-        <p className="aboutText mt-4">
-          Getting started is easy!
+        <p className="mt-3">
+          <h4>Getting started is easy!</h4>
         </p>
         <p className="aboutText">
           1. Click on the “Make Art” link.

@@ -54,7 +54,7 @@ class ChatContainer extends Component {
         <div className="card-footer">
           <form onSubmit={this.handleFormSubmit}>
             <input name="chatMessage" type="text" onChange={(e) => {this.handleInputChange(e)}} value={this.state.chatMessage} />
-            <button type="submit">Submit</button>
+            <button className="ml-3 btn-primary" type="submit">Submit</button>
           </form>
         </div>
       </div>

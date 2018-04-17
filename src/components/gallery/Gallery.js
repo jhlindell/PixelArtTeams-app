@@ -71,18 +71,20 @@ class Gallery extends Component {
     const galleryCards = {};
     galleryCards.display = 'flex';
     galleryCards.justifyContent = 'space-around';
-    galleryCards.padding = '50px';
+    galleryCards.padding = '30px';
     galleryCards.width = '100%';
     galleryCards.flexWrap = 'wrap';
 
     const selectorStyle = {};
     selectorStyle.width = '200px';
-    //selectorStyle.textAlign = 'center';
-    selectorStyle.marginTop = '10px';
+    selectorStyle.padding = '5px';
+    selectorStyle.marginTop = '20px';
     selectorStyle.marginLeft = 'auto';
     selectorStyle.marginRight = 'auto';
     selectorStyle.display = 'flex';
     selectorStyle.justifyContent = 'center';
+    selectorStyle.textAlign = 'center';
+    selectorStyle.backgroundColor = 'lightgray';
 
     const container = {};
     container.display = 'flex';
