@@ -5,12 +5,12 @@ import {
   checkUserForAdd,
   addNewUser,
   removeUser}
-  from '../actions/socketActions';
+  from '../../actions/socketActions';
 import {
   clearUserNameCheck,
   getCollaborators,
   setCollaborator }
-  from '../actions/index';
+  from '../../actions/index';
 
 class AddNewUser extends Component {
   constructor(props) {

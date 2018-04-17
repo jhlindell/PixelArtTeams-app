@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { sendSupportEmail } from '../actions/socketActions';
+import { sendSupportEmail } from '../../actions/socketActions';
 
 class CustomerSupport extends Component {
   constructor(props){

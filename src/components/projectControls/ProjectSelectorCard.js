@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectProject } from '../actions/index';
-import DrawCanvas from './DrawCanvas';
+import { selectProject } from '../../actions/index';
+import DrawCanvas from '../gallery/DrawCanvas';
 const canvasSize = 120;
 
 class ProjectSelectorCard extends Component {

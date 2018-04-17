@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectProject } from '../actions/index';
-import { getProjects } from '../actions/socketActions';
+import { selectProject } from '../../actions/index';
+import { getProjects } from '../../actions/socketActions';
 import ProjectSelectorCard from './ProjectSelectorCard';
-import Easel from '../easel.png'
+import Easel from '../../easel.png'
 
 class ProjectSelector extends Component {
   componentWillMount(){

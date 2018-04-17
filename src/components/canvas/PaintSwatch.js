@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { updateColor } from '../actions/index'
+import { updateColor } from '../../actions/index'
 
 const styles = {
   width: '40px',

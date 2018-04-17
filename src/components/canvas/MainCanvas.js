@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Grid from './Grid';
 import Palette from './Palette';
-import ProjectSelector from './ProjectSelector';
-import ChatContainer from './ChatContainer';
+import ProjectSelector from '../projectControls/ProjectSelector';
+import ChatContainer from '../ChatContainer';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProjects, saveProject, sendFinishedProject } from '../actions/socketActions';
+import { getProjects, saveProject, sendFinishedProject } from '../../actions/socketActions';
 import moment from 'moment';
-// import Background from '../watercolor-3173964_1920.jpg';
 
 class MainCanvas extends Component {
   constructor(props){

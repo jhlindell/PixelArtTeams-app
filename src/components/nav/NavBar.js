@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectProject } from '../actions/index';
-import { getUserName } from '../actions/socketActions';
+import { selectProject } from '../../actions/index';
+import { getUserName } from '../../actions/socketActions';
 
 const navBarStyle = {
   display: 'flex',

@@ -9,8 +9,8 @@ import { getSingleProject,
   promoteProjectToPublic,
   flagProject,
   flagCheck }
-  from '../actions/socketActions';
-import { getCollaborators, clearFlagCheck } from '../actions/index';
+  from '../../actions/socketActions';
+import { getCollaborators, clearFlagCheck } from '../../actions/index';
 import DrawCanvas from './DrawCanvas';
 import ReactStars from 'react-stars';
 import moment from 'moment';

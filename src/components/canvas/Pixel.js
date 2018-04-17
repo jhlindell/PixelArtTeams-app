@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { sendPixel, mouseOverAction } from '../actions/socketActions';
+import { sendPixel, mouseOverAction } from '../../actions/socketActions';
 
 const styles = {
   float: 'left',

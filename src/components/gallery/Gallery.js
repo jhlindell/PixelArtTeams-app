@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import GalleryPiece from './GalleryPiece';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getGallery } from '../actions/index';
-import { stockGallery } from '../actions/socketActions';
+import { getGallery } from '../../actions/index';
+import { stockGallery } from '../../actions/socketActions';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-//import moment from 'moment';
 
 class Gallery extends Component {
   constructor(props){
