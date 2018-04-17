@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { stripeMessage } from '../actions/index';
+import { stripeMessage } from '../../actions/index';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 

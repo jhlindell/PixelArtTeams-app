@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GalleryPiece from './GalleryPiece';
+import GalleryPiece from './gallery/GalleryPiece';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { checkUserForAdd, addNewProject } from '../actions/socketActions';
-import { clearUserNameCheck, addMessageToContainer } from '../actions/index';
+import { checkUserForAdd, addNewProject } from '../../actions/socketActions';
+import { clearUserNameCheck, addMessageToContainer } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 
 class NewProject extends Component {

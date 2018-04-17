@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import DrawCanvas from './DrawCanvas';
+import DrawCanvas from '../gallery/DrawCanvas';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectProject } from '../actions/index';
-import { deleteProject } from '../actions/socketActions';
+import { selectProject } from '../../actions/index';
+import { sendFinishedProject } from '../../actions/socketActions';
 
-class DeleteProject extends Component {
+class FinishArt extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -41,8 +41,9 @@ class DeleteProject extends Component {
     this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
   }
 
-  deleteProject(){
-    this.props.deleteProject();
+  finishProject(){
+    this.props.sendFinishedProject();
+    this.props.selectProject(0)
     this.props.history.push('/art');
   }
 
@@ -62,17 +63,17 @@ class DeleteProject extends Component {
     newStyle2.alignItems = 'center';
     newStyle2.margin = 'auto';
     newStyle2.textAlign = 'center';
-    newStyle2.marginLeft = '100px';
     newStyle2.width = '200px';
+    newStyle2.marginLeft = '100px';
 
     return (
       <div style={newStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
-        <div className = "card" style={newStyle2}>
-          <div>Delete Project? </div>
-          <div className="mb-2">You will not be able to undo this.</div>
+        <div className="card" style={newStyle2}>
+          <div>Finish Project? </div>
+          <div className="mb-2">You will not be able to work on it again.</div>
           <div>
-            <button type="button" className="btn btn-primary" onClick={()=>this.deleteProject()}> Delete </button>
+            <button type="button" className="btn btn-primary" onClick={()=>this.finishProject()}> Finish </button>
             <button type="button" className="btn btn-secondary" onClick={()=>this.cancel()}> Cancel </button>
           </div>
         </div>
@@ -82,11 +83,11 @@ class DeleteProject extends Component {
 }
 
 function mapStateToProps(state){
-  return { grid: state.gridReducer, currentProject: state.currentProject};
+  return { grid: state.gridReducer, currentProject: state.currentProject }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ deleteProject, selectProject }, dispatch);
+  return bindActionCreators({ sendFinishedProject, selectProject }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteProject);
+export default connect(mapStateToProps, mapDispatchToProps)(FinishArt);

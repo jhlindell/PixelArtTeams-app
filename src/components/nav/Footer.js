@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectProject } from '../actions/index';
-import { getUserName } from '../actions/socketActions';
+import { selectProject } from '../../actions/index';
+import { getUserName } from '../../actions/socketActions';
 import { Link } from 'react-router-dom';
 
 class Footer extends React.Component {

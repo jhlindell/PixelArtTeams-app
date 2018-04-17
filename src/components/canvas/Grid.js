@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Pixel from './Pixel';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { mouseDownAction, mouseUpAction } from '../actions/index';
-import { saveProject, sendFinishedProject } from '../actions/socketActions';
+import { mouseDownAction, mouseUpAction } from '../../actions/index';
+import { saveProject, sendFinishedProject } from '../../actions/socketActions';
 import Countdown from 'react-countdown-now';
 import moment from 'moment';
 
