@@ -32,8 +32,10 @@ class ShowProject extends Component {
     this.props.getSingleProject(id);
     this.props.getCollaborators(id);
     this.props.fetchAvgProjectRating(id);
-    this.props.fetchUserRatingForProject(id, this.props.auth.token);
-    this.props.flagCheck(id, this.props.auth.token);
+    if(this.props.auth.token){
+      this.props.fetchUserRatingForProject(id, this.props.auth.token);
+      this.props.flagCheck(id, this.props.auth.token);
+    }
   }
 
   componentWillUnmount(){
