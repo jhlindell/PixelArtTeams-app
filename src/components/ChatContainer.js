@@ -32,12 +32,13 @@ class ChatContainer extends Component {
   }
 
   render(){
-    const cardStyle = {};
-    cardStyle.display = 'flex';
-    cardStyle.justifyContent = 'center';
-    cardStyle.width= '400px';
-    cardStyle.height = '560px';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      width: this.props.width,
+      height: this.props.height,
+      textAlign: 'center',
+    };
 
     return (
       <div className="card ml-4" style={cardStyle}>

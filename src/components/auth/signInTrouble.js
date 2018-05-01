@@ -40,15 +40,17 @@ class SignInTrouble extends Component {
   }
 
   render(){
-    const container = {};
-    container.display = 'flex';
-    container.margin = 'auto';
+    const container = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const cardStyle = {};
-    cardStyle.padding = '20px';
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
-
+    const cardStyle = {
+      display: 'flex',
+      padding: '20px',
+      textAlign: 'center',
+    };
+    
     return (
       <div style={container}>
         <div className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>

@@ -12,25 +12,28 @@ class ProjectSelector extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.padding = '50px';
-    newStyle.justifyContent = 'center';
-    newStyle.fontSize = '28px';
-    newStyle.textAlign = 'center';
-    newStyle.margin = 'auto';
+    const topElementStyle = {
+      padding: '50px',
+      justifyContent: 'center',
+      fontSize: '28px',
+      textAlign: 'center',
+      margin: 'auto',
+    };
 
-    const picStyle = {};
-    picStyle.height = '160px';
-    picStyle.margin = 'auto';
-    picStyle.padding = '20px';
+    const picStyle = {
+      height: '160px',
+      margin: 'auto',
+      padding: '20px',
+    };
 
-    const cardDeck = {};
-    cardDeck.display = 'flex';
-    cardDeck.justifyContent = 'space-around';
-    cardDeck.flexWrap = 'wrap';
+    const cardDeck = {
+      display: 'flex',
+      justifyContent: 'space-around',
+      flexWrap: 'wrap',
+    };
 
     return (
-      <div style={newStyle}>
+      <div style={topElementStyle}>
         <p className="mb-3" style={{color: 'white'}}>Your Available Projects:</p>
         <div style={cardDeck}>
             <div className="card mb-3 mr-2" onClick={()=> this.props.history.push('/newProject')}>

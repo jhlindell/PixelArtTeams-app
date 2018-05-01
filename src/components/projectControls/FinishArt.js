@@ -23,22 +23,22 @@ class FinishArt extends Component {
   }
 
   calculateCanvas(){
-    let x = this.props.grid[0].length;
-    let y = this.props.grid.length;
-    let windowX = (window.innerWidth * 0.6).toFixed(0);
-    let windowY = (window.innerHeight * 0.6).toFixed(0);
-    let pixelSizeX = (windowX/x).toFixed(0);
-    let pixelSizeY = (windowY/y).toFixed(0);
+    const x = this.props.grid[0].length;
+    const y = this.props.grid.length;
+    const windowX = (window.innerWidth * 0.6).toFixed(0);
+    const windowY = (window.innerHeight * 0.6).toFixed(0);
+    const pixelSizeX = (windowX/x).toFixed(0);
+    const pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize;
     if(pixelSizeX > pixelSizeY){
       pixelSize = pixelSizeY;
     } else {
       pixelSize = pixelSizeX;
     }
-    let canvasX = pixelSize * x;
-    let canvasY = pixelSize * y;
+    const canvasX = pixelSize * x;
+    const canvasY = pixelSize * y;
 
-    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
+    this.setState({ pixelSize, canvasX, canvasY });
   }
 
   finishProject(){
@@ -52,24 +52,26 @@ class FinishArt extends Component {
   }
 
   render(){
-    let newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
-    newStyle.justifyContent = 'space-between';
+    const containerStyle = {
+      display: 'flex',
+      margin: 'auto',
+      justifyContent: 'space-between',
+    };
 
-    let newStyle2 = {};
-    newStyle2.display = 'flex';
-    newStyle2.flexDirection = 'column';
-    newStyle2.alignItems = 'center';
-    newStyle2.margin = 'auto';
-    newStyle2.textAlign = 'center';
-    newStyle2.width = '200px';
-    newStyle2.marginLeft = '100px';
+    const cardStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      margin: 'auto',
+      textAlign: 'center',
+      width: '200px',
+      marginLeft: '100px',
+    };
 
     return (
-      <div style={newStyle}>
+      <div style={containerStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
-        <div className="card" style={newStyle2}>
+        <div className="card" style={cardStyle}>
           <div>Finish Project? </div>
           <div className="mb-2">You will not be able to work on it again.</div>
           <div>

@@ -3,7 +3,7 @@ import Grid from './Grid';
 import Palette from './Palette';
 import ProjectSelector from '../projectControls/ProjectSelector';
 import ChatContainer from '../ChatContainer';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getProjects, saveProject, sendFinishedProject } from '../../actions/socketActions';
 import moment from 'moment';
@@ -40,8 +40,8 @@ class MainCanvas extends Component {
     if(nextProps.projects !== this.props.projects){
       for(let i = 0; i < nextProps.projects.length; i++){
         if(nextProps.projects[i].finished_at){
-          let now = new Date();
-          let nowString = moment.utc(now).format();
+          const now = new Date();
+          const nowString = moment.utc(now).format();
           if(moment(nowString).isSameOrAfter(nextProps.projects[i].finished_at)){
             this.props.sendFinishedProject(nextProps.projects[i].project_id);
           }
@@ -51,7 +51,7 @@ class MainCanvas extends Component {
   }
 
   getProjectIndex(id){
-    let projects = this.props.projects;
+    const projects = this.props.projects;
     let index;
     for(let i = 0; i < projects.length; i++){
       if(projects[i].project_id === id){
@@ -62,14 +62,16 @@ class MainCanvas extends Component {
   }
 
   calculateCanvas(id){
-    let index = this.getProjectIndex(id);
-    let finishTime = this.props.projects[index].finished_at;
-    let x = this.props.projects[index].grid[0].length;
-    let y = this.props.projects[index].grid.length;
-    let windowX = 800;
-    let windowY = 440;
-    let pixelSizeX = (windowX/x).toFixed(0);
-    let pixelSizeY = (windowY/y).toFixed(0);
+    const index = this.getProjectIndex(id);
+    const finishTime = this.props.projects[index].finished_at;
+    const x = this.props.projects[index].grid[0].length;
+    const y = this.props.projects[index].grid.length;
+    console.log("height: ", window.innerHeight);
+    console.log("width: ", window.innerWidth);
+    const windowX = 800;
+    const windowY = 440;
+    const pixelSizeX = (windowX/x).toFixed(0);
+    const pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize = 0;
     if(pixelSizeX < pixelSizeY){
       pixelSize = pixelSizeX;
@@ -79,10 +81,10 @@ class MainCanvas extends Component {
     if(pixelSize > 20){
       pixelSize = 20;
     }
-    let offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
-    let canvasX = ((windowX -( offsetX * 2 ))).toFixed(0);
-    let canvasY = windowY;
-    this.setState({ pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY, x: x, y: y, finishTime: finishTime });
+    const offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
+    const canvasX = ((windowX -( offsetX * 2 ))).toFixed(0);
+    const canvasY = windowY;
+    this.setState({ pixelSize, canvasX, canvasY, x, y, finishTime });
   }
 
   renderComp(){
@@ -92,22 +94,26 @@ class MainCanvas extends Component {
     else {
       const canvasYSize = 560;
       const canvasXSize = 800;
-      const canvasStyle = {};
+      const chatWidth = 400;
+
       let vertMargins = 0;
-      let gridHeight = this.state.y * this.state.pixelSize;
+      const gridHeight = this.state.y * this.state.pixelSize;
       vertMargins = (490 - gridHeight)/2;
 
-      canvasStyle.backgroundColor = 'white';
-      canvasStyle.height = canvasYSize + 'px';
-      canvasStyle.width = canvasXSize + 'px';
-      canvasStyle.display = 'flex';
-      canvasStyle.flexDirection = 'column';
+      const canvasStyle = {
+        backgroundColor: 'white',
+        height: canvasYSize + 'px',
+        width: canvasXSize + 'px',
+        display: 'flex',
+        flexDirection: 'column',
+      };
 
-      const ArtAndChat = {};
-      ArtAndChat.display = 'flex';
-      ArtAndChat.justifyContent = 'space-around';
-      ArtAndChat.alignItems = 'center';
-      ArtAndChat.flexWrap = 'wrap';
+      const ArtAndChat = {
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      };
 
       return (
         <div style={ArtAndChat}>
@@ -116,19 +122,20 @@ class MainCanvas extends Component {
             <Palette canvasWidth={canvasXSize}
               topMargin={vertMargins}/>
           </div>
-          <ChatContainer />
+          <ChatContainer height={canvasYSize} width={chatWidth}/>
         </div>
       );
     }
   };
 
   render(){
-    const containerStyle = {};
-    containerStyle.display = 'flex';
-    containerStyle.justifyContent = 'center';
-    containerStyle.alignItems = 'center';
-    containerStyle.height = '100%';
-    containerStyle.margin = 'auto';
+    const containerStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      margin: 'auto'
+    };
 
     return (
       <div style={containerStyle} id="MainCanvas1">

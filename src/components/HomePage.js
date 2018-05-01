@@ -19,28 +19,33 @@ class HomePage extends Component {
   }
 
   render(){
-    const top3Deck = {};
-    top3Deck.display = 'flex';
-    top3Deck.justifyContent = 'space-around';
-    top3Deck.width = '100%';
-    top3Deck.margin = 'auto';
-    top3Deck.flexWrap = 'wrap';
+    const top3Deck = {
+      display: 'flex',
+      justifyContent: 'space-around',
+      width: '100%',
+      margin: 'auto',
+      flexWrap: 'wrap',
+    };
 
-    const top3Card = {};
-    top3Card.width = '80%';
-    top3Card.margin = '20px';
+    const top3Card = {
+      width: '80%',
+      margin: '20px',
+    };
 
-    const cardHeader = {};
-    cardHeader.fontSize = '20px';
-    cardHeader.textAlign = 'center';
+    const cardHeader = {
+      fontSize: '20px',
+      textAlign: 'center',
+    };
 
-    const aboutCard = {};
-    aboutCard.width = '60%';
-    aboutCard.textAlign = 'center';
-    aboutCard.margin = '20px';
+    const aboutCard = {
+      width: '60%',
+      textAlign: 'center',
+      margin: '20px',
+    };
 
-    const aboutText = {};
-    aboutText.textDecoration = 'underline';
+    const aboutText = {
+      textDecoration: 'underling'
+    };
 
     return (
       <div style={sectionStyle}>

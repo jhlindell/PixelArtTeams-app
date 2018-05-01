@@ -23,22 +23,22 @@ class DeleteProject extends Component {
   }
 
   calculateCanvas(){
-    let x = this.props.grid[0].length;
-    let y = this.props.grid.length;
-    let windowX = (window.innerWidth * 0.6).toFixed(0);
-    let windowY = (window.innerHeight * 0.6).toFixed(0);
-    let pixelSizeX = (windowX/x).toFixed(0);
-    let pixelSizeY = (windowY/y).toFixed(0);
+    const x = this.props.grid[0].length;
+    const y = this.props.grid.length;
+    const windowX = (window.innerWidth * 0.6).toFixed(0);
+    const windowY = (window.innerHeight * 0.6).toFixed(0);
+    const pixelSizeX = (windowX/x).toFixed(0);
+    const pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize;
     if(pixelSizeX > pixelSizeY){
       pixelSize = pixelSizeY;
     } else {
       pixelSize = pixelSizeX;
     }
-    let canvasX = pixelSize * x;
-    let canvasY = pixelSize * y;
+    const canvasX = pixelSize * x;
+    const canvasY = pixelSize * y;
 
-    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
+    this.setState({ pixelSize, canvasX, canvasY });
   }
 
   deleteProject(){
@@ -51,19 +51,21 @@ class DeleteProject extends Component {
   }
 
   render(){
-    let newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
-    newStyle.justifyContent = 'space-between';
+    const newStyle = {
+      display: 'flex',
+      margin: 'auto',
+      justifyContent: 'space-between',
+    };
 
-    let newStyle2 = {};
-    newStyle2.display = 'flex';
-    newStyle2.flexDirection = 'column';
-    newStyle2.alignItems = 'center';
-    newStyle2.margin = 'auto';
-    newStyle2.textAlign = 'center';
-    newStyle2.marginLeft = '100px';
-    newStyle2.width = '200px';
+    const newStyle2 = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      margin: 'auto',
+      textAlign: 'center',
+      marginLeft: '100px',
+      width: '200px',
+    };
 
     return (
       <div style={newStyle}>

@@ -52,18 +52,21 @@ class Signin extends Component {
   }
 
   render(){
-    const container = {};
-    container.display = 'flex';
-    container.margin = 'auto';
+    const container = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const cardStyle = {};
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      display: 'flex',
+      textAlign: 'center',
+    };
 
-    const bodyStyle = {};
-    bodyStyle.display = 'flex';
-    bodyStyle.flexDirection = 'column';
-    bodyStyle.justifyContent = 'center';
+    const bodyStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    };
 
     return (
       <div style={container}>

@@ -25,21 +25,23 @@ class Grid extends Component {
   }
 
   render(){
-    let xCoord = this.props.x;
-    let gridWidth = xCoord * this.props.pixelSize;
-    let leftMargin = (800 - gridWidth)/2;
-    let gridStyle = {};
-    gridStyle.marginTop = this.props.vertMargins + 'px';
-    gridStyle.marginBottom = this.props.vertMargins + 'px';
-    gridStyle.marginLeft = leftMargin + 'px';
-    gridStyle.flexWrap = 'wrap';
-    gridStyle.width = gridWidth + 'px';
-    gridStyle.flex = '1';
+    const xCoord = this.props.x;
+    const gridWidth = xCoord * this.props.pixelSize;
+    const leftMargin = (800 - gridWidth)/2;
+    const gridStyle = {
+      marginTop: this.props.vertMargins + 'px',
+      marginBottom: this.props.vertMargins + 'px',
+      marginLeft: leftMargin + 'px',
+      flexWrap: 'wrap',
+      width: gridWidth + 'px',
+      flex: '1',
+    };
 
-    let countdownStyle = {};
-    countdownStyle.textAlign = 'center';
-    countdownStyle.marginTop = '5px';
-    countdownStyle.fontSize = '18px';
+    const countdownStyle = {
+      textAlign: 'center',
+      marginTop: '5px',
+      fontSize: '18px',
+    };
 
     return (
       <div id="grid">

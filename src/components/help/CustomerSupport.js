@@ -45,22 +45,26 @@ class CustomerSupport extends Component {
   }
 
   render(){
-    const container = {};
-    container.display = 'flex';
-    container.margin = 'auto';
+    const container = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const cardStyle = {};
-    cardStyle.width = '400px';
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      width: '400px',
+      display: 'flex',
+      textAlign: 'center',
+    };
 
-    const formStyle = {};
-    formStyle.display = 'flex';
-    formStyle.flexDirection = 'column';
-    formStyle.justifyContent = 'center';
+    const formStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    };
 
-    const errorStyle = {};
-    errorStyle.color = 'red';
+    const errorStyle = {
+      color: 'red',
+    };
 
     return (
       <div style={container}>
@@ -117,11 +121,12 @@ class CustomerSupport extends Component {
   }
 
   clearErrors(){
-    let errors = {};
-    errors.name = '';
-    errors.email = '';
-    errors.message = '';
-    this.setState({errors: errors });
+    let errors = {
+      name: '',
+      email: '',
+      message: '',
+    };
+    this.setState({ errors });
   }
 }
 

@@ -35,11 +35,12 @@ class Signup extends Component {
     event.preventDefault();
     let valid = this.validate();
     if(valid){
-      let modProps = {};
-      modProps.username = this.state.username.toLowerCase();
-      modProps.email = this.state.email.toLowerCase();
-      modProps.password = this.state.password;
-      modProps.passwordConfirm = this.state.passwordConfirm;
+      let modProps = {
+        username: this.state.username.toLowerCase(),
+        email: this.state.email.toLowerCase(),
+        password: this.state.password,
+        passwordConfirm: this.state.passwordConfirm,
+      };
       this.props.signUpUser(modProps);
       this.props.history.push('/signin');
     }
@@ -89,24 +90,33 @@ class Signup extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
+    const newStyle = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const cardStyle = {};
-    cardStyle.width = '250px';
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      display: 'flex',
+      width: '250px',
+      textAlign: 'center',
+    };
 
-    const ToSStyle = {};
-    ToSStyle.width = '750px';
-    ToSStyle.display = 'flex';
-    ToSStyle.textAlign = 'center';
+    const ToSStyle = {
+      display: 'flex',
+      width: '750px',
+      textAlign: 'center',
+    };
 
-    const bodyStyle = {};
-    bodyStyle.display = 'flex';
-    bodyStyle.flexDirection = 'column';
-    bodyStyle.justifyContent = 'center';
+    const bodyStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    };
+
+    const errorText = {
+      color: 'red',
+      marginTop: '5px',
+    }
 
     return (
       <div style={newStyle}>
@@ -157,25 +167,25 @@ class Signup extends Component {
                 <input name="username" type="text"
                   onChange={(e) => {this.handleInputChange(e)}}
                   value={this.state.username} placeholder="Username" />
-                  {this.state.errors.username && <div>{this.state.errors.username}</div>}
+                  {this.state.errors.username && <div style={errorText}>{this.state.errors.username}</div>}
               </div>
               <div className="form-group">
                 <input name="email" type="email"
                   onChange={(e) => {this.handleInputChange(e)}}
                   value={this.state.email} placeholder="Email" />
-                  {this.state.errors.email && <div>{this.state.errors.email}</div>}
+                  {this.state.errors.email && <div style={errorText}>{this.state.errors.email}</div>}
               </div>
               <div className="form-group">
                 <input name="password" type="password"
                   onChange={(e) => {this.handleInputChange(e)}}
                   value={this.state.password} placeholder="Password" />
-                  {this.state.errors.password && <div>{this.state.errors.password}</div>}
+                  {this.state.errors.password && <div style={errorText}>{this.state.errors.password}</div>}
               </div>
               <div className="form-group mb-4">
                 <input name="passwordConfirm" type="password"
                   onChange={(e) => {this.handleInputChange(e)}}
                   value={this.state.passwordConfirm} placeholder="Confirm Password"/>
-                  {this.state.errors.passwordConfirm && <div>{this.state.errors.passwordConfirm}</div>}
+                  {this.state.errors.passwordConfirm && <div style={errorText}>{this.state.errors.passwordConfirm}</div>}
               </div>
               {this.renderAlert()}
               {!this.state.showTerms && !this.state.termsAccepted && <button type="button" className="btn btn-primary" onClick={()=>this.showToS()}>View Terms</button>}
@@ -195,7 +205,12 @@ class Signup extends Component {
 
   validate() {
     this.clearErrors();
-    const errors = {};
+    const errors = {
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    };
     let isValid = true;
 
     if(!this.state.username){
@@ -228,12 +243,13 @@ class Signup extends Component {
   }
 
   clearErrors(){
-    let errors = {};
-    errors.username = '';
-    errors.email = '';
-    errors.password = '';
-    errors.passwordConfirm = '';
-    this.setState({errors: errors });
+    let errors = {
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    };
+    this.setState({ errors });
   }
 }
 

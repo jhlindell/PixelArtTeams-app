@@ -68,34 +68,36 @@ class Gallery extends Component {
   }
 
   render(){
-    const galleryCards = {};
-    galleryCards.display = 'flex';
-    galleryCards.justifyContent = 'space-around';
-    galleryCards.padding = '50px';
-    galleryCards.width = '100%';
-    galleryCards.flexWrap = 'wrap';
+    const galleryCards = {
+      display: 'flex',
+      justifyContent: 'space-around',
+      padding: '50px',
+      width: '100%',
+      flexWrap: 'wrap',
+    };
 
-    const selectorStyle = {};
-    selectorStyle.width = '200px';
-    //selectorStyle.textAlign = 'center';
-    selectorStyle.marginTop = '10px';
-    selectorStyle.marginLeft = 'auto';
-    selectorStyle.marginRight = 'auto';
-    selectorStyle.display = 'flex';
-    selectorStyle.justifyContent = 'center';
+    const selectorStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+      width: '200px',
+      marginTop: '10px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    };
 
-    const container = {};
-    container.display = 'flex';
-    container.justifyContent = 'center';
-    container.alignItems = 'center';
-    container.flexDirection = 'column';
-    container.width = '100%';
+    const container = {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      width: '100%',
+    };
 
     const { selectedOption } = this.state;
     const value = selectedOption && selectedOption.value;
 
     return (
-      <div style={{width: '100%'}}>
+      <div style={{ width: '100%' }}>
         <div className="card" style={selectorStyle}>
           <span>Sort Style:</span>
           <Select

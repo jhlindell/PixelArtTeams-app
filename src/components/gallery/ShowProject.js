@@ -59,23 +59,23 @@ class ShowProject extends Component {
   }
 
   calculateCanvas(project){
-    let x = project.grid[0].length;
-    let y = project.grid.length;
-    let windowX = (window.innerWidth * 0.6).toFixed(0);
-    let windowY = (window.innerHeight * 0.6).toFixed(0);
-    let pixelSizeX = (windowX/x).toFixed(0);
-    let pixelSizeY = (windowY/y).toFixed(0);
+    const x = project.grid[0].length;
+    const y = project.grid.length;
+    const windowX = (window.innerWidth * 0.6).toFixed(0);
+    const windowY = (window.innerHeight * 0.6).toFixed(0);
+    const pixelSizeX = (windowX/x).toFixed(0);
+    const pixelSizeY = (windowY/y).toFixed(0);
     let pixelSize;
     if(pixelSizeX > pixelSizeY){
       pixelSize = pixelSizeY;
     } else {
       pixelSize = pixelSizeX;
     }
-    let offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
-    let canvasX = ((windowX - (offsetX*2))).toFixed(0);
-    let canvasY = windowY;
+    const offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
+    const canvasX = ((windowX - (offsetX*2))).toFixed(0);
+    const canvasY = windowY;
 
-    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
+    this.setState({ pixelSize, canvasX, canvasY });
   }
 
   userRating(){
@@ -132,21 +132,24 @@ class ShowProject extends Component {
   }
 
   render(){
-    let containerStyle = {};
-    containerStyle.display = 'flex';
-    containerStyle.margin = 'auto';
-    containerStyle.justifyContent = 'space-between';
+    const containerStyle = {
+      display: 'flex',
+      margin: 'auto',
+      justifyContent: 'space-between',
+    };
 
-    let cardStyle = {};
-    cardStyle.display = 'flex';
-    cardStyle.margin = 'auto';
-    cardStyle.textAlign = 'center';
-    cardStyle.width = '300px';
-    cardStyle.marginLeft = '100px';
+    const cardStyle = {
+      display: 'flex',
+      margin: 'auto',
+      textAlign: 'center',
+      width: '300px',
+      marginLeft: '100px',
+    };
 
-    let starStyle = {};
-    starStyle.display = 'flex';
-    starStyle.justifyContent = 'center';
+    const starStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+    };
 
     return (
       <div style={containerStyle}>

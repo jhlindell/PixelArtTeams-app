@@ -13,12 +13,6 @@ class Footer extends React.Component {
     };
   }
 
-  // componentWillMount(){
-  //   if(this.props.authenticated){
-  //     this.props.getUserName();
-  //   }
-  // }
-
   componentWillReceiveProps(nextProps){
     if(nextProps.currentProject === 0){
       this.setState({isOwner: false});
@@ -26,14 +20,11 @@ class Footer extends React.Component {
     if(nextProps.currentProject){
       this.isProjectOwner(nextProps.currentProject);
     }
-    // if(nextProps.authenticated && nextProps.authenticated !== this.props.authenticated){
-    //   this.props.getUserName();
-    // }
   }
 
   isProjectOwner(id){
     let project;
-    let array = this.props.projects;
+    const array = this.props.projects;
     for(let i = 0; i < array.length; i++){
       if(array[i].project_id === id){
         project = array[i];
@@ -50,11 +41,12 @@ class Footer extends React.Component {
   }
 
   render(){
-    const newStyle={};
-    newStyle.display = 'flex';
-    newStyle.justifyContent = 'space-around';
-    newStyle.backgroundColor = 'black';
-    newStyle.alignItems = 'center';
+    const newStyle={
+      display: 'flex',
+      justifyContent: 'space-around',
+      backgroundColor: 'black',
+      alignItems: 'center',
+    };
 
     return (
       <footer style={newStyle}>

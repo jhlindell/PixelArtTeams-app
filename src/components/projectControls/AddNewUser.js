@@ -87,19 +87,22 @@ class AddNewUser extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.flexDirection = 'column';
-    newStyle.margin = 'auto';
-    newStyle.textAlign = 'center';
+    const newStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 'auto',
+      textAlign: 'center',
+    };
 
-    const colStyle = {};
-    colStyle.width = '60%';
-    colStyle.margin = 'auto';
+    const colStyle = {
+      width: '60%',
+      margin: 'auto',
+    };
 
-    const formStyle = {};
-    formStyle.width = '60%';
-    formStyle.margin = 'auto';
+    const formStyle = {
+      width: '60%',
+      margin: 'auto',
+    };
 
     return (
       <div style={newStyle}>
