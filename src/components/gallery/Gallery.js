@@ -83,6 +83,9 @@ class Gallery extends Component {
       marginTop: '10px',
       marginLeft: 'auto',
       marginRight: 'auto',
+      padding: '5px',
+      textAlign: 'center',
+      backgroundColor: 'lightgray',
     };
 
     const container = {
