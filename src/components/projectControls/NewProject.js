@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux';
 class NewProject extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       project_name: '',
       x: '',
@@ -40,14 +38,14 @@ class NewProject extends Component {
     }
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event) {
+  handleFormSubmit = (event) => {
     event.preventDefault();
     let valid = this.validate();
     if(valid){

@@ -15,11 +15,6 @@ import {
 class AddNewUser extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.removeUser = this.removeUser.bind(this);
-    this.selectUser = this.selectUser.bind(this);
-
     this.state = {
       user_name: '',
       email: '',
@@ -46,14 +41,14 @@ class AddNewUser extends Component {
     }
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event) {
+  handleFormSubmit = (event) => {
     event.preventDefault();
     let userName = this.state.user_name.toLowerCase();
     let email = this.state.email.toLowerCase();
@@ -76,13 +71,13 @@ class AddNewUser extends Component {
     this.props.history.push("/art");
   }
 
-  removeUser(){
+  removeUser = () => {
     this.props.removeUser(this.state.selectedUser);
     this.props.getCollaborators(this.props.currentProject);
     this.setState({selectedUser: ''});
   }
 
-  selectUser(username){
+  selectUser = (username) => {
     this.setState({selectedUser: username});
   }
 

@@ -7,8 +7,6 @@ import { clearChat } from '../actions/index';
 class ChatContainer extends Component {
   constructor(props){
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       chatMessage: ''
     }
@@ -18,14 +16,14 @@ class ChatContainer extends Component {
     this.props.clearChat();
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event){
+  handleFormSubmit = (event) => {
     event.preventDefault();
     this.props.submitChatMessage(this.props.user.username, this.state.chatMessage);
     this.setState({chatMessage: ''});

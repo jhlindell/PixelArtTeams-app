@@ -10,13 +10,12 @@ import {
 class SignInTrouble extends Component {
   constructor(props){
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       email: ''
     };
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -50,7 +49,7 @@ class SignInTrouble extends Component {
       padding: '20px',
       textAlign: 'center',
     };
-    
+
     return (
       <div style={container}>
         <div className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
