@@ -31,7 +31,7 @@ class Signup extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    let valid = this.validate();
+    const valid = this.validate();
     if(valid){
       let modProps = {
         username: this.state.username.toLowerCase(),

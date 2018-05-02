@@ -27,7 +27,7 @@ class PasswordReset extends Component {
 
   handleFormSubmit = (event) =>{
     event.preventDefault();
-    let valid = this.validate();
+    const valid = this.validate();
     if(valid){
       this.props.sendPasswordReset(this.state.password, this.props.match.params.hash);
       this.props.history.push('/signin');

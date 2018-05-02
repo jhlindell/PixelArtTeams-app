@@ -44,7 +44,7 @@ class HomePage extends Component {
     };
 
     const aboutText = {
-      textDecoration: 'underling'
+      textDecoration: 'underline'
     };
 
     return (

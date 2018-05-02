@@ -66,8 +66,6 @@ class MainCanvas extends Component {
     const finishTime = this.props.projects[index].finished_at;
     const x = this.props.projects[index].grid[0].length;
     const y = this.props.projects[index].grid.length;
-    console.log("height: ", window.innerHeight);
-    console.log("width: ", window.innerWidth);
     const windowX = 800;
     const windowY = 440;
     const pixelSizeX = (windowX/x).toFixed(0);

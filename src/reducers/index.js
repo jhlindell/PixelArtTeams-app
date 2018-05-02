@@ -3,9 +3,9 @@ import { combineReducers } from 'redux';
 function gridReducer(state, action) {
   if (state === undefined) {
     let grid = [];
-    for (var i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i++) {
       let row = [];
-      for (var j = 0; j < 20; j++) {
+      for (let j = 0; j < 20; j++) {
         row.push('#FFF');
       }
       grid.push(row);

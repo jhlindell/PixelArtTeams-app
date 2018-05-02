@@ -144,9 +144,9 @@ export function clearVerificationMessage(){
 }
 
 export function addMessageToContainer(message){
-  let timeStamp = new Date().toString();
-  let id = message + timeStamp;
-  let messageObject = { message, id}
+  const timeStamp = new Date().toString();
+  const id = message + timeStamp;
+  const messageObject = { message, id}
   return {type: 'ADD_MESSAGE', payload: messageObject};
 }
 

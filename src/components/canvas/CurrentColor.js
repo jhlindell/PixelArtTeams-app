@@ -13,7 +13,7 @@ const styles = {
 
 class CurrentColor extends Component {
   render() {
-    let newStyle = Object.assign({}, styles);
+    let newStyle = {...styles};
     newStyle.backgroundColor = this.props.activeColor;
 
     return (
