@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux';
 class NewProject extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       project_name: '',
       x: '',
@@ -40,14 +38,14 @@ class NewProject extends Component {
     }
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event) {
+  handleFormSubmit = (event) => {
     event.preventDefault();
     let valid = this.validate();
     if(valid){
@@ -81,55 +79,63 @@ class NewProject extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
+    const topElementStyle = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const footerStyle = {};
-    footerStyle.display = 'flex';
-    footerStyle.justifyContent = 'center';
+    const footerStyle = {
+      display: 'flex',
+      justifyContent: 'center',
+    };
 
-    const timerStyle = {};
-    timerStyle.display = 'flex';
-    timerStyle.flexDirection = 'column';
-    timerStyle.gridColumnStart = '2';
-    timerStyle.gridColumnEnd = '3';
-    timerStyle.justifySelf = 'center';
-    timerStyle.alignSelf = 'center';
+    const timerStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      gridColumnStart: '2',
+      gridColumnEnd: '3',
+      justifySelf: 'center',
+      alignSelf: 'center',
+    };
 
-    const radioStyle = {};
-    radioStyle.display = 'flex';
-    radioStyle.flexDirection = 'row';
+    const radioStyle = {
+      display: 'flex',
+      flexDirection: 'row',
+    };
 
-    const headerStyle = {};
-    headerStyle.textAlign = 'center';
+    const headerStyle = {
+      textAlign: 'center',
+    };
 
-    const container = {};
-    container.display = 'grid';
-    container.gridTemplateColumns = '200px 200px 200px';
+    const cardBlockStyle = {
+      display: 'grid',
+      gridTemplateColumns: '200px 200px 200px',
+    };
 
-    const column1 = {};
-    column1.gridColumnStart = '1';
-    column1.gridColumnEnd = '2';
-    column1.justifySelf = 'center';
-    column1.alignSelf = 'center';
-    column1.textAlign = 'center';
+    const column1 = {
+      gridColumnStart: '1',
+      gridColumnEnd: '2',
+      justifySelf: 'center',
+      alignSelf: 'center',
+      textAlign: 'center',
+    };
 
-    const column3 = {};
-    column3.gridColumnStart = '3';
-    column3.justifySelf = 'center';
-    column3.alignSelf = 'center';
-    column3.textAlign = 'center';
-    column3.overflowY = 'auto';
+    const column3 = {
+      gridColumnStart: '3',
+      justifySelf: 'center',
+      alignSelf: 'center',
+      textAlign: 'center',
+      overflowY: 'auto',
+    };
 
     return (
-      <div style={newStyle}>
+      <div style={topElementStyle}>
         <div className="card">
           <form onSubmit={this.handleFormSubmit}>
             <div className="card-header" style={headerStyle}>
               <h3>New Project</h3>
             </div>
-            <div className="card-block" style={container}>
+            <div className="card-block" style={cardBlockStyle}>
               <div style={column1}>
                 <div>
                   <label>Project Name</label>
@@ -265,16 +271,17 @@ class NewProject extends Component {
       isValid = false;
     }
 
-    this.setState({errors: errors});
+    this.setState({ errors});
     return isValid;
   }
 
   clearErrors(){
-    let errors = {};
-    errors.name = '';
-    errors.x = '';
-    errors.y = '';
-    this.setState({errors: errors });
+    let errors = {
+      name: '',
+      x: '',
+      y: '',
+    };
+    this.setState({ errors });
   }
 }
 

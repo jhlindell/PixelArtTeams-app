@@ -8,8 +8,6 @@ import { checkUserHash, sendPasswordReset } from '../../actions/socketActions';
 class PasswordReset extends Component {
   constructor(props){
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       password: '',
       passwordConfirm: '',
@@ -20,19 +18,18 @@ class PasswordReset extends Component {
     };
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event) {
+  handleFormSubmit = (event) =>{
     event.preventDefault();
-    let valid = this.validate();
+    const valid = this.validate();
     if(valid){
       this.props.sendPasswordReset(this.state.password, this.props.match.params.hash);
-      console.log("resetting password with: ", this.state.password, this.props.match.params.hash);
       this.props.history.push('/signin');
     }
   }
@@ -46,15 +43,17 @@ class PasswordReset extends Component {
   }
 
   render(){
-    const newStyle = {};
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
-    newStyle.textAlign = 'center';
+    const newStyle = {
+      display: 'flex',
+      margin: 'auto',
+      textAlign: 'center',
+    };
 
-    const cardStyle = {};
-    cardStyle.padding = '20px';
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      padding: '20px',
+      display: 'flex',
+      textAlign: 'center',
+    };
 
     return (
       <div style={newStyle}>
@@ -68,7 +67,7 @@ class PasswordReset extends Component {
               <input name="password" type="password"
                 onChange={(e) => {this.handleInputChange(e)}}
                 value={this.state.password} placeholder="Password" />
-                {this.state.errors.password && <div>{this.state.errors.password}</div>}
+                {this.state.errors.password && <div style={{color: 'red'}}>{this.state.errors.password}</div>}
             </div>
             <div className="form-group mb-4">
               <input name="passwordConfirm" type="password"
@@ -93,7 +92,10 @@ class PasswordReset extends Component {
 
   validate() {
     this.clearErrors();
-    const errors = {};
+    const errors = {
+      password: '',
+      passwordConfirm: '',
+    };
     let isValid = true;
 
     if(!this.state.password) {
@@ -111,15 +113,16 @@ class PasswordReset extends Component {
       isValid = false;
     }
 
-    this.setState({errors: errors});
+    this.setState({ errors });
     return isValid;
   }
 
   clearErrors(){
-    let errors = {};
-    errors.password = '';
-    errors.passwordConfirm = '';
-    this.setState({errors: errors });
+    const errors = {
+      password: '',
+      passwordConfirm: '',
+    };
+    this.setState({ errors });
   }
 }
 

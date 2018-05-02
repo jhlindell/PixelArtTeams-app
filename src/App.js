@@ -48,18 +48,21 @@ class App extends Component {
   }
 
   render() {
-    const flexCol = {};
-    flexCol.display = 'flex';
-    flexCol.flexDirection = 'column';
-    flexCol.backgroundImage = `url(${Background})`;
-    flexCol.backgroundSize = 'cover';
+    const flexCol = {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundSize: 'auto',
+      backgroundImage: `url(${Background})`,
+    };
 
-    const flex0 = {};
-    flex0.flex = 0;
-    const flex1 = {};
-    flex1.display = 'flex';
-    flex1.flex = '1 1 100%';
-    //flex1.alignItems = 'center';
+    const flex0 = {
+      flex: 0
+    };
+
+    const flex1 = {
+      display: 'flex',
+      flex: '1 1 100%',
+    };
 
     return (
       <Router>

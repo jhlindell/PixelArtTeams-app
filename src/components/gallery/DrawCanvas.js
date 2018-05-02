@@ -4,10 +4,11 @@ import DrawArt from './DrawArt';
 
 class DrawCanvas extends Component {
   render(){
-    let newStyle = {};
-    newStyle.height = this.props.canvasY + 'px';
-    newStyle.display = 'flex';
-    newStyle.margin = 'auto';
+    let newStyle = {
+      height: this.props.canvasY + 'px',
+      display: 'flex',
+      margin: 'auto',
+    };
 
     return (
       <Stage width={this.props.canvasX} height={this.props.canvasY} style={newStyle}>

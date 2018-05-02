@@ -58,7 +58,7 @@ export function getUserName(){
 
 export function checkUserForAdd(username, email){
   return (dispatch) => {
-    socket.emit('checkUser', { username: username, email: email});
+    socket.emit('checkUser', { username, email });
   }
 }
 
@@ -86,14 +86,14 @@ export function saveProject(){
 export function addNewUser(username, email){
   return (dispatch, getState) => {
     const { currentProject } = getState();
-    socket.emit('addUserToProject', { username: username, email: email, projectid: currentProject});
+    socket.emit('addUserToProject', { username, email, projectid: currentProject});
   }
 }
 
 export function removeUser(username){
   return (dispatch, getState) => {
     const { currentProject } = getState();
-    socket.emit('removeUserFromProject', { username: username, projectid: currentProject});
+    socket.emit('removeUserFromProject', { username, projectid: currentProject});
   }
 }
 
@@ -117,7 +117,7 @@ export function addNewProject(name, x, y, timer, collaborators){
       token = localStorage.getItem('token');
     } else
     token = auth.token;
-    socket.emit('addNewProject', {name, x, y, token, timer, collaborators});
+    socket.emit('addNewProject', { name, x, y, token, timer, collaborators });
   }
 }
 
@@ -156,7 +156,7 @@ export function getSingleProject(id){
 
 export function fetchUserRatingForProject(projectid, token){
   return (dispatch) => {
-    socket.emit('getUserRatingForProject', {project_id: projectid, token: token });
+    socket.emit('getUserRatingForProject', {project_id: projectid, token });
   }
 }
 

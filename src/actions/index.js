@@ -7,7 +7,7 @@ export function changeShowMenuState() {
 }
 
 export function updateColor(nextColor) {
-  return { type: 'UPDATE_COLOR', payload: {nextColor}, };
+  return { type: 'UPDATE_COLOR', payload: { nextColor }, };
 }
 
 export function selectProject(id){
@@ -52,7 +52,7 @@ export function getGallery(gallery){
 
 export function signUpUser({username, email, password}){
   return function(dispatch){
-    axios.post(`${URL}/signup`, {username, email, password})
+    axios.post(`${URL}/signup`, { username, email, password })
       .then(response => {
         if(response.data.token){
           dispatch(socketActions.sendVerificationEmail(username, email, response.data.token));
@@ -97,9 +97,9 @@ export function setUserName(userinfo){
 
 export function userNameCheck(result, message, username){
   if(username){
-    return {type: 'USERNAME_CHECK', payload: {result, message, username }};
+    return {type: 'USERNAME_CHECK', payload: { result, message, username }};
   } else {
-    return {type: 'USERNAME_CHECK', payload: {result, message }};
+    return {type: 'USERNAME_CHECK', payload: { result, message }};
   }
 }
 
@@ -144,9 +144,9 @@ export function clearVerificationMessage(){
 }
 
 export function addMessageToContainer(message){
-  let timeStamp = new Date().toString();
-  let id = message + timeStamp;
-  let messageObject = { message, id: id}
+  const timeStamp = new Date().toString();
+  const id = message + timeStamp;
+  const messageObject = { message, id}
   return {type: 'ADD_MESSAGE', payload: messageObject};
 }
 
@@ -159,7 +159,7 @@ export function clearAuthError(){
 }
 
 export function addChatMessage(username, message){
-  return {type: 'ADD_CHAT_MESSAGE', payload: {username, message}};
+  return {type: 'ADD_CHAT_MESSAGE', payload: { username, message }};
 }
 
 export function clearChat(){

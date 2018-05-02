@@ -6,8 +6,6 @@ import { sendSupportEmail } from '../../actions/socketActions';
 class CustomerSupport extends Component {
   constructor(props){
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.state = {
       name: '',
       email: '',
@@ -21,14 +19,14 @@ class CustomerSupport extends Component {
     };
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({[name]: value});
   }
 
-  handleFormSubmit(event) {
+  handleFormSubmit= (event) => {
     event.preventDefault();
     let valid = this.validate();
     if(valid){
@@ -45,22 +43,26 @@ class CustomerSupport extends Component {
   }
 
   render(){
-    const container = {};
-    container.display = 'flex';
-    container.margin = 'auto';
+    const container = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    const cardStyle = {};
-    cardStyle.width = '400px';
-    cardStyle.display = 'flex';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      width: '400px',
+      display: 'flex',
+      textAlign: 'center',
+    };
 
-    const formStyle = {};
-    formStyle.display = 'flex';
-    formStyle.flexDirection = 'column';
-    formStyle.justifyContent = 'center';
+    const formStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    };
 
-    const errorStyle = {};
-    errorStyle.color = 'red';
+    const errorStyle = {
+      color: 'red',
+    };
 
     return (
       <div style={container}>
@@ -117,11 +119,12 @@ class CustomerSupport extends Component {
   }
 
   clearErrors(){
-    let errors = {};
-    errors.name = '';
-    errors.email = '';
-    errors.message = '';
-    this.setState({errors: errors });
+    let errors = {
+      name: '',
+      email: '',
+      message: '',
+    };
+    this.setState({ errors });
   }
 }
 

@@ -8,9 +8,9 @@ var colorArray = ['#800000', '#FF0000', '#FFA500', '#FFFF00', '#808000', '#00800
 class Palette extends Component {
   render(){
     const width = this.props.canvasWidth - 40 + 'px';
-    const newStyle = {};
-    newStyle.marginTop = this.props.topMargin + 'px';
-
+    const newStyle = {
+      marginTop: this.props.topMargin + 'px',
+    };
 
     return (
       <div id='palletteDiv' style={newStyle} >

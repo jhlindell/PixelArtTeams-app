@@ -15,14 +15,15 @@ class VerifyEmail extends Component {
   }
 
   render(){
-    const containerStyle = {};
-    containerStyle.display = 'flex';
-    containerStyle.margin = 'auto';
-    containerStyle.textAlign = 'center';
+    const containerStyle = {
+      display: 'flex',
+      margin: 'auto',
+      textAlign: 'center',
+    };
 
-    const linkStyle = {};
-    linkStyle.fontSize = '22px';
-    // linkStyle.padding = '10px';
+    const linkStyle = {
+      fontSize: '22px',
+    };
 
     return (
       <div style={containerStyle}>

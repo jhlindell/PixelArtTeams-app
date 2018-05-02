@@ -17,8 +17,8 @@ class GalleryPiece extends Component{
   }
 
   calculateParams(grid){
-    let x = grid[0].length;
-    let y = grid.length;
+    const x = grid[0].length;
+    const y = grid.length;
     let canvasX = 0;
     let canvasY = 0;
     if(x >= y){
@@ -31,31 +31,34 @@ class GalleryPiece extends Component{
       canvasY = 240;
       canvasX = 240 / ratio;
     }
-    let pixelSizeX = (canvasX/x).toFixed(0);
-    let pixelSizeY = (canvasY/y).toFixed(0);
+    const pixelSizeX = (canvasX/x).toFixed(0);
+    const pixelSizeY = (canvasY/y).toFixed(0);
     let pixelSize;
     if(pixelSizeX > pixelSizeY){
       pixelSize = pixelSizeY;
     } else {
       pixelSize = pixelSizeX;
     }
-    this.setState({pixelSize: pixelSize, canvasX: canvasX, canvasY: canvasY});
+    this.setState({ pixelSize, canvasX, canvasY });
   }
 
   render(){
-    let cardStyle = {};
-    cardStyle.backgroundColor = 'gray';
-    cardStyle.marginBottom = '10px';
+    const cardStyle = {
+      backgroundColor: 'gray',
+      marginBottom: '10px',
+    };
 
-    let cardBlockStyle = {};
-    cardBlockStyle.display = 'flex';
-    cardBlockStyle.margin = 'auto';
+    const cardBlockStyle = {
+      display: 'flex',
+      margin: 'auto',
+    };
 
-    let footerStyle = {};
-    footerStyle.textAlign = 'center';
-    footerStyle.display = 'flex';
-    footerStyle.justifyContent = 'center';
-    footerStyle.alignItems = 'center';
+    const footerStyle = {
+      display: 'flex',
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+    };
 
     return (
       <div className="card" style={cardStyle} onClick={()=> this.props.history.push(`project/${this.props.art.project_id}`)}>
@@ -73,7 +76,7 @@ class GalleryPiece extends Component{
               count={3}
               size={20}
               value={this.props.art.rating} />
-            </div> 
+            </div>
         </div>
       </div>
     );

@@ -14,14 +14,16 @@ const styles = {
 class Pixel extends Component {
   render(){
     const { x, y, color} = this.props;
-    let newStyle = Object.assign({}, styles);
-    newStyle.height = this.props.pixelSize + 'px';
-    newStyle.width = this.props.pixelSize + 'px';
-    newStyle.backgroundColor = color;
+    let pixelStyle = {
+      ...styles,
+      height: this.props.pixelSize + 'px',
+      width: this.props.pixelSize + 'px',
+      backgroundColor: color
+    };
 
     return (
       <div
-        style={newStyle}
+        style={pixelStyle}
         onMouseDown={() => this.props.sendPixel(x, y)}
         onMouseOver={() => this.props.mouseOverAction(x, y)}
       >

@@ -26,18 +26,20 @@ class Store extends Component {
   }
 
   render(){
-    const cardStyle = {};
-    cardStyle.display = 'flex';
-    cardStyle.margin = 'auto';
-    cardStyle.padding = '10px';
-    cardStyle.width = '400px';
-    cardStyle.textAlign = 'center';
+    const cardStyle = {
+      display: 'flex',
+      margin: 'auto',
+      padding: '10px',
+      width: '400px',
+      textAlign: 'center',
+    };
 
-    const columnStyle = {};
-    columnStyle.display = 'flex';
-    columnStyle.flexDirection = 'column';
-    columnStyle.width = '150px';
-    columnStyle.margin = 'auto';
+    const columnStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '150px',
+      margin: 'auto',
+    };
 
     return (
       <div className="card" style={cardStyle}>
