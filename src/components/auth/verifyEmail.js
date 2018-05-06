@@ -15,7 +15,7 @@ class VerifyEmail extends Component {
   }
 
   render(){
-    const containerStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
       textAlign: 'center',
@@ -26,7 +26,7 @@ class VerifyEmail extends Component {
     };
 
     return (
-      <div style={containerStyle}>
+      <div style={componentStyle}>
         {(!this.props.verificationMessage) && <div className="card">
           <h3>Checking Verification</h3>
         </div>}

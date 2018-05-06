@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 
 function gridReducer(state, action) {
   if (state === undefined) {
-    let grid = [];
+    const grid = [];
     for (let i = 0; i < 20; i++) {
-      let row = [];
+      const row = [];
       for (let j = 0; j < 20; j++) {
         row.push('#FFF');
       }
@@ -15,10 +15,11 @@ function gridReducer(state, action) {
 
   switch (action.type) {
     case 'PIXEL_CLICK':
-      const newGrid = state.map((row, y) => row.map((pixel, x) => {
-        if (x === action.payload.x && y === action.payload.y) {
-          return action.payload.color;
-        }
+      const newGrid = state.map((row, y) => 
+        row.map((pixel, x) => {
+          if (x === action.payload.x && y === action.payload.y) {
+            return action.payload.color;
+          }
         return pixel;
       }));
       return newGrid;
@@ -82,16 +83,8 @@ function galleryReducer(state = [], action){
 }
 
 const styleErrorCode = (code) => {
-  if(code.message){
-    if (code.message.includes('401')){
-      return 'bad username or password';
-    }
-    else {
-      return code.message;
-    }
-  } else {
-    return code;
-  }
+  return (code.message) ?
+    ((code.message.includes('401')) ? 'bad username or password': code.message ) : code;
 }
 
 function authReducer(state = {}, action){

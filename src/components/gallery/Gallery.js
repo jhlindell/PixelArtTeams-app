@@ -24,41 +24,35 @@ class Gallery extends Component {
   }
 
   componentWillMount(){
-    let opts;
-    if(this.props.user && this.props.user.isMod){
-      opts = [
+    const opts = (this.props.user && this.props.user.isMod)?
+      [
         { value: 'rating', label: 'Rating' },
         { value: 'new', label: 'New' },
         { value: 'myGallery', label: 'My Gallery'},
         { value: 'flagged', label: 'Flagged Projects'}
-      ]
-    } else {
-      opts = [
+      ]:
+      [
         { value: 'rating', label: 'Rating' },
         { value: 'new', label: 'New' },
         { value: 'myGallery', label: 'My Gallery'}
-      ]
-    }
-    this.setState({options: opts});
+      ];
+      this.setState({options: opts});
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.user !== this.props.user){
-      let opts;
-      if(nextProps.user && nextProps.user.isMod){
-        opts = [
+      const opts = (nextProps.user && nextProps.user.isMod)?
+        [
           { value: 'rating', label: 'Rating' },
           { value: 'new', label: 'New' },
           { value: 'myGallery', label: 'My Gallery'},
           { value: 'flagged', label: 'Flagged Projects'}
-        ]
-      } else {
-        opts = [
+        ]:
+        [
           { value: 'rating', label: 'Rating' },
           { value: 'new', label: 'New' },
           { value: 'myGallery', label: 'My Gallery'}
-        ]
-      }
+        ];
       this.setState({ options:opts });
     }
   }
@@ -88,7 +82,7 @@ class Gallery extends Component {
       backgroundColor: 'lightgray',
     };
 
-    const container = {
+    const cardContainer = {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -111,7 +105,7 @@ class Gallery extends Component {
             options={this.state.options}
           />
         </div>
-        <div style={container}>
+        <div style={cardContainer}>
           <div style={galleryCards}>
             {this.props.gallery.map((art) => <GalleryPiece art={art} key={art.project_name} history={this.props.history}/> )}
           </div>

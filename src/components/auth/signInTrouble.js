@@ -39,7 +39,7 @@ class SignInTrouble extends Component {
   }
 
   render(){
-    const container = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
     };
@@ -51,7 +51,7 @@ class SignInTrouble extends Component {
     };
 
     return (
-      <div style={container}>
+      <div style={componentStyle}>
         <div className="card" style={cardStyle} onSubmit={this.handleFormSubmit}>
           <h3>Signin Issues</h3>
           <div className="form-group mt-4">

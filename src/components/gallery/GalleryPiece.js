@@ -21,24 +21,19 @@ class GalleryPiece extends Component{
     const y = grid.length;
     let canvasX = 0;
     let canvasY = 0;
-    if(x >= y){
-      let ratio = x/y;
+    let ratio;
+    if(x >= y)  {
+      ratio = x/y;
       canvasX = 240;
       canvasY = 240 / ratio;
-    }
-    if(y > x){
-      let ratio = y/x;
+     } else {
+      ratio = y/x;
       canvasY = 240;
       canvasX = 240 / ratio;
-    }
+     }
     const pixelSizeX = (canvasX/x).toFixed(0);
     const pixelSizeY = (canvasY/y).toFixed(0);
-    let pixelSize;
-    if(pixelSizeX > pixelSizeY){
-      pixelSize = pixelSizeY;
-    } else {
-      pixelSize = pixelSizeX;
-    }
+    const pixelSize =(pixelSizeX > pixelSizeY)? pixelSizeY: pixelSizeX;
     this.setState({ pixelSize, canvasX, canvasY });
   }
 

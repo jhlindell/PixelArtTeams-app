@@ -4,20 +4,16 @@ import { Redirect } from 'react-router-dom';
 
 class ProtectedRoute extends Component{
   render() {
-    const newStyle = {
+    const componentStyle = {
       display: 'flex',
       flex: '1 1 100%',
     };
     
-    if(this.isAuthed()){
-      return (
-        <div style={newStyle} id="protected">
+    return (this.isAuthed()) ?
+        <div style={componentStyle} id="protected">
           {this.props.children}
-        </div>
-      );
-    } else {
-      return <Redirect to='/signin' />;
-    }
+        </div> :
+        <Redirect to='/signin' />;
   }
   isAuthed() {
     return this.props.authenticated;

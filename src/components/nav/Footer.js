@@ -23,25 +23,16 @@ class Footer extends React.Component {
   }
 
   isProjectOwner(id){
-    let project;
     const array = this.props.projects;
-    for(let i = 0; i < array.length; i++){
-      if(array[i].project_id === id){
-        project = array[i];
-        break;
-      }
-    }
+    const project = array.find((element) => element.project_id === id);
     if(project){
-      if(project.project_owner === this.props.user.username){
-        this.setState({isOwner: true});
-      } else {
-        this.setState({isOwner: false});
-      }
+    (project.project_owner === this.props.user.username)? 
+        this.setState({isOwner: true}) : this.setState({isOwner: false})   
     }
   }
 
   render(){
-    const newStyle={
+    const componentStyle={
       display: 'flex',
       justifyContent: 'space-around',
       backgroundColor: 'black',
@@ -49,7 +40,7 @@ class Footer extends React.Component {
     };
 
     return (
-      <footer style={newStyle}>
+      <footer style={componentStyle}>
         <Link onClick={() => this.props.selectProject(0)}
           to="/art">Projects</Link>
         {this.state.isOwner && <Link to="/newUser">Collaborators</Link>}

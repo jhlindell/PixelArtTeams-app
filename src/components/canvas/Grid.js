@@ -13,8 +13,8 @@ class Grid extends Component {
   }
 
   componentWillMount(){
-    let now = new Date();
-    let nowString = moment.utc(now).format();
+    const now = new Date();
+    const nowString = moment.utc(now).format();
     if(moment(nowString).isSameOrAfter(this.props.finishTime)){
       this.props.sendFinishedProject(this.props.currentProject);
     }
@@ -28,6 +28,7 @@ class Grid extends Component {
     const xCoord = this.props.x;
     const gridWidth = xCoord * this.props.pixelSize;
     const leftMargin = (800 - gridWidth)/2;
+    
     const gridStyle = {
       marginTop: this.props.vertMargins + 'px',
       marginBottom: this.props.vertMargins + 'px',

@@ -32,15 +32,12 @@ class NavBar extends React.Component {
   }
 
   renderLinks() {
-    if (this.props.authenticated) {
-      // show a link to sign out
-      return <li key={'signout'}>
+    return (this.props.authenticated) ?
+      <li key={'signout'}>
         <span className="navLink mr-3">{this.props.user && this.props.user.username}</span>
         <Link className="navLink"  to="/signout">Sign Out</Link>
-      </li>
-    } else {
-      // show a link to sign in or sign up
-      return [
+      </li> :
+      [
         <li key={'signin'}>
           <Link className="navLink"  to="/signin">Sign In</Link>
         </li>,
@@ -48,7 +45,6 @@ class NavBar extends React.Component {
           <Link className="navLink" to="/signup">Sign Up</Link>
         </li>
       ];
-    }
   }
 
   render(){

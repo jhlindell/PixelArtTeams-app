@@ -43,7 +43,7 @@ class PasswordReset extends Component {
   }
 
   render(){
-    const newStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
       textAlign: 'center',
@@ -56,7 +56,7 @@ class PasswordReset extends Component {
     };
 
     return (
-      <div style={newStyle}>
+      <div style={componentStyle}>
         {(!this.props.verificationMessage) && <div className="card">
           <h3>Checking Password Reset Hash</h3>
         </div>}
@@ -118,11 +118,7 @@ class PasswordReset extends Component {
   }
 
   clearErrors(){
-    const errors = {
-      password: '',
-      passwordConfirm: '',
-    };
-    this.setState({ errors });
+    this.setState({ errors: { password: '', passwordConfirm: ''} });
   }
 }
 

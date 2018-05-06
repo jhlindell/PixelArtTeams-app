@@ -43,7 +43,7 @@ class CustomerSupport extends Component {
   }
 
   render(){
-    const container = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
     };
@@ -65,7 +65,7 @@ class CustomerSupport extends Component {
     };
 
     return (
-      <div style={container}>
+      <div style={componentStyle}>
         {!this.state.emailSent && <div className="card" style={cardStyle}>
           <form onSubmit={this.handleFormSubmit}>
             <div className="card-header">
@@ -119,12 +119,7 @@ class CustomerSupport extends Component {
   }
 
   clearErrors(){
-    let errors = {
-      name: '',
-      email: '',
-      message: '',
-    };
-    this.setState({ errors });
+    this.setState({ errors: { name: '', email: '', message: ''}});
   }
 }
 

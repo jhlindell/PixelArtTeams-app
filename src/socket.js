@@ -29,11 +29,9 @@ socket.on('requestRefresh', () => {
 });
 
 socket.on('resultOfUserCheck', (result) => {
-  if(result){
-    store.dispatch(otherActions.userNameCheck(result.bool, "User Exists", result.username));
-  } else {
+  (result)?
+    store.dispatch(otherActions.userNameCheck(result.bool, "User Exists", result.username)):
     store.dispatch(otherActions.userNameCheck(result, "User Doesn't Exist"));
-  }
 });
 
 socket.on('resultOfAddingPermission', (result) => {

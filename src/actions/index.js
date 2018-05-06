@@ -54,11 +54,9 @@ export function signUpUser({username, email, password}){
   return function(dispatch){
     axios.post(`${URL}/signup`, { username, email, password })
       .then(response => {
-        if(response.data.token){
-          dispatch(socketActions.sendVerificationEmail(username, email, response.data.token));
-        } else {
+        (response.data.token)?
+          dispatch(socketActions.sendVerificationEmail(username, email, response.data.token)):
           dispatch(authError(response.data.error));
-        }
       })
       .catch((response) => {
         dispatch(authError(response));
@@ -74,11 +72,9 @@ export function signInUser({ username, password }){
   return function(dispatch){
     axios.post(`${URL}/signin`, { username, password })
       .then(response => {
-        if(response.data.verified){
-          dispatch({type: 'AUTH_USER', payload: response.data.token });
-        } else {
+        (response.data.verified)?
+          dispatch({type: 'AUTH_USER', payload: response.data.token }):
           dispatch(authError('Click link in verification email to proceed.'));
-        }
       })
       .catch((response) => {
         dispatch(authError(response));
@@ -96,11 +92,9 @@ export function setUserName(userinfo){
 }
 
 export function userNameCheck(result, message, username){
-  if(username){
-    return {type: 'USERNAME_CHECK', payload: { result, message, username }};
-  } else {
-    return {type: 'USERNAME_CHECK', payload: { result, message }};
-  }
+  return (username)?
+    {type: 'USERNAME_CHECK', payload: { result, message, username }}:
+    {type: 'USERNAME_CHECK', payload: { result, message }};
 }
 
 export function clearUserNameCheck(){

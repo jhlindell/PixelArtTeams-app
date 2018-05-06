@@ -88,7 +88,7 @@ class Signup extends Component {
   }
 
   render(){
-    const newStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
     };
@@ -117,7 +117,7 @@ class Signup extends Component {
     }
 
     return (
-      <div style={newStyle}>
+      <div style={componentStyle}>
         {this.state.showTerms && <div className="card" style={ToSStyle} >
           <div className="card-header">
             <h3>Terms of Service</h3>
@@ -241,13 +241,7 @@ class Signup extends Component {
   }
 
   clearErrors(){
-    let errors = {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-    };
-    this.setState({ errors });
+    this.setState({ errors: {username: '', email: '', password: '', passwordConfirm: ''} });
   }
 }
 

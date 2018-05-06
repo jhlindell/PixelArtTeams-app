@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getGalleryTop3 } from '../actions/socketActions';
 
-var sectionStyle = {
+var componentStyle = {
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -48,7 +48,7 @@ class HomePage extends Component {
     };
 
     return (
-      <div style={sectionStyle}>
+      <div style={componentStyle}>
         <div className="card" style={top3Card}>
           <div className="card-header" style={cardHeader}>
             Top 3 Projects
