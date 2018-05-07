@@ -83,8 +83,11 @@ function galleryReducer(state = [], action){
 }
 
 const styleErrorCode = (code) => {
-  return (code.message) ?
-    ((code.message.includes('401')) ? 'bad username or password': code.message ) : code;
+  if(code.message) {
+    return (code.message.includes('401')) ? 'bad username or password': code.message 
+  } else {
+    return code
+  }
 }
 
 function authReducer(state = {}, action){
