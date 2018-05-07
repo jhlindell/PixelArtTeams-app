@@ -50,7 +50,7 @@ class Signin extends Component {
   }
 
   render(){
-    const container = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
     };
@@ -67,7 +67,7 @@ class Signin extends Component {
     };
 
     return (
-      <div style={container}>
+      <div style={componentStyle}>
         <div className="card" style={cardStyle}>
           <div className="card-header">
             <h3>Please Sign In</h3>

@@ -38,27 +38,21 @@ class MainCanvas extends Component {
     }
 
     if(nextProps.projects !== this.props.projects){
-      for(let i = 0; i < nextProps.projects.length; i++){
-        if(nextProps.projects[i].finished_at){
+      nextProps.projects.forEach(element => {
+        if(element.finished_at){
           const now = new Date();
           const nowString = moment.utc(now).format();
-          if(moment(nowString).isSameOrAfter(nextProps.projects[i].finished_at)){
-            this.props.sendFinishedProject(nextProps.projects[i].project_id);
+          if(moment(nowString).isSameOrAfter(element.finished_at)){
+            this.props.sendFinishedProject(element.project_id);
           }
         }
-      }
+      })
     }
   }
 
   getProjectIndex(id){
     const projects = this.props.projects;
-    let index;
-    for(let i = 0; i < projects.length; i++){
-      if(projects[i].project_id === id){
-        index = i;
-      }
-    }
-    return index;
+    return projects.indexOf(projects.find((element) => element.project_id === id));
   }
 
   calculateCanvas(id){
@@ -70,12 +64,7 @@ class MainCanvas extends Component {
     const windowY = 440;
     const pixelSizeX = (windowX/x).toFixed(0);
     const pixelSizeY = (windowY/y).toFixed(0);
-    let pixelSize = 0;
-    if(pixelSizeX < pixelSizeY){
-      pixelSize = pixelSizeX;
-    } else {
-      pixelSize = pixelSizeY;
-    }
+    let pixelSize = (pixelSizeX < pixelSizeY)? pixelSizeX: pixelSizeY;
     if(pixelSize > 20){
       pixelSize = 20;
     }

@@ -65,12 +65,7 @@ class ShowProject extends Component {
     const windowY = (window.innerHeight * 0.6).toFixed(0);
     const pixelSizeX = (windowX/x).toFixed(0);
     const pixelSizeY = (windowY/y).toFixed(0);
-    let pixelSize;
-    if(pixelSizeX > pixelSizeY){
-      pixelSize = pixelSizeY;
-    } else {
-      pixelSize = pixelSizeX;
-    }
+    const pixelSize =(pixelSizeX > pixelSizeY)? pixelSizeY: pixelSizeX;
     const offsetX = ((windowX -(x * pixelSize))/2).toFixed(0);
     const canvasX = ((windowX - (offsetX*2))).toFixed(0);
     const canvasY = windowY;
@@ -79,19 +74,12 @@ class ShowProject extends Component {
   }
 
   userRating(){
-    if(!this.props.userRating || this.props.userRating.rating === -1){
-      return 'Not Rated Yet';
-    } else {
-      return this.props.userRating.rating;
-    }
+    return (!this.props.userRating || this.props.userRating.rating === -1) ?
+      'Not Rated Yet' : this.props.userRating.rating;
   }
 
   averageRating(){
-    if(!this.props.projectAvg){
-      return 'Not Rated Yet';
-    } else {
-      return this.props.projectAvg.rating;
-    }
+    return (this.props.projectAvg) ? this.props.projectAvg.rating: 'Not Rated Yet';
   }
 
   ratingChanged = (newRating) => {
@@ -99,19 +87,13 @@ class ShowProject extends Component {
   }
 
   startTime(){
-    if(this.props.project.started_at){
-      return moment(this.props.project.started_at).local().format('LLL');
-    } else {
-      return 'N/A'
-    }
+    return (this.props.project.started_at) ? 
+      moment(this.props.project.started_at).local().format('LLL') : 'N/A';
   }
 
   endTime(){
-    if(this.props.project.finished_at){
-      return moment(this.props.project.finished_at).local().format('LLL');
-    } else {
-      return 'N/A'
-    }
+    return (this.props.project.finished_at) ? 
+      moment(this.props.project.finished_at).local().format('LLL'): 'N/A';
   }
 
   deleteProject(){
@@ -132,7 +114,7 @@ class ShowProject extends Component {
   }
 
   render(){
-    const containerStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
       justifyContent: 'space-between',
@@ -152,7 +134,7 @@ class ShowProject extends Component {
     };
 
     return (
-      <div style={containerStyle}>
+      <div style={componentStyle}>
         <div>
           {this.props.project && <DrawCanvas grid={ this.props.project.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/> }
         </div>

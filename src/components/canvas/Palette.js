@@ -8,12 +8,12 @@ var colorArray = ['#800000', '#FF0000', '#FFA500', '#FFFF00', '#808000', '#00800
 class Palette extends Component {
   render(){
     const width = this.props.canvasWidth - 40 + 'px';
-    const newStyle = {
+    const componentStyle = {
       marginTop: this.props.topMargin + 'px',
     };
 
     return (
-      <div id='palletteDiv' style={newStyle} >
+      <div id='palletteDiv' style={componentStyle} >
         <CurrentColor />
         <span id="color-fan" style={{
             display: 'flex',

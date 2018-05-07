@@ -18,11 +18,9 @@ class Store extends Component {
   }
 
   stripeMessage(){
-    if(this.props.stripeMessage && this.props.stripeMessage === 'Success'){
-      return <h3>Your Donation Was Successful. Thank You!</h3>;
-    } else {
-      return <h3>There was a problem with your donation</h3>;
-    }
+    return (this.props.stripeMessage && this.props.stripeMessage === 'Success') ?
+      <h3>Your Donation Was Successful. Thank You!</h3>:
+      <h3>There was a problem with your donation</h3>;
   }
 
   render(){

@@ -50,15 +50,15 @@ class AddNewUser extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    let userName = this.state.user_name.toLowerCase();
-    let email = this.state.email.toLowerCase();
+    const userName = this.state.user_name.toLowerCase();
+    const email = this.state.email.toLowerCase();
     this.props.addNewUser(userName, email);
     this.clearForm();
   }
 
   userCheckClicked(){
-    let userName = this.state.user_name.toLowerCase();
-    let email = this.state.email.toLowerCase();
+    const userName = this.state.user_name.toLowerCase();
+    const email = this.state.email.toLowerCase();
     this.props.checkUserForAdd(userName, email);
   }
 
@@ -82,7 +82,7 @@ class AddNewUser extends Component {
   }
 
   render(){
-    const newStyle = {
+    const componentStyle = {
       display: 'flex',
       flexDirection: 'column',
       margin: 'auto',
@@ -100,7 +100,7 @@ class AddNewUser extends Component {
     };
 
     return (
-      <div style={newStyle}>
+      <div style={componentStyle}>
         <div className="card mb-4" style={colStyle}>
           <div className="card-header artTitleText" >
             Collaborators:

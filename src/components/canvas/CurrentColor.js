@@ -13,8 +13,8 @@ const styles = {
 
 class CurrentColor extends Component {
   render() {
-    let newStyle = {...styles};
-    newStyle.backgroundColor = this.props.activeColor;
+    const colorStyle = {...styles};
+    colorStyle.backgroundColor = this.props.activeColor;
 
     return (
       <span
@@ -27,7 +27,7 @@ class CurrentColor extends Component {
           boxSizing: 'borderBox'
         }}
       >
-        <div style={newStyle} >
+        <div style={colorStyle} >
           <span style={{fontSize: 'small'}}>
             {this.props.activeColor.replace('#','')}
           </span>

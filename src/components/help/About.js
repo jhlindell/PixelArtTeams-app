@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const newStyle = {
+const componentStyle = {
   width: '70%',
   display: 'flex',
   flexDirection: 'column',
@@ -12,7 +12,7 @@ const newStyle = {
 class About extends Component {
   render(){
     return (
-      <div className="card" style={newStyle}>
+      <div className="card" style={componentStyle}>
         <p className="mt-3">
           <h4>Getting started is easy!</h4>
         </p>

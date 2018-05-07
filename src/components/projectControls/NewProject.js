@@ -27,7 +27,7 @@ class NewProject extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.user !== this.props.user){
       if(nextProps.user.result === true){
-        let array = this.state.collaborators;
+        const array = this.state.collaborators;
         array.push(nextProps.user.username);
         this.setState({ collaborators: array });
         this.props.clearUserNameCheck();
@@ -47,7 +47,7 @@ class NewProject extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    let valid = this.validate();
+    const valid = this.validate();
     if(valid){
       this.props.addNewProject(this.state.project_name, this.state.x, this.state.y, this.state.timer, this.state.collaborators);
       this.props.history.push('/art');
@@ -55,8 +55,8 @@ class NewProject extends Component {
   }
 
   addUserClicked(){
-    let userName = this.state.user_name.toLowerCase();
-    let email = this.state.email.toLowerCase();
+    const userName = this.state.user_name.toLowerCase();
+    const email = this.state.email.toLowerCase();
     this.props.checkUserForAdd(userName, email);
   }
 
@@ -65,12 +65,8 @@ class NewProject extends Component {
   }
 
   removeUser(){
-    let array = this.state.collaborators;
-    for(let i = 0; i < array.length; i++){
-      if(array[i] === this.state.selectedUser){
-        array.splice(i, 1);
-      }
-    }
+    const array = this.state.collaborators;
+    array.filter((element) => element !== this.state.eleectedUser)
     this.setState({ collaborators: array });
   }
 
@@ -79,7 +75,7 @@ class NewProject extends Component {
   }
 
   render(){
-    const topElementStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
     };
@@ -129,7 +125,7 @@ class NewProject extends Component {
     };
 
     return (
-      <div style={topElementStyle}>
+      <div style={componentStyle}>
         <div className="card">
           <form onSubmit={this.handleFormSubmit}>
             <div className="card-header" style={headerStyle}>
@@ -276,12 +272,7 @@ class NewProject extends Component {
   }
 
   clearErrors(){
-    let errors = {
-      name: '',
-      x: '',
-      y: '',
-    };
-    this.setState({ errors });
+    this.setState({ errors: {name: '',x: '',y: ''} });
   }
 }
 

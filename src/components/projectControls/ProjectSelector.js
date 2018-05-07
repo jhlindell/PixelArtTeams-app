@@ -12,7 +12,7 @@ class ProjectSelector extends Component {
   }
 
   render(){
-    const topElementStyle = {
+    const componentStyle = {
       padding: '50px',
       justifyContent: 'center',
       fontSize: '28px',
@@ -33,7 +33,7 @@ class ProjectSelector extends Component {
     };
 
     return (
-      <div style={topElementStyle}>
+      <div style={componentStyle}>
         <p className="mb-3" style={{color: 'white'}}>Your Available Projects:</p>
         <div style={cardDeck}>
             <div className="card mb-3 mr-2" onClick={()=> this.props.history.push('/newProject')}>

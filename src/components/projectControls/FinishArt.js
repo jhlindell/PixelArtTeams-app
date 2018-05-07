@@ -29,12 +29,7 @@ class FinishArt extends Component {
     const windowY = (window.innerHeight * 0.6).toFixed(0);
     const pixelSizeX = (windowX/x).toFixed(0);
     const pixelSizeY = (windowY/y).toFixed(0);
-    let pixelSize;
-    if(pixelSizeX > pixelSizeY){
-      pixelSize = pixelSizeY;
-    } else {
-      pixelSize = pixelSizeX;
-    }
+    const pixelSize = (pixelSizeX > pixelSizeY) ? pixelSizeY: pixelSizeX;
     const canvasX = pixelSize * x;
     const canvasY = pixelSize * y;
 
@@ -52,7 +47,7 @@ class FinishArt extends Component {
   }
 
   render(){
-    const containerStyle = {
+    const componentStyle = {
       display: 'flex',
       margin: 'auto',
       justifyContent: 'space-between',
@@ -69,7 +64,7 @@ class FinishArt extends Component {
     };
 
     return (
-      <div style={containerStyle}>
+      <div style={componentStyle}>
         <DrawCanvas grid={ this.props.grid } pixelSize={this.state.pixelSize} canvasX={this.state.canvasX} canvasY={this.state.canvasY}/>
         <div className="card" style={cardStyle}>
           <div>Finish Project? </div>

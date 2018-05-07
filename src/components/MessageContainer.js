@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { clearMessage } from '../actions/index';
 
-const containerStyle = {
+const componentStyle = {
   display: 'flex',
   height: '50px',
   width: '100%',
@@ -34,7 +34,7 @@ class MessageContainer extends Component {
   renderMessages(){
     if(this.props.messages.length){
       return(
-        <div style={containerStyle}>
+        <div style={componentStyle}>
           { this.props.messages.map((message) =>
           <div className="card" onClick={()=>this.clearMessage(message.id)} key={ message.id } style={cardStyle}>
             <span>{message.message}</span>
