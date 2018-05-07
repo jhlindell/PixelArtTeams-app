@@ -62,7 +62,7 @@ export function checkUserForAdd(username, email){
   }
 }
 
-export function deleteProject(id?){
+export function deleteProject(id = null){
   return (dispatch, getState) => {
     if(id){
       const { auth } = getState();
@@ -97,7 +97,7 @@ export function removeUser(username){
   }
 }
 
-export function sendFinishedProject(id?){
+export function sendFinishedProject(id = null){
   return (dispatch, getState) => {
     if(id){
       const {auth} = getState();
